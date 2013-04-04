@@ -1,0 +1,9 @@
+<module>
+    <inherits name="com.brazoft.foundation.gwt.Foundation"/>
+    <inherits name="com.google.gwt.regexp.RegExp"/>
+
+    <public path="assets"/>
+    
+    <stylesheet src="bootstrap.css"/>
+    <script 	src="bootstrap.js"/>
+</module>
