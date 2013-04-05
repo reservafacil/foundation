@@ -73,7 +73,7 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 			@Override
 			public void onClick(ClickEvent event)
 			{
-				Datepicker.this.input.input().focus();
+				Datepicker.this.input.focus();
 			}
 		});
 		this.input = new ExtendedTextBox().append(icon);
@@ -176,7 +176,7 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 	
 	public Datepicker focus()
 	{
-		this.input.input().focus();
+		this.input.focus();
 		return this;
 	}
 	
@@ -300,10 +300,10 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 	{
 		TextBox box = this.input.input();
 		
-		double left = box.getAbsoluteLeft();
+		double left = box.getAbsoluteLeft() + box.getElement().getScrollLeft();
 		double top = box.getAbsoluteTop() + box.getOffsetHeight();
 
-		this.picker.style().position(Position.FIXED).top(top, Unit.PX).left(left, Unit.PX).zIndex(1000);
+		this.picker.style().position(Position.ABSOLUTE).top(top, Unit.PX).left(left, Unit.PX).zIndex(1000);
 		
 		return this;
 	}

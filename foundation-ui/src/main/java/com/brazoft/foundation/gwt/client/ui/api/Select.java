@@ -20,6 +20,10 @@ package com.brazoft.foundation.gwt.client.ui.api;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.NodeIterable;
+import com.brazoft.foundation.gwt.client.component.api.Component;
+import com.brazoft.foundation.gwt.client.component.api.HasText;
+import com.brazoft.foundation.gwt.client.component.api.HasValue;
+import com.brazoft.foundation.gwt.client.component.api.ResponsiveComponent;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.Events;
 import com.brazoft.foundation.gwt.client.event.api.AttachHandler;
@@ -211,11 +215,9 @@ public abstract class Select<W extends Widget, V> extends Bootstrap<W> implement
 	
 	public W item(String text, String value)
 	{
-		OptionElement option = ElementResolver.option();
-		option.setInnerHTML(text);
-		option.setValue(value);
+		Option option = new Option().text(text).value(value);
 		
-		this.element().appendChild(option);
+		this.add(option);
 		
 		return (W) this;
 	}
@@ -295,22 +297,6 @@ public abstract class Select<W extends Widget, V> extends Bootstrap<W> implement
 		return (W) this;
 	}
 	
-//	public W responsiveTo(Widget container)
-//	{
-//		return Component.Util.responsiveBehavior(this, container);
-//	}
-//	
-//	public W adaptSize(Widget container)
-//	{
-//		double containerWidth = Component.Util.innerWidth(container);
-//		double inputWidth = containerWidth - Component.Util.computeLeft(container) - Component.Util.computeRight(this) - Component.Util.computeLeft(this);
-//		
-//		this.style().width(inputWidth, Unit.PX);
-//		this.update();
-//		
-//		return (W) this;
-//	}
-	
 	protected NodeIterable<OptionElement> options()
 	{
 		return new NodeIterable<OptionElement>(this.element().getOptions());
@@ -321,15 +307,73 @@ public abstract class Select<W extends Widget, V> extends Bootstrap<W> implement
 		return this.getElement().cast();
 	}
 	
-	protected W update()
+	public W update()
 	{
-		if(this.isAttached())
-		{
-			this.initJS(this.getId(), this.options.getJavaScriptObject());
-		}
-		
+		this.update(this.getId());
 		return (W) this;
 	}
+	
+//	@Override
+//	public W adaptSize(Widget container)
+//	{
+//		double width = Component.Util.innerWidth(container);
+//		this.style().width(width, Unit.PX);
+//		
+//		return (W) this;
+//	}
+//	
+//	@Override
+//	public W responsiveTo(Widget container)
+//	{
+//		return Component.Util.responsiveBehavior(this, container);
+//	}
+
+	class Option extends Widget implements HasText<Option>, HasValue<Option, String>
+	{
+		public Option()
+		{
+			this.setElement(ElementResolver.option());
+		}
+		
+		OptionElement element()
+		{
+			return this.getElement().cast();
+		}
+		
+		public boolean isSelected()
+		{
+			return this.element().isSelected();
+		}
+
+		@Override
+		public Option value(String value)
+		{
+			this.element().setValue(value);
+			return this;
+		}
+
+		@Override
+		public String getValue()
+		{
+			return this.element().getValue();
+		}
+
+		@Override
+		public Option text(String text)
+		{
+			return Component.Util.setHTML(this, text);
+		}
+
+		@Override
+		public String getText()
+		{
+			return Component.Util.getHTML(this);
+		}
+	}
+	
+	native void update(String id)/*-{
+		$wnd.$('#' + id).select2().trigger('change');
+	}-*/;
 	
 	native void doIt(String id, String action)/*-{
 		$wnd.$("#" + id).select2(action);

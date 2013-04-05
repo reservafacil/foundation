@@ -21,6 +21,7 @@ package com.brazoft.foundation.gwt.client.ui.api;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Widget;
 
+@SuppressWarnings("unchecked")
 public abstract class Combo<W extends Widget> extends Select<W, String>
 {
 	public Combo()
