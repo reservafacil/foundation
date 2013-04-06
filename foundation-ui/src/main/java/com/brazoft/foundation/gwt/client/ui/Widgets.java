@@ -18,9 +18,9 @@
 
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.ui.api.UIButton;
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.HTML;
+import com.brazoft.foundation.gwt.client.ui.api.UIButton;
 import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.dom.client.LabelElement;
@@ -32,6 +32,17 @@ import com.google.gwt.user.client.ui.Widget;
 @SuppressWarnings("unchecked")
 public class Widgets
 {
+	public static <W extends Widget> W setData(W widget, String value)
+	{
+		widget.getElement().setAttribute("data-value", value);
+		return widget;
+	}
+	
+	public static <W extends Widget> String getData(W widget)
+	{
+		return widget.getElement().getAttribute("data-value");
+	}
+	
 	public static <W extends Widget> W muted(W widget)
 	{
 		widget.addStyleName("muted");

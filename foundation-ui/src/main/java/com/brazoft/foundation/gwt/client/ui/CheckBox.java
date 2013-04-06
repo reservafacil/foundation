@@ -22,7 +22,7 @@ import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.event.Events;
 import com.google.gwt.event.dom.client.ClickHandler;
 
-public class CheckBox extends Input<CheckBox, Boolean>
+public class CheckBox extends Input<CheckBox, String>
 {
 	public CheckBox()
 	{
@@ -34,15 +34,26 @@ public class CheckBox extends Input<CheckBox, Boolean>
 		return Events.on(this, handler);
 	}
 	
-	public CheckBox value(Boolean value)
+	public CheckBox checked(Boolean selected)
 	{
-		this.element().setChecked(value);
+		this.element().setChecked(selected);
 		return this;
 	}
 	
-	public Boolean getValue()
+	public Boolean isChecked()
 	{
 		return this.element().isChecked();
+	}
+	
+	public CheckBox value(String value)
+	{
+		this.element().setValue(value);
+		return this;
+	}
+	
+	public String getValue()
+	{
+		return this.element().getValue();
 	}
 	
 	@Override

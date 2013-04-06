@@ -20,22 +20,33 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 
-public class RadioButton extends Input<RadioButton, Boolean>
+public class RadioButton extends Input<RadioButton, String>
 {
 	public RadioButton(String name)
 	{
 		super(ElementResolver.radio(name));
 	}
 	
-	public RadioButton value(Boolean value)
+	public RadioButton checked(Boolean value)
 	{
 		this.element().setChecked(value);
 		return this;
 	}
 	
-	public Boolean getValue()
+	public Boolean isChecked()
 	{
 		return this.element().isChecked();
+	}
+	
+	public RadioButton value(String value)
+	{
+		this.element().setValue(value);
+		return this;
+	}
+	
+	public String getValue()
+	{
+		return this.element().getValue();
 	}
 	
 	@Override

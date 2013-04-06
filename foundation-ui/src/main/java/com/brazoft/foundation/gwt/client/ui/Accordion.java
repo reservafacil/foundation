@@ -23,7 +23,6 @@ import com.brazoft.foundation.gwt.client.component.HTML;
 import com.brazoft.foundation.gwt.client.component.api.Component;
 import com.brazoft.foundation.gwt.client.component.api.HasText;
 import com.brazoft.foundation.gwt.client.event.Event;
-import com.brazoft.foundation.gwt.client.event.Events;
 import com.brazoft.foundation.gwt.client.event.api.EventHandler;
 import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 import com.brazoft.foundation.gwt.client.ui.api.NativeEvent;

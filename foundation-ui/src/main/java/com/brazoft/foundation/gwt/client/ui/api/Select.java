@@ -23,7 +23,6 @@ import com.brazoft.foundation.gwt.client.component.NodeIterable;
 import com.brazoft.foundation.gwt.client.component.api.Component;
 import com.brazoft.foundation.gwt.client.component.api.HasText;
 import com.brazoft.foundation.gwt.client.component.api.HasValue;
-import com.brazoft.foundation.gwt.client.component.api.ResponsiveComponent;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.Events;
 import com.brazoft.foundation.gwt.client.event.api.AttachHandler;

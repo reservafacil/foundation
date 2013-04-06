@@ -13,17 +13,41 @@ public class FormLabel extends Component<FormLabel> implements HasText<FormLabel
 {
 	private Emphasis text;
 	
+	private UIInput<?, ?> input;
+	
 	public FormLabel()
 	{
+		this(Orientation.VERTICAL);
+	}
+	
+	public FormLabel(Orientation orientation)
+	{
 		super(ElementResolver.label());
+		this.init(orientation);
+	}
+	
+	private void init(Orientation orientation)
+	{
+		if (orientation == Orientation.HORIZONTAL)
+		{
+			this.className("inline");
+		}
+	}
+	
+	public UIInput<?, ?> getInput()
+	{
+		return this.input;
 	}
 	
 	public FormLabel forInput(UIInput<?, ?> input)
 	{
+		boolean checkbox = (input instanceof CheckBox);
+		this.input = input;
 		this.forId(input.getId());
 		
-		if(input instanceof CheckBox || input instanceof RadioButton)
+		if(checkbox || input instanceof RadioButton)
 		{
+			this.className(checkbox ? "checkbox" : "radio");
 			this.add(input.asWidget());
 			input.style().display(Display.INLINE).paddingLeft(4, Unit.PX);
 			this.text = new Emphasis(EmphasisOptions.SMALL).muted();
