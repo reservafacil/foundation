@@ -32,7 +32,7 @@ import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
-public abstract class Component<W extends Widget> extends Composite<W>
+public abstract class Component<C extends Component<C>> extends Composite<C>
 {
 	private Panel panel;
 	
@@ -43,7 +43,7 @@ public abstract class Component<W extends Widget> extends Composite<W>
 		element.setId(Document.get().createUniqueId());
 	}
 	
-	protected W detachChildren()
+	protected C detachChildren()
 	{
 		for(Widget child : this.getChildren())
 		{
@@ -51,37 +51,37 @@ public abstract class Component<W extends Widget> extends Composite<W>
 		}
 		
 		this.panel.clear();
-		return (W) this;
+		return (C) this;
 	}
 	
-	protected W remove(Widget child)
+	protected C remove(Widget child)
 	{
 		this.panel.remove(child);
-		return (W) this;
+		return (C) this;
 	}
 
-	protected W add(Widget add)
+	protected C add(Widget add)
 	{
 		return this.add(add, true);
 	}
 	
-	protected W add(Widget add, boolean ignoreIfParent)
+	protected C add(Widget add, boolean ignoreIfParent)
 	{
 		if(ignoreIfParent && add.getParent() != null)
 		{
-			return (W) this;
+			return (C) this;
 		}
 		
 		this.panel.add(add);
 		
-		return (W) this;
+		return (C) this;
 	}
 	
-	protected W insert(Widget add, Widget before)
+	protected C insert(Widget add, Widget before)
 	{
 		this.panel.insert(add, before);
 		
-		return (W) this;
+		return (C) this;
 	}
 	
 	protected Iterable<Widget> getChildren()

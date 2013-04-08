@@ -1,12 +1,14 @@
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
+import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 import com.google.gwt.dom.client.Style.Unit;
 
 public class ProgressCategory extends Bootstrap<ProgressCategory>
 {
 	private int	total	= 100;
+	
+	private StyleChooser<ProgressCategory> chooser = new StyleChooser<ProgressCategory>("bar-success", "bar-warning", "bar-danger", "bar-info");
 
 	public ProgressCategory()
 	{
@@ -16,22 +18,22 @@ public class ProgressCategory extends Bootstrap<ProgressCategory>
 
 	public ProgressCategory success()
 	{
-		return this.className("bar-success");
+		return this.chooser.className(this, "bar-success");
 	}
 
 	public ProgressCategory warning()
 	{
-		return this.className("bar-warning");
+		return this.chooser.className(this, "bar-warning");
 	}
 
 	public ProgressCategory danger()
 	{
-		return this.className("bar-danger");
+		return this.chooser.className(this, "bar-danger");
 	}
 
 	public ProgressCategory info()
 	{
-		return this.className("bar-info");
+		return this.chooser.className(this, "bar-info");
 	}
 
 	public ProgressCategory total(int total)

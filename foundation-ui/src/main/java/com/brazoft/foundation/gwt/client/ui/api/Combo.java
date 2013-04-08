@@ -19,42 +19,41 @@
 package com.brazoft.foundation.gwt.client.ui.api;
 
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
-public abstract class Combo<W extends Widget> extends Select<W, String>
+public abstract class Combo<C extends Combo<C>> extends Select<C, String>
 {
 	public Combo()
 	{
 		super(false);
 	}
 	
-	public W minimumResultsForSearch(int minimum)
+	public C minimumResultsForSearch(int minimum)
 	{
 		this.getOptions().put("minimumResultsForSearch", minimum);
 		return this.update();
 	}
 	
-	public W selectOnBlur(boolean select)
+	public C selectOnBlur(boolean select)
 	{
 		this.getOptions().put("selectOnBlur", select);
 		return this.update();
 	}
 	
-	public W block()
+	public C block()
 	{
 		this.style().width(100, Unit.PCT);
-		return (W) this;
+		return (C) this;
 	}
 	
-	public W allowDeselection(boolean allow)
+	public C allowDeselection(boolean allow)
 	{
 		this.getOptions().put("allow_single_deselect", allow);
-		return (W) this;
+		return (C) this;
 	}
 	
 	@Override
-	public W value(String value)
+	public C value(String value)
 	{
 		return this.select(value);
 	}

@@ -26,31 +26,30 @@ import com.brazoft.foundation.gwt.client.event.api.DetachHandler;
 import com.brazoft.foundation.gwt.client.event.api.EventHandler;
 import com.google.gwt.user.client.ui.Control;
 import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
-public abstract class Composite<W extends Widget> extends Control implements IsWidget
+public abstract class Composite<C extends Composite<C>> extends Control implements IsWidget
 {
-	private Style<W> style;
+	private Style<C> style;
 	
 	private EventBus eventBus;
 	
-	public W onAttach(AttachHandler handler)
+	public C onAttach(AttachHandler handler)
 	{
 		this.addAttachHandler(handler);
-		return (W) this;
+		return (C) this;
 	}
 	
-	public W onDetach(DetachHandler handler)
+	public C onDetach(DetachHandler handler)
 	{
 		this.addAttachHandler(handler);
-		return (W) this;
+		return (C) this;
 	}
 		
-	public W attribute(String name, String value)
+	public C attribute(String name, String value)
 	{
 		this.getElement().setAttribute(name, value);
-		return (W) this;
+		return (C) this;
 	}
 	
 	public String getAttribute(String name)
@@ -58,16 +57,22 @@ public abstract class Composite<W extends Widget> extends Control implements IsW
 		return this.getElement().getAttribute(name);
 	}
 	
-	public W className(String className)
+	public C className(String className)
 	{
 		this.addStyleName(className);
-		return (W) this;
+		return (C) this;
 	}
 	
-	public W removeClassName(String className)
+	public C styleName(String styleName)
+	{
+		this.setStyleName(styleName);
+		return (C) this;
+	}
+	
+	public C removeClassName(String className)
 	{
 		this.removeStyleName(className);
-		return (W) this;
+		return (C) this;
 	}
 	
 	public String getId()
@@ -75,46 +80,46 @@ public abstract class Composite<W extends Widget> extends Control implements IsW
 		return this.getElement().getId();
 	}
 	
-	public W id(String id)
+	public C id(String id)
 	{
 		this.getElement().setId(id);
-		return (W) this;
+		return (C) this;
 	}
 	
-	public W name(String name)
+	public C name(String name)
 	{
 		return this.attribute("name", name);
 	}
 	
-	public Style<W> style()
+	public Style<C> style()
 	{
 		if(this.style == null)
 		{
-			this.style = Style.<W>create((W) this);
+			this.style = Style.<C>create((C) this);
 		}
 		
 		return this.style;
 	}
 	
-	public W title(String title)
+	public C title(String title)
 	{
 		this.getElement().setTitle(title);
-		return (W) this;
+		return (C) this;
 	}
 	
-	public W visible()
+	public C visible()
 	{
 		this.setVisible(true);
-		return (W) this;
+		return (C) this;
 	}
 	
-	public W hidden()
+	public C hidden()
 	{
 		this.setVisible(false);
-		return (W) this;
+		return (C) this;
 	}
 	
-	protected W addEvent(String type, EventHandler handler)
+	protected C addEvent(String type, EventHandler handler)
 	{
 		if(this.eventBus == null)
 		{
@@ -123,22 +128,22 @@ public abstract class Composite<W extends Widget> extends Control implements IsW
 		
 		this.eventBus.add(type, handler);
 		
-		return (W) this;
+		return (C) this;
 	}
 	
-	public W fireEvent(String type)
+	public C fireEvent(String type)
 	{
 		return this.fireEvent(type, new Event(this));
 	}
 	
-	public W fireEvent(String type, Event event)
+	public C fireEvent(String type, Event event)
 	{
 		if(this.eventBus != null)
 		{
 			this.eventBus.fire(type, event);
 		}
 		
-		return (W) this;
+		return (C) this;
 	}
 	
 	protected EventBus eventBus()

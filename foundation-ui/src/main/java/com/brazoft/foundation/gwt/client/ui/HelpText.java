@@ -23,7 +23,7 @@ import com.brazoft.foundation.gwt.client.component.api.HasText;
 import com.brazoft.foundation.gwt.client.ui.Emphasis.EmphasisOptions;
 import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 
-class HelpText extends Bootstrap<HelpText> implements HasText<HelpText>
+public class HelpText extends Bootstrap<HelpText> implements HasText<HelpText>
 {
 	private Emphasis container = new Emphasis(EmphasisOptions.SMALL);
 	

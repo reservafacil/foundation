@@ -1,5 +1,9 @@
 package com.brazoft.foundation.gwt.client.ui;
 
+import com.brazoft.foundation.gwt.client.component.ElementResolver;
+import com.brazoft.foundation.gwt.client.component.HTML;
+import com.brazoft.foundation.gwt.client.component.api.Component;
+import com.brazoft.foundation.gwt.client.event.Events;
 import com.brazoft.foundation.gwt.client.ui.api.UIButton;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.event.dom.client.BlurHandler;
@@ -15,16 +19,14 @@ import com.google.gwt.event.dom.client.MouseOutHandler;
 import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.event.dom.client.MouseUpHandler;
 import com.google.gwt.event.dom.client.MouseWheelHandler;
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.HTML;
-import com.brazoft.foundation.gwt.client.component.api.Component;
-import com.brazoft.foundation.gwt.client.event.Events;
 
 public class QuickButton extends Component<QuickButton> implements UIButton<QuickButton>
 {
 	private Paragraph text = new Paragraph();
 	
 	private HTML<SpanElement> notification = HTML.asSpan().className("notification");
+	
+	private StyleChooser<HTML<SpanElement>> chooser = new StyleChooser<HTML<SpanElement>>("btn-primary", "btn-info", "btn-success", "btn-warning", "btn-danger", "btn-inverse");
 	
 	public QuickButton()
 	{
@@ -120,42 +122,42 @@ public class QuickButton extends Component<QuickButton> implements UIButton<Quic
 	@Override
 	public QuickButton primary()
 	{
-		this.notification.className("btn-primary");
+		this.chooser.className(this.notification, "btn-primary");
 		return this;
 	}
 
 	@Override
 	public QuickButton info()
 	{
-		this.notification.className("btn-info");
+		this.chooser.className(this.notification, "btn-info");
 		return this;
 	}
 
 	@Override
 	public QuickButton success()
 	{
-		this.notification.className("btn-success");
+		this.chooser.className(this.notification, "btn-success");
 		return this;
 	}
 
 	@Override
 	public QuickButton warning()
 	{
-		this.notification.className("btn-warning");
+		this.chooser.className(this.notification, "btn-warning");
 		return this;
 	}
 
 	@Override
 	public QuickButton danger()
 	{
-		this.notification.className("btn-danger");
+		this.chooser.className(this.notification, "btn-danger");
 		return this;
 	}
 
 	@Override
 	public QuickButton inverse()
 	{
-		this.notification.className("btn-inverse");
+		this.chooser.className(this.notification, "btn-inverse");
 		return this;
 	}
 
@@ -199,11 +201,3 @@ public class QuickButton extends Component<QuickButton> implements UIButton<Quic
 		return this.text.getText();
 	}
 }
-
-/*
-<a class="quick-button span2">
-	<i class="fa-icon-group"></i>
-	<p>Users</p>
-	<span class="notification">1.367</span>
-</a> 
-*/

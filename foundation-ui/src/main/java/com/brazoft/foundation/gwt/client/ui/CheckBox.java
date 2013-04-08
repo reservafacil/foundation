@@ -19,19 +19,14 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.event.Events;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.brazoft.foundation.gwt.client.ui.api.Input;
+import com.brazoft.foundation.gwt.client.ui.api.UISelection;
 
-public class CheckBox extends Input<CheckBox, String>
+public class CheckBox extends Input<CheckBox, String> implements UISelection<CheckBox, String>
 {
 	public CheckBox()
 	{
 		super(ElementResolver.checkbox());
-	}
-	
-	public CheckBox onClick(ClickHandler handler)
-	{
-		return Events.on(this, handler);
 	}
 	
 	public CheckBox checked(Boolean selected)

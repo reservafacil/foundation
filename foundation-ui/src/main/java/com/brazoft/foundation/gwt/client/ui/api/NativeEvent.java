@@ -3,9 +3,8 @@ package com.brazoft.foundation.gwt.client.ui.api;
 import com.brazoft.foundation.gwt.client.event.api.AttachHandler;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.AttachEvent;
-import com.google.gwt.user.client.ui.Widget;
 
-public abstract class NativeEvent<W extends Widget> extends Bootstrap<W>
+public abstract class NativeEvent<N extends NativeEvent<N>> extends Bootstrap<N>
 {
 	public NativeEvent(Element element)
 	{

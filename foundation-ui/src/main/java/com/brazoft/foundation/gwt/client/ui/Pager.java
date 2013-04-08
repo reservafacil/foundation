@@ -2,6 +2,7 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.event.Event;
+import com.brazoft.foundation.gwt.client.ui.api.Pagination;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -82,7 +83,7 @@ public class Pager extends Pagination<Pager>
 	}
 
 	@Override
-	Pager previous()
+	protected Pager previous()
 	{
 		this.next.activate();
 		
@@ -90,7 +91,7 @@ public class Pager extends Pagination<Pager>
 	}
 
 	@Override
-	Pager next()
+	protected Pager next()
 	{
 		this.previous.activate();
 		

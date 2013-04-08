@@ -13,9 +13,15 @@ public class ValidationProcess
 	public <V> ValidationConstraint<V> constraintFor(UIInput<?, V> input)
 	{
 		ValidationConstraint<V> constraint = new ValidationConstraint<V>(input);
-		this.constraints.add(constraint);
+		this.add(constraint);
 		
 		return constraint; 
+	}
+	
+	public ValidationProcess add(ValidationConstraint<?> constraint)
+	{
+		this.constraints.add(constraint);
+		return this;
 	}
 	
 	public boolean validate()
@@ -46,7 +52,7 @@ public class ValidationProcess
 		void whenInvalid(String message);
 	}
 	
-	public class ValidationConstraint<V>
+	public static class ValidationConstraint<V>
 	{
 		private UIInput<?, V> input;
 		
@@ -62,6 +68,12 @@ public class ValidationProcess
 		public ValidationConstraint<V> add(Validator<V> validator)
 		{
 			this.validators.add(validator);
+			return this;
+		}
+		
+		public ValidationConstraint<V> remove(Validator<V> validator)
+		{
+			this.validators.remove(validator);
 			return this;
 		}
 		

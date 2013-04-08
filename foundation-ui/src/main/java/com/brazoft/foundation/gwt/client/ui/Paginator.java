@@ -1,6 +1,7 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.event.Event;
+import com.brazoft.foundation.gwt.client.ui.api.Pagination;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 
@@ -134,13 +135,13 @@ public class Paginator extends Pagination<Paginator>
 		return this.getIndex(this.active);
 	}
 	
-	Paginator previous()
+	protected Paginator previous()
 	{
 		this.next.activate();
 		return this.run(-1);
 	}
 	
-	Paginator next()
+	protected Paginator next()
 	{
 		this.previous.activate();
 		return this.run(1);

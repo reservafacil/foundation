@@ -36,4 +36,14 @@ public enum Alignment
 		
 		return "clearfix";
 	}
+	
+	public String toString()
+	{
+		if(this == NONE)
+		{
+			return LEFT.toString();
+		}
+		
+		return this.name().toLowerCase();
+	}
 }

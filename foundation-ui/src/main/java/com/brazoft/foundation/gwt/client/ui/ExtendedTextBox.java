@@ -18,6 +18,8 @@
 
 package com.brazoft.foundation.gwt.client.ui;
 
+import com.brazoft.foundation.gwt.client.ui.api.DecoratedTextBox;
+
 
 public class ExtendedTextBox extends DecoratedTextBox<ExtendedTextBox, String>
 {
@@ -64,13 +66,13 @@ public class ExtendedTextBox extends DecoratedTextBox<ExtendedTextBox, String>
 	@Override
 	public String getValue()
 	{
-		return this.input().getValue();
+		return this.getInput().getValue();
 	}
 	
 	@Override
 	public ExtendedTextBox value(String value)
 	{
-		this.input().value(value);
+		this.getInput().value(value);
 		return this;
 	}
 }

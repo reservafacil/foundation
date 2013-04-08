@@ -19,6 +19,7 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
+import com.brazoft.foundation.gwt.client.ui.api.Form;
 import com.google.gwt.user.client.ui.Widget;
 
 public class InlineForm extends Form<InlineForm>

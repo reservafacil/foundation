@@ -22,6 +22,7 @@ import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.DomEvent;
 import com.brazoft.foundation.gwt.client.json.JSONCollection;
+import com.brazoft.foundation.gwt.client.ui.api.Input;
 
 public class TextBox extends Input<TextBox, String>
 {

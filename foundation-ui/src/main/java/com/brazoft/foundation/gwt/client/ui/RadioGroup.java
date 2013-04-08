@@ -47,7 +47,7 @@ public class RadioGroup extends Group<RadioGroup, String>
 	
 	private RadioButton radio(Widget child)
 	{
-		FormLabel label = (FormLabel) child;
+		Label label = (Label) child;
 		return (RadioButton) label.getInput();
 	}
 }

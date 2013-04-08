@@ -26,6 +26,8 @@ import com.google.gwt.dom.client.Element;
 
 public class Emphasis extends Bootstrap<Emphasis> implements HasText<Emphasis>
 {
+	private StyleChooser<Emphasis> chooser = new StyleChooser<Emphasis>("text-warning", "text-error", "text-info", "text-success");
+	
 	public Emphasis(EmphasisOptions option)
 	{
 		super(option.resolveElement());
@@ -33,22 +35,22 @@ public class Emphasis extends Bootstrap<Emphasis> implements HasText<Emphasis>
 	
 	public Emphasis warning()
 	{
-		return this.className("text-warning");
+		return this.chooser.className(this, "text-warning");
 	}
 	
 	public Emphasis error()
 	{
-		return this.className("text-error");
+		return this.chooser.className(this, "text-error");
 	}
 	
 	public Emphasis info()
 	{
-		return this.className("text-info");
+		return this.chooser.className(this, "text-info");
 	}
 	
 	public Emphasis success()
 	{
-		return this.className("text-success");
+		return this.chooser.className(this, "text-success");
 	}
 	
 	@Override

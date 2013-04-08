@@ -56,7 +56,7 @@ public class Style<W extends Widget>
 	{
 		if(widget instanceof Component)
 		{
-			return ((Component<W>) widget).style();
+			return (Style<W>) ((Component<?>) widget).style();
 		}
 		
 		return Style.create(widget);

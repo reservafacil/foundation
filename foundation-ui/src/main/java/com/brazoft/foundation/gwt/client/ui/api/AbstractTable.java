@@ -26,6 +26,7 @@ import com.brazoft.foundation.gwt.client.event.api.HasClickHandlers;
 import com.brazoft.foundation.gwt.client.event.api.HasMouseHandlers;
 import com.brazoft.foundation.gwt.client.ui.Alignment;
 import com.brazoft.foundation.gwt.client.ui.Icon;
+import com.brazoft.foundation.gwt.client.ui.VerticalAlignment;
 import com.brazoft.foundation.gwt.client.ui.Widgets;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.dom.client.TableCellElement;
@@ -41,7 +42,7 @@ import com.google.gwt.event.dom.client.MouseWheelHandler;
 import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
-public class AbstractTable<W extends Widget> extends Bootstrap<W>
+public class AbstractTable<T extends AbstractTable<T>> extends Bootstrap<T>
 {
 	private Caption caption;
 	
@@ -56,29 +57,29 @@ public class AbstractTable<W extends Widget> extends Bootstrap<W>
 		super(ElementResolver.table());
 	}
 	
-	public W block()
+	public T block()
 	{
 		this.style().width(100, Unit.PCT);
 		
-		return (W) this;
+		return (T) this;
 	}
 	
 	@Override
-	public W align(Alignment alignment)
+	public T align(Alignment alignment)
 	{
 		return this.attribute("align", alignment.name().toLowerCase());
 	}
 	
-	public W cellpadding(int padding)
+	public T cellpadding(int padding)
 	{
 		this.element().setCellPadding(padding);
-		return (W) this;
+		return (T) this;
 	}
 	
-	public W cellspacin(int spacing)
+	public T cellspacin(int spacing)
 	{
 		this.element().setCellSpacing(spacing);
-		return (W) this;
+		return (T) this;
 	}
 	
 	protected Caption caption()
@@ -383,6 +384,18 @@ public class AbstractTable<W extends Widget> extends Bootstrap<W>
 			public Cell icon(Icon icon)
 			{
 				return Widgets.setIcon(this, icon);
+			}
+			
+			public Cell align(Alignment align)
+			{
+				this.element().setAlign(align.toString());
+				return this;
+			}
+			
+			public Cell verticalAlign(VerticalAlignment vAlign)
+			{
+				this.element().setVAlign(vAlign.toString());
+				return this;
 			}
 			
 			TableCellElement element()

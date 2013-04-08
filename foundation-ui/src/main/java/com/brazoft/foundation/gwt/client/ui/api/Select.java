@@ -23,6 +23,7 @@ import com.brazoft.foundation.gwt.client.component.NodeIterable;
 import com.brazoft.foundation.gwt.client.component.api.Component;
 import com.brazoft.foundation.gwt.client.component.api.HasText;
 import com.brazoft.foundation.gwt.client.component.api.HasValue;
+import com.brazoft.foundation.gwt.client.component.api.ResponsiveComponent;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.Events;
 import com.brazoft.foundation.gwt.client.event.api.AttachHandler;
@@ -52,7 +53,7 @@ import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
-public abstract class Select<W extends Widget, V> extends Bootstrap<W> implements UIInput<W, V>, HasFocusHandlers<W>, HasChangeHandlers<W>, HasKeyHandlers<W>, HasMouseHandlers<W>//, ResponsiveComponent<W>
+public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> implements UIInput<S, V>, HasFocusHandlers<S>, HasChangeHandlers<S>, HasKeyHandlers<S>, HasMouseHandlers<S>, ResponsiveComponent<S>
 {
 	private JSONObject options = JSON.asObject();
 	
@@ -72,168 +73,182 @@ public abstract class Select<W extends Widget, V> extends Bootstrap<W> implement
 		});
 	}
 	
-	public W block()
+	public S block()
 	{
 		this.style().width(100, Unit.PCT);
-		return (W) this;
+		return (S) this;
 	}
 	
 	@Override
-	public W onMouseDown(MouseDownHandler handler)
+	public S onMouseDown(MouseDownHandler handler)
 	{
-		return Events.on((W) this, handler);
+		return Events.on((S) this, handler);
 	}
 
 	@Override
-	public W onMouseMove(MouseMoveHandler handler)
+	public S onMouseMove(MouseMoveHandler handler)
 	{
-		return Events.on((W) this, handler);
+		return Events.on((S) this, handler);
 	}
 
 	@Override
-	public W onMouseOut(MouseOutHandler handler)
+	public S onMouseOut(MouseOutHandler handler)
 	{
-		return Events.on((W) this, handler);
+		return Events.on((S) this, handler);
 	}
 
 	@Override
-	public W onMouseOver(MouseOverHandler handler)
+	public S onMouseOver(MouseOverHandler handler)
 	{
-		return Events.on((W) this, handler);
+		return Events.on((S) this, handler);
 	}
 
 	@Override
-	public W onMouseUp(MouseUpHandler handler)
+	public S onMouseUp(MouseUpHandler handler)
 	{
-		return Events.on((W) this, handler);
+		return Events.on((S) this, handler);
 	}
 
 	@Override
-	public W onMouseWheel(MouseWheelHandler handler)
+	public S onMouseWheel(MouseWheelHandler handler)
 	{
-		return Events.on((W) this, handler);
+		return Events.on((S) this, handler);
 	}
 
 	@Override
-	public W onKeyPress(KeyPressHandler handler)
+	public S onKeyPress(KeyPressHandler handler)
 	{
-		return Events.on((W) this, handler);
+		return Events.on((S) this, handler);
 	}
 
 	@Override
-	public W onKeyDown(KeyDownHandler handler)
+	public S onKeyDown(KeyDownHandler handler)
 	{
-		return Events.on((W) this, handler);
+		return Events.on((S) this, handler);
 	}
 
 	@Override
-	public W onKeyUp(KeyUpHandler handler)
+	public S onKeyUp(KeyUpHandler handler)
 	{
-		return Events.on((W) this, handler);
+		return Events.on((S) this, handler);
 	}
 
 	@Override
-	public W onChange(ChangeHandler handler)
+	public S onChange(ChangeHandler handler)
 	{
-		return Events.on((W) this, handler);
+		return Events.on((S) this, handler);
 	}
 
 	@Override
-	public W onFocus(FocusHandler handler)
+	public S onFocus(FocusHandler handler)
 	{
-		return Events.on((W) this, handler);
+		return Events.on((S) this, handler);
 	}
 
 	@Override
-	public W onBlur(BlurHandler handler)
+	public S onBlur(BlurHandler handler)
 	{
-		return Events.on((W) this, handler);
+		return Events.on((S) this, handler);
 	}
 	
-	public W open()
+	@Override
+	public S adaptSize(Widget container)
+	{
+		double parentWidth = Component.Util.innerWidth(container);
+		this.style().width(parentWidth, Unit.PX);
+		this.update();
+		
+		return (S) this;
+	}
+	
+	@Override
+	public S responsiveTo(Widget container)
+	{
+		return Component.Util.responsiveBehavior(this, container);
+	}
+	
+	public S open()
 	{
 		this.doIt(this.getId(), "open");
-		return (W) this;
+		return (S) this;
 	}
 	
-	public W close()
+	public S close()
 	{
 		this.doIt(this.getId(), "close");
-		return (W) this;
+		return (S) this;
 	}
 	
-	public W openOnEnter(boolean open)
+	public S openOnEnter(boolean open)
 	{
 		this.options.put("openOnEnter", open);
 		return this.update();
 	}
 	
-	public W allowClear(boolean allow)
+	public S allowClear(boolean allow)
 	{
 		this.options.put("allowClear", allow);
 		return this.update();
 	}
 	
-	public W minimumInputLength(int length)
+	public S minimumInputLength(int length)
 	{
 		this.options.put("minimumInputLength", length);
 		return this.update();
 	}
 	
-	public W maximumInputLength(int length)
+	public S maximumInputLength(int length)
 	{
 		this.options.put("maximumInputLength", length);
 		return this.update();
 	}
-	
-	
 	
 	protected JSONObject getOptions()
 	{
 		return this.options;
 	}
 
-	public W select(int index)
+	public S select(int index)
 	{
 		this.element().getOptions().getItem(index).setSelected(true);
 		
-		return (W) this;
+		return (S) this;
 	}
 	
-	public W deselect(int index)
+	public S deselect(int index)
 	{
 		this.element().getOptions().getItem(index).setSelected(false);
 		
-		return (W) this;
+		return (S) this;
 	}
 	
-	public W item(String value)
+	public S item(String value)
 	{
 		return this.item(value, value);
 	}
 	
-	public W item(String text, String value)
+	public S item(String text, String value)
 	{
 		Option option = new Option().text(text).value(value);
 		
 		this.add(option);
 		
-		return (W) this;
+		return (S) this;
 	}
 	
 	@Override
-	public W placeholder(String placeholder)
+	public S placeholder(String placeholder)
 	{
 		this.attribute("data-placeholder", placeholder);
-		return (W) this;
+		return (S) this;
 	}
 	
-	public W span(int span)
+	public S span(int span)
 	{
 		return this.className("span" + span);
 	}
 
-	protected W select(String... values)
+	protected S select(String... values)
 	{
 		for(OptionElement option : this.options())
 		{
@@ -243,7 +258,7 @@ public abstract class Select<W extends Widget, V> extends Bootstrap<W> implement
 			}
 		}
 		
-		return (W) this;
+		return (S) this;
 	}
 	
 	@Override
@@ -253,10 +268,10 @@ public abstract class Select<W extends Widget, V> extends Bootstrap<W> implement
 	}
 	
 	@Override
-	public W readonly()
+	public S readonly()
 	{
 		this.element().setDisabled(true);
-		return (W) this;
+		return (S) this;
 	}
 	
 	@Override
@@ -266,10 +281,10 @@ public abstract class Select<W extends Widget, V> extends Bootstrap<W> implement
 	}
 
 	@Override
-	public W editable()
+	public S editable()
 	{
 		this.element().setDisabled(false);
-		return (W) this;
+		return (S) this;
 	}
 	
 	@Override
@@ -278,10 +293,10 @@ public abstract class Select<W extends Widget, V> extends Bootstrap<W> implement
 		return !this.isRequired();
 	}
 	
-	public W nullable()
+	public S nullable()
 	{
 		this.required = false;
-		return (W) this;
+		return (S) this;
 	}
 	
 	@Override
@@ -290,10 +305,10 @@ public abstract class Select<W extends Widget, V> extends Bootstrap<W> implement
 		return this.required;
 	}
 	
-	public W required()
+	public S required()
 	{
 		this.required = true;
-		return (W) this;
+		return (S) this;
 	}
 	
 	protected NodeIterable<OptionElement> options()
@@ -306,27 +321,12 @@ public abstract class Select<W extends Widget, V> extends Bootstrap<W> implement
 		return this.getElement().cast();
 	}
 	
-	public W update()
+	public S update()
 	{
 		this.update(this.getId());
-		return (W) this;
+		return (S) this;
 	}
 	
-//	@Override
-//	public W adaptSize(Widget container)
-//	{
-//		double width = Component.Util.innerWidth(container);
-//		this.style().width(width, Unit.PX);
-//		
-//		return (W) this;
-//	}
-//	
-//	@Override
-//	public W responsiveTo(Widget container)
-//	{
-//		return Component.Util.responsiveBehavior(this, container);
-//	}
-
 	class Option extends Widget implements HasText<Option>, HasValue<Option, String>
 	{
 		public Option()

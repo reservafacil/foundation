@@ -298,7 +298,7 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 	
 	Datepicker position()
 	{
-		TextBox box = this.input.input();
+		TextBox box = this.input.getInput();
 		
 		double left = box.getAbsoluteLeft() + box.getElement().getScrollLeft();
 		double top = box.getAbsoluteTop() + box.getOffsetHeight();

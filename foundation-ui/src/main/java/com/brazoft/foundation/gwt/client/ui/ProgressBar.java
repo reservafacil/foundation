@@ -26,6 +26,8 @@ public class ProgressBar extends Bootstrap<ProgressBar>
 {
 	private ProgressCategory category = new ProgressCategory();
 	
+	private StyleChooser<ProgressBar> chooser = new StyleChooser<ProgressBar>("progress-success", "progress-warning", "progress-danger", "progress-info");
+	
 	public ProgressBar(ProgressBarOptions option)
 	{
 		super(ElementResolver.div());
@@ -64,22 +66,22 @@ public class ProgressBar extends Bootstrap<ProgressBar>
 	
 	public ProgressBar success()
 	{
-		return this.className("progress-success");
+		return this.chooser.className(this, "progress-success");
 	}
 	
 	public ProgressBar warning()
 	{
-		return this.className("progress-warning");
+		return this.chooser.className(this, "progress-warning");
 	}
 	
 	public ProgressBar danger()
 	{
-		return this.className("progress-danger");
+		return this.chooser.className(this, "progress-danger");
 	}
 	
 	public ProgressBar info()
 	{
-		return this.className("progress-info");
+		return this.chooser.className(this, "progress-info");
 	}
 	
 	public ProgressBar total(int total)

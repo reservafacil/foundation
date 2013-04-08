@@ -19,6 +19,7 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
+import com.brazoft.foundation.gwt.client.ui.api.Input;
 
 public class PasswordBox extends Input<PasswordBox, String>
 {

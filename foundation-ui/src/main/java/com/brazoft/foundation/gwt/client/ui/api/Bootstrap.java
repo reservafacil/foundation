@@ -18,43 +18,42 @@
 
 package com.brazoft.foundation.gwt.client.ui.api;
 
+import com.brazoft.foundation.gwt.client.component.api.Component;
 import com.brazoft.foundation.gwt.client.ui.Alignment;
 import com.brazoft.foundation.gwt.client.ui.Direction;
 import com.brazoft.foundation.gwt.client.ui.ViewPort;
 import com.brazoft.foundation.gwt.client.ui.Widgets;
-import com.brazoft.foundation.gwt.client.component.api.Component;
 import com.google.gwt.dom.client.Element;
-import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
-public abstract class Bootstrap<W extends Widget> extends Component<W>
+public abstract class Bootstrap<B extends Bootstrap<B>> extends Component<B>
 {
 	public Bootstrap(Element element)
 	{
 		super(element);
 	}
 	
-	public W affix()
+	public B affix()
 	{
 		return this.className("affix");
 	}
 	
-	public W scrollSpy()
+	public B scrollSpy()
 	{
-		return (W) Widgets.scrollSpy(this);
+		return (B) Widgets.scrollSpy(this);
 	}
 		
-	public W muted()
+	public B muted()
 	{
-		return (W) Widgets.muted(this);
+		return (B) Widgets.muted(this);
 	}
 	
-	public W align(Alignment alignment)
+	public B align(Alignment alignment)
 	{
 		return this.className(alignment.className());
 	}
 	
-	public W popover(String text, String content, Direction direction)
+	public B popover(String text, String content, Direction direction)
 	{
 		this.attribute("rel", "popover");
 		this.attribute("data-placement", direction.name().toLowerCase());
@@ -63,7 +62,7 @@ public abstract class Bootstrap<W extends Widget> extends Component<W>
 		return this.attribute("data-original-title", text);
 	}
 	
-	public W tooltip(String text, Direction direction)
+	public B tooltip(String text, Direction direction)
 	{
 		this.attribute("rel", "tooltip");
 		this.attribute("data-placement", direction.name().toLowerCase());
@@ -71,23 +70,23 @@ public abstract class Bootstrap<W extends Widget> extends Component<W>
 		return this.attribute("data-original-title", text);
 	}
 	
-	public W visibleOn(ViewPort... viewPorts)
+	public B visibleOn(ViewPort... viewPorts)
 	{
 		for(ViewPort viewPort : viewPorts)
 		{
 			viewPort.visible(this);
 		}
 		
-		return (W) this;
+		return (B) this;
 	}
 	
-	public W hiddenOn(ViewPort... viewPorts)
+	public B hiddenOn(ViewPort... viewPorts)
 	{
 		for(ViewPort viewPort : viewPorts)
 		{
 			viewPort.hidden(this);
 		}
 		
-		return (W) this;
+		return (B) this;
 	}
 }

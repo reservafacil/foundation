@@ -36,6 +36,8 @@ import com.google.gwt.event.dom.client.MouseWheelHandler;
 
 public class Badge extends Bootstrap<Badge> implements HasText<Badge>, HasClickHandlers<Badge>, HasMouseHandlers<Badge>
 {
+	private StyleChooser<Badge> chooser = new StyleChooser<Badge>("badge-success", "badge-warning", "badge-important", "badge-info", "badge-inverse");
+	
 	public Badge()
 	{
 		super(ElementResolver.span());
@@ -89,30 +91,30 @@ public class Badge extends Bootstrap<Badge> implements HasText<Badge>, HasClickH
 	{
 		return Events.on(this, handler);
 	}
-
+	
 	public Badge success()
 	{
-		return this.className("badge-success");
+		return this.chooser.className(this, "badge-success");
 	}
 	
 	public Badge warning()
 	{
-		return this.className("badge-warning");
+		return this.chooser.className(this, "badge-warning");
 	}
 	
 	public Badge important()
 	{
-		return this.className("badge-important");
+		return this.chooser.className(this, "badge-important");
 	}
 	
 	public Badge info()
 	{
-		return this.className("badge-info");
+		return this.chooser.className(this, "badge-info");
 	}
 	
 	public Badge inverse()
 	{
-		return this.className("badge-inverse");
+		return this.chooser.className(this, "badge-inverse");
 	}
 
 	@Override

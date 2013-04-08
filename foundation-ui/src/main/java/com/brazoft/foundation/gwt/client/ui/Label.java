@@ -1,70 +1,97 @@
-/**
- * Copyright (C) 2009-2012 the original author or authors.
- * See the notice.md file distributed with this work for additional
- * information regarding copyright ownership.
- *
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
- */
-
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.api.Component;
 import com.brazoft.foundation.gwt.client.component.api.HasText;
-import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
+import com.brazoft.foundation.gwt.client.component.api.UIInput;
+import com.brazoft.foundation.gwt.client.ui.Emphasis.EmphasisOptions;
+import com.google.gwt.dom.client.LabelElement;
+import com.google.gwt.dom.client.Style.Display;
+import com.google.gwt.dom.client.Style.Unit;
 
-public class Label extends Bootstrap<Label> implements HasText<Label>
+public class Label extends Component<Label> implements HasText<Label>
 {
+	private Emphasis text;
+	
+	private UIInput<?, ?> input;
+	
 	public Label()
 	{
-		super(ElementResolver.span());
-		this.className("label");
+		this(Orientation.VERTICAL);
 	}
 	
-	public Label success()
+	public Label(Orientation orientation)
 	{
-		return this.className("label-success");
+		super(ElementResolver.label());
+		this.init(orientation);
 	}
 	
-	public Label warning()
+	private void init(Orientation orientation)
 	{
-		return this.className("label-warning");
+		if (orientation == Orientation.HORIZONTAL)
+		{
+			this.className("inline");
+		}
 	}
 	
-	public Label important()
+	public UIInput<?, ?> getInput()
 	{
-		return this.className("label-important");
+		return this.input;
 	}
 	
-	public Label info()
+	public Label forInput(UIInput<?, ?> input)
 	{
-		return this.className("label-info");
+		boolean checkbox = (input instanceof CheckBox);
+		this.input = input;
+		this.forId(input.getId());
+		
+		if(checkbox || input instanceof RadioButton)
+		{
+			this.className(checkbox ? "checkbox" : "radio");
+			this.add(input.asWidget());
+			input.style().display(Display.INLINE).paddingLeft(4, Unit.PX);
+			this.text = new Emphasis(EmphasisOptions.SMALL).muted();
+			this.text.style().display(Display.INLINE).paddingLeft(4, Unit.PX);
+			this.add(this.text);
+			
+			return this;
+		}
+		
+		return this.add(input.asWidget());
 	}
 	
-	public Label inverse()
+	public Label forId(String id)
 	{
-		return this.className("label-inverse");
+		this.element().setHtmlFor(id);
+		return this;
 	}
 
 	@Override
 	public Label text(String text)
 	{
-		return Component.Util.setHTML(this, text);
+		if(this.text == null)
+		{
+			this.text = new Emphasis(EmphasisOptions.SMALL).muted();
+			this.add(this.text);
+		}
+		this.text.text(text);
+		
+		return this;
 	}
 
 	@Override
 	public String getText()
 	{
-		return Component.Util.getHTML(this);
+		if(this.text != null)
+		{
+			return this.text.getText();
+		}
+		
+		return "";
+	}
+	
+	protected LabelElement element()
+	{
+		return this.getElement().cast();
 	}
 }

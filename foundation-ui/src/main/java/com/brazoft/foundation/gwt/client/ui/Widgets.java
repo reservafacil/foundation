@@ -20,6 +20,7 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.HTML;
+import com.brazoft.foundation.gwt.client.ui.api.Input;
 import com.brazoft.foundation.gwt.client.ui.api.UIButton;
 import com.google.gwt.dom.client.BodyElement;
 import com.google.gwt.dom.client.Element;
@@ -32,6 +33,8 @@ import com.google.gwt.user.client.ui.Widget;
 @SuppressWarnings("unchecked")
 public class Widgets
 {
+	static final StyleChooser<Widget> btnChooser = new StyleChooser<Widget>("btn-primary", "btn-info", "btn-success", "btn-warning", "btn-danger", "btn-inverse");
+	
 	public static <W extends Widget> W setData(W widget, String value)
 	{
 		widget.getElement().setAttribute("data-value", value);
@@ -107,35 +110,41 @@ public class Widgets
 		
 		return (B) button;
 	}
-
+	
 	static <B extends UIButton<? extends Widget>> B setPrimary(B button)
 	{
-		return (B) button.className("btn-primary");
+		btnChooser.className(button.asWidget(), "btn-primary");
+		return button;
 	}
 	
 	static <B extends UIButton<? extends Widget>> B setInfo(B button)
 	{
-		return (B) button.className("btn-info");
+		btnChooser.className(button.asWidget(), "btn-info");
+		return button;
 	}
 	
 	static <B extends UIButton<? extends Widget>> B setSuccess(B button)
 	{
-		return (B) button.className("btn-success"); 
+		btnChooser.className(button.asWidget(), "btn-success");
+		return button;
 	}
 	
 	static <B extends UIButton<? extends Widget>> B setWarning(B button)
 	{
-		return (B) button.className("btn-warning"); 
+		btnChooser.className(button.asWidget(), "btn-warning");
+		return button;
 	}
 	
 	static <B extends UIButton<? extends Widget>> B setDanger(B button)
 	{
-		return (B) button.className("btn-danger");
+		btnChooser.className(button.asWidget(), "btn-danger");
+		return button;
 	}
 	
 	static <B extends UIButton<? extends Widget>> B setInverse(B button)
 	{
-		return (B) button.className("btn-inverse");
+		btnChooser.className(button.asWidget(), "btn-inverse");
+		return button;
 	}
 	
 	static <B extends UIButton<? extends Widget>> B setLink(B button)
@@ -179,19 +188,19 @@ public class Widgets
 		return widget;
 	}
 	
-	static boolean isDisabledClass(Widget widget)
+	public static boolean isDisabledClass(Widget widget)
 	{
 		return widget.getStyleName().contains("disabled");
 	}
 	
-	static <W extends Widget> W disabledClass(W widget)
+	public static <W extends Widget> W disabledClass(W widget)
 	{
 		widget.addStyleName("disabled");
 		
 		return widget;
 	}
 	
-	static <W extends Widget> W enabledClass(W widget)
+	public static <W extends Widget> W enabledClass(W widget)
 	{
 		widget.removeStyleName("disabled");
 		

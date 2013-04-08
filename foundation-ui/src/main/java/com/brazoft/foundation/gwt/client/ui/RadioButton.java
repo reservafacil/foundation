@@ -19,8 +19,10 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
+import com.brazoft.foundation.gwt.client.ui.api.Input;
+import com.brazoft.foundation.gwt.client.ui.api.UISelection;
 
-public class RadioButton extends Input<RadioButton, String>
+public class RadioButton extends Input<RadioButton, String> implements UISelection<RadioButton, String>
 {
 	public RadioButton(String name)
 	{

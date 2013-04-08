@@ -20,6 +20,7 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.ui.SearchForm.SearchOptions;
 import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
+import com.brazoft.foundation.gwt.client.ui.api.Form;
 import com.brazoft.foundation.gwt.client.ui.api.UIButton;
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.HTML;
