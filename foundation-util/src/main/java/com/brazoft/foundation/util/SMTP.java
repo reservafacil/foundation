@@ -71,17 +71,17 @@ public class SMTP extends Authenticator
 			mime.setFrom(new InternetAddress(this.constants.getFrom()));
 			mime.setSubject(message.getSubject());
 
-			if (!Validator.isBlankOrNull(message.getTo()))
+			if (!Validator.isEmptyOrNull(message.getTo()))
 			{
 				mime.setRecipients(Message.RecipientType.TO, InternetAddress.parse(message.getTo()));
 			}
 
-			if (!Validator.isBlankOrNull(message.getCc()))
+			if (!Validator.isEmptyOrNull(message.getCc()))
 			{
 				mime.setRecipients(Message.RecipientType.CC, InternetAddress.parse(message.getCc()));
 			}
 
-			if (!Validator.isBlankOrNull(message.getBcc()))
+			if (!Validator.isEmptyOrNull(message.getBcc()))
 			{
 				mime.setRecipients(Message.RecipientType.BCC, InternetAddress.parse(message.getBcc()));
 			}

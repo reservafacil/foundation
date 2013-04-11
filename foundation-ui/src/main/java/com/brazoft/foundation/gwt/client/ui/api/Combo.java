@@ -21,7 +21,7 @@ package com.brazoft.foundation.gwt.client.ui.api;
 import com.google.gwt.dom.client.Style.Unit;
 
 @SuppressWarnings("unchecked")
-public abstract class Combo<C extends Combo<C>> extends Select<C, String>
+public abstract class Combo<C extends Combo<C, V>, V> extends Select<C, V>
 {
 	public Combo()
 	{
@@ -50,22 +50,5 @@ public abstract class Combo<C extends Combo<C>> extends Select<C, String>
 	{
 		this.getOptions().put("allow_single_deselect", allow);
 		return (C) this;
-	}
-	
-	@Override
-	public C value(String value)
-	{
-		return this.select(value);
-	}
-	
-	@Override
-	public String getValue()
-	{
-		if(this.element().getSelectedIndex() == -1)
-		{
-			return null;
-		}
-		
-		return this.element().getOptions().getItem(this.element().getSelectedIndex()).getValue();
 	}
 }

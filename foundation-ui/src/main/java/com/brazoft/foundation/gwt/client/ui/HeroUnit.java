@@ -30,7 +30,7 @@ public class HeroUnit extends Bootstrap<HeroUnit>
 	{
 		super(ElementResolver.div());
 		this.className("hero-unit");
-		this.add(this.heading);
+		this.item(this.heading);
 	}
 	
 	public HeroUnit heading(String text)
@@ -40,7 +40,7 @@ public class HeroUnit extends Bootstrap<HeroUnit>
 		return this;
 	}
 	
-	public HeroUnit add(Widget widget)
+	public HeroUnit item(Widget widget)
 	{
 		if(widget instanceof Paragraph)
 		{

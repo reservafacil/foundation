@@ -364,7 +364,7 @@ public class Converter
 	 */
 	public static String toNone(String value)
 	{
-		return Validator.isBlankOrNull(value) ? "none" : value;
+		return Validator.isEmptyOrNull(value) ? "none" : value;
 	}
 
 	/**
@@ -435,7 +435,7 @@ public class Converter
 	 */
 	protected static Object toObject(Object value, Class<?> clazz)
 	{
-		if (value == null || Validator.isBlankOrNull(value.toString()))
+		if (value == null || Validator.isEmptyOrNull(value.toString()))
 		{
 			if (Integer.class.isAssignableFrom(clazz))
 			{

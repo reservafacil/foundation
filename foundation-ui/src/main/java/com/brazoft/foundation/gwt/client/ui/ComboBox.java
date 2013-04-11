@@ -20,7 +20,22 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.ui.api.Combo;
 
-public class ComboBox extends Combo<ComboBox>
+public class ComboBox extends Combo<ComboBox, String>
 {
+	@Override
+	public ComboBox value(String value)
+	{
+		return this.select(value);
+	}
 	
+	@Override
+	public String getValue()
+	{
+		if(this.element().getSelectedIndex() == -1)
+		{
+			return null;
+		}
+		
+		return this.element().getOptions().getItem(this.element().getSelectedIndex()).getValue();
+	}
 }

@@ -29,7 +29,7 @@ public class Validator
 	 * @param value
 	 * @return Returns if value is blank or null
 	 */
-	public static boolean isBlankOrNull(String value)
+	public static boolean isEmptyOrNull(String value)
 	{
 		return (value == null) || value.isEmpty();
 	}
@@ -40,7 +40,7 @@ public class Validator
 	 */
 	public static boolean isBlankOrNullOrZero(String value)
 	{
-		return Validator.isBlankOrNull(value) || "0".equals(value);
+		return Validator.isEmptyOrNull(value) || "0".equals(value);
 	}
 	
 	/**
@@ -60,7 +60,7 @@ public class Validator
 		
 		if(value instanceof String)
 		{
-			return Validator.isBlankOrNull((String) value);
+			return Validator.isEmptyOrNull((String) value);
 		}
 		
 		return false;

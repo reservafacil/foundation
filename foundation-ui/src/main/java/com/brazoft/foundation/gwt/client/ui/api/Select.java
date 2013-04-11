@@ -53,7 +53,7 @@ import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
-public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> implements UIInput<S, V>, HasFocusHandlers<S>, HasChangeHandlers<S>, HasKeyHandlers<S>, HasMouseHandlers<S>, ResponsiveComponent<S>
+public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> implements UIInput<S, V>, HasFocusHandlers<S>, HasChangeHandlers<S>, HasKeyHandlers<S>, HasMouseHandlers<S>//, ResponsiveComponent<S>
 {
 	private JSONObject options = JSON.asObject();
 	
@@ -151,21 +151,20 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 		return Events.on((S) this, handler);
 	}
 	
-	@Override
-	public S adaptSize(Widget container)
-	{
-		double parentWidth = Component.Util.innerWidth(container);
-		this.style().width(parentWidth, Unit.PX);
-		this.update();
-		
-		return (S) this;
-	}
-	
-	@Override
-	public S responsiveTo(Widget container)
-	{
-		return Component.Util.responsiveBehavior(this, container);
-	}
+//	@Override
+//	public S adaptSize(Widget container)
+//	{
+//		double parentWidth = Component.Util.innerWidth(container);
+//		this.style().width(parentWidth, Unit.PX);
+//		
+//		return (S) this;
+//	}
+//	
+//	@Override
+//	public S responsiveTo(Widget container)
+//	{
+//		return Component.Util.responsiveBehavior(this, container);
+//	}
 	
 	public S open()
 	{
@@ -316,6 +315,11 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 		return new NodeIterable<OptionElement>(this.element().getOptions());
 	}
 	
+	protected String getSelection()
+	{
+		return this.element().getValue();
+	}
+	
 	protected SelectElement element()
 	{
 		return this.getElement().cast();
@@ -350,7 +354,7 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 			this.element().setValue(value);
 			return this;
 		}
-
+		
 		@Override
 		public String getValue()
 		{

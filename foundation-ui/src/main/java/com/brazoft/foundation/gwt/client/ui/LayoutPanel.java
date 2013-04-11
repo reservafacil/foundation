@@ -22,7 +22,7 @@ public class LayoutPanel extends Bootstrap<LayoutPanel>
 			((ResponsiveComponent<?>) child).responsiveTo(this);
 		}
 		
-		this.add(item);
+		this.item(item);
 		
 		return item;
 	}
@@ -35,7 +35,6 @@ public class LayoutPanel extends Bootstrap<LayoutPanel>
 			this.add(child);
 		}
 		
-		@Override
 		public Item add(Widget add)
 		{
 			return super.add(add);

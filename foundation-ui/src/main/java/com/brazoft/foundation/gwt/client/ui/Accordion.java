@@ -75,7 +75,7 @@ public class Accordion extends NativeEvent<Accordion>
 	{
 		AccordionItem item = new AccordionItem(this.hasChildren());
 		
-		item.heading.add(heading);
+		item.heading.item(heading);
 		item.collapse.add(content);
 		this.add(item);
 		
@@ -216,7 +216,7 @@ public class Accordion extends NativeEvent<Accordion>
 			this.toogle.attribute("data-parent", "#" + Accordion.this.getId());
 		}
 		
-		protected AccordionHeading add(Widget child) 
+		protected AccordionHeading item(Widget child) 
 		{
 			this.toogle.add(child);
 			return this;

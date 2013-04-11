@@ -84,7 +84,7 @@ public class OSUtil
 		if(!ignoreError)
 		{
 			error = Converter.toString(OSUtil.handle(process.getErrorStream()));
-			if(!Validator.isBlankOrNull(error))
+			if(!Validator.isEmptyOrNull(error))
 			{
 				throw new IOException(error);
 			}

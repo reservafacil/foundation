@@ -87,7 +87,7 @@ public class LayoutRow extends Bootstrap<LayoutRow>
 			return this.className("offset" + offset);
 		}
 
-		public Cell add(Widget add)
+		public Cell item(Widget add)
 		{
 			return super.add(add);
 		}

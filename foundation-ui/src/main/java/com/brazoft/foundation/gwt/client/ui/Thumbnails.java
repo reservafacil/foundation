@@ -31,6 +31,6 @@ public class Thumbnails extends Bootstrap<Thumbnails>
 
 	public Thumbnails item(Thumbnail thumbnail)
 	{
-		return this.add(thumbnail);
+		return this.item(thumbnail);
 	}
 }

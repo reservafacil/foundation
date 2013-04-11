@@ -95,7 +95,7 @@ public class LDAP
 
 		try
 		{
-			if (!Validator.isBlankOrNull(password))
+			if (!Validator.isEmptyOrNull(password))
 			{
 				bytes = password.getBytes("UTF-8");
 			}

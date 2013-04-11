@@ -71,7 +71,7 @@ public class LocaleUtil
 		StringBuffer buffer;
 
 		buffer = new StringBuffer(LocaleUtil.getLanguageLabel(locale, translateTo));
-		if(!Validator.isBlankOrNull(locale.getCountry()))
+		if(!Validator.isEmptyOrNull(locale.getCountry()))
 		{
 			buffer.append(" (");
 			buffer.append(LocaleUtil.getCountryLabel(locale, translateTo));
@@ -87,7 +87,7 @@ public class LocaleUtil
 	 */
 	public static String toISOCode(Locale locale)
 	{
-		if (Validator.isBlankOrNull(locale.getCountry()))
+		if (Validator.isEmptyOrNull(locale.getCountry()))
 		{
 			return locale.getLanguage();
 		}

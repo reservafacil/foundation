@@ -35,7 +35,7 @@ public class ValidationProcess
 		
 		for(ValidationConstraint<?> constraint : this.constraints)
 		{
-			result = result && constraint.validate();
+			result = constraint.validate() && result;
 			if(!result && propagation == Propagation.STOP_AT_ONCE)
 			{
 				return false;
