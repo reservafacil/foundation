@@ -22,6 +22,7 @@ import java.util.Date;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.HTML;
+import com.brazoft.foundation.gwt.client.component.api.Component;
 import com.brazoft.foundation.gwt.client.component.api.ResponsiveComponent;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.Event;
@@ -39,6 +40,7 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
+import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 
 public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepicker, Date>, ResponsiveComponent<Datepicker>
@@ -52,6 +54,8 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 	private DateFormat format;
 	
 	private boolean shown;
+	
+	private boolean readOnly;
 	
 	public Datepicker()
 	{
@@ -76,7 +80,8 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 				Datepicker.this.input.focus();
 			}
 		});
-		this.input = new ExtendedTextBox().append(icon);
+		this.input = new ExtendedTextBox().append(icon).readonly();
+		this.editable();
 		this.input.onFocus(new FocusHandler()
 		{
 			@Override
@@ -190,7 +195,7 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 	
 	Datepicker show()
 	{
-		if(!this.shown)
+		if(!this.shown && !this.isReadOnly())
 		{
 			this.picker.style().display(Display.BLOCK);
 			
@@ -215,6 +220,7 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 	{
 		if(value == null)
 		{
+			this.input.value(null);
 			return this;
 		}
 		
@@ -241,26 +247,28 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 	@Override
 	public boolean isReadOnly()
 	{
-		return this.input.isReadOnly();
+		return this.readOnly;
 	}
 
 	@Override
 	public Datepicker readonly()
 	{
-		this.input.readonly();
+		this.input.getInput().style().clearBackgroundColor();
+		this.readOnly = true;
 		return this;
 	}
 	
 	@Override
 	public boolean isEditable()
 	{
-		return this.input.isEditable();
+		return !this.readOnly;
 	}
 
 	@Override
 	public Datepicker editable()
 	{
-		this.input.editable();
+		this.input.getInput().style().backgroundColor("white");
+		this.readOnly = false;
 		return this;
 	}
 	
@@ -299,11 +307,12 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 	Datepicker position()
 	{
 		TextBox box = this.input.getInput();
-		
-		double left = box.getAbsoluteLeft() + box.getElement().getScrollLeft();
-		double top = box.getAbsoluteTop() + box.getOffsetHeight();
+		//double left = box.getAbsoluteLeft() - (box.getOffsetWidth() + box.getElement().getScrollLeft());
+		//double top = this.picker.getAbsoluteTop() - this.picker.getElement().getClientHeight() - this.picker.getOffsetHeight();
 
-		this.picker.style().position(Position.ABSOLUTE).top(top, Unit.PX).left(left, Unit.PX).zIndex(1000);
+		double left = 0;
+		double top = 0;
+		this.picker.style().zIndex(1000).position(Position.RELATIVE).left(left, Unit.PX).top(top, Unit.PX).display(Display.INLINE_BLOCK);
 		
 		return this;
 	}

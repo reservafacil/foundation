@@ -27,4 +27,6 @@ public interface UIComponent<W extends Widget> extends IsWidget
 	W visible();
 	
 	W hidden();
+	
+	void removeFromParent();
 }

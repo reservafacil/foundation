@@ -21,6 +21,7 @@ package com.brazoft.foundation.gwt.client.json;
 import com.google.gwt.json.client.JSONBoolean;
 import com.google.gwt.json.client.JSONExpression;
 import com.google.gwt.json.client.JSONNumber;
+import com.google.gwt.json.client.JSONParser;
 import com.google.gwt.json.client.JSONString;
 import com.google.gwt.json.client.JSONValue;
 
@@ -44,6 +45,14 @@ public class JSON
 				};
 	}
 	
+	public static JSONCollection<String> asStringCollection(String json)
+	{
+		JSONCollection<String> collection = asStringCollection();
+		collection.setArray(JSONParser.parseLenient(json).isArray());
+		
+		return collection;
+	}
+	
 	public static JSONCollection<String> asStringCollection()
 	{
 		return new JSONCollection<String>()
@@ -62,6 +71,14 @@ public class JSON
 				};
 	}
 	
+	public static JSONCollection<Boolean> asBooleanCollection(String json)
+	{
+		JSONCollection<Boolean> collection = asBooleanCollection();
+		collection.setArray(JSONParser.parseLenient(json).isArray());
+		
+		return collection;
+	}
+	
 	public static JSONCollection<Boolean> asBooleanCollection()
 	{
 		return new JSONCollection<Boolean>()
@@ -78,6 +95,14 @@ public class JSON
 						return value.isBoolean().booleanValue();
 					}
 				};
+	}
+	
+	public static JSONCollection<Number> asNumberCollection(String json)
+	{
+		JSONCollection<Number> collection = asNumberCollection();
+		collection.setArray(JSONParser.parseLenient(json).isArray());
+		
+		return collection;
 	}
 	
 	public static JSONCollection<Number> asNumberCollection()
@@ -101,5 +126,10 @@ public class JSON
 	public static JSONObject asObject()
 	{
 		return new JSONObject();
+	}
+	
+	public static JSONObject asObject(String json)
+	{
+		return new JSONObject(JSONParser.parseLenient(json).isObject());
 	}
 }

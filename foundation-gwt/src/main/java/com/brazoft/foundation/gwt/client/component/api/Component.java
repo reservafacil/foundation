@@ -18,11 +18,10 @@
 
 package com.brazoft.foundation.gwt.client.component.api;
 
-import com.brazoft.foundation.gwt.client.component.Panel;
+import com.brazoft.foundation.gwt.client.component.Point;
 import com.brazoft.foundation.gwt.client.component.Style;
 import com.brazoft.foundation.gwt.client.event.api.AttachHandler;
 import com.brazoft.foundation.gwt.client.event.api.DetachHandler;
-import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.AttachEvent;
 import com.google.gwt.event.logical.shared.ResizeEvent;
@@ -34,85 +33,9 @@ import com.google.gwt.user.client.ui.Widget;
 @SuppressWarnings("unchecked")
 public abstract class Component<C extends Component<C>> extends Composite<C>
 {
-	private Panel panel;
-	
 	public Component(Element element)
 	{
-		this.panel = new Panel(element);
-		this.initWidget(this.panel);
-		element.setId(Document.get().createUniqueId());
-	}
-	
-	protected C detachChildren()
-	{
-		for(Widget child : this.getChildren())
-		{
-			child.removeFromParent();
-		}
-		
-		this.panel.clear();
-		return (C) this;
-	}
-	
-	protected C remove(Widget child)
-	{
-		this.panel.remove(child);
-		return (C) this;
-	}
-
-	protected C add(Widget add)
-	{
-		return this.add(add, true);
-	}
-	
-	protected C add(Widget add, boolean ignoreIfParent)
-	{
-		if(ignoreIfParent && add.getParent() != null)
-		{
-			return (C) this;
-		}
-		
-		this.panel.add(add);
-		
-		return (C) this;
-	}
-	
-	protected C insert(Widget add, Widget before)
-	{
-		this.panel.insert(add, before);
-		
-		return (C) this;
-	}
-	
-	protected Iterable<Widget> getChildren()
-	{
-		return this.panel.children();
-	}
-	
-	protected Widget getChild(int index)
-	{
-		return this.panel.getWidget(index);
-	}
-	
-	protected int getIndex(Widget child)
-	{
-		return this.panel.getWidgetIndex(child);
-	}
-	
-	protected int childrenCount()
-	{
-		return this.panel.getWidgetCount();
-	}
-	
-	public boolean hasChildren()
-	{
-		return this.panel.getWidgetCount() > 0;
-	}
-	
-	@Override
-	protected Panel getWidget()
-	{
-		return this.panel;
+		super(element);
 	}
 	
 	public static class Util
@@ -142,20 +65,20 @@ public abstract class Component<C extends Component<C>> extends Composite<C>
 		
 		public static <W extends Widget> double innerWidth(W widget)
 		{
-			double left = computeLeft(widget);
-			double right = computeRight(widget);
+			double left = computeInnerLeft(widget);
+			double right = computeInnerRight(widget);
 			
 			return (widget.getOffsetWidth() - left) - right;
 		}
 		
-		public static <W extends Widget> double computeLeft(W widget)
+		public static <W extends Widget> double computeInnerLeft(W widget)
 		{
 			Style<W> style = Style.<W>get(widget);
 			
 			return style.computePropertyInt("padding-left") + style.computePropertyInt("margin-left") + style.computePropertyInt("border-left");
 		}
 		
-		public static <W extends Widget> double computeRight(W widget)
+		public static <W extends Widget> double computeInnerRight(W widget)
 		{
 			Style<W> style = Style.<W>get(widget);
 			

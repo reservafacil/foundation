@@ -19,13 +19,20 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
+import com.brazoft.foundation.gwt.client.event.api.AttachHandler;
+import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.DomEvent;
+import com.google.gwt.event.logical.shared.AttachEvent;
+import com.brazoft.foundation.gwt.client.json.JSON;
 import com.brazoft.foundation.gwt.client.json.JSONCollection;
+import com.brazoft.foundation.gwt.client.json.JSONObject;
 import com.brazoft.foundation.gwt.client.ui.api.Input;
 
 public class TextBox extends Input<TextBox, String>
 {
+	private JSONObject options = JSON.asObject();
+	
 	public TextBox()
 	{
 		super(ElementResolver.text());
@@ -54,12 +61,39 @@ public class TextBox extends Input<TextBox, String>
 	 */
 	public TextBox mask(String pattern)
 	{
-		return this.attribute("data-mask", pattern);
+		return this.mask("_", pattern);
+	}
+	
+	public TextBox unmask()
+	{
+		if(this.isAttached())
+		{
+			this.nativeUnmask(this.getId());
+		}
+		return this;
 	}
 	
 	public TextBox mask(String placeholder, String pattern)
 	{
-		return this.mask(pattern).attribute("data-placeholder", placeholder);
+		this.options.put("mask", pattern);
+		this.options.put("placeholder", placeholder);
+		if(this.isAttached())
+		{
+			this.nativeMask(this.getId(), this.options.getJavaScriptObject());
+		}
+		else
+		{
+			this.onAttach(new AttachHandler()
+			{
+				@Override
+				protected void onAttach(AttachEvent event)
+				{
+					nativeMask(getId(), options.getJavaScriptObject());
+				}
+			});
+		}
+		
+		return this;
 	}
 	
 	public TextBox typeahead(JSONCollection<?> values)
@@ -88,4 +122,12 @@ public class TextBox extends Input<TextBox, String>
 		this.element().setMaxLength(maxLength);
 		return this;
 	}
+	
+	private native void nativeMask(String id, JavaScriptObject options)/*-{
+		$wnd.$("#" + id).inputmask(options);
+	}-*/;
+	
+	private native void nativeUnmask(String id)/*-{
+		$wnd.$("#" + id).inputmask().unmask();
+	}-*/;
 }

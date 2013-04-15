@@ -23,7 +23,6 @@ import com.brazoft.foundation.gwt.client.component.NodeIterable;
 import com.brazoft.foundation.gwt.client.component.api.Component;
 import com.brazoft.foundation.gwt.client.component.api.HasText;
 import com.brazoft.foundation.gwt.client.component.api.HasValue;
-import com.brazoft.foundation.gwt.client.component.api.ResponsiveComponent;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.Events;
 import com.brazoft.foundation.gwt.client.event.api.AttachHandler;
@@ -247,19 +246,6 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 		return this.className("span" + span);
 	}
 
-	protected S select(String... values)
-	{
-		for(OptionElement option : this.options())
-		{
-			for(String value : values)
-			{
-				option.setSelected(option.getValue().equals(value));
-			}
-		}
-		
-		return (S) this;
-	}
-	
 	@Override
 	public boolean isReadOnly()
 	{
@@ -270,6 +256,7 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 	public S readonly()
 	{
 		this.element().setDisabled(true);
+		this.update();
 		return (S) this;
 	}
 	
@@ -283,6 +270,7 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 	public S editable()
 	{
 		this.element().setDisabled(false);
+		this.update();
 		return (S) this;
 	}
 	
@@ -313,11 +301,6 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 	protected NodeIterable<OptionElement> options()
 	{
 		return new NodeIterable<OptionElement>(this.element().getOptions());
-	}
-	
-	protected String getSelection()
-	{
-		return this.element().getValue();
 	}
 	
 	protected SelectElement element()
@@ -373,6 +356,14 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 			return Component.Util.getHTML(this);
 		}
 	}
+	
+	protected native String getSelection(String id) /*-{
+		return $wnd.$("#" + id).select2("val");
+	}-*/;
+
+	protected native void select(String id, String value)/*-{
+		$wnd.$("#" + id).select2("val", value);
+	}-*/;
 	
 	native void update(String id)/*-{
 		$wnd.$('#' + id).select2().trigger('change');

@@ -1,8 +1,11 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.json.JSONCollection;
+import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
+import com.google.gwt.user.client.Event;
+import com.google.gwt.user.client.Window;
 
 public class NumberBox extends TextBox
 {
@@ -13,12 +16,32 @@ public class NumberBox extends TextBox
 			@Override
 			public void onKeyPress(KeyPressEvent event)
 			{
+				int keyCode = event.getNativeEvent().getKeyCode();
+				if(KeyCodes.KEY_BACKSPACE == keyCode || KeyCodes.KEY_DELETE == keyCode ||
+						KeyCodes.KEY_LEFT == keyCode || KeyCodes.KEY_RIGHT == keyCode)
+				{
+					return;
+				}
+				
 				if (!"0123456789".contains(String.valueOf(event.getCharCode()))) 
 				{
 					event.preventDefault();
 				}
 			}
 		});
+	}
+	
+	@Override
+	public void onBrowserEvent(Event event)
+	{
+		super.onBrowserEvent(event);
+		switch (event.getTypeInt()) 
+		{
+			case Event.ONPASTE:
+				Window.alert(this.getValue());
+				event.preventDefault();
+				break;
+		}
 	}
 	
 	@Override

@@ -320,7 +320,7 @@ public abstract class DecoratedTextBox<D extends DecoratedTextBox<D, V>, V> exte
 			}
 		}
 		
-		double inputWidth = containerWidth - addOnWidth - Component.Util.computeLeft(container) - Component.Util.computeRight(this.input) - Component.Util.computeLeft(this.input);
+		double inputWidth = containerWidth - addOnWidth - Component.Util.computeInnerLeft(container) - Component.Util.computeInnerRight(this.input) - Component.Util.computeInnerLeft(this.input);
 				
 		this.input.style().width(inputWidth, Unit.PX);
 		

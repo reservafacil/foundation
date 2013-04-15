@@ -925,6 +925,12 @@ public class Style<W extends Widget>
 		style().setWidth(value, unit);
 		return this;
 	}
+	
+	public Style<W> property(String style, String value)
+	{
+		style().setProperty(style, value);
+		return this;
+	}
 
 	public Style<W> zIndex(int value)
 	{

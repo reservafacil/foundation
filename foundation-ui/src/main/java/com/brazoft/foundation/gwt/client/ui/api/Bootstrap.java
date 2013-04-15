@@ -55,19 +55,12 @@ public abstract class Bootstrap<B extends Bootstrap<B>> extends Component<B>
 	
 	public B popover(String text, String content, Direction direction)
 	{
-		this.attribute("rel", "popover");
-		this.attribute("data-placement", direction.name().toLowerCase());
-		this.attribute("data-content", content);
-		
-		return this.attribute("data-original-title", text);
+		return (B) Widgets.setPopover(this, text, content, direction);
 	}
 	
 	public B tooltip(String text, Direction direction)
 	{
-		this.attribute("rel", "tooltip");
-		this.attribute("data-placement", direction.name().toLowerCase());
-		
-		return this.attribute("data-original-title", text);
+		return (B) Widgets.setTooltip(this, text, direction);
 	}
 	
 	public B visibleOn(ViewPort... viewPorts)

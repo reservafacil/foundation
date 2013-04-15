@@ -18,21 +18,30 @@
 
 package com.brazoft.foundation.gwt.client.json;
 
+import java.util.Iterator;
+
 import com.google.gwt.json.client.JSONArray;
 import com.google.gwt.json.client.JSONValue;
 
-public abstract class JSONCollection<V>
+public abstract class JSONCollection<V> implements Iterable<V>, Iterator<V>
 {
 	private JSONArray array;
 	
+	int index;
+	
 	JSONCollection()
 	{
-		this.array = new JSONArray();
+		this(new JSONArray());
 	}
 	
 	public JSONCollection(JSONArray array)
 	{
 		super();
+		this.array = array;
+	}
+	
+	void setArray(JSONArray array)
+	{
 		this.array = array;
 	}
 
@@ -61,6 +70,37 @@ public abstract class JSONCollection<V>
 	public String toString()
 	{
 		return this.array.toString();
+	}
+	
+	@Override
+	public Iterator<V> iterator()
+	{
+		return this;
+	}
+	
+	@Override
+	public boolean hasNext()
+	{
+		boolean hasNext = this.index < this.size();
+		
+		if(!hasNext)
+		{
+			this.index = 0;
+		}
+		
+		return hasNext;
+	}
+	
+	@Override
+	public V next()
+	{
+		return this.get(this.index++);
+	}
+	
+	@Override
+	public void remove()
+	{
+		return;
 	}
 	
 	abstract JSONValue toJSONValue(V value);

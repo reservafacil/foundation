@@ -28,6 +28,20 @@ public abstract class Combo<C extends Combo<C, V>, V> extends Select<C, V>
 		super(false);
 	}
 	
+	protected String getSelection()
+	{
+		return this.getSelection(this.getId());
+	}
+	
+	protected C select(String value)
+	{
+		this.select(this.getId(), value);
+		
+		return (C) this;
+	}
+	
+	
+	
 	public C minimumResultsForSearch(int minimum)
 	{
 		this.getOptions().put("minimumResultsForSearch", minimum);

@@ -95,8 +95,9 @@ public class ValidationProcess
 					this.action.whenInvalid(validator.getMessage());
 					return false;
 				}
-				this.action.whenValid();
 			}
+			
+			this.action.whenValid();			
 			
 			return true;
 		}

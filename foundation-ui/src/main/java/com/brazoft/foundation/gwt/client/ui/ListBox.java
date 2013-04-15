@@ -20,8 +20,9 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import java.util.ArrayList;
 
+import com.brazoft.foundation.gwt.client.json.JSON;
+import com.brazoft.foundation.gwt.client.json.JSONCollection;
 import com.brazoft.foundation.gwt.client.ui.api.Select;
-import com.google.gwt.dom.client.OptionElement;
 
 public class ListBox extends Select<ListBox, String[]>
 {
@@ -43,22 +44,34 @@ public class ListBox extends Select<ListBox, String[]>
 	}
 	
 	@Override
-	public ListBox value(String[] value)
+	public ListBox value(String... value)
 	{
 		return this.select(value);
 	}
-
+	
+	protected ListBox select(String... values)
+	{
+		JSONCollection<String> selection = JSON.asStringCollection();
+		
+		for(String value : values)
+		{
+			selection.add(value);
+		}
+		
+		this.select(this.getId(), selection.toString());
+		
+		return this;
+	}
+	
 	@Override
 	public String[] getValue()
 	{
 		java.util.List<String> values = new ArrayList<String>();
-		
-		for(OptionElement element : this.options())
+		JSONCollection<String> jsonValues = JSON.asStringCollection(this.getSelection(this.getId()));
+
+		for(String value : jsonValues)
 		{
-			if(element.isSelected())
-			{
-				values.add(element.getValue());
-			}
+			values.add(value);
 		}
 		
 		return values.toArray(new String[values.size()]);

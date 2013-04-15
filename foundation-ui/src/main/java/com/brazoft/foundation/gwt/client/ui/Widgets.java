@@ -52,6 +52,25 @@ public class Widgets
 		return widget;
 	}
 	
+	public static <W extends Widget> W setPopover(W widget, String text, String content, Direction direction)
+	{
+		widget.getElement().setAttribute("rel", "popover");
+		widget.getElement().setAttribute("data-placement", direction.name().toLowerCase());
+		widget.getElement().setAttribute("data-content", content);
+		widget.getElement().setAttribute("data-original-title", text);
+		
+		return widget;
+	}
+	
+	public static <W extends Widget> W setTooltip(W widget, String text, Direction direction)
+	{
+		widget.getElement().setAttribute("rel", "tooltip");
+		widget.getElement().setAttribute("data-placement", direction.name().toLowerCase());
+		widget.getElement().setAttribute("data-original-title", text);
+		
+		return widget;
+	}
+	
 	public static <W extends Widget> W setIcon(W widget, Icon icon)
 	{
 		return setIcon(widget, icon, false);

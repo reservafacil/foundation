@@ -18,14 +18,18 @@
 
 package com.brazoft.foundation.gwt.client.component.api;
 
+import com.brazoft.foundation.gwt.client.component.Panel;
 import com.brazoft.foundation.gwt.client.component.Style;
 import com.brazoft.foundation.gwt.client.event.Event;
 import com.brazoft.foundation.gwt.client.event.EventBus;
 import com.brazoft.foundation.gwt.client.event.api.AttachHandler;
 import com.brazoft.foundation.gwt.client.event.api.DetachHandler;
 import com.brazoft.foundation.gwt.client.event.api.EventHandler;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.dom.client.Element;
 import com.google.gwt.user.client.ui.Control;
 import com.google.gwt.user.client.ui.IsWidget;
+import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
 public abstract class Composite<C extends Composite<C>> extends Control implements IsWidget
@@ -33,6 +37,97 @@ public abstract class Composite<C extends Composite<C>> extends Control implemen
 	private Style<C> style;
 	
 	private EventBus eventBus;
+	
+	private Panel panel;
+	
+	public Composite()
+	{
+		super();
+	}
+	
+	public Composite(Widget widget)
+	{
+		this(widget.getElement());
+	}
+	
+	public Composite(Element element)
+	{
+		this.panel = new Panel(element);
+		this.initWidget(this.panel);
+		element.setId(Document.get().createUniqueId());
+	}
+	
+	protected C detachChildren()
+	{
+		for(Widget child : this.getChildren())
+		{
+			child.removeFromParent();
+		}
+		
+		this.panel.clear();
+		return (C) this;
+	}
+	
+	protected C remove(Widget child)
+	{
+		this.panel.remove(child);
+		return (C) this;
+	}
+
+	protected C add(Widget add)
+	{
+		return this.add(add, true);
+	}
+	
+	protected C add(Widget add, boolean ignoreIfParent)
+	{
+		if(ignoreIfParent && add.getParent() != null)
+		{
+			return (C) this;
+		}
+		
+		this.panel.add(add);
+		
+		return (C) this;
+	}
+	
+	protected C insert(Widget add, Widget before)
+	{
+		this.panel.insert(add, before);
+		
+		return (C) this;
+	}
+	
+	protected Iterable<Widget> getChildren()
+	{
+		return this.panel.children();
+	}
+	
+	protected Widget getChild(int index)
+	{
+		return this.panel.getWidget(index);
+	}
+	
+	protected int getIndex(Widget child)
+	{
+		return this.panel.getWidgetIndex(child);
+	}
+	
+	protected int childrenCount()
+	{
+		return this.panel.getWidgetCount();
+	}
+	
+	public boolean hasChildren()
+	{
+		return this.panel.getWidgetCount() > 0;
+	}
+	
+	@Override
+	protected Panel getWidget()
+	{
+		return this.panel;
+	}
 	
 	public C onAttach(AttachHandler handler)
 	{
@@ -49,6 +144,12 @@ public abstract class Composite<C extends Composite<C>> extends Control implemen
 	public C attribute(String name, String value)
 	{
 		this.getElement().setAttribute(name, value);
+		return (C) this;
+	}
+	
+	public C removeAttribute(String name)
+	{
+		this.getElement().removeAttribute(name);
 		return (C) this;
 	}
 	
