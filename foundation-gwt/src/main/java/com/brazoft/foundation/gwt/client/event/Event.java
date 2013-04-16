@@ -20,23 +20,23 @@ package com.brazoft.foundation.gwt.client.event;
 
 import com.google.gwt.user.client.ui.Widget;
 
-public class Event
+public class Event<T>
 {
 	private Widget widget;
 	
-	private Object data;
+	private T data;
 
 	public Event(Widget widget)
 	{
 		this.widget = widget;
 	}
 	
-	public Event(Object data)
+	public Event(T data)
 	{
 		this(null, data);
 	}
 	
-	public Event(Widget widget, Object data)
+	public Event(Widget widget, T data)
 	{
 		super();
 		this.widget = widget;
@@ -48,7 +48,7 @@ public class Event
 		return widget;
 	}
 	
-	public Object data()
+	public T data()
 	{
 		return data;
 	}

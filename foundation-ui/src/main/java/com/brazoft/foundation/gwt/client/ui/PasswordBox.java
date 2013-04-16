@@ -28,6 +28,12 @@ public class PasswordBox extends Input<PasswordBox, String>
 		super(ElementResolver.password());
 	}
 	
+	@Override
+	public PasswordBox clear()
+	{
+		return this.value("");
+	}
+	
 	public PasswordBox value(String value)
 	{
 		this.element().setValue(value);

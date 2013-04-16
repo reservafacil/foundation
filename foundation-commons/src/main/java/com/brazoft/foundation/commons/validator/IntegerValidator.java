@@ -10,14 +10,14 @@ public class IntegerValidator extends AbstractValidator<IntegerValidator, String
 
 	public IntegerValidator()
 	{
-		super();
+		this(Integer.MIN_VALUE, Integer.MAX_VALUE);
 	}
 
 	public IntegerValidator(Integer min, Integer max)
 	{
 		super();
-		this.min = Integer.MIN_VALUE;
-		this.max = Integer.MAX_VALUE;
+		this.min = min;
+		this.max = max;
 	}
 
 	public boolean delegateValidation(String value)

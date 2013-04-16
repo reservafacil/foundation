@@ -38,6 +38,13 @@ public abstract class LabeledInput<L extends LabeledInput<L>> extends Composite<
 	}
 	
 	@Override
+	public L clear()
+	{
+		this.input.clear();
+		return (L) this;
+	}
+	
+	@Override
 	public L id(String id)
 	{
 		this.label.forId(id);

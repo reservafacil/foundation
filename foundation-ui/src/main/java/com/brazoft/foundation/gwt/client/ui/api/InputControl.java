@@ -2,7 +2,6 @@ package com.brazoft.foundation.gwt.client.ui.api;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.HTML;
-import com.brazoft.foundation.gwt.client.component.api.ResponsiveComponent;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.ui.HelpText;
 import com.brazoft.foundation.gwt.client.ui.HelpText.HelpOptions;
@@ -27,16 +26,6 @@ public class InputControl extends Bootstrap<InputControl>
 	{
 		this.message = new HelpText().hidden();
 		this.controls.add(input.asWidget()).add(this.message);
-		
-		return this;
-	}
-	
-	public InputControl responsive(UIInput<?, ?> input)
-	{
-		if(input instanceof ResponsiveComponent)
-		{
-			((ResponsiveComponent<?>) input).responsiveTo(this.controls);
-		}
 		
 		return this;
 	}

@@ -39,6 +39,12 @@ public class TextBox extends Input<TextBox, String>
 	}
 	
 	@Override
+	public TextBox clear()
+	{
+		return this.value("");
+	}
+	
+	@Override
 	public TextBox value(String value)
 	{
 		this.element().setValue(value);

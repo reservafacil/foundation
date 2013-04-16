@@ -29,6 +29,12 @@ public class CheckBox extends Input<CheckBox, String> implements UISelection<Che
 		super(ElementResolver.checkbox());
 	}
 	
+	@Override
+	public CheckBox clear()
+	{
+		return this.checked(false);
+	}
+	
 	public CheckBox checked(Boolean selected)
 	{
 		this.element().setChecked(selected);

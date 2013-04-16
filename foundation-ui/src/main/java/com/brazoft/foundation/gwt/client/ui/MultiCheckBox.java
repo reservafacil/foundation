@@ -11,16 +11,26 @@ public class MultiCheckBox extends Group<MultiCheckBox, String[]>
 	{
 		super(orientation);
 	}
+	
+	@Override
+	public MultiCheckBox clear()
+	{
+		for (Widget child : getChildren())
+		{
+			this.checkbox(child).clear();
+		}
+		return this;
+	}
 
 	@Override
 	public MultiCheckBox value(String[] values)
 	{
 		for (Widget child : getChildren())
 		{
-			CheckBox radio = this.checkbox(child);
+			CheckBox check = this.checkbox(child);
 			for(String value : values)
 			{
-				radio.checked(radio.getValue().equals(value));
+				check.checked(check.getValue().equals(value));
 			}
 		}
 		

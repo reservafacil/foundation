@@ -220,7 +220,7 @@ public abstract class Composite<C extends Composite<C>> extends Control implemen
 		return (C) this;
 	}
 	
-	protected C addEvent(String type, EventHandler handler)
+	protected C addEvent(String type, EventHandler<Object> handler)
 	{
 		if(this.eventBus == null)
 		{
@@ -234,10 +234,10 @@ public abstract class Composite<C extends Composite<C>> extends Control implemen
 	
 	public C fireEvent(String type)
 	{
-		return this.fireEvent(type, new Event(this));
+		return this.fireEvent(type, new Event<Object>(this));
 	}
 	
-	public C fireEvent(String type, Event event)
+	public C fireEvent(String type, Event<Object> event)
 	{
 		if(this.eventBus != null)
 		{

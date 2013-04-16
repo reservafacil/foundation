@@ -18,7 +18,6 @@
 
 package com.brazoft.foundation.gwt.client.component.api;
 
-import com.brazoft.foundation.gwt.client.component.Point;
 import com.brazoft.foundation.gwt.client.component.Style;
 import com.brazoft.foundation.gwt.client.event.api.AttachHandler;
 import com.brazoft.foundation.gwt.client.event.api.DetachHandler;

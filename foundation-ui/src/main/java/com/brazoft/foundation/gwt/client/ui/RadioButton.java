@@ -46,6 +46,12 @@ public class RadioButton extends Input<RadioButton, String> implements UISelecti
 		return this;
 	}
 	
+	@Override
+	public RadioButton clear()
+	{
+		return this.checked(false);
+	}
+	
 	public String getValue()
 	{
 		return this.element().getValue();

@@ -27,18 +27,18 @@ import com.brazoft.foundation.gwt.client.event.api.EventHandler;
 
 public class EventBus
 {
-	private Map<String, List<EventHandler>> events;
+	private Map<String, List<EventHandler<Object>>> events;
 	
 	public EventBus()
 	{
-		this.events = new HashMap<String, List<EventHandler>>();
+		this.events = new HashMap<String, List<EventHandler<Object>>>();
 	}
 	
-	public EventBus add(String type, EventHandler event)
+	public EventBus add(String type, EventHandler<Object> event)
 	{
 		if(!this.events.containsKey(type))
 		{
-			this.events.put(type, new ArrayList<EventHandler>());
+			this.events.put(type, new ArrayList<EventHandler<Object>>());
 		}
 		
 		this.events.get(type).add(event);
@@ -51,24 +51,24 @@ public class EventBus
 		return this.events.keySet();
 	}
 	
-	public EventHandler get(String type)
+	public EventHandler<Object> get(String type)
 	{
 		return this.events.get(type).get(0);
 	}
 	
-	public List<EventHandler> list(String type)
+	public List<EventHandler<Object>> list(String type)
 	{
 		return this.events.get(type);
 	}
 	
-	public EventBus fire(String type, Event e)
+	public EventBus fire(String type, Event<Object> e)
 	{
 		if(!this.events.containsKey(type))
 		{
 			return this;
 		}
 		
-		for(EventHandler handler : this.list(type))
+		for(EventHandler<Object> handler : this.list(type))
 		{
 			handler.onEvent(e);
 		}

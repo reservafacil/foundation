@@ -180,25 +180,25 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 	public S openOnEnter(boolean open)
 	{
 		this.options.put("openOnEnter", open);
-		return this.update();
+		return (S) this;
 	}
 	
 	public S allowClear(boolean allow)
 	{
 		this.options.put("allowClear", allow);
-		return this.update();
+		return (S) this;
 	}
 	
 	public S minimumInputLength(int length)
 	{
 		this.options.put("minimumInputLength", length);
-		return this.update();
+		return (S) this;
 	}
 	
 	public S maximumInputLength(int length)
 	{
 		this.options.put("maximumInputLength", length);
-		return this.update();
+		return (S) this;
 	}
 	
 	protected JSONObject getOptions()
@@ -210,14 +210,14 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 	{
 		this.element().getOptions().getItem(index).setSelected(true);
 		
-		return (S) this;
+		return this.update();
 	}
 	
 	public S deselect(int index)
 	{
 		this.element().getOptions().getItem(index).setSelected(false);
 		
-		return (S) this;
+		return this.update();
 	}
 	
 	public S item(String value)
@@ -241,11 +241,6 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 		return (S) this;
 	}
 	
-	public S span(int span)
-	{
-		return this.className("span" + span);
-	}
-
 	@Override
 	public boolean isReadOnly()
 	{
@@ -256,8 +251,7 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 	public S readonly()
 	{
 		this.element().setDisabled(true);
-		this.update();
-		return (S) this;
+		return this.update();
 	}
 	
 	@Override
@@ -270,8 +264,7 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 	public S editable()
 	{
 		this.element().setDisabled(false);
-		this.update();
-		return (S) this;
+		return this.update();
 	}
 	
 	@Override
@@ -283,7 +276,7 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 	public S nullable()
 	{
 		this.required = false;
-		return (S) this;
+		return this.update();
 	}
 	
 	@Override
@@ -295,7 +288,7 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 	public S required()
 	{
 		this.required = true;
-		return (S) this;
+		return this.update();
 	}
 	
 	protected NodeIterable<OptionElement> options()
@@ -306,6 +299,12 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 	protected SelectElement element()
 	{
 		return this.getElement().cast();
+	}
+	
+	public S clear()
+	{
+		this.select(this.getId(), "");
+		return (S) this;
 	}
 	
 	public S update()

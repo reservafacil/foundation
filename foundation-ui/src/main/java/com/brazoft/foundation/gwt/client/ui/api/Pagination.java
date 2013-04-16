@@ -39,14 +39,14 @@ public abstract class Pagination<P extends Pagination<P>> extends Bootstrap<P>
 		super.add(this.list, true);
 	}
 	
-	public P whenPaginate(EventHandler handler)
+	public P whenPaginate(EventHandler<Object> handler)
 	{
 		this.addEvent("pager-event", handler);
 		
 		return (P) this;
 	}
 	
-	public P fire(Event event)
+	public P fire(Event<Object> event)
 	{
 		return this.fireEvent("pager-event", event);
 	}

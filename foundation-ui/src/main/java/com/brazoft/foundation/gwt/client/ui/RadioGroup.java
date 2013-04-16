@@ -19,6 +19,18 @@ public class RadioGroup extends Group<RadioGroup, String>
 
 		return this.input(button, text);
 	}
+	
+	@Override
+	public RadioGroup clear()
+	{
+		for (Widget child : getChildren())
+		{
+			RadioButton radio = this.radio(child);
+			radio.clear();
+		}
+		
+		return this;
+	}
 
 	public RadioGroup value(String value)
 	{

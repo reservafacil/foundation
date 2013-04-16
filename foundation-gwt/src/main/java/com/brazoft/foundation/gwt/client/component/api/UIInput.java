@@ -39,4 +39,6 @@ public interface UIInput<W extends Widget, V> extends UIComponent<W>, HasValue<W
 	boolean isRequired();
 	
 	W required();
+	
+	W clear();
 }

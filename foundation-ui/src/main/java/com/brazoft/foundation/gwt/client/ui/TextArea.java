@@ -131,6 +131,12 @@ public class TextArea extends Bootstrap<TextArea> implements UIInput<TextArea, S
 	}
 	
 	@Override
+	public TextArea clear()
+	{
+		return this.value("");
+	}
+	
+	@Override
 	public TextArea value(String value)
 	{
 		this.element().setValue(value);

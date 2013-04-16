@@ -38,6 +38,6 @@ public class CNPJFormat implements Format<String>
 			return null;
 		}
 		
-		return value.replace(".", "").replace("-", "").trim();
+		return value.replace(".", "").replace("-", "").replace("/", "").trim();
 	}
 }

@@ -264,6 +264,14 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
             box-shadow: 0 0 5px rgba(0,0,0,.3);
 }
 
+.control-group.error .select2-container {
+    border: 1px solid #b94a48;
+    outline: none;
+	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+	-moz-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+	box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
+}
+
 .select2-dropdown-open .select2-choice {
     border-bottom-color: transparent;
     -webkit-box-shadow: 0 1px 0 #fff inset;

@@ -20,16 +20,17 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import java.util.ArrayList;
 
-import com.brazoft.foundation.gwt.client.ui.ProgressBar.ProgressBarOptions;
-import com.brazoft.foundation.gwt.client.ui.api.AbstractTable;
-import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
-import com.brazoft.foundation.gwt.client.ui.api.GridColumn;
-import com.brazoft.foundation.gwt.client.ui.api.GridFilter;
-import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row.Cell;
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.HTML;
 import com.brazoft.foundation.gwt.client.event.Event;
 import com.brazoft.foundation.gwt.client.event.api.EventHandler;
+import com.brazoft.foundation.gwt.client.jso.JSObject;
+import com.brazoft.foundation.gwt.client.ui.ProgressBar.ProgressBarOptions;
+import com.brazoft.foundation.gwt.client.ui.api.AbstractTable;
+import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row.Cell;
+import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
+import com.brazoft.foundation.gwt.client.ui.api.GridColumn;
+import com.brazoft.foundation.gwt.client.ui.api.GridFilter;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.SpanElement;
@@ -39,7 +40,6 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.brazoft.foundation.gwt.client.jso.JSObject;
 
 @SuppressWarnings("unchecked")
 public class DataGrid<J extends JSObject> extends AbstractTable<DataGrid<J>>
@@ -69,10 +69,10 @@ public class DataGrid<J extends JSObject> extends AbstractTable<DataGrid<J>>
 	public DataGrid()
 	{
 		this.className("table table-bordered datagrid");
-		this.footer.pager.whenPaginate(new EventHandler()
+		this.footer.pager.whenPaginate(new EventHandler<Object>()
 		{
 			@Override
-			public void onEvent(Event e)
+			public void onEvent(Event<Object> e)
 			{
 				int page = (Integer) e.data();
 				DataGrid.this.drawPage(page);
@@ -92,7 +92,7 @@ public class DataGrid<J extends JSObject> extends AbstractTable<DataGrid<J>>
 		this.add(this.progress);
 	}
 	
-	public DataGrid<J> onDraw(EventHandler handler)
+	public DataGrid<J> onDraw(EventHandler<Object> handler)
 	{
 		return this.addEvent("onDraw", handler);
 	}

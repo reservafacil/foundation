@@ -22,7 +22,6 @@ import java.util.Date;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.HTML;
-import com.brazoft.foundation.gwt.client.component.api.Component;
 import com.brazoft.foundation.gwt.client.component.api.ResponsiveComponent;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.Event;
@@ -40,7 +39,6 @@ import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.event.dom.client.FocusEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
-import com.google.gwt.user.client.Window;
 import com.google.gwt.user.client.ui.Widget;
 
 public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepicker, Date>, ResponsiveComponent<Datepicker>
@@ -212,6 +210,13 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 		this.picker.style().display(Display.NONE);
 		this.panel.selected(false);
 		
+		return this;
+	}
+	
+	@Override
+	public Datepicker clear()
+	{
+		this.input.clear();
 		return this;
 	}
 	

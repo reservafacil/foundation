@@ -20,7 +20,7 @@ package com.brazoft.foundation.gwt.client.event.api;
 
 import com.brazoft.foundation.gwt.client.event.Event;
 
-public interface EventHandler
+public interface EventHandler<T>
 {
-	void onEvent(Event e);
+	void onEvent(Event<T> e);
 }

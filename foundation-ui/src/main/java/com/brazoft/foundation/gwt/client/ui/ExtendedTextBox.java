@@ -62,6 +62,12 @@ public class ExtendedTextBox extends DecoratedTextBox<ExtendedTextBox, String>
 	{
 		return this.add(button, Decoration.APPENDED);
 	}
+	
+	@Override
+	public ExtendedTextBox clear()
+	{
+		return this.value("");
+	}
 
 	@Override
 	public String getValue()

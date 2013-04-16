@@ -5,10 +5,21 @@ import java.util.List;
 
 import com.brazoft.foundation.commons.validator.api.Validator;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
+import com.brazoft.foundation.gwt.client.event.Event;
+import com.brazoft.foundation.gwt.client.event.api.EventHandler;
+import com.brazoft.foundation.gwt.client.util.ValidationProcess.ValidationResult.FieldState;
 
 public class ValidationProcess
 {
 	private List<ValidationConstraint<?>> constraints = new ArrayList<ValidationConstraint<?>>();
+	
+	private EventHandler<ValidationResult> handler;
+	
+	public ValidationProcess onComplete(EventHandler<ValidationResult> handler)
+	{
+		this.handler = handler;
+		return this;
+	}
 	
 	public <V> ValidationConstraint<V> constraintFor(UIInput<?, V> input)
 	{
@@ -31,18 +42,27 @@ public class ValidationProcess
 	
 	public boolean validate(Propagation propagation)
 	{
-		boolean result = true;
+		boolean valid = true;
+		ValidationResult result = new ValidationResult();
 		
 		for(ValidationConstraint<?> constraint : this.constraints)
 		{
-			result = constraint.validate() && result;
-			if(!result && propagation == Propagation.STOP_AT_ONCE)
+			FieldState field = new FieldState(constraint.validate(), constraint.name);
+			result.add(field);
+			
+			valid = field.isValid() && valid;
+			if(!valid && propagation == Propagation.STOP_AT_ONCE)
 			{
 				return false;
 			}
 		}
 		
-		return result;
+		if(!valid && this.handler != null)
+		{
+			this.handler.onEvent(new Event<ValidationResult>(result));
+		}
+		
+		return valid;
 	}
 	
 	public interface ValidationAction
@@ -54,6 +74,8 @@ public class ValidationProcess
 	
 	public static class ValidationConstraint<V>
 	{
+		private String name;
+		
 		private UIInput<?, V> input;
 		
 		private final List<Validator<V>> validators = new ArrayList<Validator<V>>();
@@ -63,6 +85,12 @@ public class ValidationProcess
 		public ValidationConstraint(UIInput<?, V> input)
 		{
 			this.input = input;
+		}
+		
+		public ValidationConstraint<V> name(String name)
+		{
+			this.name = name;
+			return this;
 		}
 
 		public ValidationConstraint<V> add(Validator<V> validator)
@@ -89,8 +117,8 @@ public class ValidationProcess
 			
 			for(Validator<V> validator : this.validators)
 			{
-				boolean result = validator.validate(value);
-				if(!result)
+				boolean valid = validator.validate(value);
+				if(!valid)
 				{
 					this.action.whenInvalid(validator.getMessage());
 					return false;
@@ -100,6 +128,45 @@ public class ValidationProcess
 			this.action.whenValid();			
 			
 			return true;
+		}
+	}
+	
+	public static class ValidationResult
+	{
+		private List<FieldState> fields = new ArrayList<FieldState>();
+		
+		void add(FieldState field)
+		{
+			this.fields.add(field);
+		}
+		
+		public List<FieldState> getFields()
+		{
+			return fields;
+		}
+		
+		public static class FieldState
+		{
+			private boolean valid;
+			
+			private String name;
+
+			FieldState(boolean valid, String name)
+			{
+				super();
+				this.valid = valid;
+				this.name = name;
+			}
+			
+			public String getName()
+			{
+				return name;
+			}
+			
+			public boolean isValid()
+			{
+				return valid;
+			}
 		}
 	}
 	

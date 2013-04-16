@@ -155,6 +155,13 @@ public class Spinner extends Bootstrap<Spinner> implements UIInput<Spinner, Inte
 		return this;
 	}
 	
+	@Override
+	public Spinner clear()
+	{
+		this.input.value("");
+		return this;
+	}
+	
 	public Integer getValue()
 	{
 		return Integer.valueOf(this.input.getValue());

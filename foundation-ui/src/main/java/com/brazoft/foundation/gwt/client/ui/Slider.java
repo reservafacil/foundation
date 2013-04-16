@@ -166,6 +166,14 @@ public class Slider extends Bootstrap<Slider> implements UIInput<Slider, Double>
 		return this.options.getNumber(SliderOption.END.toString()).doubleValue();
 	}
 	
+	@Override
+	public Slider clear()
+	{
+		this.value(this.getStart());
+		return this;
+	}
+	
+	
 	public Slider value(Double value)
 	{
 		return this.option(SliderOption.VALUE, value);
@@ -352,34 +360,34 @@ public class Slider extends Bootstrap<Slider> implements UIInput<Slider, Double>
     @Override
     protected void onUnload()
     {
-    	this.destroySliderJS(this, this.slider.getId());
+    		this.destroySliderJS(this, this.slider.getId());
     }
     
     private void fireOnChangeEvent(com.google.gwt.user.client.Event evt, JsArrayNumber values, boolean hasOriginalEvent)
     {
-    	if (hasOriginalEvent || this.firstOnChange) 
-    	{
-    		this.fireEvent(SliderEvent.CHANGE.toString(), new Event(this, values));
-    	}
-    	
-    	this.firstOnChange = false;
+	    	if (hasOriginalEvent || this.firstOnChange) 
+	    	{
+	    		this.fireEvent(SliderEvent.CHANGE.toString(), new Event(this, values));
+	    	}
+	    	
+	    	this.firstOnChange = false;
     }
     
     private boolean fireOnSlideEvent(com.google.gwt.user.client.Event evt, JsArrayNumber values)
     {
-    	this.fireEvent(SliderEvent.SLIDE.toString(), new Event(this, values));
+    		this.fireEvent(SliderEvent.SLIDE.toString(), new Event(this, values));
     	
-    	return true;
+    		return true;
     }
     
     private void fireOnStartEvent(com.google.gwt.user.client.Event evt, JsArrayNumber values)
     {
-    	this.fireEvent(SliderEvent.START.toString(), new Event(this, values));
+    		this.fireEvent(SliderEvent.START.toString(), new Event(this, values));
     }
     
     private void fireOnStopEvent(com.google.gwt.user.client.Event evt, JsArrayNumber values)
     {
-    	this.fireEvent(SliderEvent.STOP.toString(), new Event(this, values));
+    		this.fireEvent(SliderEvent.STOP.toString(), new Event(this, values));
     }
 	
 	/*
@@ -446,10 +454,10 @@ public class Slider extends Bootstrap<Slider> implements UIInput<Slider, Double>
     
     enum SliderEvent
     {
-    	CHANGE,
-    	SLIDE,
-    	START,
-    	STOP;
+    		CHANGE,
+    		SLIDE,
+    		START,
+    		STOP;
     }
 	
 	enum SliderOption

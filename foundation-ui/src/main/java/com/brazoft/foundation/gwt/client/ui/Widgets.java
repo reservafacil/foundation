@@ -76,13 +76,18 @@ public class Widgets
 		return setIcon(widget, icon, false);
 	}
 	
+	public static boolean mustBeWhiteIcon(String className)
+	{
+		MatchResult matcher = RegExp.compile("primary|info|success|warning|danger|inverse").exec(className);
+		return matcher != null && matcher.getGroupCount() > 0;
+	}
+	
 	public static <W extends Widget> W setIcon(W widget, Icon icon, boolean insert)
 	{
 		Element element = widget.getElement();
 		String className = element.getClassName();
 		
-		MatchResult matcher = RegExp.compile("primary|info|success|warning|danger|inverse").exec(className);
-		boolean white = matcher != null && matcher.getGroupCount() > 0;
+		boolean white = mustBeWhiteIcon(className);
 				
 		Element i = ElementResolver.getElementByTagName(element, "i");
 		if(i == null)

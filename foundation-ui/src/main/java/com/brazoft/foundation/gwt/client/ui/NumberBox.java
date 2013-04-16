@@ -1,14 +1,28 @@
 package com.brazoft.foundation.gwt.client.ui;
 
+import java.util.ArrayList;
+
 import com.brazoft.foundation.gwt.client.json.JSONCollection;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.user.client.Event;
-import com.google.gwt.user.client.Window;
 
 public class NumberBox extends TextBox
 {
+	private static final java.util.List<Integer> allowedKeys = new ArrayList<Integer>();
+	
+	static
+	{
+		allowedKeys.add(KeyCodes.KEY_ALT);
+		allowedKeys.add(KeyCodes.KEY_CTRL);
+		allowedKeys.add(KeyCodes.KEY_BACKSPACE);
+		allowedKeys.add(KeyCodes.KEY_DELETE);
+		allowedKeys.add(KeyCodes.KEY_LEFT);
+		allowedKeys.add(KeyCodes.KEY_RIGHT);
+		allowedKeys.add(KeyCodes.KEY_SHIFT);
+		allowedKeys.add(KeyCodes.KEY_TAB);
+	}
+	
 	public NumberBox()
 	{
 		this.onKeyPress(new KeyPressHandler()
@@ -17,8 +31,7 @@ public class NumberBox extends TextBox
 			public void onKeyPress(KeyPressEvent event)
 			{
 				int keyCode = event.getNativeEvent().getKeyCode();
-				if(KeyCodes.KEY_BACKSPACE == keyCode || KeyCodes.KEY_DELETE == keyCode ||
-						KeyCodes.KEY_LEFT == keyCode || KeyCodes.KEY_RIGHT == keyCode)
+				if(allowedKeys.contains(keyCode))
 				{
 					return;
 				}
@@ -30,20 +43,7 @@ public class NumberBox extends TextBox
 			}
 		});
 	}
-	
-	@Override
-	public void onBrowserEvent(Event event)
-	{
-		super.onBrowserEvent(event);
-		switch (event.getTypeInt()) 
-		{
-			case Event.ONPASTE:
-				Window.alert(this.getValue());
-				event.preventDefault();
-				break;
-		}
-	}
-	
+
 	@Override
 	public NumberBox value(String value)
 	{
