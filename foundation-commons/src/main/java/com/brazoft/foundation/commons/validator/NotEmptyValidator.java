@@ -13,6 +13,6 @@ public class NotEmptyValidator<T> extends AbstractValidator<NotEmptyValidator<T>
 	@Override
 	protected boolean delegateValidation(T value)
 	{
-		return !Validator.isBlankOrNull(value);
+		return !Validator.isEmptyOrNull(value);
 	}
 }

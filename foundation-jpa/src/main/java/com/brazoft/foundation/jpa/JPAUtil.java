@@ -44,7 +44,7 @@ public class JPAUtil
 			
 			value = JPAUtil.getValue(instance, field);
 			
-			if(!Validator.isBlankOrNull(value))
+			if(!Validator.isEmptyOrNull(value))
 			{
 				fields.put(JPAUtil.getName(field), value);
 			}

@@ -1,11 +1,12 @@
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.ui.api.UIButton;
-import com.google.gwt.dom.client.SpanElement;
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.HTML;
 import com.brazoft.foundation.gwt.client.component.api.Component;
+import com.brazoft.foundation.gwt.client.component.api.HasText;
 import com.brazoft.foundation.gwt.client.component.api.ResponsiveComponent;
+import com.brazoft.foundation.gwt.client.ui.api.UIButton;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.user.client.ui.Widget;
 
 public class Portlet extends Component<Portlet>
@@ -30,7 +31,7 @@ public class Portlet extends Component<Portlet>
 		return this.body;
 	}
 	
-	public class Header extends Component<Header>
+	public class Header extends Component<Header> implements HasText<Header>
 	{
 		private HTML<SpanElement> icon = HTML.asSpan().className("icon");
 		
@@ -51,10 +52,16 @@ public class Portlet extends Component<Portlet>
 			return this;
 		}
 		
-		public Header title(String title)
+		public Header text(String title)
 		{
 			this.title.text(title);
 			return this;
+		}
+		
+		@Override
+		public String getText()
+		{
+			return this.title.getText();
 		}
 		
 		public Toolbar toolbar()

@@ -39,7 +39,7 @@ public class LayoutRow extends Bootstrap<LayoutRow>
 		this.setStyleName(option.rowClass());
 	}
 	
-	LayoutRow(LayoutOptions option)
+	public LayoutRow(LayoutOptions option)
 	{
 		this();
 		this.setStyleName(option.rowClass());

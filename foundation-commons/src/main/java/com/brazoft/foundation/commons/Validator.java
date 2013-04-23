@@ -38,7 +38,7 @@ public class Validator
 	 * @param value
 	 * @return Returns if value is blank or null or zero("0")
 	 */
-	public static boolean isBlankOrNullOrZero(String value)
+	public static boolean isEmptyOrNullOrZero(String value)
 	{
 		return Validator.isEmptyOrNull(value) || "0".equals(value);
 	}
@@ -47,7 +47,7 @@ public class Validator
 	 * @param value
 	 * @return Returns if value is blank or null
 	 */
-	public static boolean isBlankOrNull(Object value)
+	public static boolean isEmptyOrNull(Object value)
 	{
 		if(value == null)
 		{

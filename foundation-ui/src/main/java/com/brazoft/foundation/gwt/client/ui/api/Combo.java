@@ -40,8 +40,6 @@ public abstract class Combo<C extends Combo<C, V>, V> extends Select<C, V>
 		return (C) this;
 	}
 	
-	
-	
 	public C minimumResultsForSearch(int minimum)
 	{
 		this.getOptions().put("minimumResultsForSearch", minimum);

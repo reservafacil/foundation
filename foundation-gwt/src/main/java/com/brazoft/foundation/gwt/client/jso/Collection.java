@@ -20,6 +20,7 @@ public class Collection<J extends JavaScriptObject> implements Iterable<J>, Iter
 	@Override
 	public Iterator<J> iterator()
 	{
+		this.index = 0;
 		return this;
 	}
 

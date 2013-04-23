@@ -33,11 +33,13 @@ import com.brazoft.foundation.gwt.client.event.api.HasMouseHandlers;
 import com.brazoft.foundation.gwt.client.json.JSON;
 import com.brazoft.foundation.gwt.client.json.JSONObject;
 import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.dom.client.OptionElement;
 import com.google.gwt.dom.client.SelectElement;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.BlurHandler;
 import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.DomEvent;
 import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.dom.client.KeyDownHandler;
 import com.google.gwt.event.dom.client.KeyPressHandler;
@@ -70,12 +72,6 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 				initJS(getId(), options.getJavaScriptObject());
 			}
 		});
-	}
-	
-	public S block()
-	{
-		this.style().width(100, Unit.PCT);
-		return (S) this;
 	}
 	
 	@Override
@@ -150,20 +146,11 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 		return Events.on((S) this, handler);
 	}
 	
-//	@Override
-//	public S adaptSize(Widget container)
-//	{
-//		double parentWidth = Component.Util.innerWidth(container);
-//		this.style().width(parentWidth, Unit.PX);
-//		
-//		return (S) this;
-//	}
-//	
-//	@Override
-//	public S responsiveTo(Widget container)
-//	{
-//		return Component.Util.responsiveBehavior(this, container);
-//	}
+	public S block()
+	{
+		this.style().width(100, Unit.PCT);
+		return (S) this;
+	}
 	
 	public S open()
 	{
@@ -334,6 +321,7 @@ public abstract class Select<S extends Select<S, V>, V> extends Bootstrap<S> imp
 		public Option value(String value)
 		{
 			this.element().setValue(value);
+			DomEvent.fireNativeEvent(Document.get().createChangeEvent(), this);
 			return this;
 		}
 		

@@ -19,15 +19,13 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.event.api.AttachHandler;
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.event.dom.client.DomEvent;
-import com.google.gwt.event.logical.shared.AttachEvent;
 import com.brazoft.foundation.gwt.client.json.JSON;
 import com.brazoft.foundation.gwt.client.json.JSONCollection;
 import com.brazoft.foundation.gwt.client.json.JSONObject;
 import com.brazoft.foundation.gwt.client.ui.api.Input;
+import com.google.gwt.core.client.JavaScriptObject;
+import com.google.gwt.dom.client.Document;
+import com.google.gwt.event.dom.client.DomEvent;
 
 public class TextBox extends Input<TextBox, String>
 {
@@ -89,14 +87,8 @@ public class TextBox extends Input<TextBox, String>
 		}
 		else
 		{
-			this.onAttach(new AttachHandler()
-			{
-				@Override
-				protected void onAttach(AttachEvent event)
-				{
-					nativeMask(getId(), options.getJavaScriptObject());
-				}
-			});
+			this.attribute("data-mask", this.options.get("mask"));
+			this.attribute("data-placeholder", this.options.get("placeholder"));
 		}
 		
 		return this;

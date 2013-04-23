@@ -242,7 +242,7 @@ public abstract class AbstractDAO implements IDAO
 			return false;
 		}
 
-		return !Validator.isBlankOrNullOrZero(value.toString());
+		return !Validator.isEmptyOrNullOrZero(value.toString());
 	}
 
 	/**
