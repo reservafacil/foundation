@@ -1,9 +1,9 @@
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.ui.api.Group;
+import com.brazoft.foundation.gwt.client.ui.api.WidgetGroup;
 import com.google.gwt.user.client.ui.Widget;
 
-public class RadioGroup extends Group<RadioGroup, String>
+public class RadioGroup extends WidgetGroup<RadioGroup, String>
 {
 	private String		name;
 

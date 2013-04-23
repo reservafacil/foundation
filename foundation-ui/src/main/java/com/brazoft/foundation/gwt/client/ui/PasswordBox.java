@@ -18,14 +18,65 @@
 
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.ui.api.Input;
+import com.brazoft.foundation.gwt.client.ui.api.DecoratedInput;
 
-public class PasswordBox extends Input<PasswordBox, String>
+public class PasswordBox extends DecoratedInput<PasswordBox, String>
 {
 	public PasswordBox()
 	{
-		super(ElementResolver.password());
+		super(new InputPassword());
+	}
+	
+	@Override
+	public InputPassword input()
+	{
+		return (InputPassword) super.input();
+	}
+	
+	public PasswordBox block()
+	{
+		this.input().block();
+		return this;
+	}
+	
+	public PasswordBox prepend(String text)
+	{
+		return this.add(text, Decoration.PREPENDED);
+	}
+
+	public PasswordBox append(String text)
+	{
+		return this.add(text, Decoration.APPENDED);
+	}
+	
+	public PasswordBox prepend(Icon icon)
+	{
+		return this.add(icon, Decoration.PREPENDED);
+	}
+
+	public PasswordBox append(Icon icon)
+	{
+		return this.add(icon, Decoration.APPENDED);
+	}
+	
+	public PasswordBox prepend(Button button)
+	{
+		return this.add(button, Decoration.PREPENDED);
+	}
+
+	public PasswordBox append(Button button)
+	{
+		return this.add(button, Decoration.APPENDED);
+	}
+	
+	public PasswordBox prepend(SplitButton button)
+	{
+		return this.add(button, Decoration.PREPENDED);
+	} 
+
+	public PasswordBox append(SplitButton button)
+	{
+		return this.add(button, Decoration.APPENDED);
 	}
 	
 	@Override
@@ -33,26 +84,17 @@ public class PasswordBox extends Input<PasswordBox, String>
 	{
 		return this.value("");
 	}
-	
-	public PasswordBox value(String value)
-	{
-		this.element().setValue(value);
-		return this;
-	}
-	
+
+	@Override
 	public String getValue()
 	{
-		return this.element().getValue();
+		return this.input().getValue();
 	}
 	
-	public PasswordBox block()
+	@Override
+	public PasswordBox value(String value)
 	{
-		return this.className("input-block-level");
-	}
-	
-	public PasswordBox maxLength(int maxLength)
-	{
-		this.element().setMaxLength(maxLength);
+		this.input().value(value);
 		return this;
 	}
 }

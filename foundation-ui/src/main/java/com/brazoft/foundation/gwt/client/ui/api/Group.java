@@ -1,125 +1,100 @@
 package com.brazoft.foundation.gwt.client.ui.api;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.api.UIInput;
-import com.brazoft.foundation.gwt.client.event.api.HasChangeHandlers;
-import com.brazoft.foundation.gwt.client.ui.Label;
-import com.brazoft.foundation.gwt.client.ui.Orientation;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.user.client.ui.Widget;
+import com.brazoft.foundation.gwt.client.component.HTML;
+import com.brazoft.foundation.gwt.client.component.api.Component;
+import com.brazoft.foundation.gwt.client.component.api.Composite;
+import com.brazoft.foundation.gwt.client.component.api.HasText;
+import com.brazoft.foundation.gwt.client.ui.Alignment;
+import com.brazoft.foundation.gwt.client.ui.Icon;
+import com.brazoft.foundation.gwt.client.ui.LabeledText;
+import com.brazoft.foundation.gwt.client.ui.Widgets;
+import com.google.gwt.dom.client.AnchorElement;
+import com.google.gwt.dom.client.SpanElement;
+import com.google.gwt.dom.client.Style.Unit;
 
 @SuppressWarnings("unchecked")
-public abstract class Group<G extends Group<G, V>, V> extends Bootstrap<G> implements UIInput<G, V>, HasChangeHandlers<G>
+public abstract class Group<G extends Group<G>> extends Composite<G>
 {
-	private Orientation	orientation;
+	private final LabelGroup					label		= new LabelGroup();
 
-	private InputState	contentState	= InputState.NONE;
+	private int								colspan		= 1;
 
-	private boolean required;
-
-	public Group(Orientation orientation)
+	public G label(String labelText)
 	{
-		super(ElementResolver.div());
-		this.orientation = orientation;
+		this.label.text(labelText);
+		
+		return (G) this;
 	}
 	
-	public G onChange(ChangeHandler handler)
+	public G hint(String title)
 	{
-		for (Widget child : getChildren())
-		{
-			Label label = (Label) child;
-			UIInput<?, ?> input = label.getInput();
-			if(input instanceof HasChangeHandlers)
-			{
-				((HasChangeHandlers<?>) input).onChange(handler);
-			}
-		}
+		this.label.hint(title);
 		
 		return (G) this;
 	}
 
-	public G item(String text)
+	public LabelGroup getLabel()
 	{
-		return this.item(text, text);
+		return this.label;
 	}
 
-	public abstract G item(String text, String value);
-	
-	@Override
-	public G placeholder(String placeholder)
+	public G colspan(int colspan)
 	{
+		this.colspan = colspan;
 		return (G) this;
 	}
-	
-	@Override
-	public boolean isReadOnly()
-	{
-		return this.contentState == InputState.READONLY;
-	}
 
-	@Override
-	public G readonly()
+	public int getColspan()
 	{
-		this.contentState = InputState.READONLY;
-		return this.process(this.contentState);
+		return this.colspan;
 	}
 	
-	@Override
-	public boolean isEditable()
+	public class LabelGroup extends Component<LabelGroup> implements HasText<LabelGroup>
 	{
-		return this.contentState == InputState.EDITABLE;
-	}
+		private LabeledText			label	= new LabeledText().align(Alignment.LEFT);
 
-	@Override
-	public G editable()
-	{
-		this.contentState = InputState.EDITABLE;
-		return this.process(this.contentState);
-	}
-	
-	@Override
-	public boolean isNullable()
-	{
-		return !this.required;
-	}
-
-	@Override
-	public G nullable()
-	{
-		this.required = false;
-		return (G) this;
-	}
-	
-	@Override
-	public boolean isRequired()
-	{
-		return this.required;
-	}
-
-	@Override
-	public G required()
-	{
-		this.required = true;
-		return (G) this;
-	}
-	
-	protected G input(UIInput<?, ?> input, String labelText)
-	{
-		this.contentState.visit(input);
-
-		Label label = new Label(this.orientation).forInput(input).text(labelText);
+		private HTML<SpanElement>	mark	 = HTML.asSpan().className("required");
 		
-		return this.add(label);
-	}
-	
-	G process(InputState state)
-	{
-		for (Widget child : getChildren())
+		private HTML<AnchorElement>	hint = HTML.asAnchor("#").className("hint");
+
+		public LabelGroup()
 		{
-			Label label = (Label) child;
-			state.visit(label.getInput());
+			super(ElementResolver.div());
+			this.add(this.label).add(this.mark).add(this.hint);
+			this.style().marginBottom(5, Unit.PX);
+		}
+		
+		public LabelGroup hint(String title)
+		{
+			Widgets.setIcon(this.hint, Icon.QUESTION_SIGN);
+			this.hint.title(title).style().marginLeft(5, Unit.PX);
+			return this;
+		} 
+
+		public LabelGroup mark()
+		{
+			this.mark.text("*");
+			return this;
 		}
 
-		return (G) this;
+		public LabelGroup unmark()
+		{
+			this.mark.text("");
+			return this;
+		}
+
+		@Override
+		public LabelGroup text(String text)
+		{
+			this.label.text(text);
+			return this;
+		}
+
+		@Override
+		public String getText()
+		{
+			return this.label.getText();
+		}
 	}
 }

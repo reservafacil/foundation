@@ -39,3 +39,10 @@
 {
 	display: table-row;
 }
+
+.required {
+	color: #B94A48;
+	display: inline;
+	padding-left: 5px;
+	font-weight: bold;
+}

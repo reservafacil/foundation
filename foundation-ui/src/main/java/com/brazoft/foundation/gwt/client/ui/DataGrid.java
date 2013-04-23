@@ -363,7 +363,7 @@ public class DataGrid<J extends JSObject> extends AbstractTable<DataGrid<J>>
 		
 		class GridSearch extends Bootstrap<GridSearch>
 		{
-			private ExtendedTextBox input = new ExtendedTextBox().className("datagrid-search").size(Size.DEFAULT);
+			private TextBox input = new TextBox().className("datagrid-search").size(Size.DEFAULT);
 			
 			private Button searchButton = new Button().icon(Icon.FILTER);
 			

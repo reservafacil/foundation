@@ -43,7 +43,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepicker, Date>, ResponsiveComponent<Datepicker>
 {
-	private ExtendedTextBox input;
+	private TextBox input;
 	
 	private MonthPanel panel;
 	
@@ -78,7 +78,7 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 				Datepicker.this.input.focus();
 			}
 		});
-		this.input = new ExtendedTextBox().append(icon).readonly();
+		this.input = new TextBox().append(icon).readonly();
 		this.editable();
 		this.input.onFocus(new FocusHandler()
 		{
@@ -104,12 +104,12 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 		this.add(this.input);
 		
 		this.panel = new MonthPanel();
-		this.panel.onSelection(new EventHandler()
+		this.panel.onSelection(new EventHandler<Date>()
 		{
 			@Override
-			public void onEvent(Event e)
+			public void onEvent(Event<Date> e)
 			{
-				Datepicker.this.value(((Date) e.data()));
+				Datepicker.this.value(e.data());
 				Datepicker.this.hide();
 			}
 		}).onNext(this.doFocus).onPrevious(this.doFocus);
@@ -151,13 +151,13 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 		return this;
 	}
 	
-	public Datepicker onSelection(EventHandler handler)
+	public Datepicker onSelection(EventHandler<Date> handler)
 	{
 		this.panel.onSelection(handler);
 		return this;
 	}
 	
-	public static Date getValue(Event event)
+	public static Date getValue(Event<Date> event)
 	{
 		return MonthPanel.getValue(event);
 	}
@@ -258,7 +258,7 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 	@Override
 	public Datepicker readonly()
 	{
-		this.input.getInput().style().clearBackgroundColor();
+		this.input.input().style().clearBackgroundColor();
 		this.readOnly = true;
 		return this;
 	}
@@ -272,7 +272,7 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 	@Override
 	public Datepicker editable()
 	{
-		this.input.getInput().style().backgroundColor("white");
+		this.input.input().style().backgroundColor("white");
 		this.readOnly = false;
 		return this;
 	}
@@ -311,7 +311,7 @@ public class Datepicker extends Bootstrap<Datepicker> implements UIInput<Datepic
 	
 	Datepicker position()
 	{
-		TextBox box = this.input.getInput();
+		//InputText box = this.input.input();
 		//double left = box.getAbsoluteLeft() - (box.getOffsetWidth() + box.getElement().getScrollLeft());
 		//double top = this.picker.getAbsoluteTop() - this.picker.getElement().getClientHeight() - this.picker.getOffsetHeight();
 

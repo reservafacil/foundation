@@ -33,7 +33,7 @@ import com.google.gwt.event.dom.client.KeyPressHandler;
 
 public class Spinner extends Bootstrap<Spinner> implements UIInput<Spinner, Integer>, HasChangeHandlers<Spinner>
 {
-	private TextBox input = new TextBox().size(Size.MINI).className("spinner-input").maxLength(3);
+	private InputText input = new InputText().size(Size.MINI).className("spinner-input").maxLength(3);
 	
 	private SpinnerButtons buttons = new SpinnerButtons();
 	

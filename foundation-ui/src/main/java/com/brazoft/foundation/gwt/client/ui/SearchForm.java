@@ -27,7 +27,7 @@ import com.google.gwt.dom.client.DivElement;
 
 public class SearchForm extends Bootstrap<SearchForm> implements HasText<SearchForm>
 {
-	private TextBox search = new TextBox();
+	private InputText search = new InputText();
 	
 	private Button button = new Button(ButtonOptions.BUTTON);
 	

@@ -233,7 +233,6 @@ public final class HTML<E extends Element> extends Component<HTML<E>> implements
 	@Override
 	protected Panel getWidget()
 	{
-		// TODO Auto-generated method stub
 		return super.getWidget();
 	}
 	

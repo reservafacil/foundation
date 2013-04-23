@@ -45,33 +45,33 @@ public class LayoutRow extends Bootstrap<LayoutRow>
 		this.setStyleName(option.rowClass());
 	}
 
-	public Cell cell()
+	public LayoutCell cell()
 	{
-		Cell cell = new Cell();
+		LayoutCell cell = new LayoutCell();
 
 		this.add(cell);
 
 		return cell;
 	}
 	
-	public class Cell extends Bootstrap<Cell> implements HasText<Cell>
+	public class LayoutCell extends Bootstrap<LayoutCell> implements HasText<LayoutCell>
 	{
 		private int	span;
 
 		private int	offset;
 
-		public Cell()
+		public LayoutCell()
 		{
 			this(1);
 		}
 
-		public Cell(int span)
+		public LayoutCell(int span)
 		{
 			super(ElementResolver.div());
 			this.span(span);
 		}
 
-		public Cell span(int span)
+		public LayoutCell span(int span)
 		{
 			this.removeClassName("span" + this.span);
 			this.span = span;
@@ -79,7 +79,7 @@ public class LayoutRow extends Bootstrap<LayoutRow>
 			return this.className("span" + span);
 		}
 
-		public Cell offset(int offset)
+		public LayoutCell offset(int offset)
 		{
 			this.removeClassName("offset" + this.offset);
 			this.offset = offset;
@@ -87,13 +87,13 @@ public class LayoutRow extends Bootstrap<LayoutRow>
 			return this.className("offset" + offset);
 		}
 
-		public Cell item(Widget add)
+		public LayoutCell item(Widget add)
 		{
 			return super.add(add);
 		}
 
 		@Override
-		public Cell text(String text)
+		public LayoutCell text(String text)
 		{
 			return Component.Util.setHTML(this, text);
 		}

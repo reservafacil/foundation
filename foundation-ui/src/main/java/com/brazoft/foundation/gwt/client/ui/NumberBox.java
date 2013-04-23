@@ -2,12 +2,12 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import java.util.ArrayList;
 
-import com.brazoft.foundation.gwt.client.json.JSONCollection;
+import com.brazoft.foundation.gwt.client.ui.api.DecoratedInputText;
 import com.google.gwt.event.dom.client.KeyCodes;
 import com.google.gwt.event.dom.client.KeyPressEvent;
 import com.google.gwt.event.dom.client.KeyPressHandler;
 
-public class NumberBox extends TextBox
+public class NumberBox extends DecoratedInputText<NumberBox>
 {
 	private static final java.util.List<Integer> allowedKeys = new ArrayList<Integer>();
 	
@@ -42,47 +42,5 @@ public class NumberBox extends TextBox
 				}
 			}
 		});
-	}
-
-	@Override
-	public NumberBox value(String value)
-	{
-		return (NumberBox) super.value(value);
-	}
-
-	@Override
-	public NumberBox mask(String pattern)
-	{
-		return (NumberBox) super.mask(pattern);
-	}
-
-	@Override
-	public NumberBox mask(String placeholder, String pattern)
-	{
-		return (NumberBox) super.mask(placeholder, pattern);
-	}
-
-	@Override
-	public NumberBox typeahead(JSONCollection<?> values)
-	{
-		return (NumberBox) super.typeahead(values);
-	}
-
-	@Override
-	public NumberBox typeahead(JSONCollection<?> values, int showItems)
-	{
-		return (NumberBox) super.typeahead(values, showItems);
-	}
-
-	@Override
-	public NumberBox block()
-	{
-		return (NumberBox) super.block();
-	}
-
-	@Override
-	public NumberBox maxLength(int maxLength)
-	{
-		return (NumberBox) super.maxLength(maxLength);
 	}
 }
