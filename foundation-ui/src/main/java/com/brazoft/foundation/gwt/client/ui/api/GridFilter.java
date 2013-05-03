@@ -1,6 +1,6 @@
 package com.brazoft.foundation.gwt.client.ui.api;
 
-import com.brazoft.foundation.gwt.client.jso.JSObject;
+import com.google.gwt.jso.JSObject;
 
 public abstract class GridFilter<J extends JSObject>
 {

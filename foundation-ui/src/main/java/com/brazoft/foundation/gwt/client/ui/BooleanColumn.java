@@ -1,11 +1,11 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.commons.format.api.Format;
-import com.brazoft.foundation.gwt.client.jso.JSObject;
-import com.brazoft.foundation.gwt.client.ui.api.GridColumn;
+import com.brazoft.foundation.gwt.client.ui.api.TextGridColumn;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.jso.JSObject;
 
-public class BooleanColumn<J extends JSObject> extends GridColumn<BooleanColumn<J>, J>
+public class BooleanColumn<J extends JSObject> extends TextGridColumn<BooleanColumn<J>, J>
 {
 	private Format<Boolean> format;
 	
@@ -36,6 +36,7 @@ public class BooleanColumn<J extends JSObject> extends GridColumn<BooleanColumn<
 	public BooleanColumn(Format<Boolean> format)
 	{
 		this.format = format;
+		this.sortable();
 	}
 
 	public String toString(J object)

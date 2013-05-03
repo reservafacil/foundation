@@ -123,7 +123,6 @@ public abstract class Pagination<P extends Pagination<P>> extends Bootstrap<P>
 		{
 			super(e);
 			this.link = HTML.as(e);
-			this.add(this.link);
 		}
 		
 		public Item icon(Icon icon)

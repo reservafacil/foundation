@@ -16,11 +16,43 @@
  * limitations under the License.
  */
 
-package org.fusesource.restygwt.client;
+package com.brazoft.foundation.gwt.client.ui;
 
-import com.google.gwt.jso.JSObject;
+import com.brazoft.foundation.gwt.client.component.ElementResolver;
+import com.brazoft.foundation.gwt.client.ui.api.Input;
 
-public interface JSOCallback<J extends JSObject> extends MethodCallback<J>
+public class InputPassword extends Input<InputPassword, String>
 {
-
+	public InputPassword()
+	{
+		super(ElementResolver.password());
+	}
+	
+	@Override
+	public InputPassword clear()
+	{
+		return this.value("");
+	}
+	
+	public InputPassword value(String value)
+	{
+		this.element().setValue(value);
+		return this;
+	}
+	
+	public String getValue()
+	{
+		return this.element().getValue();
+	}
+	
+	public InputPassword block()
+	{
+		return this.className("input-block-level");
+	}
+	
+	public InputPassword maxLength(int maxLength)
+	{
+		this.element().setMaxLength(maxLength);
+		return this;
+	}
 }

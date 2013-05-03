@@ -55,7 +55,7 @@ public class Button extends Bootstrap<Button> implements UIButton<Button>
 	public Button(ButtonOptions option)
 	{
 		super(option.resolveElement());
-		this.setStyleName("btn");
+		this.add(this.text).setStyleName("btn");
 		this.inline();
 	}
 	
@@ -218,13 +218,14 @@ public class Button extends Bootstrap<Button> implements UIButton<Button>
 	@Override
 	public Button text(String text)
 	{
-		return Component.Util.setHTML(this, " " + text.trim() + " ");
+	    	Component.Util.setHTML(this.text, " " + text.trim() + " ");
+		return this;
 	}
 
 	@Override
 	public String getText()
 	{
-		return Component.Util.getHTML(this);
+		return Component.Util.getHTML(this.text);
 	}
 
 	public enum ButtonOptions

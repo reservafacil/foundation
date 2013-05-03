@@ -1,11 +1,11 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.commons.format.api.Format;
-import com.brazoft.foundation.gwt.client.jso.JSObject;
-import com.brazoft.foundation.gwt.client.ui.api.GridColumn;
+import com.brazoft.foundation.gwt.client.ui.api.*;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.jso.JSObject;
 
-public class NumberColumn<J extends JSObject> extends GridColumn<NumberColumn<J>, J>
+public class NumberColumn<J extends JSObject> extends TextGridColumn<NumberColumn<J>, J>
 {
 	private Format<Number> format;
 	

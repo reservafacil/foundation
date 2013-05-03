@@ -16,73 +16,83 @@
  * limitations under the License.
  */
 
-package com.brazoft.foundation.gwt.client.ui;
+package com.brazoft.foundation.gwt.client.ui.api;
 
-import com.brazoft.foundation.gwt.client.ui.api.DecoratedInput;
+import com.brazoft.foundation.gwt.client.ui.Button;
+import com.brazoft.foundation.gwt.client.ui.Icon;
+import com.brazoft.foundation.gwt.client.ui.InputText;
+import com.brazoft.foundation.gwt.client.ui.SplitButton;
 
-public class PasswordBox extends DecoratedInput<PasswordBox, String>
+@SuppressWarnings("unchecked")
+public class DecoratedInputText<D extends DecoratedInputText<D>> extends DecoratedInput<D, String>
 {
-	public PasswordBox()
+	public DecoratedInputText()
 	{
-		super(new InputPassword());
+		super(new InputText());
 	}
 	
 	@Override
-	public InputPassword input()
+	public InputText input()
 	{
-		return (InputPassword) super.input();
+		return (InputText) super.input();
 	}
 	
-	public PasswordBox block()
+	public D block()
 	{
 		this.input().block();
-		return this;
+		return (D) this;
 	}
 	
-	public PasswordBox prepend(String text)
+	public D prepend(String text)
 	{
 		return this.add(text, Decoration.PREPENDED);
 	}
 
-	public PasswordBox append(String text)
+	public D append(String text)
 	{
 		return this.add(text, Decoration.APPENDED);
 	}
 	
-	public PasswordBox prepend(Icon icon)
+	public D prepend(Icon icon)
 	{
 		return this.add(icon, Decoration.PREPENDED);
 	}
 
-	public PasswordBox append(Icon icon)
+	public D append(Icon icon)
 	{
 		return this.add(icon, Decoration.APPENDED);
 	}
 	
-	public PasswordBox prepend(Button button)
+	public D prepend(Button button)
 	{
 		return this.add(button, Decoration.PREPENDED);
 	}
 
-	public PasswordBox append(Button button)
+	public D append(Button button)
 	{
 		return this.add(button, Decoration.APPENDED);
 	}
 	
-	public PasswordBox prepend(SplitButton button)
+	public D prepend(SplitButton button)
 	{
 		return this.add(button, Decoration.PREPENDED);
 	} 
 
-	public PasswordBox append(SplitButton button)
+	public D append(SplitButton button)
 	{
 		return this.add(button, Decoration.APPENDED);
 	}
 	
 	@Override
-	public PasswordBox clear()
+	public D clear()
 	{
 		return this.value("");
+	}
+	
+	public D maxLength(int maxLength)
+	{
+		this.input().maxLength(maxLength);
+		return (D) this;
 	}
 
 	@Override
@@ -92,9 +102,9 @@ public class PasswordBox extends DecoratedInput<PasswordBox, String>
 	}
 	
 	@Override
-	public PasswordBox value(String value)
+	public D value(String value)
 	{
 		this.input().value(value);
-		return this;
+		return (D) this;
 	}
 }

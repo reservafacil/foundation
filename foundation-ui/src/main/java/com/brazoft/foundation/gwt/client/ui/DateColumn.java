@@ -3,11 +3,11 @@ package com.brazoft.foundation.gwt.client.ui;
 import java.util.Date;
 
 import com.brazoft.foundation.commons.format.api.Format;
-import com.brazoft.foundation.gwt.client.jso.JSObject;
-import com.brazoft.foundation.gwt.client.ui.api.GridColumn;
+import com.brazoft.foundation.gwt.client.ui.api.*;
 import com.google.gwt.core.client.JsArray;
+import com.google.gwt.jso.JSObject;
 
-public class DateColumn<J extends JSObject> extends GridColumn<DateColumn<J>, J>
+public class DateColumn<J extends JSObject> extends TextGridColumn<DateColumn<J>, J>
 {
 	private Format<Date> format;
 	

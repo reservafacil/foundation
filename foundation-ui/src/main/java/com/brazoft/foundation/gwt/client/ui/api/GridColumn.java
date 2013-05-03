@@ -18,42 +18,91 @@
 
 package com.brazoft.foundation.gwt.client.ui.api;
 
+import com.brazoft.foundation.gwt.client.component.HTML;
 import com.brazoft.foundation.gwt.client.ui.Icon;
 import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row.Cell;
-import com.brazoft.foundation.gwt.client.component.HTML;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.dom.client.SpanElement;
+import com.google.gwt.dom.client.*;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.ClickHandler;
-import com.brazoft.foundation.gwt.client.jso.JSObject;
+import com.google.gwt.jso.JSObject;
 
 @SuppressWarnings("unchecked")
 public abstract class GridColumn<G extends GridColumn<G, J>, J extends JSObject>
 {
-	private Cell				cell;
 
-	private HTML<SpanElement>	label	= HTML.asSpan();
+    	private Cell              headerCell;
 
-	private String				name;
+    	private HTML<SpanElement> label = HTML.asSpan();
+
+    	private String            name;
+
+    	private boolean           sortable;
+    	
+        private double            width;
+    
+        private Unit              widthUnit;
 	
-	private SortDirection		direction = SortDirection.NONE;
-	
-	public G cell(Cell cell)
+	protected Cell headerCell()
 	{
-		this.cell = cell;
-		this.cell.className("sortable").add(this.label);
+	    return this.headerCell;
+	}
+	
+	public boolean isFilterable()
+	{
+	    return false;
+	}
+	
+	public G width(double width, Unit unit)
+	{
+	    this.width = width;
+	    this.widthUnit = unit;
+	    return (G) this;
+	}
+	
+	public G sort(JsArray<J> rows)
+	{
+	    return (G) this;
+	}
+	
+	public G unsort()
+	{
+	    return (G) this;
+	}
+	
+	public G headerCell(Cell cell)
+	{
+		this.headerCell = cell;
+		this.headerCell.add(this.label);
+		
+		if(this.sortable)
+		{
+		    this.headerCell.className("sortable");
+		}
+		
+		if(this.width > 0)
+		{
+		    this.headerCell.style().width(this.width, this.widthUnit);
+		}
 
 		return (G) this;
 	}
 	
+	public G sortable()
+	{
+	    this.sortable = true;
+	    return (G) this;
+	}
+	
 	public G onClick(ClickHandler handler)
 	{
-		this.cell.onClick(handler);
+		this.headerCell.onClick(handler);
 		return (G) this;
 	}
 
 	public G icon(Icon icon)
 	{
-		this.cell.icon(icon);
+		this.headerCell.icon(icon);
 		return (G) this;
 	}
 
@@ -81,94 +130,10 @@ public abstract class GridColumn<G extends GridColumn<G, J>, J extends JSObject>
 		return (G) this;
 	}
 	
-	public G unsort()
+	public String toString(J object)
 	{
-		this.cell.removeClassName("sorted").icon(Icon.NONE);
-		return (G) this;
+	    return object.toString();
 	}
 	
-	public G sort(JsArray<J> rows)
-	{
-		this.direction = this.direction.reverse();
-		
-		this.cell.className("sorted").icon(this.direction.icon());
-		
-		this.doSort(rows, this.name, this.direction.value());
-		
-		return (G) this;
-	}
-	
-	protected abstract void doSort(JsArray<J> rows, String name, int direction);
-	
-	enum SortDirection
-	{
-		NONE
-		{
-			@Override
-			public int value()
-			{
-				return 0;
-			}
-			
-			@Override
-			public SortDirection reverse()
-			{
-				return ASC;
-			}
-			
-			@Override
-			public Icon icon()
-			{
-				return null;
-			}
-		},
-		DESC
-		{
-			@Override
-			public int value()
-			{
-				return -1;
-			}
-			
-			@Override
-			public SortDirection reverse()
-			{
-				return ASC;
-			}
-			
-			@Override
-			public Icon icon()
-			{
-				return Icon.CHEVRON_DOWN;
-			}
-		},
-		ASC
-		{
-			@Override
-			public int value()
-			{
-				return 1;
-			}
-			
-			@Override
-			public SortDirection reverse()
-			{
-				return DESC;
-			}
-			
-			@Override
-			public Icon icon()
-			{
-				return Icon.CHEVRON_UP;
-			}
-		};
-		
-		public abstract int value();
-		
-		public abstract SortDirection reverse();
-		
-		public abstract Icon icon();
-	}
-
-	public abstract String toString(J object);
+	public abstract G render(int rowIndex, Cell cell, J object);
 }

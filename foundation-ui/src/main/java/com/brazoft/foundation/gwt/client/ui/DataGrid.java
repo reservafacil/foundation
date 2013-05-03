@@ -24,13 +24,10 @@ import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.HTML;
 import com.brazoft.foundation.gwt.client.event.Event;
 import com.brazoft.foundation.gwt.client.event.api.EventHandler;
-import com.brazoft.foundation.gwt.client.jso.JSObject;
 import com.brazoft.foundation.gwt.client.ui.ProgressBar.ProgressBarOptions;
 import com.brazoft.foundation.gwt.client.ui.api.AbstractTable;
 import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row.Cell;
-import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
-import com.brazoft.foundation.gwt.client.ui.api.GridColumn;
-import com.brazoft.foundation.gwt.client.ui.api.GridFilter;
+import com.brazoft.foundation.gwt.client.ui.api.*;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.SpanElement;
@@ -40,6 +37,7 @@ import com.google.gwt.event.dom.client.ChangeEvent;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.event.dom.client.ClickEvent;
 import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.jso.JSObject;
 
 @SuppressWarnings("unchecked")
 public class DataGrid<J extends JSObject> extends AbstractTable<DataGrid<J>>
@@ -99,7 +97,7 @@ public class DataGrid<J extends JSObject> extends AbstractTable<DataGrid<J>>
 	
 	public DataGrid<J> add(final GridColumn<?, J> column)
 	{
-		column.cell(this.headerColumns.cell());
+		column.headerCell(this.headerColumns.cell());
 		column.onClick(new ClickHandler()
 		{
 			@Override
@@ -141,7 +139,7 @@ public class DataGrid<J extends JSObject> extends AbstractTable<DataGrid<J>>
 	{
 		for(GridColumn<?, J> gc : this.columns)
 		{
-			gc.unsort();
+		    gc.unsort();
 		}
 		
 		this.footer.pager.reset();
@@ -179,6 +177,20 @@ public class DataGrid<J extends JSObject> extends AbstractTable<DataGrid<J>>
 		this.drawPage(1);
 		
 		return this;
+	}
+	
+	public DataGrid<J> refresh(int rowIndex, J object)
+	{
+	    if(rowIndex == -1)
+	    {
+		this.rows.push(object);
+	    }
+	    else
+	    {
+		this.rows.set(rowIndex, object);
+	    }
+	    
+	    return this.draw(rows);
 	}
 	
 	public DataGrid<J> draw(JsArray<J> rows)
@@ -242,7 +254,7 @@ public class DataGrid<J extends JSObject> extends AbstractTable<DataGrid<J>>
 			
  			for (GridColumn<?, J> column : this.columns)
 			{
-				row.cell().text(column.toString(object));
+				column.render((index - 1), row.cell(), object);
 			}
 		}
 		
@@ -545,7 +557,7 @@ public class DataGrid<J extends JSObject> extends AbstractTable<DataGrid<J>>
 			
 			for(GridColumn<?, J> column : DataGrid.this.columns)
 			{
-				if(DataGrid.this.caption.search.mode.eval(search, column.toString(row)))
+				if(column.isFilterable() && DataGrid.this.caption.search.mode.eval(search, column.toString(row)))
 				{
 					return true;
 				}

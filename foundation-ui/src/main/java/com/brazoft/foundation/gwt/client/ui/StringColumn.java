@@ -1,14 +1,31 @@
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.ui.api.GridColumn;
+import com.brazoft.foundation.commons.format.api.Format;
+import com.brazoft.foundation.gwt.client.ui.api.*;
 import com.google.gwt.core.client.JsArray;
-import com.brazoft.foundation.gwt.client.jso.JSObject;
+import com.google.gwt.jso.JSObject;
 
-public class StringColumn<J extends JSObject> extends GridColumn<StringColumn<J>, J>
+public class StringColumn<J extends JSObject> extends TextGridColumn<StringColumn<J>, J>
 {
+    	private Format<String> format;
+    	
+        public StringColumn() {
+	    super();
+        }
+    
+        public StringColumn(Format<String> format) {
+	    this.format = format;
+        }
+    
 	public final String toString(J object)
 	{
-		return object.get(this.getName());
+	    String value = object.get(this.getName());
+	    if(this.format != null)
+	    {
+		value = this.format.format(value);
+	    }
+	    
+	    return value;
 	}
 	
 	@Override

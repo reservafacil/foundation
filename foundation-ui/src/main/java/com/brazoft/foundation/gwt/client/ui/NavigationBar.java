@@ -237,7 +237,7 @@ public class NavigationBar extends Bootstrap<NavigationBar> implements HasText<N
 			return item;
 		}
 		
-		class Item extends Bootstrap<Item> implements HasText<Item>, HasFocusHandlers<Item>, HasClickHandlers<Item>, HasMouseHandlers<Item>, HasKeyHandlers<Item>
+		public class Item extends Bootstrap<Item> implements HasText<Item>, HasFocusHandlers<Item>, HasClickHandlers<Item>, HasMouseHandlers<Item>, HasKeyHandlers<Item>
 		{
 			private HTML<AnchorElement> link = HTML.asAnchor("#");
 			
