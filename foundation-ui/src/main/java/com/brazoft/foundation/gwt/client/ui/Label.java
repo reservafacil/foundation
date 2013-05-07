@@ -71,7 +71,7 @@ public class Label extends Component<Label> implements HasText<Label>
 	{
 		if(this.text == null)
 		{
-			this.text = new Emphasis(EmphasisOptions.SMALL).muted();
+			this.text = new Emphasis(EmphasisOptions.SMALL);
 			this.add(this.text);
 		}
 		this.text.text(text);

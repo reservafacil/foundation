@@ -25,9 +25,9 @@ import com.brazoft.foundation.gwt.client.component.HTML;
 import com.brazoft.foundation.gwt.client.event.Event;
 import com.brazoft.foundation.gwt.client.event.api.EventHandler;
 import com.brazoft.foundation.gwt.client.ui.ProgressBar.ProgressBarOptions;
-import com.brazoft.foundation.gwt.client.ui.api.AbstractTable;
 import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row.Cell;
 import com.brazoft.foundation.gwt.client.ui.api.*;
+import com.brazoft.foundation.gwt.client.util.JSArrays;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.SpanElement;
@@ -177,6 +177,13 @@ public class DataGrid<J extends JSObject> extends AbstractTable<DataGrid<J>>
 		this.drawPage(1);
 		
 		return this;
+	}
+	
+	public DataGrid<J> remove(int rowIndex)
+	{
+	    JSArrays.remove(this.rows, rowIndex);
+	    
+	    return this.draw(rows);
 	}
 	
 	public DataGrid<J> refresh(int rowIndex, J object)

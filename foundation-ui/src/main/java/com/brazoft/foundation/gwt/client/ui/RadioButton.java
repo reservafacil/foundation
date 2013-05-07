@@ -58,6 +58,23 @@ public class RadioButton extends Input<RadioButton, String> implements UISelecti
 	}
 	
 	@Override
+	public RadioButton editable() {
+	    this.element().setDisabled(false);
+	    return this;
+	}
+	
+	@Override
+	public RadioButton readonly() {
+	    this.element().setDisabled(true);
+	    return this;
+	}
+	
+	@Override
+	public boolean isReadOnly() {
+	    return this.element().isDisabled();
+	}
+	
+	@Override
 	public RadioButton placeholder(String placeholder)
 	{
 		Widgets.adaptPlaceholder(this, placeholder, "radio");

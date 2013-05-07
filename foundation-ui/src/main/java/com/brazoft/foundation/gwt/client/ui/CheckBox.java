@@ -19,8 +19,7 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.ui.api.Input;
-import com.brazoft.foundation.gwt.client.ui.api.UISelection;
+import com.brazoft.foundation.gwt.client.ui.api.*;
 
 public class CheckBox extends Input<CheckBox, String> implements UISelection<CheckBox, String>
 {
@@ -55,6 +54,23 @@ public class CheckBox extends Input<CheckBox, String> implements UISelection<Che
 	public String getValue()
 	{
 		return this.element().getValue();
+	}
+	
+	@Override
+	public CheckBox editable() {
+	    this.element().setDisabled(false);
+	    return this;
+	}
+	
+	@Override
+	public CheckBox readonly() {
+	    this.element().setDisabled(true);
+	    return this;
+	}
+	
+	@Override
+	public boolean isReadOnly() {
+	    return this.element().isDisabled();
 	}
 	
 	@Override

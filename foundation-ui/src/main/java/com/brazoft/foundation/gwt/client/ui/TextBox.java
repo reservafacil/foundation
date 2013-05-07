@@ -30,12 +30,6 @@ public class TextBox extends DecoratedInputText<TextBox>
 		return (InputText) super.input();
 	}
 	
-	public TextBox block()
-	{
-		this.input().block();
-		return this;
-	}
-	
 	public TextBox mask(String pattern)
 	{
 		this.input().mask(pattern);

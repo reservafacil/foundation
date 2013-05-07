@@ -81,7 +81,7 @@ public class Validator
 	 */
 	public static boolean isZero(Number number)
 	{
-		return number.doubleValue() == 0.0;
+		return number != null && number.doubleValue() == 0.0;
 	}
 
 	/**
