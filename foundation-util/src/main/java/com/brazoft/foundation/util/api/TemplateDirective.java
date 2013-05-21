@@ -16,37 +16,35 @@ import org.apache.velocity.runtime.parser.node.Node;
 import com.brazoft.foundation.io.IOHandler;
 import com.brazoft.foundation.util.VelocityUtil;
 
-public abstract class TemplateDirective extends Directive
-{
-	@Override
-	public void init(RuntimeServices rs, InternalContextAdapter context, Node node) throws TemplateInitException
-	{
-		super.init(rs, context, node);
-		this.resolve(rs, this.getName());
-	}
-	
-	@Override
-	protected boolean doRender(InternalContextAdapter context, Writer writer, List<Variable> variables)
-	{
-		try
-		{
-			Template directive = VelocityUtil.getInstance().createTemplate(this.getName(), new ByteArrayInputStream(IOHandler.read(this.source())));
-			
-			List<Object> values = new ArrayList<Object>();
-			for(Variable variable : variables)
-			{
-				values.add(variable.getValue());
-			}
-			
-			directive.merge(this.getContext(values), writer);
+public abstract class TemplateDirective
+    extends Directive {
 
-			return true;
-		}
-		catch(Exception e)
-		{
-			throw new ResourceNotFoundException(e);
-		}
-	}
+    @Override
+    public void init(RuntimeServices rs, InternalContextAdapter context, Node node)
+	throws TemplateInitException {
+	super.init(rs, context, node);
+	this.resolve(rs, this.getName());
+    }
 
-	protected abstract VelocityContext getContext(List<Object> variables) throws Exception;
+    @Override
+    protected boolean doRender(InternalContextAdapter context, Writer writer, List<Variable> variables) {
+	try {
+	    Template directive = VelocityUtil.getInstance().createTemplate(this.getName(),
+		                                                           new ByteArrayInputStream(IOHandler.read(this.source())));
+
+	    List<Object> values = new ArrayList<Object>();
+	    for (Variable variable : variables) {
+		values.add(variable.getValue());
+	    }
+
+	    directive.merge(this.getContext(values), writer);
+
+	    return true;
+	} catch (Exception e) {
+	    throw new ResourceNotFoundException(e);
+	}
+    }
+
+    protected abstract VelocityContext getContext(List<Object> variables)
+	throws Exception;
 }

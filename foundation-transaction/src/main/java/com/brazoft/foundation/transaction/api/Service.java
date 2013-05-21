@@ -7,7 +7,6 @@ import java.lang.annotation.RetentionPolicy;
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
 @Retention(RetentionPolicy.RUNTIME)
-public @interface Service
-{
+public @interface Service {
 
 }

@@ -8,45 +8,44 @@ import com.brazoft.foundation.job.api.AbstractCronTrigger;
 /**
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
-public class ForEachWeekTrigger extends AbstractCronTrigger
-{
-	/**
+public class ForEachWeekTrigger
+    extends AbstractCronTrigger {
+
+    /**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 1L;
+    private static final long serialVersionUID = 1L;
 
-	private int weeks;
+    private int               weeks;
 
-	/**
-	 * @param schedule
-	 * @param registry 
-	 * @param weeks 
-	 */
-	public ForEachWeekTrigger(Calendar schedule, JobRegistry registry, int weeks)
-	{
-		super(schedule, registry);
-		this.weeks = weeks;
-	}
-	
-	@Override
-	protected String getExpressionString()
-	{
-		StringBuffer expression;
-		
-		expression = new StringBuffer(Calendar.getInstance().get(Calendar.DATE));
-		expression.append("/");
-		expression.append(this.weeks * 7);
-		expression.append(" * ? *");
-		
-		return expression.toString();
-	}
+    /**
+     * @param schedule
+     * @param registry
+     * @param weeks
+     */
+    public ForEachWeekTrigger(Calendar schedule, JobRegistry registry, int weeks) {
+	super(schedule, registry);
+	this.weeks = weeks;
+    }
 
-	/**
-	 * @param weeks
-	 * @throws ParseException
-	 */
-	public void setForEach() throws ParseException
-	{
-		
-	}
+    @Override
+    protected String getExpressionString() {
+	StringBuffer expression;
+
+	expression = new StringBuffer(Calendar.getInstance().get(Calendar.DATE));
+	expression.append("/");
+	expression.append(this.weeks * 7);
+	expression.append(" * ? *");
+
+	return expression.toString();
+    }
+
+    /**
+     * @param weeks
+     * @throws ParseException
+     */
+    public void setForEach()
+	throws ParseException {
+
+    }
 }

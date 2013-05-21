@@ -1,43 +1,34 @@
 package com.brazoft.foundation.soa;
 
-public class Request<V>
-{
-	private V 	data;
-	
-	private int start;
-	
-	private int end;
-	
-	public Request<V> data(V data)
-	{
-		this.data = data;
-		return this;
-	}
-	
-	public V getData()
-	{
-		return data;
-	}
+public class Request<T> {
 
-	public int getStart()
-	{
-		return start;
-	}
-	
-	public int getEnd()
-	{
-		return this.end + this.start;
-	}
+    private T   data;
 
-	public Request<V> start(int start)
-	{
-		this.start = start;
-		return this;
-	}
-	
-	public Request<V> end(int end)
-	{
-		this.end = end;
-		return this;
-	}
+    private int start;
+
+    private int end;
+
+    public T getData() {
+	return data;
+    }
+
+    public void setData(T data) {
+	this.data = data;
+    }
+
+    public int getStart() {
+	return start;
+    }
+
+    public void setStart(int start) {
+	this.start = start;
+    }
+
+    public int getEnd() {
+	return end;
+    }
+
+    public void setEnd(int end) {
+	this.end = end;
+    }
 }

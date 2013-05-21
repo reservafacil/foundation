@@ -22,6 +22,10 @@
 			<artifactId>foundation-gwt</artifactId>
 			<scope>provided</scope>
 		</dependency>
+		<dependency>
+		  <groupId>com.googlecode.gwtquery</groupId>
+		  <artifactId>gwtquery</artifactId>
+		</dependency>
 	</dependencies>
 
 	<build>

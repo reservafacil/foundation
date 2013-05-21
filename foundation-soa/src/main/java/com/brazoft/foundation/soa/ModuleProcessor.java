@@ -17,67 +17,57 @@ import com.google.inject.Injector;
 import com.google.inject.Module;
 import com.google.inject.Stage;
 
-public class ModuleProcessor
-{
-   private final static Logger logger = Logger.getLogger(ModuleProcessor.class);
+public class ModuleProcessor {
 
-   private final Registry registry;
-   private final ResteasyProviderFactory providerFactory;
+    private final static Logger           logger = Logger.getLogger(ModuleProcessor.class);
 
-   public ModuleProcessor(final Registry registry, final ResteasyProviderFactory providerFactory)
-   {
-      this.registry = registry;
-      this.providerFactory = providerFactory;
-   }
+    private final Registry                registry;
+    private final ResteasyProviderFactory providerFactory;
 
-   public Injector process(final Module... modules)
-   {
-      final Injector injector = Guice.createInjector(modules);
-      processInjector(injector);
-      return injector;
-   }
+    public ModuleProcessor(final Registry registry, final ResteasyProviderFactory providerFactory) {
+	this.registry = registry;
+	this.providerFactory = providerFactory;
+    }
 
-   public Injector process(final Stage stage, final Module... modules)
-   {
-      final Injector injector = Guice.createInjector(stage, modules);
-      processInjector(injector);
-      return injector;
-   }
+    public Injector process(final Module... modules) {
+	final Injector injector = Guice.createInjector(modules);
+	processInjector(injector);
+	return injector;
+    }
 
-   public Injector process(final Iterable<Module> modules)
-   {
-      final Injector injector = Guice.createInjector(modules);
-      processInjector(injector);
-      return injector;
-   }
+    public Injector process(final Stage stage, final Module... modules) {
+	final Injector injector = Guice.createInjector(stage, modules);
+	processInjector(injector);
+	return injector;
+    }
 
-   public Injector process(final Stage stage, final Iterable<Module> modules)
-   {
-      final Injector injector = Guice.createInjector(stage, modules);
-      processInjector(injector);
-      return injector;
-   }
+    public Injector process(final Iterable<Module> modules) {
+	final Injector injector = Guice.createInjector(modules);
+	processInjector(injector);
+	return injector;
+    }
 
-   private void processInjector(final Injector injector)
-   {
-      for (final Binding<?> binding : injector.getBindings().values())
-      {
-         final Type type = binding.getKey().getTypeLiteral().getType();
-         if (type instanceof Class)
-         {
-            final Class<?> beanClass = (Class) type;
-            if (GetRestful.isRootResource(beanClass))
-            {
-               final ResourceFactory resourceFactory = new GuiceResourceFactory(binding.getProvider(), beanClass);
-               logger.info("registering factory for {0}", beanClass.getName());
-               registry.addResourceFactory(resourceFactory);
-            }
-            if (beanClass.isAnnotationPresent(Provider.class))
-            {
-               logger.info("registering provider instance for {0}", beanClass.getName());
-               providerFactory.registerProviderInstance(binding.getProvider().get());
-            }
-         }
-      }
-   }
+    public Injector process(final Stage stage, final Iterable<Module> modules) {
+	final Injector injector = Guice.createInjector(stage, modules);
+	processInjector(injector);
+	return injector;
+    }
+
+    private void processInjector(final Injector injector) {
+	for (final Binding<?> binding : injector.getBindings().values()) {
+	    final Type type = binding.getKey().getTypeLiteral().getType();
+	    if (type instanceof Class) {
+		final Class<?> beanClass = (Class)type;
+		if (GetRestful.isRootResource(beanClass)) {
+		    final ResourceFactory resourceFactory = new GuiceResourceFactory(binding.getProvider(), beanClass);
+		    logger.info("registering factory for {0}", beanClass.getName());
+		    registry.addResourceFactory(resourceFactory);
+		}
+		if (beanClass.isAnnotationPresent(Provider.class)) {
+		    logger.info("registering provider instance for {0}", beanClass.getName());
+		    providerFactory.registerProviderInstance(binding.getProvider().get());
+		}
+	    }
+	}
+    }
 }

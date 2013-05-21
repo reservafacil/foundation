@@ -5,13 +5,13 @@ import com.brazoft.foundation.transaction.api.AbstractTransactionManager;
 /**
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
-public class TransactionManager extends AbstractTransactionManager
-{
-	/**
+public class TransactionManager
+    extends AbstractTransactionManager {
+
+    /**
 	 * 
 	 */
-	public TransactionManager()
-	{
-		super();
-	}
+    public TransactionManager() {
+	super();
+    }
 }

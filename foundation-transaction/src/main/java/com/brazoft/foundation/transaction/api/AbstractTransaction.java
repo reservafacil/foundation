@@ -6,66 +6,59 @@ import java.util.List;
 /**
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
-public abstract class AbstractTransaction implements ITransaction
-{
-	private List<ITransaction> joined;
-	
-	/**
+public abstract class AbstractTransaction
+    implements ITransaction {
+
+    private List<ITransaction> joined;
+
+    /**
 	 * 
 	 */
-	public AbstractTransaction()
-	{
-		this.joined = new ArrayList<ITransaction>();
-	}
-	
-	public void join(ITransaction transaction)
-	{
-		this.joined.add(transaction);
+    public AbstractTransaction() {
+	this.joined = new ArrayList<ITransaction>();
+    }
+
+    public void join(ITransaction transaction) {
+	this.joined.add(transaction);
+    }
+
+    public void commit() {
+	for (ITransaction tx : this.joined) {
+	    tx.commit();
 	}
 
-	public void commit()
-	{
-		for(ITransaction tx : this.joined)
-		{
-			tx.commit();
-		}
-		
-		this.doCommit();
+	this.doCommit();
+    }
+
+    public void release() {
+	for (ITransaction tx : this.joined) {
+	    tx.release();
 	}
 
-	public void release()
-	{
-		for(ITransaction tx : this.joined)
-		{
-			tx.release();
-		}
-		
-		this.doRelease();
-		this.joined.clear();
+	this.doRelease();
+	this.joined.clear();
+    }
+
+    public void rollback() {
+	for (ITransaction tx : this.joined) {
+	    tx.rollback();
 	}
 
-	public void rollback()
-	{
-		for(ITransaction tx : this.joined)
-		{
-			tx.rollback();
-		}
-		
-		this.doRollback();
-	}
-	
-	/**
+	this.doRollback();
+    }
+
+    /**
 	 * 
 	 */
-	protected abstract void doCommit();
-	
-	/**
+    protected abstract void doCommit();
+
+    /**
 	 * 
 	 */
-	protected abstract void doRelease();
-	
-	/**
+    protected abstract void doRelease();
+
+    /**
 	 * 
 	 */
-	protected abstract void doRollback();
+    protected abstract void doRollback();
 }

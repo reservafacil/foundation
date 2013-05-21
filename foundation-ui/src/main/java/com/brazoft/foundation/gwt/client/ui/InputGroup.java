@@ -2,192 +2,129 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.commons.validator.NotEmptyValidator;
 import com.brazoft.foundation.commons.validator.api.Validator;
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.HTML;
-import com.brazoft.foundation.gwt.client.component.api.Component;
-import com.brazoft.foundation.gwt.client.component.api.HasText;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.ui.api.Group;
 import com.brazoft.foundation.gwt.client.util.ValidationProcess.ValidationAction;
 import com.brazoft.foundation.gwt.client.util.ValidationProcess.ValidationConstraint;
-import com.google.gwt.dom.client.SpanElement;
-import com.google.gwt.dom.client.Style.Unit;
 
-public class InputGroup<V> extends Group<InputGroup<V>> implements UIInput<InputGroup<V>, V>
-{
-	private final UIInput<?, V>				input;
+public class InputGroup<V>
+    extends Group<InputGroup<V>>
+    implements UIInput<InputGroup<V>, V> {
 
-	private final ValidationConstraint<V>	constraint;
+    private final UIInput<?, V>           input;
 
-	private final NotEmptyValidator<V>		validator	= new NotEmptyValidator<V>();
+    private final ValidationConstraint<V> constraint;
 
-	public InputGroup(UIInput<?, V> input)
-	{
-		this.input = input;
-		this.initWidget(input.asWidget());
-		this.constraint = new ValidationConstraint<V>(input);
-	}
-	
-	public InputGroup<V> requiredMessage(String text)
-	{
-		this.validator.message(text);
-		return this;
-	}
-	
-	@Override
-	public InputGroup<V> label(String labelText)
-	{
-		this.constraint.name(labelText);
-		
-		return super.label(labelText);
-	}
-	
-	public UIInput<?, V> getInput()
-	{
-		return input;
-	}
-	
-	public InputGroup<V> clear()
-	{
-		this.input.clear();
-		return this;
-	}
+    private final NotEmptyValidator<V>    validator = new NotEmptyValidator<V>();
 
-	@Override
-	public InputGroup<V> value(V value)
-	{
-		this.input.value(value);
-		return this;
-	}
+    public InputGroup(UIInput<?, V> input) {
+	this.input = input;
+	this.initWidget(input.asWidget());
+	this.constraint = new ValidationConstraint<V>(input);
+    }
 
-	@Override
-	public V getValue()
-	{
-		return this.input.getValue();
-	}
+    public InputGroup<V> requiredMessage(String text) {
+	this.validator.message(text);
+	return this;
+    }
 
-	public ValidationConstraint<V> getConstraint()
-	{
-		return this.constraint;
-	}
+    @Override
+    public InputGroup<V> label(String labelText) {
+	this.constraint.name(labelText);
 
-	public InputGroup<V> validator(Validator<V> validator)
-	{
-		this.constraint.add(validator);
-		return this;
-	}
+	return super.label(labelText);
+    }
 
-	public InputGroup<V> action(ValidationAction action)
-	{
-		this.constraint.action(action);
-		return this;
-	}
+    public UIInput<?, V> getInput() {
+	return input;
+    }
 
-	boolean validate()
-	{
-		return this.constraint.validate();
-	}
+    public InputGroup<V> clear() {
+	this.input.clear();
+	return this;
+    }
 
-	@Override
-	public InputGroup<V> placeholder(String placeholder)
-	{
-		this.input.placeholder(placeholder);
-		return this;
-	}
+    @Override
+    public InputGroup<V> value(V value) {
+	this.input.value(value);
+	return this;
+    }
 
-	@Override
-	public boolean isReadOnly()
-	{
-		return this.input.isReadOnly();
-	}
+    @Override
+    public V getValue() {
+	return this.input.getValue();
+    }
 
-	@Override
-	public InputGroup<V> readonly()
-	{
-		this.input.readonly();
-		return this;
-	}
+    public ValidationConstraint<V> getConstraint() {
+	return this.constraint;
+    }
 
-	@Override
-	public boolean isEditable()
-	{
-		return this.input.isEditable();
-	}
+    public InputGroup<V> validator(Validator<V> validator) {
+	this.constraint.add(validator);
+	return this;
+    }
 
-	@Override
-	public InputGroup<V> editable()
-	{
-		this.input.editable();
-		return this;
-	}
+    public InputGroup<V> action(ValidationAction action) {
+	this.constraint.action(action);
+	return this;
+    }
 
-	@Override
-	public boolean isNullable()
-	{
-		return this.input.isNullable();
-	}
+    boolean validate() {
+	return this.constraint.validate();
+    }
 
-	@Override
-	public InputGroup<V> nullable()
-	{
-		this.getLabel().unmark();
-		this.constraint.remove(this.validator);
-		this.input.nullable();
-		this.validate();
-		return this;
-	}
+    @Override
+    public InputGroup<V> placeholder(String placeholder) {
+	this.input.placeholder(placeholder);
+	return this;
+    }
 
-	@Override
-	public boolean isRequired()
-	{
-		return this.input.isRequired();
-	}
+    @Override
+    public boolean isReadOnly() {
+	return this.input.isReadOnly();
+    }
 
-	@Override
-	public InputGroup<V> required()
-	{
-		this.getLabel().mark();
-		this.constraint.add(this.validator);
-		this.input.required();
-		return this;
-	}
+    @Override
+    public InputGroup<V> readonly() {
+	this.input.readonly();
+	return this;
+    }
 
-	public class LabelMark extends Component<LabelMark> implements HasText<LabelMark>
-	{
-		private LabeledText			label	= new LabeledText().align(Alignment.LEFT);
+    @Override
+    public boolean isEditable() {
+	return this.input.isEditable();
+    }
 
-		private HTML<SpanElement>	mark	= HTML.asSpan().className("required");
+    @Override
+    public InputGroup<V> editable() {
+	this.input.editable();
+	return this;
+    }
 
-		public LabelMark()
-		{
-			super(ElementResolver.div());
-			this.add(this.label).add(this.mark);
-			this.style().marginBottom(5, Unit.PX);
-		}
+    @Override
+    public boolean isNullable() {
+	return this.input.isNullable();
+    }
 
-		public LabelMark mark()
-		{
-			this.mark.text("*");
-			return this;
-		}
+    @Override
+    public InputGroup<V> nullable() {
+	this.getLabel().unmark();
+	this.constraint.remove(this.validator);
+	this.input.nullable();
+	this.validate();
+	return this;
+    }
 
-		public LabelMark unmark()
-		{
-			this.mark.text("");
-			return this;
-		}
+    @Override
+    public boolean isRequired() {
+	return this.input.isRequired();
+    }
 
-		@Override
-		public LabelMark text(String text)
-		{
-			this.label.text(text);
-			return this;
-		}
-
-		@Override
-		public String getText()
-		{
-			return this.label.getText();
-		}
-	}
+    @Override
+    public InputGroup<V> required() {
+	this.getLabel().mark();
+	this.constraint.add(this.validator);
+	this.input.required();
+	return this;
+    }
 }

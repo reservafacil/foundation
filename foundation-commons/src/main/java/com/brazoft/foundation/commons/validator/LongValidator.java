@@ -2,26 +2,24 @@ package com.brazoft.foundation.commons.validator;
 
 import com.brazoft.foundation.commons.validator.api.AbstractValidator;
 
-public class LongValidator extends AbstractValidator<LongValidator, String>
-{
-	private Long min;
+public class LongValidator
+    extends AbstractValidator<LongValidator, String> {
 
-	private Long max;
+    private Long min;
 
-	public LongValidator()
-	{
-		super();
-	}
+    private Long max;
 
-	public LongValidator(Long min, Long max)
-	{
-		super();
-		this.min = Long.MIN_VALUE;
-		this.max = Long.MAX_VALUE;
-	}
+    public LongValidator() {
+	super();
+    }
 
-	protected boolean delegateValidation(String value)
-	{
-		return Long.valueOf(value) >= this.min && Long.valueOf(value) <= this.max;
-	}
+    public LongValidator(Long min, Long max) {
+	super();
+	this.min = Long.MIN_VALUE;
+	this.max = Long.MAX_VALUE;
+    }
+
+    protected boolean delegateValidation(String value) {
+	return Long.valueOf(value) >= this.min && Long.valueOf(value) <= this.max;
+    }
 }

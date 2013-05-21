@@ -1,7 +1,5 @@
 package com.brazoft.foundation.gwt.client.ui;
 
-public enum Orientation
-{
-	HORIZONTAL,
-	VERTICAL;
+public enum Orientation {
+    HORIZONTAL, VERTICAL;
 }

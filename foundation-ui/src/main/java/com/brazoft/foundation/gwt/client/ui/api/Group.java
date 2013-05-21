@@ -1,25 +1,18 @@
 package com.brazoft.foundation.gwt.client.ui.api;
 
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.HTML;
-import com.brazoft.foundation.gwt.client.component.api.Component;
-import com.brazoft.foundation.gwt.client.component.api.Composite;
-import com.brazoft.foundation.gwt.client.component.api.HasText;
-import com.brazoft.foundation.gwt.client.ui.Alignment;
-import com.brazoft.foundation.gwt.client.ui.Icon;
-import com.brazoft.foundation.gwt.client.ui.LabeledText;
-import com.brazoft.foundation.gwt.client.ui.Widgets;
-import com.google.gwt.dom.client.AnchorElement;
-import com.google.gwt.dom.client.SpanElement;
+import com.brazoft.foundation.gwt.client.component.*;
+import com.brazoft.foundation.gwt.client.component.api.*;
+import com.brazoft.foundation.gwt.client.ui.*;
+import com.google.gwt.dom.client.*;
 import com.google.gwt.dom.client.Style.Unit;
 
 @SuppressWarnings("unchecked")
 public abstract class Group<G extends Group<G>>
     extends Composite<G> {
 
-    private final LabelGroup label   = new LabelGroup();
+    private LabelGroup label = new LabelGroup();
 
-    private int              colspan = 1;
+    private int        colspan = 1;
 
     public G label(String labelText) {
 	this.label.text(labelText);
@@ -58,30 +51,30 @@ public abstract class Group<G extends Group<G>>
 
 	public LabelGroup() {
 	    super(ElementResolver.div());
-	    this.add(this.label).add(this.mark).add(this.hint);
+	    this.add(this.label).add(this.mark).add(this.hint).hidden();
 	    this.style().marginBottom(5, Unit.PX);
 	}
 
 	public LabelGroup hint(String title) {
 	    Widgets.setIcon(this.hint, Icon.QUESTION_SIGN);
 	    this.hint.title(title).style().marginLeft(5, Unit.PX);
-	    return this;
+	    return this.visible();
 	}
 
 	public LabelGroup mark() {
 	    this.mark.text("*");
-	    return this;
+	    return this.visible();
 	}
 
 	public LabelGroup unmark() {
 	    this.mark.text("");
-	    return this;
+	    return this.visible();
 	}
 
 	@Override
 	public LabelGroup text(String text) {
 	    this.label.text(text);
-	    return this;
+	    return this.visible();
 	}
 
 	@Override

@@ -6,70 +6,61 @@ import java.util.Arrays;
 import java.util.Comparator;
 import java.util.List;
 
-public class ReflectionComparator<T> implements Comparator<T>
-{
-	public static enum EDirection
-	{
-		ASCENDING, DESCENDING;
+public class ReflectionComparator<T>
+    implements Comparator<T> {
 
-		int compare(Comparable c1, Comparable c2)
-		{
-			if (this.equals(ASCENDING))
-			{
-				return c1.compareTo(c2);
-			}
+    public static enum EDirection {
+	ASCENDING, DESCENDING;
 
-			return c2.compareTo(c1);
-		}
+	int compare(Comparable c1, Comparable c2) {
+	    if (this.equals(ASCENDING)) {
+		return c1.compareTo(c2);
+	    }
+
+	    return c2.compareTo(c1);
+	}
+    }
+
+    private EDirection  direction;
+
+    private List<Field> fields = new ArrayList<Field>();
+
+    public ReflectionComparator(EDirection direction) {
+	this.direction = direction;
+    }
+
+    public void add(String name, Class<?> clazz) {
+	this.add(ReflectionUtil.getField(clazz, name));
+    }
+
+    public void add(Field field) {
+	if (!Arrays.asList(field.getType().getInterfaces()).contains(Comparable.class)) {
+	    throw new RuntimeException("The field " + field.getName() + " must be a instance of Comparable.");
 	}
 
-	private EDirection	direction;
+	this.fields.add(field);
+    }
 
-	private List<Field>	fields	= new ArrayList<Field>();
+    public int compare(T o1, T o2) {
+	int compareTo = 0;
+	Comparable<?> c1;
+	Comparable<?> c2;
 
-	public ReflectionComparator(EDirection direction)
-	{
-		this.direction = direction;
-	}
-	
-	public void add(String name, Class<?> clazz){
-		this.add(ReflectionUtil.getField(clazz, name));
-	}
+	for (Field field : this.fields) {
+	    c1 = this.get(field, o1);
+	    c2 = this.get(field, o2);
 
-	public void add(Field field)
-	{
-		if (!Arrays.asList(field.getType().getInterfaces()).contains(Comparable.class))
-		{
-			throw new RuntimeException("The field " + field.getName() + " must be a instance of Comparable.");
-		}
+	    compareTo = this.direction.compare(c1, c2);
 
-		this.fields.add(field);
+	    if (compareTo != 0) {
+		break;
+	    }
 	}
 
-	public int compare(T o1, T o2)
-	{
-		int compareTo = 0;
-		Comparable<?> c1;
-		Comparable<?> c2;
+	return compareTo;
+    }
 
-		for (Field field : this.fields)
-		{
-			c1 = this.get(field, o1);
-			c2 = this.get(field, o2);
-
-			compareTo = this.direction.compare(c1, c2);
-
-			if (compareTo != 0)
-			{
-				break;
-			}
-		}
-
-		return compareTo;
-	}
-
-	private Comparable<?> get(Field field, T object)
-	{
-		return (Comparable<?>) ReflectionUtil.getValue(object, field);
-	}
+    private Comparable<?> get(Field field, T object) {
+	return (Comparable<?>)ReflectionUtil.getValue(object, field);
+    }
 }

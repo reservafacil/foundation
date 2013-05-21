@@ -6,13 +6,13 @@ import com.google.gwt.event.dom.client.TouchMoveHandler;
 import com.google.gwt.event.dom.client.TouchStartHandler;
 import com.google.gwt.user.client.ui.Widget;
 
-public interface HasTouchHandlers<W extends Widget>
-{
-	W onTouchCancel(TouchCancelHandler handler);
-	
-	W onTouchEnd(TouchEndHandler handler);
-	
-	W onTouchMove(TouchMoveHandler handler);
-	
-	W onTouchStart(TouchStartHandler handler);
+public interface HasTouchHandlers<W extends Widget> {
+
+    W onTouchCancel(TouchCancelHandler handler);
+
+    W onTouchEnd(TouchEndHandler handler);
+
+    W onTouchMove(TouchMoveHandler handler);
+
+    W onTouchStart(TouchStartHandler handler);
 }

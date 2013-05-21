@@ -11,27 +11,25 @@ import com.brazoft.foundation.jdbc.api.AbstractDataSource;
 /**
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
-class ContainerDataSource extends AbstractDataSource
-{
-	private DataSource	datasource;
+class ContainerDataSource
+    extends AbstractDataSource {
 
-	public void configure(JDBCProperties jdbc) throws SQLException
-	{
-		InitialContext ic = null;
+    private DataSource datasource;
 
-		try
-		{
-			ic = new InitialContext();
-			this.datasource = (DataSource) ic.lookup(jdbc.getProperties().getJndi());
-		}
-		catch (Exception e)
-		{
-			throw new SQLException(e.getMessage());
-		}
+    public void configure(JDBCProperties jdbc)
+	throws SQLException {
+	InitialContext ic = null;
+
+	try {
+	    ic = new InitialContext();
+	    this.datasource = (DataSource)ic.lookup(jdbc.getProperties().getJndi());
+	} catch (Exception e) {
+	    throw new SQLException(e.getMessage());
 	}
+    }
 
-	public Connection getConnection() throws SQLException
-	{
-		return this.datasource.getConnection();
-	}
+    public Connection getConnection()
+	throws SQLException {
+	return this.datasource.getConnection();
+    }
 }

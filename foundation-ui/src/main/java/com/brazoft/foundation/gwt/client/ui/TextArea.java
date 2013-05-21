@@ -2,13 +2,13 @@
  * Copyright (C) 2009-2012 the original author or authors.
  * See the notice.md file distributed with this work for additional
  * information regarding copyright ownership.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -40,177 +40,151 @@ import com.google.gwt.event.dom.client.MouseOverHandler;
 import com.google.gwt.event.dom.client.MouseUpHandler;
 import com.google.gwt.event.dom.client.MouseWheelHandler;
 
-public class TextArea extends Bootstrap<TextArea> implements UIInput<TextArea, String>, HasFocusHandlers<TextArea>, HasMouseHandlers<TextArea>, HasKeyHandlers<TextArea>, HasChangeHandlers<TextArea>
-{
-	public TextArea()
-	{
-		super(ElementResolver.textarea());
-	}
-	
-	public TextArea onChange(ChangeHandler handler)
-	{
-		return Events.on(this, handler);
-	}
-	
-	@Override
-	public TextArea onKeyPress(KeyPressHandler handler)
-	{
-		return Events.on(this, handler);
-	}
+public final class TextArea
+    extends Bootstrap<TextArea>
+    implements UIInput<TextArea, String>, HasFocusHandlers<TextArea>, HasMouseHandlers<TextArea>, HasKeyHandlers<TextArea>,
+    HasChangeHandlers<TextArea> {
 
-	@Override
-	public TextArea onKeyDown(KeyDownHandler handler)
-	{
-		return Events.on(this, handler);
-	}
+    public TextArea() {
+	super(ElementResolver.textarea());
+    }
 
-	@Override
-	public TextArea onKeyUp(KeyUpHandler handler)
-	{
-		return Events.on(this, handler);
-	}
+    public TextArea onChange(ChangeHandler handler) {
+	return Events.on(this, handler);
+    }
 
-	@Override
-	public TextArea onMouseDown(MouseDownHandler handler)
-	{
-		return Events.on(this, handler);
-	}
+    @Override
+    public TextArea onKeyPress(KeyPressHandler handler) {
+	return Events.on(this, handler);
+    }
 
-	@Override
-	public TextArea onMouseMove(MouseMoveHandler handler)
-	{
-		return Events.on(this, handler);
-	}
+    @Override
+    public TextArea onKeyDown(KeyDownHandler handler) {
+	return Events.on(this, handler);
+    }
 
-	@Override
-	public TextArea onMouseOut(MouseOutHandler handler)
-	{
-		return Events.on(this, handler);
-	}
+    @Override
+    public TextArea onKeyUp(KeyUpHandler handler) {
+	return Events.on(this, handler);
+    }
 
-	@Override
-	public TextArea onMouseOver(MouseOverHandler handler)
-	{
-		return Events.on(this, handler);
-	}
+    @Override
+    public TextArea onMouseDown(MouseDownHandler handler) {
+	return Events.on(this, handler);
+    }
 
-	@Override
-	public TextArea onMouseUp(MouseUpHandler handler)
-	{
-		return Events.on(this, handler);
-	}
+    @Override
+    public TextArea onMouseMove(MouseMoveHandler handler) {
+	return Events.on(this, handler);
+    }
 
-	@Override
-	public TextArea onMouseWheel(MouseWheelHandler handler)
-	{
-		return Events.on(this, handler);
-	}
+    @Override
+    public TextArea onMouseOut(MouseOutHandler handler) {
+	return Events.on(this, handler);
+    }
 
-	@Override
-	public TextArea onFocus(FocusHandler handler)
-	{
-		return Events.on(this, handler);
-	}
+    @Override
+    public TextArea onMouseOver(MouseOverHandler handler) {
+	return Events.on(this, handler);
+    }
 
-	@Override
-	public TextArea onBlur(BlurHandler handler)
-	{
-		return Events.on(this, handler);
-	}
+    @Override
+    public TextArea onMouseUp(MouseUpHandler handler) {
+	return Events.on(this, handler);
+    }
 
-	public TextArea cols(int cols)
-	{
-		this.element().setCols(cols);
-		return this;
-	}
-	
-	public TextArea rows(int rows)
-	{
-		this.element().setRows(rows);
-		return this;
-	}
-	
-	@Override
-	public TextArea clear()
-	{
-		return this.value("");
-	}
-	
-	@Override
-	public TextArea value(String value)
-	{
-		this.element().setValue(value);
-		return this;
-	}
-	
-	@Override
-	public String getValue()
-	{
-		return this.element().getValue();
-	}
-	
-	public TextArea placeholder(String placeholder)
-	{
-		return this.attribute("placeholder", placeholder);
-	}
-	
-	@Override
-	public boolean isReadOnly()
-	{
-		return this.element().isReadOnly();
-	}
+    @Override
+    public TextArea onMouseWheel(MouseWheelHandler handler) {
+	return Events.on(this, handler);
+    }
 
-	@Override
-	public TextArea readonly()
-	{
-		this.element().setReadOnly(true);
-		return this;
-	}
-	
-	@Override
-	public boolean isEditable()
-	{
-		return !this.isReadOnly();
-	}
+    @Override
+    public TextArea onFocus(FocusHandler handler) {
+	return Events.on(this, handler);
+    }
 
-	@Override
-	public TextArea editable()
-	{
-		this.element().setReadOnly(false);
-		return this;
-	}
-	
-	@Override
-	public boolean isNullable()
-	{
-		return !this.isRequired();
-	}
+    @Override
+    public TextArea onBlur(BlurHandler handler) {
+	return Events.on(this, handler);
+    }
 
-	@Override
-	public TextArea nullable()
-	{
-		return this.attribute("required", null);
-	}
-	
-	@Override
-	public boolean isRequired()
-	{
-		return this.getAttribute("required") != null;
-	}
+    public TextArea cols(int cols) {
+	this.element().setCols(cols);
+	return this;
+    }
 
-	@Override
-	public TextArea required()
-	{
-		return this.attribute("required", "");
-	}
-	
-	public TextArea block()
-	{
-		return this.className("input-block-level");
-	}
+    public TextArea rows(int rows) {
+	this.element().setRows(rows);
+	return this;
+    }
 
-	TextAreaElement element()
-	{
-		return this.getElement().cast();
-	}
+    @Override
+    public TextArea clear() {
+	return this.value("");
+    }
+
+    @Override
+    public TextArea value(String value) {
+	this.element().setValue(value);
+	return this;
+    }
+
+    @Override
+    public String getValue() {
+	return this.element().getValue();
+    }
+
+    public TextArea placeholder(String placeholder) {
+	return this.attribute("placeholder", placeholder);
+    }
+
+    @Override
+    public boolean isReadOnly() {
+	return this.element().isReadOnly();
+    }
+
+    @Override
+    public TextArea readonly() {
+	this.element().setReadOnly(true);
+	return this;
+    }
+
+    @Override
+    public boolean isEditable() {
+	return !this.isReadOnly();
+    }
+
+    @Override
+    public TextArea editable() {
+	this.element().setReadOnly(false);
+	return this;
+    }
+
+    @Override
+    public boolean isNullable() {
+	return !this.isRequired();
+    }
+
+    @Override
+    public TextArea nullable() {
+	return this.attribute("required", null);
+    }
+
+    @Override
+    public boolean isRequired() {
+	return this.getAttribute("required") != null;
+    }
+
+    @Override
+    public TextArea required() {
+	return this.attribute("required", "");
+    }
+
+    public TextArea block() {
+	return this.className("input-block-level");
+    }
+
+    TextAreaElement element() {
+	return this.getElement().cast();
+    }
 }

@@ -15,16 +15,18 @@ import org.codehaus.jackson.map.ObjectMapper;
 import org.codehaus.jackson.map.SerializationConfig.Feature;
 
 @Provider
-public class JsonProvider extends JacksonJsonProvider
-{
-	public static final String	DATE_FORMAT	= "yyyy-MM-dd HH:mm:ss";
+public class JsonProvider
+    extends JacksonJsonProvider {
 
-	@Override
-	public void writeTo(Object value, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType, MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream) throws IOException, WebApplicationException
-	{
-		ObjectMapper mapper = locateMapper(type, mediaType);
-		mapper.configure(Feature.WRITE_DATES_AS_TIMESTAMPS, false);
+    public static final String DATE_FORMAT = "yyyy-MM-dd HH:mm:ss";
 
-		super.writeTo(value, type, genericType, annotations, mediaType, httpHeaders, entityStream);
-	}
+    @Override
+    public void writeTo(Object value, Class<?> type, Type genericType, Annotation[] annotations, MediaType mediaType,
+	                MultivaluedMap<String, Object> httpHeaders, OutputStream entityStream)
+	throws IOException, WebApplicationException {
+	ObjectMapper mapper = locateMapper(type, mediaType);
+	mapper.configure(Feature.WRITE_DATES_AS_TIMESTAMPS, false);
+
+	super.writeTo(value, type, genericType, annotations, mediaType, httpHeaders, entityStream);
+    }
 }

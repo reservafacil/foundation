@@ -10,101 +10,88 @@ import com.brazoft.foundation.security.api.ILDAPClasses;
 /**
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
-public class LDAPObject
-{
-	private String						dn;
+public class LDAPObject {
 
-	private Map<String, List<String>>	attributes;
+    private String                    dn;
 
-	/**
+    private Map<String, List<String>> attributes;
+
+    /**
 	 * 
 	 */
-	public LDAPObject()
-	{
-		super();
+    public LDAPObject() {
+	super();
+    }
+
+    /**
+     * @param dn
+     */
+    public LDAPObject(String dn) {
+	this.dn = dn;
+    }
+
+    /**
+     * @return Returns the attributes.
+     */
+    public Map<String, List<String>> getAttributes() {
+	if (this.attributes == null) {
+	    this.attributes = new HashMap<String, List<String>>();
 	}
 
-	/**
-	 * @param dn
-	 */
-	public LDAPObject(String dn)
-	{
-		this.dn = dn;
+	return attributes;
+    }
+
+    /**
+     * @param key
+     * @param value
+     */
+    public void put(String key, String value) {
+	key = key.toUpperCase();
+
+	if (!this.getAttributes().containsKey(key)) {
+	    this.getAttributes().put(key, new ArrayList<String>());
 	}
 
-	/**
-	 * @return Returns the attributes.
-	 */
-	public Map<String, List<String>> getAttributes()
-	{
-		if (this.attributes == null)
-		{
-			this.attributes = new HashMap<String, List<String>>();
-		}
+	this.getAttributes().get(key).add(value);
+    }
 
-		return attributes;
+    /**
+     * @param key
+     * @return Returns Object
+     */
+    public Object get(String key) {
+	if (!this.getAttributes().containsKey(key)) {
+	    return null;
 	}
 
-	/**
-	 * @param key
-	 * @param value
-	 */
-	public void put(String key, String value)
-	{
-		key = key.toUpperCase();
-		
-		if (!this.getAttributes().containsKey(key))
-		{
-			this.getAttributes().put(key, new ArrayList<String>());
-		}
+	return this.getAttributes().get(key).get(0);
+    }
 
-		this.getAttributes().get(key).add(value);
+    /**
+     * @return Returns name
+     */
+    public String getName() {
+	for (String key : ILDAPClasses.NAMING_ATTRIBUTES) {
+	    if (this.getAttributes().containsKey(key)) {
+		return (String)this.getAttributes().get(key).get(0);
+	    }
 	}
 
-	/**
-	 * @param key
-	 * @return Returns Object
-	 */
-	public Object get(String key)
-	{
-		if (!this.getAttributes().containsKey(key))
-		{
-			return null;
-		}
+	return this.getDn();
+    }
 
-		return this.getAttributes().get(key).get(0);
-	}
+    /**
+     * @return Returns the dn.
+     */
+    public String getDn() {
+	return dn;
+    }
 
-	/**
-	 * @return Returns name
-	 */
-	public String getName()
-	{
-		for (String key : ILDAPClasses.NAMING_ATTRIBUTES)
-		{
-			if (this.getAttributes().containsKey(key))
-			{
-				return (String) this.getAttributes().get(key).get(0);
-			}
-		}
-
-		return this.getDn();
-	}
-
-	/**
-	 * @return Returns the dn.
-	 */
-	public String getDn()
-	{
-		return dn;
-	}
-
-	/**
-	 * @param dn
-	 *            The dn to set.
-	 */
-	public void setDn(String dn)
-	{
-		this.dn = dn;
-	}
+    /**
+     * @param dn
+     *            The dn to set.
+     */
+    public void setDn(String dn) {
+	this.dn = dn;
+    }
 }

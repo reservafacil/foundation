@@ -8,35 +8,40 @@ import com.brazoft.foundation.jdbc.JDBCProperties;
 /**
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
-public interface IDataSource
-{
-	/**
-	 * @param jdbc
-	 * @throws SQLException
-	 */
-	public void configure(JDBCProperties jdbc) throws SQLException;
+public interface IDataSource {
 
-	/**
-	 * @return Returns the connection to database
-	 * @throws SQLException
-	 */
-	public Connection getConnection() throws SQLException;
+    /**
+     * @param jdbc
+     * @throws SQLException
+     */
+    public void configure(JDBCProperties jdbc)
+	throws SQLException;
 
-	/**
-	 * @param conn
-	 * @throws SQLException
-	 */
-	public void release(Connection conn) throws SQLException;
+    /**
+     * @return Returns the connection to database
+     * @throws SQLException
+     */
+    public Connection getConnection()
+	throws SQLException;
 
-	/**
-	 * @param conn
-	 * @throws SQLException
-	 */
-	public void commit(Connection conn) throws SQLException;
+    /**
+     * @param conn
+     * @throws SQLException
+     */
+    public void release(Connection conn)
+	throws SQLException;
 
-	/**
-	 * @param conn
-	 * @throws SQLException
-	 */
-	public void rollback(Connection conn) throws SQLException;
+    /**
+     * @param conn
+     * @throws SQLException
+     */
+    public void commit(Connection conn)
+	throws SQLException;
+
+    /**
+     * @param conn
+     * @throws SQLException
+     */
+    public void rollback(Connection conn)
+	throws SQLException;
 }

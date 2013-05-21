@@ -4,47 +4,42 @@ import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 import com.google.gwt.dom.client.Style.Unit;
 
-public class ProgressCategory extends Bootstrap<ProgressCategory>
-{
-	private int	total	= 100;
-	
-	private StyleChooser<ProgressCategory> chooser = new StyleChooser<ProgressCategory>("bar-success", "bar-warning", "bar-danger", "bar-info");
+public final class ProgressCategory
+    extends Bootstrap<ProgressCategory> {
 
-	public ProgressCategory()
-	{
-		super(ElementResolver.div());
-		this.className("bar");
-	}
+    private int                            total   = 100;
 
-	public ProgressCategory success()
-	{
-		return this.chooser.className(this, "bar-success");
-	}
+    private StyleChooser<ProgressCategory> chooser = new StyleChooser<ProgressCategory>("bar-success", "bar-warning", "bar-danger",
+	                                                                                "bar-info");
 
-	public ProgressCategory warning()
-	{
-		return this.chooser.className(this, "bar-warning");
-	}
+    public ProgressCategory() {
+	super(ElementResolver.div());
+	this.className("bar");
+    }
 
-	public ProgressCategory danger()
-	{
-		return this.chooser.className(this, "bar-danger");
-	}
+    public ProgressCategory success() {
+	return this.chooser.className(this, "bar-success");
+    }
 
-	public ProgressCategory info()
-	{
-		return this.chooser.className(this, "bar-info");
-	}
+    public ProgressCategory warning() {
+	return this.chooser.className(this, "bar-warning");
+    }
 
-	public ProgressCategory total(int total)
-	{
-		this.total = total;
-		return this;
-	}
+    public ProgressCategory danger() {
+	return this.chooser.className(this, "bar-danger");
+    }
 
-	public ProgressCategory worked(int amount)
-	{
-		this.style().width((amount / this.total) * 100, Unit.PCT);
-		return this;
-	}
+    public ProgressCategory info() {
+	return this.chooser.className(this, "bar-info");
+    }
+
+    public ProgressCategory total(int total) {
+	this.total = total;
+	return this;
+    }
+
+    public ProgressCategory worked(int amount) {
+	this.style().width((amount / this.total) * 100, Unit.PCT);
+	return this;
+    }
 }

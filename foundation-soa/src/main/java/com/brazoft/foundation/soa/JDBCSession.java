@@ -15,115 +15,94 @@ import com.brazoft.foundation.util.api.IDAO;
 /**
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
-public class JDBCSession extends AbstractSession
-{
-	private IDataSource	datasource;
+public class JDBCSession
+    extends AbstractSession {
 
-	private Connection	connection;
+    private IDataSource datasource;
 
-	/**
+    private Connection  connection;
+
+    /**
 	 * 
 	 */
-	public JDBCSession()
-	{
-		super();
-	}
+    public JDBCSession() {
+	super();
+    }
 
-	/**
-	 * @param data
-	 */
-	public JDBCSession(Object data)
-	{
-		super(data);
-	}
-	
-	@Override
-	protected boolean isOpened()
-	{
-		return this.connection != null;
-	}
+    /**
+     * @param data
+     */
+    public JDBCSession(Object data) {
+	super(data);
+    }
 
-	@Override
-	protected void open()
-	{
-		try
-		{
-			if(this.datasource == null)
-			{
-				this.setProperties(JDBCProperties.newInstance(JDBCSession.DEFAULT_BUNDLE));
-			}
-			
-			this.connection = this.datasource.getConnection();
-			this.connection.setAutoCommit(false);
-		}
-		catch (SQLException e)
-		{
-			ExceptionHandler.handleRuntime(e);
-		}
-	}
-	
-	@Override
-	protected void close()
-	{
-		try
-		{
-			this.datasource.release(this.connection);
-		}
-		catch (SQLException e)
-		{
-			ExceptionHandler.handleRuntime(e);
-		}
-		finally
-		{
-			this.connection = null;
-			this.datasource = null;
-		}
-	}
+    @Override
+    protected boolean isOpened() {
+	return this.connection != null;
+    }
 
-	/**
-	 * @param properties
-	 */
-	public void setProperties(JDBCProperties properties)
-	{
-		try
-		{
-			this.datasource = DataSourceFactory.getImplementationFor(properties);
-		}
-		catch (SQLException e)
-		{
-			ExceptionHandler.handleRuntime(e);
-		}
-	}
-	
-	/**
-	 * @param dao
-	 */
-	protected void setDatasource(IDAO dao)
-	{
-		((AbstractDAO) dao).setConnection(this.connection);
-	}
-	
-	/**
-	 * @return Returns Connection
-	 */
-	Connection getConnection()
-	{
-		return connection;
-	}
-	
-	/**
-	 * @return Returns Datasource
-	 */
-	IDataSource getDatasource()
-	{
-		return datasource;
-	}
+    @Override
+    protected void open() {
+	try {
+	    if (this.datasource == null) {
+		this.setProperties(JDBCProperties.newInstance(JDBCSession.DEFAULT_BUNDLE));
+	    }
 
-	@Override
-	protected ITransaction getTransactionInstance()
-	{
-		return new JDBCTransaction(this);
+	    this.connection = this.datasource.getConnection();
+	    this.connection.setAutoCommit(false);
+	} catch (SQLException e) {
+	    ExceptionHandler.handleRuntime(e);
 	}
-	
-	private static final String	DEFAULT_BUNDLE	= "javadb";
+    }
+
+    @Override
+    protected void close() {
+	try {
+	    this.datasource.release(this.connection);
+	} catch (SQLException e) {
+	    ExceptionHandler.handleRuntime(e);
+	} finally {
+	    this.connection = null;
+	    this.datasource = null;
+	}
+    }
+
+    /**
+     * @param properties
+     */
+    public void setProperties(JDBCProperties properties) {
+	try {
+	    this.datasource = DataSourceFactory.getImplementationFor(properties);
+	} catch (SQLException e) {
+	    ExceptionHandler.handleRuntime(e);
+	}
+    }
+
+    /**
+     * @param dao
+     */
+    protected void setDatasource(IDAO dao) {
+	((AbstractDAO)dao).setConnection(this.connection);
+    }
+
+    /**
+     * @return Returns Connection
+     */
+    Connection getConnection() {
+	return connection;
+    }
+
+    /**
+     * @return Returns Datasource
+     */
+    IDataSource getDatasource() {
+	return datasource;
+    }
+
+    @Override
+    protected ITransaction getTransactionInstance() {
+	return new JDBCTransaction(this);
+    }
+
+    private static final String DEFAULT_BUNDLE = "javadb";
 }

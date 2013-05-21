@@ -10,97 +10,87 @@ import com.brazoft.foundation.util.SQLGeneratorBase;
 /**
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
-public abstract class AbstractSQLStrategy<T> extends AbstractQueryStrategy<T>
-{
-	private StringBuffer query;
+public abstract class AbstractSQLStrategy<T>
+    extends AbstractQueryStrategy<T> {
 
-	/**
-	 * @param query
-	 */
-	public AbstractSQLStrategy(StringBuffer query)
-	{
-		this.query = query;
-	}
-	
-	@Override
-	public T doLoad(T search)
-	{
-		return (T) this.createQuery(search).uniqueResult();
-	}
+    private StringBuffer query;
 
-	/**
-	 * @param search
-	 * @param orderBy
-	 * @return Returns List<T>
-	 */
-	public List<T> doFindAsc(T search, String... orderBy)
-	{
-		if (!Validator.isEmptyOrNull(orderBy))
-		{
-			this.appendOrderBy(orderBy);
-			this.query.append(" DESC");
-		}
+    /**
+     * @param query
+     */
+    public AbstractSQLStrategy(StringBuffer query) {
+	this.query = query;
+    }
 
-		return this.doFind(this.createQuery(search));
+    @Override
+    public T doLoad(T search) {
+	return (T)this.createQuery(search).uniqueResult();
+    }
+
+    /**
+     * @param search
+     * @param orderBy
+     * @return Returns List<T>
+     */
+    public List<T> doFindAsc(T search, String... orderBy) {
+	if (!Validator.isEmptyOrNull(orderBy)) {
+	    this.appendOrderBy(orderBy);
+	    this.query.append(" DESC");
 	}
 
-	/**
-	 * @param search
-	 * @param orderBy
-	 * @return Returns List<T>
-	 */
-	public List<T> doFindDesc(T search, String... orderBy)
-	{
-		if (!Validator.isEmptyOrNull(orderBy))
-		{
-			this.appendOrderBy(orderBy);
-			this.query.append(" ASC");
-		}
+	return this.doFind(this.createQuery(search));
+    }
 
-		return this.doFind(this.createQuery(search));
+    /**
+     * @param search
+     * @param orderBy
+     * @return Returns List<T>
+     */
+    public List<T> doFindDesc(T search, String... orderBy) {
+	if (!Validator.isEmptyOrNull(orderBy)) {
+	    this.appendOrderBy(orderBy);
+	    this.query.append(" ASC");
 	}
 
-	/**
-	 * @param search
-	 * @return Returns List<T>
-	 */
-	public List<T> doFind(T search)
-	{
-		return this.doFind(this.createQuery(search));
+	return this.doFind(this.createQuery(search));
+    }
+
+    /**
+     * @param search
+     * @return Returns List<T>
+     */
+    public List<T> doFind(T search) {
+	return this.doFind(this.createQuery(search));
+    }
+
+    /**
+     * @return Returns Query
+     */
+    protected StringBuffer getQuery() {
+	return query;
+    }
+
+    /**
+     * @param query
+     * @return Returns List<T>
+     */
+    private List<T> doFind(Query query) {
+	return query.list();
+    }
+
+    private void appendOrderBy(String... orderBy) {
+	this.query.append(" ORDER BY ");
+	for (String fieldName : orderBy) {
+	    this.query.append(fieldName);
+	    this.query.append(SQLGeneratorBase.COMMA);
 	}
 
-	/**
-	 * @return Returns Query
-	 */
-	protected StringBuffer getQuery()
-	{
-		return query;
-	}
+	SQLGeneratorBase.getInstance().removeLastComma(this.query);
+    }
 
-	/**
-	 * @param query
-	 * @return Returns List<T>
-	 */
-	private List<T> doFind(Query query)
-	{
-		return query.list();
-	}
-	
-	private void appendOrderBy(String... orderBy)
-	{
-		this.query.append(" ORDER BY ");
-		for (String fieldName : orderBy)
-		{
-			this.query.append(fieldName);
-			this.query.append(SQLGeneratorBase.COMMA);
-		}
-
-		SQLGeneratorBase.getInstance().removeLastComma(this.query);
-	}
-	
-	/**
-	 * @param search
-	 * @return Returns Query from search
-	 */
-	protected abstract Query createQuery(T search);
+    /**
+     * @param search
+     * @return Returns Query from search
+     */
+    protected abstract Query createQuery(T search);
 }

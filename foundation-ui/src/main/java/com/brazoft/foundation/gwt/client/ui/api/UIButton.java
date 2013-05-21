@@ -2,13 +2,13 @@
  * Copyright (C) 2009-2012 the original author or authors.
  * See the notice.md file distributed with this work for additional
  * information regarding copyright ownership.
- *
+ * 
  * Licensed under the Apache License, Version 2.0 (the "License");
  * you may not use this file except in compliance with the License.
  * You may obtain a copy of the License at
- *
- *     http://www.apache.org/licenses/LICENSE-2.0
- *
+ * 
+ * http://www.apache.org/licenses/LICENSE-2.0
+ * 
  * Unless required by applicable law or agreed to in writing, software
  * distributed under the License is distributed on an "AS IS" BASIS,
  * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
@@ -28,25 +28,26 @@ import com.brazoft.foundation.gwt.client.event.api.HasKeyHandlers;
 import com.brazoft.foundation.gwt.client.event.api.HasMouseHandlers;
 import com.google.gwt.user.client.ui.Widget;
 
-public interface UIButton<W extends Widget> extends HasText<W>, HasClickHandlers<W>, HasFocusHandlers<W>, HasMouseHandlers<W>, HasKeyHandlers<W>, UIComponent<W> 
-{
-	W size(Size size);
+public interface UIButton<W extends Widget>
+    extends HasText<W>, HasClickHandlers<W>, HasFocusHandlers<W>, HasMouseHandlers<W>, HasKeyHandlers<W>, UIComponent<W> {
 
-	W primary();
-	
-	W info();
-	
-	W success();
-	
-	W warning();
-	
-	W danger();
-	
-	W inverse();
-	
-	W link();
+    W size(Size size);
 
-	W expanded();
-	
-	W icon(Icon icon);
+    W primary();
+
+    W info();
+
+    W success();
+
+    W warning();
+
+    W danger();
+
+    W inverse();
+
+    W link();
+
+    W expanded();
+
+    W icon(Icon icon);
 }

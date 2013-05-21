@@ -6,10 +6,10 @@ import java.io.FileFilter;
 /**
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
-public class DirectoryFilter implements FileFilter
-{
-	public boolean accept(File f)
-	{
-		return f.isDirectory();
-	}
+public class DirectoryFilter
+    implements FileFilter {
+
+    public boolean accept(File f) {
+	return f.isDirectory();
+    }
 }

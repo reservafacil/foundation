@@ -1,6 +1,7 @@
 <module>
-    <inherits name="com.google.gwt.json.JSON"/>
-    <inherits name="com.google.gwt.JSO"/>
-    <inherits name="com.google.gwt.http.HTTP"/>
-    <inherits name="org.fusesource.restygwt.RestyGWT"/>
+  <inherits name="com.google.gwt.json.JSON" />
+  <inherits name="com.google.gwt.JSO" />
+  <inherits name="com.google.gwt.http.HTTP" />
+  <inherits name="org.fusesource.restygwt.RestyGWT" />
+  <inherits name='com.google.gwt.query.Query' />
 </module>

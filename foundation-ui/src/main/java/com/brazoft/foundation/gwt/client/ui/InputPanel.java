@@ -12,93 +12,82 @@ import com.google.gwt.event.dom.client.BlurEvent;
 import com.google.gwt.event.dom.client.BlurHandler;
 
 @SuppressWarnings("unchecked")
-public abstract class InputPanel<I extends InputPanel<I>> extends OutputPanel<I>
-{
-	private ValidationProcess	process	= new ValidationProcess();
-	
-	public InputPanel(int columns)
-	{
-		super(columns);
-	}
-	
-	public InputItem item(final InputGroup<?> group)
-	{
-		Cell cell = this.cell(group.getColspan());
-		
-		if(group.getInput() instanceof Select)
-		{
-			group.getInput().style().property("width", cell.style().getWidth());
-		}
+public abstract class InputPanel<I extends InputPanel<I>>
+    extends OutputPanel<I> {
 
-		final InputControl control = new InputControl().input(group);
-		cell.add(group.getLabel());
-		cell.add(control);
+    private ValidationProcess process = new ValidationProcess();
 
-		if (group.getInput() instanceof HasFocusHandlers)
-		{
-			((HasFocusHandlers<?>) group.getInput()).onBlur(new BlurHandler()
-			{
-				@Override
-				public void onBlur(BlurEvent event)
-				{
-					group.validate();
-				}
-			});
-		}
+    public InputPanel(int columns) {
+	super(columns);
+    }
 
-		ValidationAction action = new ValidationAction()
-		{
-			@Override
-			public void whenValid()
-			{
-				control.reset();
-			}
+    public InputItem item(final InputGroup<?> group) {
+	Cell cell = this.cell(group.getColspan());
 
-			@Override
-			public void whenInvalid(String message)
-			{
-				control.error().message(message);
-			}
-		};
-
-		group.action(action);
-		this.process.add(group.getConstraint());
-
-		return new InputItem(cell, control);
-	}
-	
-	public I onValidation(EventHandler<ValidationResult> handler)
-	{
-		this.process.onComplete(handler);
-		return (I) this;
+	if (group.getInput() instanceof Select) {
+	    group.getInput().style().property("width", cell.style().getWidth());
 	}
 
-	public boolean validate()
-	{
-		return this.process.validate();
-	}
-	
-	public static class InputItem
-	{
-		private Cell cell;
-		
-		private InputControl control;
-		
-		InputItem(Cell cell, InputControl control)
-		{
-			super();
-			this.cell = cell;
-			this.control = control;
-		}
+	final InputControl control = new InputControl().input(group);
+	cell.add(group.getLabel());
+	cell.add(control);
 
-		public Cell cell()
-		{
-			return this.cell;
+	if (group.getInput() instanceof HasFocusHandlers) {
+	    ((HasFocusHandlers<?>)group.getInput()).onBlur(new BlurHandler() {
+
+		@Override
+		public void onBlur(BlurEvent event) {
+		    group.validate();
 		}
-		
-		public InputControl control()
-		{
-			return this.control;
-		}
+	    });
 	}
+
+	ValidationAction action = new ValidationAction() {
+
+	    @Override
+	    public void whenValid() {
+		control.reset();
+	    }
+
+	    @Override
+	    public void whenInvalid(String message) {
+		control.error().message(message);
+	    }
+	};
+
+	group.action(action);
+	this.process.add(group.getConstraint());
+
+	return new InputItem(cell, control);
+    }
+
+    public I onValidation(EventHandler<ValidationResult> handler) {
+	this.process.onComplete(handler);
+	return (I)this;
+    }
+
+    public boolean validate() {
+	return this.process.validate();
+    }
+
+    public static class InputItem {
+
+	private Cell         cell;
+
+	private InputControl control;
+
+	InputItem(Cell cell, InputControl control) {
+	    super();
+	    this.cell = cell;
+	    this.control = control;
+	}
+
+	public Cell cell() {
+	    return this.cell;
+	}
+
+	public InputControl control() {
+	    return this.control;
+	}
+    }
 }

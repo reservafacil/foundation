@@ -10,78 +10,66 @@ import java.util.ResourceBundle;
 /**
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
-public class LocalizedMessages
-{
-	private static Map<String, LocalizedMessages>	cache;
+public class LocalizedMessages {
 
-	private ResourceBundle							bundle;
-	
-	protected LocalizedMessages(String name, Locale locale)
-	{
-		this.bundle = ResourceBundle.getBundle(name, locale);
-	}
+    private static Map<String, LocalizedMessages> cache;
 
-	public static LocalizedMessages getInstance(String name)
-	{
-		return LocalizedMessages.getInstance(name, Locale.getDefault());
-	}
+    private ResourceBundle                        bundle;
 
-	public static LocalizedMessages getInstance(String name, Locale locale)
-	{
-		if(LocalizedMessages.cache == null)
-		{
-			LocalizedMessages.cache = new HashMap<String, LocalizedMessages>();
-		}
+    protected LocalizedMessages(String name, Locale locale) {
+	this.bundle = ResourceBundle.getBundle(name, locale);
+    }
 
-		if(!LocalizedMessages.cache.containsKey(name))
-		{
-			LocalizedMessages.cache.put(name, new LocalizedMessages(name, Locale.getDefault()));
-		}
+    public static LocalizedMessages getInstance(String name) {
+	return LocalizedMessages.getInstance(name, Locale.getDefault());
+    }
 
-		return LocalizedMessages.cache.get(name);
-	}
-	
-	public boolean contains(String key)
-	{
-		Enumeration<String> keys;
-		
-		keys = this.bundle.getKeys();
-		while(keys.hasMoreElements())
-		{
-			if(keys.nextElement().equals(key))
-			{
-				return true;
-			}
-		}
-		
-		return false;
+    public static LocalizedMessages getInstance(String name, Locale locale) {
+	if (LocalizedMessages.cache == null) {
+	    LocalizedMessages.cache = new HashMap<String, LocalizedMessages>();
 	}
 
-	public String getProperty(String key)
-	{
-		return this.bundle.getString(key);
+	if (!LocalizedMessages.cache.containsKey(name)) {
+	    LocalizedMessages.cache.put(name, new LocalizedMessages(name, Locale.getDefault()));
 	}
-	
-	public String getFormatted(String key, Object[] args)
-	{
-		return MessageFormat.format(this.getProperty(key), args);
+
+	return LocalizedMessages.cache.get(name);
+    }
+
+    public boolean contains(String key) {
+	Enumeration<String> keys;
+
+	keys = this.bundle.getKeys();
+	while (keys.hasMoreElements()) {
+	    if (keys.nextElement().equals(key)) {
+		return true;
+	    }
 	}
-	
-	public Map<Object, Object> getMessageMap()
-	{
-		Map<Object, Object> map;
-		Enumeration<String> keys;
-		String key;
-		
-		map = new HashMap<Object, Object>();
-		keys = this.bundle.getKeys();
-		
-		while(keys.hasMoreElements())
-		{
-			key = keys.nextElement();
-			map.put(key, this.bundle.getObject(key));
-		}
-		
-		return map;
+
+	return false;
+    }
+
+    public String getProperty(String key) {
+	return this.bundle.getString(key);
+    }
+
+    public String getFormatted(String key, Object[] args) {
+	return MessageFormat.format(this.getProperty(key), args);
+    }
+
+    public Map<Object, Object> getMessageMap() {
+	Map<Object, Object> map;
+	Enumeration<String> keys;
+	String key;
+
+	map = new HashMap<Object, Object>();
+	keys = this.bundle.getKeys();
+
+	while (keys.hasMoreElements()) {
+	    key = keys.nextElement();
+	    map.put(key, this.bundle.getObject(key));
 	}
+
+	return map;
+    }
 }

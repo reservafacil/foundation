@@ -7,25 +7,24 @@ import com.brazoft.foundation.job.api.AbstractCronTrigger;
 /**
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
-public class OnceAWeekTrigger extends AbstractCronTrigger
-{
-	/**
+public class OnceAWeekTrigger
+    extends AbstractCronTrigger {
+
+    /**
 	 * 
 	 */
-	private static final long	serialVersionUID	= 1L;
+    private static final long serialVersionUID = 1L;
 
-	/**
-	 * @param schedule
-	 * @param registry
-	 */
-	public OnceAWeekTrigger(Calendar schedule, JobRegistry registry)
-	{
-		super(schedule, registry);
-	}
-	
-	@Override
-	protected String getExpressionString()
-	{
-		return "* * MON";
-	}
+    /**
+     * @param schedule
+     * @param registry
+     */
+    public OnceAWeekTrigger(Calendar schedule, JobRegistry registry) {
+	super(schedule, registry);
+    }
+
+    @Override
+    protected String getExpressionString() {
+	return "* * MON";
+    }
 }

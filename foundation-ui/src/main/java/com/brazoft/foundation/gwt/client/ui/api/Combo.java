@@ -34,12 +34,11 @@ public abstract class Combo<C extends Combo<C, V>, V>
     }
 
     protected C select(String value) {
-	
-	for(OptionElement option : this.options())
-	{
+
+	for (OptionElement option : this.options()) {
 	    option.setSelected(option.getValue().equals(value));
 	}
-	
+
 	this.select(this.getId(), value);
 
 	return (C)this;
