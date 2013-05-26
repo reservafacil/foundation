@@ -41,7 +41,7 @@ public final class Spinner
 
     private int            step         = 1;
 
-    private int            defaultValue = 1;
+    private int            defaultValue = 0;
 
     private int            minValue     = Integer.MIN_VALUE;
 
@@ -118,7 +118,7 @@ public final class Spinner
     public Spinner increment() {
 	int value = this.getValue() + this.step;
 
-	value = value > this.maxValue ? this.maxValue : value;
+	value = Math.min(value, this.maxValue);
 
 	return this.value(value);
     }
@@ -126,7 +126,7 @@ public final class Spinner
     public Spinner decrement() {
 	int value = this.getValue() - this.step;
 
-	value = value < this.minValue ? this.minValue : value;
+	value = Math.max(value, this.minValue);
 
 	return this.value(value);
     }

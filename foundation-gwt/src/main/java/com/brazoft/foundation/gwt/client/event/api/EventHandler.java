@@ -20,7 +20,25 @@ package com.brazoft.foundation.gwt.client.event.api;
 
 import com.brazoft.foundation.gwt.client.event.Event;
 
-public interface EventHandler<T> {
+public abstract class EventHandler<T> {
 
-    void onEvent(Event<T> e);
+    private boolean canceled;
+
+    public final void fire(Event<T> e) {
+	if (this.canceled) {
+	    return;
+	}
+
+	this.onEvent(e);
+    }
+
+    public void canceled() {
+	this.canceled = true;
+    }
+
+    public void activate() {
+	this.canceled = false;
+    }
+
+    public abstract void onEvent(Event<T> e);
 }

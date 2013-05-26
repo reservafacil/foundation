@@ -268,7 +268,7 @@ public class AbstractTable<T extends AbstractTable<T>>
 
 	public static class Cell
 	    extends Bootstrap<Cell>
-	    implements HasText<Cell>, HasClickHandlers<Cell>, HasMouseHandlers<Cell> {
+	    implements UICell<Cell> {
 
 	    public Cell(boolean head) {
 		super(head ? ElementResolver.th() : ElementResolver.td());

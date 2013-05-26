@@ -18,11 +18,18 @@
 
 package com.google.gwt.user.client.ui;
 
+import com.google.gwt.event.shared.HandlerManager;
+
 public class Control
     extends Composite {
 
     @Override
     protected void setParent(Widget parent) {
 	super.setParent(parent);
+    }
+    
+    @Override
+    protected HandlerManager getHandlerManager() {
+        return super.getHandlerManager();
     }
 }

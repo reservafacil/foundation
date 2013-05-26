@@ -19,15 +19,13 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.api.Component;
-import com.brazoft.foundation.gwt.client.component.api.HasChild;
-import com.brazoft.foundation.gwt.client.component.api.HasText;
+import com.brazoft.foundation.gwt.client.component.api.*;
 import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 import com.google.gwt.user.client.ui.Widget;
 
 public final class Heading
     extends Bootstrap<Heading>
-    implements HasChild<Heading>, HasText<Heading> {
+    implements HasText<Heading> {
 
     public Heading(int level) {
 	super(ElementResolver.heading(level));
@@ -35,21 +33,6 @@ public final class Heading
 
     public Heading add(Widget add) {
 	return super.add(add);
-    }
-
-    @Override
-    public Heading add(Widget add, boolean ignoreIfParent) {
-	return super.add(add, ignoreIfParent);
-    }
-
-    @Override
-    public Iterable<Widget> getChildren() {
-	return super.getChildren();
-    }
-
-    @Override
-    public Heading insert(Widget add, Widget before) {
-	return super.insert(add, before);
     }
 
     @Override

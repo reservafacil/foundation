@@ -18,74 +18,25 @@
 
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.component.HTML;
-import com.brazoft.foundation.gwt.client.component.api.UIInput;
-import com.brazoft.foundation.gwt.client.ui.api.Form;
-import com.google.gwt.dom.client.DivElement;
-import com.google.gwt.dom.client.LabelElement;
-import com.google.gwt.user.client.ui.Widget;
+import com.brazoft.foundation.gwt.client.component.api.Composite;
+import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row;
 
 public final class HorizontalForm
-    extends Form<HorizontalForm> {
+    extends Composite<HorizontalForm> {
 
-    private FormAction action;
+    private Table table = new Table();
 
     public HorizontalForm() {
-	super();
-	this.className("form-horizontal");
+	this.initWidget(this.table);
     }
 
-    public HorizontalForm input(UIInput<? extends Widget, ?> input, String labelText) {
-	return this.input(input, labelText, null);
-    }
-
-    public HorizontalForm input(UIInput<? extends Widget, ?> input, String labelText, String helpText) {
-	HTML<DivElement> controlGroup = this.controlGroup();
-	HTML<DivElement> controls = this.controls();
-	HTML<LabelElement> label = HTML.asLabel().className("control-label").text(labelText);
-
-	if (input instanceof CheckBox) {
-	    label.add(input.asWidget()).className("checkbox");
-	    controls.add(label);
-	} else if (input instanceof RadioButton) {
-	    label.add(input.asWidget()).className("radio");
-	    controls.add(label);
-	} else {
-	    controls.add(input.asWidget());
-	}
-
-	controlGroup.add(label);
-	controlGroup.add(controls);
-
-	if (helpText != null) {
-	    HelpText help = new HelpText().text(helpText);
-	    controls.add(help);
-	}
-
-	return this.add(controlGroup);
-    }
-
-    public HorizontalForm button(Button button) {
-	HTML<DivElement> controlGroup = this.controlGroup();
-	HTML<DivElement> controls = this.controls();
-
-	return this.add(controlGroup.add(controls.add(button)));
-    }
-
-    public FormAction action() {
-	if (this.action == null) {
-	    this.action = new FormAction();
-	    this.add(this.action);
-	}
-
-	return this.action;
-    }
-
-    private HTML<DivElement> controlGroup() {
-	return HTML.asDiv().className("control-group");
-    }
-
-    private HTML<DivElement> controls() {
-	return HTML.asDiv().className("controls");
+    public <V> HorizontalForm item(InputGroup<V> group)
+    {
+	Row row = this.table.body().row();
+	group.getLabel().style().clearMarginBottom();
+	row.cell().verticalAlign(VerticalAlignment.MIDDLE).add(group.getLabel());
+	row.cell().add(group);
+	
+	return this;
     }
 }

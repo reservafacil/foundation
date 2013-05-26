@@ -25,6 +25,7 @@ import com.brazoft.foundation.gwt.client.component.api.*;
 import com.brazoft.foundation.gwt.client.event.Event;
 import com.brazoft.foundation.gwt.client.event.api.*;
 import com.brazoft.foundation.gwt.client.event.api.HasChangeHandlers;
+import com.brazoft.foundation.gwt.client.event.api.HasFocusHandlers;
 import com.brazoft.foundation.gwt.client.i18n.DateFormat;
 import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 import com.brazoft.foundation.gwt.client.util.Calendar;
@@ -33,12 +34,13 @@ import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.shared.GwtEvent.Type;
 import com.google.gwt.query.client.GQuery;
 import com.google.gwt.user.client.ui.Widget;
 
 public final class Datepicker
     extends Bootstrap<Datepicker>
-    implements UIInput<Datepicker, Date>, ResponsiveComponent<Datepicker>, HasChangeHandlers<Datepicker> {
+    implements UIInput<Datepicker, Date>, ResponsiveComponent<Datepicker>, HasChangeHandlers<Datepicker>, HasFocusHandlers<Datepicker> {
 
     private TextBox          input;
 
@@ -104,13 +106,25 @@ public final class Datepicker
 	}).onNext(this.doFocus).onPrevious(this.doFocus);
 	this.add(this.picker.add(this.panel)).hide();
     }
-    
+
     @Override
     public Datepicker onChange(ChangeHandler handler) {
-        this.input.onChange(handler);
+	this.input.onChange(handler);
 	return this;
     }
-    
+
+    @Override
+    public Datepicker onFocus(FocusHandler handler) {
+	this.input.onFocus(handler);
+	return this;
+    }
+
+    @Override
+    public Datepicker onBlur(BlurHandler handler) {
+	this.input.onBlur(handler);
+	return this;
+    }
+
     public Datepicker onSelection(EventHandler<Date> handler) {
 	this.panel.onSelection(handler);
 	return this;
@@ -135,10 +149,6 @@ public final class Datepicker
     public Datepicker size(Size size) {
 	this.input.size(size);
 	return this;
-    }
-    
-    public static Date getValue(Event<Date> event) {
-	return MonthPanel.getValue(event);
     }
 
     public Datepicker range(Date start, Date end) {
@@ -266,19 +276,32 @@ public final class Datepicker
 	this.input.responsiveTo(container);
 	return this;
     }
-    
+
+    @Override
+    public Datepicker removeHandlers(Event<?> event) {
+	this.panel.removeHandlers(event);
+	return super.removeHandlers(event);
+    }
+
+    @Override
+    public <H extends com.google.gwt.event.shared.EventHandler> Datepicker removeHandlers(Type<H> type) {
+	this.panel.removeHandlers(type);
+	return super.removeHandlers(type);
+    }
+
     private ClickHandler doFocus = new ClickHandler() {
-	@Override
-	public void onClick(ClickEvent event) {
-		Datepicker.this.focus();
-	}
-    };
+
+	                             @Override
+	                             public void onClick(ClickEvent event) {
+		                         Datepicker.this.focus();
+	                             }
+	                         };
 
     Datepicker position() {
 	GQuery input = this.input.input().asQuery();
-	
-	double left = input.left() + input.scrollLeft() + Component.Util.computeInnerLeft(this.getParent());
-	double top = input.top() + input.scrollTop() + (input.outerHeight(true) * 2.5);
+
+	double left = input.position().left + input.scrollLeft() + Component.Util.computeInnerLeft(this.getParent());
+	double top = input.position().top + input.scrollTop() + input.outerHeight(true);
 	this.picker.style().zIndex(1000).position(Position.ABSOLUTE).left(left, Unit.PX).display(Display.BLOCK).top(top, Unit.PX);
 
 	return this;

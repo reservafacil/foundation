@@ -20,47 +20,58 @@ package com.brazoft.foundation.gwt.client.event;
 
 import java.util.*;
 
-import com.brazoft.foundation.gwt.client.event.api.EventHandler;
+import com.brazoft.foundation.gwt.client.event.api.*;
 
+@SuppressWarnings("unchecked")
 public class EventBus {
 
-    private Map<String, List<EventHandler<?>>> events;
+    private final Map<EventType, List<EventHandler<?>>> events;
 
     public EventBus() {
-	this.events = new HashMap<String, List<EventHandler<?>>>();
+	this.events = new HashMap<EventType, List<EventHandler<?>>>();
     }
 
-    public EventBus add(String type, EventHandler<?> event) {
+    public <T> EventBus add(EventType type, EventHandler<T> handler) {
 	if (!this.events.containsKey(type)) {
 	    this.events.put(type, new ArrayList<EventHandler<?>>());
 	}
 
-	this.events.get(type).add(event);
+	this.events.get(type).add(handler);
 
 	return this;
     }
 
-    public Iterable<String> types() {
-	return this.events.keySet();
-    }
-
-    public EventHandler<?> get(String type) {
-	return this.events.get(type).get(0);
-    }
-
-    private List<EventHandler<?>> list(String type) {
-	return this.events.get(type);
-    }
-
-    public <T> EventBus fire(String type, Event<T> e) {
-	if (!this.events.containsKey(type)) {
+    public <T> EventBus fire(Event<T> e) {
+	if (!this.events.containsKey(e.type())) {
 	    return this;
 	}
 
-	for (EventHandler<?> handler : this.list(type)) {
-	    ((EventHandler<T>)handler).onEvent(e);
+	List<EventHandler<?>> handlers = this.events.get(e.type());
+
+	for (EventHandler<?> handler : handlers) {
+	    ((EventHandler<T>)handler).fire(e);
 	}
 
 	return this;
+    }
+    
+    public <T> EventBus remove(EventHandler<T> handler) {
+	handler.canceled();
+	return this;
+    }
+
+    public EventBus remove(EventType type) {
+
+	List<EventHandler<?>> handlers = this.events.get(type);
+
+	for (EventHandler<?> handler : handlers) {
+	    handler.canceled();
+	}
+
+	return this;
+    }
+
+    public Iterable<EventType> types() {
+	return this.events.keySet();
     }
 }

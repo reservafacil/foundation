@@ -20,22 +20,18 @@ package com.brazoft.foundation.gwt.client.component.api;
 
 import static com.google.gwt.query.client.GQuery.*;
 
-import com.brazoft.foundation.gwt.client.component.Panel;
+import com.brazoft.foundation.gwt.client.component.*;
 import com.brazoft.foundation.gwt.client.component.Style;
-import com.brazoft.foundation.gwt.client.event.*;
 import com.brazoft.foundation.gwt.client.event.api.*;
 import com.google.gwt.dom.client.*;
 import com.google.gwt.query.client.GQuery;
-import com.google.gwt.user.client.ui.*;
+import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
 public abstract class Composite<C extends Composite<C>>
-    extends Control
-    implements IsWidget {
-
+    extends EventSource<C> {
+    
     private Style<C> style;
-
-    private EventBus eventBus;
 
     private Panel    panel;
 
@@ -77,7 +73,7 @@ public abstract class Composite<C extends Composite<C>>
 	if (ignoreIfParent && add.getParent() != null) {
 	    return (C)this;
 	}
-
+	
 	this.panel.add(add);
 
 	return (C)this;
@@ -189,28 +185,6 @@ public abstract class Composite<C extends Composite<C>>
 	return (C)this;
     }
 
-    protected <T> C addEvent(String type, EventHandler<T> handler) {
-	if (this.eventBus == null) {
-	    this.eventBus = new EventBus();
-	}
-
-	this.eventBus.add(type, handler);
-
-	return (C)this;
-    }
-
-    public C fireEvent(String type) {
-	return this.fireEvent(type, new Event<Object>(this));
-    }
-
-    public <T> C fireEvent(String type, Event<T> event) {
-	if (this.eventBus != null) {
-	    this.eventBus.fire(type, event);
-	}
-
-	return (C)this;
-    }
-
     public GQuery asQuery() {
 	if (this.query == null) {
 	    this.query = $(this);
@@ -219,7 +193,4 @@ public abstract class Composite<C extends Composite<C>>
 	return this.query;
     }
 
-    protected EventBus eventBus() {
-	return eventBus;
-    }
 }

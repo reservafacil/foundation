@@ -2,8 +2,7 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.event.Event;
 import com.brazoft.foundation.gwt.client.ui.api.Pagination;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.*;
 
 public final class Paginator
     extends Pagination<Paginator> {
@@ -139,7 +138,7 @@ public final class Paginator
 	    selection.disabled();
 
 	    this.active = selection;
-	    this.fire(new Event(this, Integer.valueOf(this.active.getText())));
+	    this.fireEvent(Integer.valueOf(this.active.getText()));
 
 	    return this;
 	}

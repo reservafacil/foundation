@@ -20,24 +20,19 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import java.util.ArrayList;
 
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.HTML;
+import com.brazoft.foundation.gwt.client.component.*;
 import com.brazoft.foundation.gwt.client.event.Event;
-import com.brazoft.foundation.gwt.client.event.api.EventHandler;
+import com.brazoft.foundation.gwt.client.event.api.*;
 import com.brazoft.foundation.gwt.client.ui.ProgressBar.ProgressBarOptions;
-import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row.Cell;
 import com.brazoft.foundation.gwt.client.ui.api.*;
+import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row.Cell;
 import com.brazoft.foundation.gwt.client.util.JSArrays;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.dom.client.DivElement;
-import com.google.gwt.dom.client.SpanElement;
+import com.google.gwt.dom.client.*;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.jso.*;
+import com.google.gwt.event.dom.client.*;
+import com.google.gwt.jso.JSObject;
 
 @SuppressWarnings("unchecked")
 public final class DataGrid<J extends JSObject>
@@ -67,11 +62,11 @@ public final class DataGrid<J extends JSObject>
 
     public DataGrid() {
 	this.className("table table-bordered datagrid");
-	this.footer.pager.whenPaginate(new EventHandler<Object>() {
+	this.footer.pager.whenPaginate(new EventHandler<Integer>() {
 
 	    @Override
-	    public void onEvent(Event<Object> e) {
-		int page = (Integer)e.data();
+	    public void onEvent(Event<Integer> e) {
+		int page = e.data();
 		DataGrid.this.drawPage(page);
 	    }
 	});
@@ -89,7 +84,7 @@ public final class DataGrid<J extends JSObject>
     }
 
     public DataGrid<J> onDraw(EventHandler<Object> handler) {
-	return this.addEvent("onDraw", handler);
+	return this.addHandler(Type.DRAW, handler);
     }
 
     public DataGrid<J> add(final GridColumn<?, J> column) {
@@ -181,7 +176,7 @@ public final class DataGrid<J extends JSObject>
     }
 
     public DataGrid<J> draw(JsArray<J> rows) {
-	this.fireEvent("onDraw");
+	this.fireEvent(Type.DRAW);
 
 	this.rows = rows;
 	this.totalRows = rows.length();
@@ -511,5 +506,11 @@ public final class DataGrid<J extends JSObject>
 
 	    return false;
 	}
+    }
+
+    enum Type
+	implements EventType {
+
+	DRAW;
     }
 }

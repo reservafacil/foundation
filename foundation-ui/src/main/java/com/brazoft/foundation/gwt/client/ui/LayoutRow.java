@@ -20,10 +20,13 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.api.Component;
-import com.brazoft.foundation.gwt.client.component.api.HasText;
+import com.brazoft.foundation.gwt.client.event.Events;
 import com.brazoft.foundation.gwt.client.ui.Grid.GridOptions;
 import com.brazoft.foundation.gwt.client.ui.Layout.LayoutOptions;
-import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
+import com.brazoft.foundation.gwt.client.ui.api.*;
+import com.google.gwt.core.shared.GWT;
+import com.google.gwt.dom.client.Style.Unit;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.Widget;
 
 public final class LayoutRow
@@ -53,7 +56,7 @@ public final class LayoutRow
 
     public class LayoutCell
 	extends Bootstrap<LayoutCell>
-	implements HasText<LayoutCell> {
+	implements UICell<LayoutCell> {
 
 	private int span;
 
@@ -82,7 +85,7 @@ public final class LayoutRow
 	    return this.className("offset" + offset);
 	}
 
-	public LayoutCell item(Widget add) {
+	public LayoutCell add(Widget add) {
 	    return super.add(add);
 	}
 
@@ -94,6 +97,77 @@ public final class LayoutRow
 	@Override
 	public String getText() {
 	    return Component.Util.getHTML(this);
+	}
+
+	@Override
+	public LayoutCell onClick(ClickHandler handler) {
+	    return Events.on(this, handler);
+	}
+
+	@Override
+	public LayoutCell onDoubleClick(DoubleClickHandler handler) {
+	    return Events.on(this, handler);
+	}
+
+	@Override
+	public LayoutCell onMouseDown(MouseDownHandler handler) {
+	    return Events.on(this, handler);
+	}
+
+	@Override
+	public LayoutCell onMouseMove(MouseMoveHandler handler) {
+	    return Events.on(this, handler);
+	}
+
+	@Override
+	public LayoutCell onMouseOut(MouseOutHandler handler) {
+	    return Events.on(this, handler);
+	}
+
+	@Override
+	public LayoutCell onMouseOver(MouseOverHandler handler) {
+	    return Events.on(this, handler);
+	}
+
+	@Override
+	public LayoutCell onMouseUp(MouseUpHandler handler) {
+	    return Events.on(this, handler);
+	}
+
+	@Override
+	public LayoutCell onMouseWheel(MouseWheelHandler handler) {
+	    return Events.on(this, handler);
+	}
+
+	@Override
+	public LayoutCell colspan(int colspan) {
+	    GWT.log("LayoutRow does not support colspan(). Using span() instead.");
+	    this.span(this.span * colspan);
+	    return this;
+	}
+
+	@Override
+	public LayoutCell rowspan(int rowspan) {
+	    GWT.log("LayoutRow does not support rowspan(). Using offset() instead.");
+	    this.offset(this.span * rowspan);
+	    return this;
+	}
+
+	@Override
+	public LayoutCell icon(Icon icon) {
+	    Widgets.setIcon(this, icon);
+	    return this;
+	}
+
+	@Override
+	public LayoutCell verticalAlign(VerticalAlignment vAlign) {
+	    if (VerticalAlignment.MIDDLE.equals(vAlign)) {
+		this.style().verticalAlign(50, Unit.PCT);
+	    } else if (VerticalAlignment.BOTTOM.equals(vAlign)) {
+		this.style().verticalAlign(100, Unit.PCT);
+	    }
+
+	    return this;
 	}
     }
 }

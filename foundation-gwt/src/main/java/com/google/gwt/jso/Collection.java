@@ -2,9 +2,7 @@ package com.google.gwt.jso;
 
 import java.util.Iterator;
 
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArray;
-import com.google.gwt.thirdparty.streamhtmlparser.JavascriptParser;
+import com.google.gwt.core.client.*;
 
 public class Collection<J extends JavaScriptObject>
     implements Iterable<J>, Iterator<J> {

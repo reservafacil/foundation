@@ -19,7 +19,6 @@
 package com.brazoft.foundation.gwt.client.component;
 
 import com.brazoft.foundation.gwt.client.component.api.Component;
-import com.brazoft.foundation.gwt.client.component.api.HasChild;
 import com.brazoft.foundation.gwt.client.component.api.HasText;
 import com.brazoft.foundation.gwt.client.event.Events;
 import com.brazoft.foundation.gwt.client.event.api.HasClickHandlers;
@@ -56,7 +55,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public final class HTML<E extends Element>
     extends Component<HTML<E>>
-    implements HasText<HTML<E>>, HasChild<HTML<E>>, HasClickHandlers<HTML<E>>, HasMouseHandlers<HTML<E>>, HasKeyHandlers<HTML<E>>,
+    implements HasText<HTML<E>>, HasClickHandlers<HTML<E>>, HasMouseHandlers<HTML<E>>, HasKeyHandlers<HTML<E>>,
     HasFocusHandlers<HTML<E>>, HasTouchHandlers<HTML<E>> {
 
     private E element;
@@ -165,6 +164,7 @@ public final class HTML<E extends Element>
 	return this.element;
     }
 
+    @Override
     public HTML<E> add(Widget add) {
 	return super.add(add);
     }

@@ -19,7 +19,7 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.event.api.EventHandler;
+import com.brazoft.foundation.gwt.client.event.api.*;
 import com.brazoft.foundation.gwt.client.ui.api.NativeEvent;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -52,12 +52,12 @@ public final class Alert
 	}
     }
 
-    public Alert onClose(EventHandler event) {
-	return this.addEvent("close", event);
+    public Alert onClose(EventHandler<?> event) {
+	return this.addHandler(Type.CLOSE, event);
     }
 
-    public Alert whenClosed(EventHandler event) {
-	return this.addEvent("closed", event);
+    public Alert whenClosed(EventHandler<?> event) {
+	return this.addHandler(Type.CLOSED, event);
     }
 
     public Alert block() {
@@ -72,19 +72,11 @@ public final class Alert
 
 	return super.add(new Paragraph().add(add));
     }
-
-    @Override
-    protected void registerNativeEvent(Iterable<String> types) {
-	for (String type : types) {
-	    this.registerEvent(this, type, this.getId());
-	}
+    
+    enum Type
+	implements EventType {
+	CLOSE, CLOSED;
     }
-
-    private native void registerEvent(Alert widget, String type, String id) /*-{
-	                                                                    $wnd.$("#" + id).on(type, function () {
-	                                                                    widget.@com.brazoft.foundation.gwt.client.component.api.Component::fireEvent(Ljava/lang/String;)(type);
-	                                                                    });
-	                                                                    }-*/;
 
     public enum AlertOptions {
 	ERROR, INFO, SUCCESS, WARNING;

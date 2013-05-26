@@ -20,23 +20,20 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import java.util.Date;
 
-import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
+import com.brazoft.foundation.gwt.client.component.ElementResolver;
+import com.brazoft.foundation.gwt.client.event.Event;
+import com.brazoft.foundation.gwt.client.event.api.*;
+import com.brazoft.foundation.gwt.client.i18n.DateFormat;
+import com.brazoft.foundation.gwt.client.json.JSONCollection;
 import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Body;
 import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Header;
 import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row;
 import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row.Cell;
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.event.Event;
-import com.brazoft.foundation.gwt.client.event.api.EventHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.MouseDownEvent;
-import com.google.gwt.event.dom.client.MouseDownHandler;
-import com.brazoft.foundation.gwt.client.i18n.DateFormat;
-import com.brazoft.foundation.gwt.client.json.JSONCollection;
-import com.brazoft.foundation.gwt.client.util.Calendar;
+import com.brazoft.foundation.gwt.client.ui.api.*;
+import com.brazoft.foundation.gwt.client.util.*;
 import com.brazoft.foundation.gwt.client.util.Calendar.Month;
 import com.brazoft.foundation.gwt.client.util.Calendar.WeekDay;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.Widget;
 
 public final class MonthPanel
@@ -106,12 +103,8 @@ public final class MonthPanel
 	return this.selected;
     }
 
-    public MonthPanel onSelection(EventHandler handler) {
-	return this.addEvent("selection", handler);
-    }
-
-    public static Date getValue(Event event) {
-	return (Date)event.data();
+    public MonthPanel onSelection(EventHandler<Date> handler) {
+	return this.<Date> addHandler(Type.SELECTION, handler);
     }
 
     public MonthPanel range(Date start, Date end) {
@@ -179,7 +172,6 @@ public final class MonthPanel
 	    this.range = new Range();
 	    this.body = body;
 
-	    // Init table
 	    for (int w = 0; w < 6; w++) {
 		Row row = body.row();
 		for (int d = 0; d < 7; d++) {
@@ -191,7 +183,7 @@ public final class MonthPanel
 			    Calendar calendar = Days.this.toCalendar(cell);
 			    if (Days.this.range.eval(calendar) && !cell.getStyleName().contains("off")) {
 				Days.this.selectDate(calendar, cell);
-				MonthPanel.this.fireEvent("selection", new Event(MonthPanel.this, calendar.toDate()));
+				MonthPanel.this.fireEvent(new Event<Date>(Type.SELECTION, MonthPanel.this, calendar.toDate()));
 			    }
 			}
 		    }).onMouseDown(new MouseDownHandler() {
@@ -374,5 +366,10 @@ public final class MonthPanel
 	    this.month.text(calendar.toString(this.monthNameFormat));
 	    return this;
 	}
+    }
+
+    enum Type
+	implements EventType {
+	SELECTION;
     }
 }

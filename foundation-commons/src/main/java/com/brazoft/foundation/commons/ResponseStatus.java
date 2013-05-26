@@ -1,7 +1,7 @@
 package com.brazoft.foundation.commons;
 
 public enum ResponseStatus {
-    END_POOLING(204), FAILURE(500), FORBIDDEN(403), UNAUTHORIZED(401), BAD_REQUEST(400), TOKEN_EXPIRED(205), SUCCESS(200);
+    END_POOLING(204), FAILURE(500), FORBIDDEN(403), UNAUTHORIZED(401), BAD_REQUEST(400), TOKEN_EXPIRED(205), SUCCESS(200), UNKNOW(-1);
 
     private int code;
 
@@ -20,6 +20,6 @@ public enum ResponseStatus {
 	    }
 	}
 
-	return null;
+	return UNKNOW;
     }
 }

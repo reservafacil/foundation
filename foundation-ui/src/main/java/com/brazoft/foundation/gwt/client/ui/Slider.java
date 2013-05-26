@@ -18,21 +18,15 @@
 
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.HTML;
-import com.brazoft.foundation.gwt.client.component.api.Component;
-import com.brazoft.foundation.gwt.client.component.api.ResponsiveComponent;
-import com.brazoft.foundation.gwt.client.component.api.UIInput;
+import com.brazoft.foundation.gwt.client.component.*;
+import com.brazoft.foundation.gwt.client.component.api.*;
 import com.brazoft.foundation.gwt.client.event.Event;
-import com.brazoft.foundation.gwt.client.event.api.EventHandler;
-import com.brazoft.foundation.gwt.client.json.JSON;
-import com.brazoft.foundation.gwt.client.json.JSONCollection;
-import com.brazoft.foundation.gwt.client.json.JSONObject;
+import com.brazoft.foundation.gwt.client.event.api.*;
+import com.brazoft.foundation.gwt.client.json.*;
 import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 import com.brazoft.foundation.gwt.client.util.MessageFormat;
-import com.google.gwt.core.client.JavaScriptObject;
-import com.google.gwt.core.client.JsArrayNumber;
-import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.core.client.*;
+import com.google.gwt.dom.client.*;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -60,22 +54,22 @@ public final class Slider
     }
 
     public Slider onChange(EventHandler handler) {
-	this.addEvent(SliderEvent.CHANGE.toString(), handler);
+	this.addHandler(SliderEvent.CHANGE, handler);
 	return this;
     }
 
     public Slider onSlide(EventHandler handler) {
-	this.addEvent(SliderEvent.SLIDE.toString(), handler);
+	this.addHandler(SliderEvent.SLIDE, handler);
 	return this;
     }
 
     public Slider onStart(EventHandler handler) {
-	this.addEvent(SliderEvent.START.toString(), handler);
+	this.addHandler(SliderEvent.START, handler);
 	return this;
     }
 
     public Slider onStop(EventHandler handler) {
-	this.addEvent(SliderEvent.STOP.toString(), handler);
+	this.addHandler(SliderEvent.STOP, handler);
 	return this;
     }
 
@@ -313,24 +307,24 @@ public final class Slider
 
     private void fireOnChangeEvent(com.google.gwt.user.client.Event evt, JsArrayNumber values, boolean hasOriginalEvent) {
 	if (hasOriginalEvent || this.firstOnChange) {
-	    this.fireEvent(SliderEvent.CHANGE.toString(), new Event(this, values));
+	    this.fireEvent(new Event<JsArrayNumber>(SliderEvent.CHANGE, this, values));
 	}
 
 	this.firstOnChange = false;
     }
 
     private boolean fireOnSlideEvent(com.google.gwt.user.client.Event evt, JsArrayNumber values) {
-	this.fireEvent(SliderEvent.SLIDE.toString(), new Event(this, values));
+	this.fireEvent(new Event<JsArrayNumber>(SliderEvent.SLIDE, this, values));
 
 	return true;
     }
 
     private void fireOnStartEvent(com.google.gwt.user.client.Event evt, JsArrayNumber values) {
-	this.fireEvent(SliderEvent.START.toString(), new Event(this, values));
+	this.fireEvent(new Event<JsArrayNumber>(SliderEvent.START, this, values));
     }
 
     private void fireOnStopEvent(com.google.gwt.user.client.Event evt, JsArrayNumber values) {
-	this.fireEvent(SliderEvent.STOP.toString(), new Event(this, values));
+	this.fireEvent(new Event<JsArrayNumber>(SliderEvent.STOP, this, values));
     }
 
     /*
@@ -394,7 +388,8 @@ public final class Slider
 	                                                          $wnd.$("#" + id).slider("destroy");
 	                                                          }-*/;
 
-    enum SliderEvent {
+    enum SliderEvent
+	implements EventType {
 	CHANGE, SLIDE, START, STOP;
     }
 

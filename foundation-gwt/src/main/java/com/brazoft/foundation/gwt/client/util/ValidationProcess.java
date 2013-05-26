@@ -8,6 +8,7 @@ import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.Event;
 import com.brazoft.foundation.gwt.client.event.api.EventHandler;
 import com.brazoft.foundation.gwt.client.util.ValidationProcess.ValidationResult.FieldState;
+import com.google.gwt.core.shared.GWT;
 
 public class ValidationProcess {
 
@@ -51,7 +52,7 @@ public class ValidationProcess {
 	}
 
 	if (!valid && this.handler != null) {
-	    this.handler.onEvent(new Event<ValidationResult>(result));
+	    this.handler.onEvent(new Event<ValidationResult>(null, result));
 	}
 
 	return valid;
@@ -99,19 +100,24 @@ public class ValidationProcess {
 	}
 
 	public boolean validate() {
-	    V value = this.input.getValue();
+	    try {
+		V value = this.input.getValue();
 
-	    for (Validator<V> validator : this.validators) {
-		boolean valid = validator.validate(value);
-		if (!valid) {
-		    this.action.whenInvalid(validator.getMessage());
-		    return false;
+		for (Validator<V> validator : this.validators) {
+		    boolean valid = validator.validate(value);
+		    if (!valid) {
+			this.action.whenInvalid(validator.getMessage());
+			return false;
+		    }
 		}
+
+		this.action.whenValid();
+
+		return true;
+	    } catch (RuntimeException e) {
+		GWT.log("Error in validation", e);
+		return false;
 	    }
-
-	    this.action.whenValid();
-
-	    return true;
 	}
     }
 

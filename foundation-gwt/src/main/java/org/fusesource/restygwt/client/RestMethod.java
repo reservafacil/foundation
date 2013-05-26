@@ -123,7 +123,7 @@ public class RestMethod
 	defaultAcceptType(Resource.CONTENT_TYPE_JSON);
 
 	try {
-	    send(new AbstractRequestCallback<J>(this, callback) {
+	    send(new RequestNoLogCallback<J>(this, callback) {
 
 		protected J parseResult()
 		    throws Exception {

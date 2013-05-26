@@ -3,8 +3,7 @@ package com.brazoft.foundation.gwt.client.ui;
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.event.Event;
 import com.brazoft.foundation.gwt.client.ui.api.Pagination;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.*;
 
 public final class Pager
     extends Pagination<Pager> {
@@ -65,10 +64,6 @@ public final class Pager
 	return this.count();
     }
 
-    public static int getValue(Event event) {
-	return (Integer)event.data();
-    }
-
     @Override
     public int getCurrentPage() {
 	return this.page;
@@ -99,7 +94,7 @@ public final class Pager
 
 	if (newPage > 0 && newPage <= this.pages) {
 	    this.page += direction;
-	    this.fire(new Event(this, this.page));
+	    this.fireEvent(this.page);
 
 	    return this.count();
 	}

@@ -1,9 +1,10 @@
 package com.brazoft.foundation.gwt.client.ui.api;
 
-import com.brazoft.foundation.gwt.client.event.api.AttachHandler;
+import com.brazoft.foundation.gwt.client.event.api.*;
 import com.google.gwt.dom.client.Element;
 import com.google.gwt.event.logical.shared.AttachEvent;
 
+@SuppressWarnings("unchecked")
 public abstract class NativeEvent<N extends NativeEvent<N>>
     extends Bootstrap<N> {
 
@@ -26,9 +27,21 @@ public abstract class NativeEvent<N extends NativeEvent<N>>
 	if (this.eventBus() == null) {
 	    return;
 	}
-
-	this.registerNativeEvent(this.eventBus().types());
+	
+	Iterable<EventType> types = this.eventBus().types();
+	for (EventType type : types) {
+	    this.registerEvent((N) this, this.toMethod(type), type, this.getId());
+	}
     }
-
-    protected abstract void registerNativeEvent(Iterable<String> types);
+    
+    protected native void registerEvent(N widget, String method, EventType type, String id) /*-{
+    	$wnd.$("#" + id).on(method, function () {
+    		widget.@com.brazoft.foundation.gwt.client.component.api.EventSource::fireEvent(Lcom/brazoft/foundation/gwt/client/event/api/EventType;)(type);
+    	});
+    }-*/;
+    
+    protected String toMethod(EventType type)
+    {
+	return type.name().toLowerCase();
+    }
 }

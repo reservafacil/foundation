@@ -18,19 +18,14 @@
 
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.HTML;
-import com.brazoft.foundation.gwt.client.component.api.Component;
-import com.brazoft.foundation.gwt.client.component.api.HasText;
+import com.brazoft.foundation.gwt.client.component.*;
+import com.brazoft.foundation.gwt.client.component.api.*;
 import com.brazoft.foundation.gwt.client.event.Event;
-import com.brazoft.foundation.gwt.client.event.api.EventHandler;
-import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
+import com.brazoft.foundation.gwt.client.event.api.*;
+import com.brazoft.foundation.gwt.client.ui.api.*;
 import com.brazoft.foundation.gwt.client.ui.api.NativeEvent;
-import com.google.gwt.dom.client.AnchorElement;
-import com.google.gwt.dom.client.DivElement;
-import com.google.gwt.dom.client.SpanElement;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.dom.client.*;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.Widget;
 
 public final class Accordion
@@ -65,6 +60,22 @@ public final class Accordion
 
 	return heading;
     }
+    
+    public Accordion show()
+    {
+	this.jsFunction(this.getId(), Type.SHOW.name().toLowerCase());
+	return this;
+    }
+    
+    public Accordion hide()
+    {
+	this.jsFunction(this.getId(), Type.HIDE.name().toLowerCase());
+	return this;
+    }
+    
+    private native void jsFunction(String id, String method)/*-{
+    	$("#" + id).collapse(method);
+    }-*/;
 
     AccordionItem newItem(Widget heading, Widget content) {
 	AccordionItem item = new AccordionItem(this.hasChildren());
@@ -97,12 +108,12 @@ public final class Accordion
 	    this.add(this.link).add(this.button);
 	}
 
-	public RemovableItem onRemove(final EventHandler handler) {
+	public RemovableItem onRemove(final EventHandler<?> handler) {
 	    ClickHandler clickHandler = new ClickHandler() {
 
 		@Override
 		public void onClick(ClickEvent e) {
-		    handler.onEvent(new Event(RemovableItem.this));
+		    handler.onEvent(new Event(Type.REMOVE, RemovableItem.this));
 		}
 	    };
 
@@ -125,7 +136,7 @@ public final class Accordion
 	    this.button.onClick(new ClickHandler() {
 
 		@Override
-		public void onClick(ClickEvent arg0) {
+		public void onClick(ClickEvent e) {
 		    reference.removeFromParent();
 		}
 	    });
@@ -222,32 +233,24 @@ public final class Accordion
 	}
     }
 
-    public Accordion onShow(EventHandler event) {
-	return this.addEvent("show", event);
+    public Accordion onShow(EventHandler<?> event) {
+	return this.addHandler(Type.SHOW, event);
     }
 
-    public Accordion whenShown(EventHandler event) {
-	return this.addEvent("shown", event);
+    public Accordion whenShown(EventHandler<?> event) {
+	return this.addHandler(Type.SHOWN, event);
     }
 
-    public Accordion onHide(EventHandler event) {
-	return this.addEvent("hide", event);
+    public Accordion onHide(EventHandler<?> event) {
+	return this.addHandler(Type.HIDE, event);
     }
 
-    public Accordion whenHidden(EventHandler event) {
-	return this.addEvent("hidden", event);
+    public Accordion whenHidden(EventHandler<?> event) {
+	return this.addHandler(Type.HIDDEN, event);
     }
 
-    @Override
-    protected void registerNativeEvent(Iterable<String> types) {
-	for (String type : types) {
-	    this.registerEvent(this, type, this.getId());
-	}
+    enum Type
+	implements EventType {
+	HIDE, HIDDEN, REMOVE, SHOW, SHOWN;
     }
-
-    private native void registerEvent(Accordion widget, String type, String id) /*-{
-	                                                                        $wnd.$("#" + id).on(type, function () {
-	                                                                        widget.@com.brazoft.foundation.gwt.client.component.api.Component::fireEvent(Ljava/lang/String;)(type);
-	                                                                        });
-	                                                                        }-*/;
 }

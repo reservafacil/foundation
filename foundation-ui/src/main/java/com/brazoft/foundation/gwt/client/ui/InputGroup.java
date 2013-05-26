@@ -22,6 +22,10 @@ public class InputGroup<V>
 	this.initWidget(input.asWidget());
 	this.constraint = new ValidationConstraint<V>(input);
     }
+    
+    public UIInput<?, V> input() {
+	return this.input;
+    }
 
     public InputGroup<V> requiredMessage(String text) {
 	this.validator.message(text);

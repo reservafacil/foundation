@@ -1,31 +1,14 @@
 package com.brazoft.foundation.gwt.client.ui.api;
 
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.HTML;
+import com.brazoft.foundation.gwt.client.component.*;
 import com.brazoft.foundation.gwt.client.component.api.HasText;
 import com.brazoft.foundation.gwt.client.event.Event;
-import com.brazoft.foundation.gwt.client.event.api.EventHandler;
+import com.brazoft.foundation.gwt.client.event.api.*;
 import com.brazoft.foundation.gwt.client.event.api.HasClickHandlers;
 import com.brazoft.foundation.gwt.client.event.api.HasFocusHandlers;
-import com.brazoft.foundation.gwt.client.event.api.HasKeyHandlers;
-import com.brazoft.foundation.gwt.client.event.api.HasMouseHandlers;
-import com.brazoft.foundation.gwt.client.ui.Icon;
-import com.brazoft.foundation.gwt.client.ui.Widgets;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.UListElement;
-import com.google.gwt.event.dom.client.BlurHandler;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.DoubleClickHandler;
-import com.google.gwt.event.dom.client.FocusHandler;
-import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.dom.client.MouseDownHandler;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.event.dom.client.MouseOutHandler;
-import com.google.gwt.event.dom.client.MouseOverHandler;
-import com.google.gwt.event.dom.client.MouseUpHandler;
-import com.google.gwt.event.dom.client.MouseWheelHandler;
+import com.brazoft.foundation.gwt.client.ui.*;
+import com.google.gwt.dom.client.*;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
@@ -39,14 +22,10 @@ public abstract class Pagination<P extends Pagination<P>>
 	super.add(this.list, true);
     }
 
-    public P whenPaginate(EventHandler<Object> handler) {
-	this.addEvent("pager-event", handler);
+    public P whenPaginate(EventHandler<Integer> handler) {
+	this.addHandler(Type.PAGINATE, handler);
 
 	return (P)this;
-    }
-
-    public P fire(Event<Object> event) {
-	return this.fireEvent("pager-event", event);
     }
 
     @Override
@@ -66,37 +45,20 @@ public abstract class Pagination<P extends Pagination<P>>
 	this.list.add(add);
 	return (P)this;
     }
-
-    @Override
-    protected P add(Widget add, boolean ignoreIfParent) {
-	this.list.add(add, ignoreIfParent);
-	return (P)this;
-    }
-
-    @Override
-    protected P insert(Widget add, Widget before) {
-	this.list.insert(add, before);
-	return (P)this;
-    }
-
-    @Override
-    protected Iterable<Widget> getChildren() {
-	return this.list.getChildren();
-    }
-
-    @Override
-    protected int getIndex(Widget child) {
-	return this.list.getIndex(child);
-    }
-
-    @Override
-    protected int childrenCount() {
-	return this.list.childrenCount();
-    }
-
+    
     @Override
     protected Item getChild(int index) {
-	return (Item)this.list.getChild(index);
+	return (Item) this.list.getChild(index);
+    }
+
+    protected P fireEvent(int page) {
+	this.fireEvent(new Event<Integer>(Pagination.Type.PAGINATE, this, page));
+	return (P)this;
+    }
+
+    enum Type
+	implements EventType {
+	PAGINATE;
     }
 
     public static class Item

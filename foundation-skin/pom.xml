@@ -1,0 +1,75 @@
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+  xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 http://maven.apache.org/xsd/maven-4.0.0.xsd">
+  <modelVersion>4.0.0</modelVersion>
+
+  <artifactId>foundation-skin</artifactId>
+  <name>Foundation for Skin</name>
+
+  <parent>
+    <groupId>com.brazoft.foundation</groupId>
+    <artifactId>foundation</artifactId>
+    <version>2.1.0-SNAPSHOT</version>
+  </parent>
+
+  <build>
+    <!--Add sources to jar files -->
+    <resources>
+      <resource>
+        <directory>src/main/java</directory>
+      </resource>
+      <resource>
+        <directory>src/main/resources</directory>
+      </resource>
+    </resources>
+
+    <plugins>
+      <plugin>
+        <groupId>org.apache.maven.plugins</groupId>
+        <artifactId>maven-compiler-plugin</artifactId>
+        <configuration>
+          <source>${java.compiler.version}</source>
+          <target>${java.compiler.version}</target>
+        </configuration>
+      </plugin>
+
+      <!-- CSS Compression -->
+      <plugin>
+        <groupId>net.alchim31.maven</groupId>
+        <artifactId>yuicompressor-maven-plugin</artifactId>
+        <executions>
+          <execution>
+            <goals>
+              <goal>compress</goal>
+            </goals>
+          </execution>
+        </executions>
+        <configuration>
+          <nosuffix>true</nosuffix>
+          <force>true</force>
+          <linebreakpos>-1</linebreakpos>
+
+          <aggregations>
+            <aggregation>
+              <insertNewLine>true</insertNewLine>
+              <removeIncluded>true</removeIncluded>
+              <output>${project.build.directory}/classes/com/brazoft/foundation/gwt/assets/bootstrap.css</output>
+              <includes>
+                <include>${project.build.directory}/classes/web/css/bootstrap.css</include>
+                <include>${project.build.directory}/classes/web/css/bootstrap-responsive.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-datagrid.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-datepicker.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-layout-panel.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-quick-button.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-plan.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-portlet.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-select2.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-slider.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-spinner.css</include>
+              </includes>
+            </aggregation>
+          </aggregations>
+        </configuration>
+      </plugin>
+    </plugins>
+  </build>
+</project>

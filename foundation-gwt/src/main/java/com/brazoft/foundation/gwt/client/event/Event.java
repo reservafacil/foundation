@@ -18,6 +18,7 @@
 
 package com.brazoft.foundation.gwt.client.event;
 
+import com.brazoft.foundation.gwt.client.event.api.EventType;
 import com.google.gwt.user.client.ui.Widget;
 
 public class Event<T> {
@@ -25,26 +26,34 @@ public class Event<T> {
     private Widget widget;
 
     private T      data;
-
-    public Event(Widget widget) {
-	this.widget = widget;
+    
+    private EventType type;
+    
+    public Event(EventType type, Widget widget) {
+	this(type, widget, null);
     }
 
-    public Event(T data) {
-	this(null, data);
+    public Event(EventType type, T data) {
+	this(type, null, data);
     }
 
-    public Event(Widget widget, T data) {
+    public Event(EventType type, Widget widget, T data) {
 	super();
+	this.type = type;
 	this.widget = widget;
 	this.data = data;
     }
 
     public Widget widget() {
-	return widget;
+	return this.widget;
     }
 
     public T data() {
-	return data;
+	return this.data;
+    }
+    
+    public EventType type()
+    {
+	return this.type;
     }
 }

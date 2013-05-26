@@ -17,19 +17,20 @@
   </properties>
 
   <modules>
-    <module>foundation-gwt</module>
-    <module>foundation-ui</module>
     <module>foundation-aop</module>
+    <module>foundation-commons</module>
+    <module>foundation-gwt</module>
     <module>foundation-io</module>
     <module>foundation-jdbc</module>
     <module>foundation-job</module>
     <module>foundation-jpa</module>
     <module>foundation-security</module>
+    <module>foundation-skin</module>
     <module>foundation-soa</module>
     <module>foundation-transaction</module>
+    <module>foundation-ui</module>
     <module>foundation-util</module>
     <module>foundation-web</module>
-    <module>foundation-commons</module>
   </modules>
 
   <dependencyManagement>
@@ -286,6 +287,23 @@
       </dependency>
     </dependencies>
   </dependencyManagement>
+
+  <build>
+    <pluginManagement>
+      <plugins>
+        <plugin>
+          <groupId>org.apache.maven.plugins</groupId>
+          <artifactId>maven-compiler-plugin</artifactId>
+          <version>2.1</version>
+        </plugin>
+        <plugin>
+          <groupId>net.alchim31.maven</groupId>
+          <artifactId>yuicompressor-maven-plugin</artifactId>
+          <version>1.1</version>
+        </plugin>
+      </plugins>
+    </pluginManagement>
+  </build>
 
   <repositories>
     <repository>

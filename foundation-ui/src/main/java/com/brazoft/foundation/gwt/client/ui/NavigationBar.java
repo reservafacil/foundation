@@ -18,37 +18,19 @@
 
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.ui.SearchForm.SearchOptions;
-import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
-import com.brazoft.foundation.gwt.client.ui.api.Form;
-import com.brazoft.foundation.gwt.client.ui.api.UIButton;
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
+import com.brazoft.foundation.gwt.client.component.*;
 import com.brazoft.foundation.gwt.client.component.HTML;
-import com.brazoft.foundation.gwt.client.component.api.Component;
+import com.brazoft.foundation.gwt.client.component.api.*;
 import com.brazoft.foundation.gwt.client.component.api.HasText;
-import com.brazoft.foundation.gwt.client.component.api.UIInput;
+import com.brazoft.foundation.gwt.client.event.api.*;
 import com.brazoft.foundation.gwt.client.event.api.HasClickHandlers;
 import com.brazoft.foundation.gwt.client.event.api.HasFocusHandlers;
-import com.brazoft.foundation.gwt.client.event.api.HasKeyHandlers;
-import com.brazoft.foundation.gwt.client.event.api.HasMouseHandlers;
-import com.google.gwt.dom.client.AnchorElement;
-import com.google.gwt.dom.client.DivElement;
-import com.google.gwt.dom.client.LIElement;
-import com.google.gwt.event.dom.client.BlurHandler;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.DoubleClickHandler;
-import com.google.gwt.event.dom.client.FocusHandler;
-import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.dom.client.MouseDownHandler;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.event.dom.client.MouseOutHandler;
-import com.google.gwt.event.dom.client.MouseOverHandler;
-import com.google.gwt.event.dom.client.MouseUpHandler;
-import com.google.gwt.event.dom.client.MouseWheelHandler;
+import com.brazoft.foundation.gwt.client.ui.SearchForm.SearchOptions;
+import com.brazoft.foundation.gwt.client.ui.api.*;
+import com.google.gwt.dom.client.*;
+import com.google.gwt.event.dom.client.*;
+import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Image;
-import com.google.gwt.user.client.ui.Widget;
 
 public final class NavigationBar
     extends Bootstrap<NavigationBar>

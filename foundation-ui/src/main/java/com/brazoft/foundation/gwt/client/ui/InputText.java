@@ -19,9 +19,7 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.json.JSON;
-import com.brazoft.foundation.gwt.client.json.JSONCollection;
-import com.brazoft.foundation.gwt.client.json.JSONObject;
+import com.brazoft.foundation.gwt.client.json.*;
 import com.brazoft.foundation.gwt.client.ui.api.Input;
 import com.google.gwt.core.client.JavaScriptObject;
 import com.google.gwt.dom.client.Document;
