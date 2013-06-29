@@ -54,6 +54,16 @@ public class Selector<S extends Selector<S>>
 
 	return this.style;
     }
+    
+    public S blur(){
+	this.getElement().blur();
+	return (S) this;
+    }
+    
+    public S focus(){
+	this.getElement().focus();
+	return (S) this;
+    }
 
     public S fadeIn() {
 	this.selector().fadeIn();

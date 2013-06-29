@@ -29,7 +29,6 @@
     <dependency>
       <groupId>com.googlecode.gwtquery</groupId>
       <artifactId>gwtquery</artifactId>
-      <scope>import</scope>
     </dependency>
   </dependencies>
 
