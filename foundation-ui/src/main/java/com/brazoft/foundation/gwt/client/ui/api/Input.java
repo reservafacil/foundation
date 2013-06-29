@@ -136,18 +136,6 @@ public abstract class Input<I extends Input<I, V>, V>
 	return (I)this;
     }
 
-    public I blur() {
-	this.element.blur();
-
-	return (I)this;
-    }
-
-    public I focus() {
-	this.element.focus();
-
-	return (I)this;
-    }
-
     public I span(int span) {
 	return this.className("span" + span);
     }

@@ -306,6 +306,18 @@ public final class NavigationBar
 
 		return this;
 	    }
+	    
+	    @Override
+	    public Item focus() {
+	        this.link.focus();
+		return this;
+	    }
+	    
+	    @Override
+	    public Item blur() {
+	        this.link.blur();
+		return this;
+	    }
 	}
     }
 
