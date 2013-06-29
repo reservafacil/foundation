@@ -1,52 +1,42 @@
 /**
- * Copyright (C) 2009-2012 the original author or authors.
- * See the notice.md file distributed with this work for additional
- * information regarding copyright ownership.
+ * Copyright (C) 2009-2012 the original author or authors. See the notice.md file distributed with
+ * this work for additional information regarding copyright ownership.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.brazoft.foundation.gwt.client.ui.api;
 
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.Events;
+import com.brazoft.foundation.gwt.client.event.api.*;
 import com.brazoft.foundation.gwt.client.event.api.HasChangeHandlers;
+import com.brazoft.foundation.gwt.client.event.api.HasClickHandlers;
 import com.brazoft.foundation.gwt.client.event.api.HasFocusHandlers;
-import com.brazoft.foundation.gwt.client.event.api.HasKeyHandlers;
-import com.brazoft.foundation.gwt.client.event.api.HasMouseHandlers;
 import com.brazoft.foundation.gwt.client.ui.Size;
+import com.google.gwt.core.client.GWT;
 import com.google.gwt.dom.client.InputElement;
-import com.google.gwt.event.dom.client.BlurHandler;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.FocusHandler;
-import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.dom.client.MouseDownHandler;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.event.dom.client.MouseOutHandler;
-import com.google.gwt.event.dom.client.MouseOverHandler;
-import com.google.gwt.event.dom.client.MouseUpHandler;
-import com.google.gwt.event.dom.client.MouseWheelHandler;
+import com.google.gwt.event.dom.client.*;
+import com.google.gwt.user.client.ui.impl.TextBoxImpl;
 
 @SuppressWarnings("unchecked")
 public abstract class Input<I extends Input<I, V>, V>
     extends Bootstrap<I>
-    implements UIInput<I, V>, HasMouseHandlers<I>, HasKeyHandlers<I>, HasFocusHandlers<I>, HasChangeHandlers<I> {
+    implements UIInput<I, V>, HasClickHandlers<I>, HasMouseHandlers<I>, HasKeyHandlers<I>, HasFocusHandlers<I>, HasChangeHandlers<I> {
 
-    private InputElement element;
+    private InputElement       element;
 
-    private boolean      required;
+    private boolean            required;
+
+    private static TextBoxImpl impl = GWT.create(TextBoxImpl.class);
 
     public Input(InputElement element) {
 	super(element);
@@ -55,6 +45,16 @@ public abstract class Input<I extends Input<I, V>, V>
 
     protected InputElement element() {
 	return this.element;
+    }
+
+    @Override
+    public I onClick(ClickHandler handler) {
+	return (I)Events.on(this, handler);
+    }
+
+    @Override
+    public I onDoubleClick(DoubleClickHandler handler) {
+	return (I)Events.on(this, handler);
     }
 
     @Override
@@ -131,6 +131,11 @@ public abstract class Input<I extends Input<I, V>, V>
 	return this.className("input-medium");
     }
 
+    public I cursorAt(int index) {
+	this.selectRange(index, 0);
+	return (I)this;
+    }
+
     public I blur() {
 	this.element.blur();
 
@@ -199,5 +204,17 @@ public abstract class Input<I extends Input<I, V>, V>
 
     public I placeholder(String placeholder) {
 	return this.attribute("placeholder", placeholder);
+    }
+
+    public I selectAll() {
+	int length = this.element.getValue().length();
+	if (length > 0) {
+	    this.selectRange(0, length);
+	}
+	return (I)this;
+    }
+
+    private void selectRange(int index, int length) {
+	Input.impl.setSelectionRange((com.google.gwt.user.client.Element)this.element.cast(), index, length);
     }
 }

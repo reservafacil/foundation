@@ -29,26 +29,20 @@ public abstract class Pagination<P extends Pagination<P>>
     }
 
     @Override
-    protected P detachChildren() {
-	this.list.detachChildren();
-	return (P)this;
-    }
-
-    @Override
-    protected P remove(Widget child) {
+    public P remove(Widget child) {
 	this.list.remove(child);
 	return (P)this;
     }
 
     @Override
-    protected P add(Widget add) {
+    public P add(Widget add) {
 	this.list.add(add);
 	return (P)this;
     }
-    
+
     @Override
-    protected Item getChild(int index) {
-	return (Item) this.list.getChild(index);
+    public Item getChild(int index) {
+	return (Item)this.list.getChild(index);
     }
 
     protected P fireEvent(int page) {
@@ -68,12 +62,13 @@ public abstract class Pagination<P extends Pagination<P>>
 	private HTML<? extends Element> link;
 
 	public Item() {
-	    this(ElementResolver.li());
+	    this(ElementResolver.a());
 	}
 
 	public Item(Element e) {
-	    super(e);
+	    super(ElementResolver.li());
 	    this.link = HTML.as(e);
+	    this.add(link);
 	}
 
 	public Item icon(Icon icon) {

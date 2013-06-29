@@ -28,9 +28,14 @@ public abstract class DataPanel<D extends DataPanel<D>>
 	this.strategy = option.get().init(this, columns);
     }
 
+    public D adaptative() {
+	this.strategy.adaptative();
+	return (D)this;
+    }
+
     public D width(double width, Unit unit) {
 	this.strategy.width(width, unit);
-	
+
 	return (D)this;
     }
 
@@ -55,72 +60,73 @@ public abstract class DataPanel<D extends DataPanel<D>>
 
 	return (D)this;
     }
-    
+
     public D adopt(Composite<?> composite) {
 	composite.hidden().removeFromParent();
-	this.item(composite, 1);
-	composite.asQuery().fadeIn();
-	
+	this.item(composite);
+	composite.fadeIn();
+
 	return (D)this;
     }
 
     public D adopt(Composite<?> composite, int colspan) {
 	composite.hidden().removeFromParent();
 	this.item(composite, colspan);
-	composite.asQuery().fadeIn();
-	
+	composite.fadeIn();
+
 	return (D)this;
     }
 
     protected UICell<?> cell(int colspan) {
 	return this.strategy.cell(colspan);
     }
-    
-    public enum PanelOptions
-    {
-	FIXED
-	{
-	    DataPanelStrategy get()
-	    {
+
+    public enum PanelOptions {
+	FIXED {
+
+	    DataPanelStrategy get() {
 		return new FixedStrategy();
 	    }
-	}
-	, FLUID
-	{
-	    DataPanelStrategy get()
-	    {
+	},
+	FLUID {
+
+	    DataPanelStrategy get() {
 		return new FluidStrategy();
 	    }
 	};
-	
+
 	abstract DataPanelStrategy get();
     }
-    
+
     static class FluidStrategy
 	implements DataPanelStrategy {
-	
-	private HTML<DivElement> container = HTML.asDiv();
-	
-	private LayoutRow row;
 
-	private int    columns;
-	
-	private int    columnCounter;
+	private HTML<DivElement> container  = HTML.asDiv();
 
-	private int    maxColumns = 12;
+	private LayoutRow        row;
 
-	public DataPanelStrategy init(DataPanel<?> panel, int columns)
-	{
+	private int              columns;
+
+	private int              columnCounter;
+
+	private int              maxColumns = 12;
+
+	public DataPanelStrategy init(DataPanel<?> panel, int columns) {
 	    panel.add(this.container);
 	    this.columns = columns;
 	    return this;
 	}
-	
+
+	@Override
+	public void adaptative() {
+
+	}
+
 	@Override
 	public UICell<?> cell() {
 	    return this.cell(this.columns);
 	}
-	
+
 	@Override
 	public UICell<?> cell(int colspan) {
 	    if (this.columnCounter == 0) {
@@ -132,13 +138,12 @@ public abstract class DataPanel<D extends DataPanel<D>>
 	    if (columnCounter >= this.columns) {
 		this.columnCounter = 0;
 	    }
-	    
+
 	    LayoutCell cell = this.row.cell().span(Integer.valueOf((this.maxColumns / this.columns) * colspan));
-	    cell.style().marginBottom(15, Unit.PX);
 
 	    return cell;
 	}
-	
+
 	@Override
 	public void width(double width, Unit unit) {
 	    GWT.log("FluidStrategy in DataPanel does not support width()");
@@ -148,33 +153,39 @@ public abstract class DataPanel<D extends DataPanel<D>>
     static class FixedStrategy
 	implements DataPanelStrategy {
 
-	private Table  table     = new Table();
+	private Table   table     = new Table();
 
-	private Row    row;
+	private Row     row;
 
-	private int    columns;
+	private int     columns;
 
-	private int    columnCounter;
+	private int     columnCounter;
 
-	private double width     = 100;
+	private double  width     = 100;
 
-	private Unit   widthUnit = Unit.PCT;
-	
-	public DataPanelStrategy init(DataPanel<?> panel, int columns)
-	{
+	private Unit    widthUnit = Unit.PCT;
+
+	private boolean adaptative;
+
+	public DataPanelStrategy init(DataPanel<?> panel, int columns) {
 	    panel.add(this.table);
 	    this.table.style().width(this.width, this.widthUnit);
 	    panel.add(this.table);
 	    this.columns = columns;
-	    
+
 	    return this;
 	}
-	
+
+	@Override
+	public void adaptative() {
+	    this.adaptative = true;
+	}
+
 	@Override
 	public UICell<?> cell() {
 	    return this.cell(this.columns);
 	}
-	
+
 	public void width(double width, Unit unit) {
 	    this.width = width;
 	    this.widthUnit = unit;
@@ -194,7 +205,9 @@ public abstract class DataPanel<D extends DataPanel<D>>
 
 	    Cell cell = this.row.cell();
 	    cell.verticalAlign(VerticalAlignment.TOP);
-	    cell.style().width((this.width / this.columns) * colspan, this.widthUnit).marginBottom(15, Unit.PX);
+	    if (!adaptative) {
+		cell.style().width((this.width / this.columns) * colspan, this.widthUnit);
+	    }
 
 	    if (colspan > 1) {
 		cell.colspan(colspan);
@@ -207,11 +220,13 @@ public abstract class DataPanel<D extends DataPanel<D>>
     interface DataPanelStrategy {
 
 	DataPanelStrategy init(DataPanel<?> panel, int columns);
-	
+
 	UICell<?> cell();
-	
+
 	UICell<?> cell(int colspan);
-	
+
 	void width(double width, Unit unit);
+
+	void adaptative();
     }
 }

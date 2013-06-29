@@ -10,13 +10,13 @@ import com.google.gwt.user.client.ui.Widget;
 public class PlanPanel
     extends Component<PlanPanel> {
 
-    private PlanHeader header;
-    
+    private PlanHeader   header;
+
     private PlanFeatures features;
-    
-    private PlanBody body;
-    
-    private PlanFooter footer;
+
+    private PlanBody     body;
+
+    private PlanFooter   footer;
 
     public PlanPanel() {
 	super(ElementResolver.div());
@@ -31,7 +31,7 @@ public class PlanPanel
 
 	return this.header;
     }
-    
+
     public PlanFeatures features() {
 	if (this.features == null) {
 	    this.features = new PlanFeatures();
@@ -40,7 +40,7 @@ public class PlanPanel
 
 	return this.features;
     }
-    
+
     public PlanBody body() {
 	if (this.body == null) {
 	    this.body = new PlanBody();
@@ -49,7 +49,7 @@ public class PlanPanel
 
 	return this.body;
     }
-    
+
     public PlanFooter footer() {
 	if (this.footer == null) {
 	    this.footer = new PlanFooter();
@@ -114,7 +114,7 @@ public class PlanPanel
 	    return this;
 	}
     }
-    
+
     public class PlanBody
 	extends Component<PlanBody> {
 
@@ -124,13 +124,12 @@ public class PlanPanel
 	    super(ElementResolver.div());
 	    this.className("plan-features").add(this.ul);
 	}
-	
-	public PlanBody add(Widget widget)
-	{
+
+	public PlanBody add(Widget widget) {
 	    HTML<LIElement> li = HTML.asListItem().add(widget);
 	    li.style().borderWidth(0, Unit.PX);
 	    this.ul.add(li);
-	    
+
 	    return this;
 	}
     }
@@ -143,26 +142,25 @@ public class PlanPanel
 	public PlanFeatures() {
 	    super(ElementResolver.div());
 	    this.className("plan-features").add(this.ul);
-        }
-	
-	public PlanFeatures add(Widget widget)
-	{
+	}
+
+	public PlanFeatures add(Widget widget) {
 	    this.ul.add(HTML.asListItem().add(widget));
 	    return this;
 	}
     }
-    
+
     public class PlanFooter
-	extends Component<PlanFooter>{
-	
-        public PlanFooter() {
-            super(ElementResolver.div());
+	extends Component<PlanFooter> {
+
+	public PlanFooter() {
+	    super(ElementResolver.div());
 	    this.className("plan-actions");
-        }
-        
-        @Override
-        public PlanFooter add(Widget add) {
-            return super.add(add);
-        }
+	}
+
+	@Override
+	public PlanFooter add(Widget add) {
+	    return super.add(add);
+	}
     }
 }

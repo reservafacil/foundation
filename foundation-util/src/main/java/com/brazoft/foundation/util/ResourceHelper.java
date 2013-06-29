@@ -13,98 +13,94 @@ import java.util.Enumeration;
  */
 public class ResourceHelper {
 
-    /**
-     * @param url
-     * 
-     *            Example
-     *            url = http://www.brazoft.com.br
-     *            change to http://www.brazoft.com.br/
-     * 
-     */
-    public static void formatURL(StringBuffer url) {
-	if (url.charAt(url.length() - 1) != '/') {
-	    url.append("/");
-	}
+  /**
+   * @param url
+   * 
+   *          Example url = http://www.brazoft.com.br change to http://www.brazoft.com.br/
+   * 
+   */
+  public static void formatURL(StringBuffer url) {
+    if (url.charAt(url.length() - 1) != '/') {
+      url.append("/");
+    }
+  }
+
+  public static InputStream getStream(String path) {
+    InputStream input = null;
+    File file;
+
+    try {
+      file = new File(path);
+      if (file.exists()) {
+        return new FileInputStream(file);
+      }
+
+      input = ResourceHelper.getClassPath(path);
+
+      if (input == null) {
+        input = ResourceHelper.getMetaResource(path);
+      }
+    } catch (Exception e) {
+      e.printStackTrace();
     }
 
-    public static InputStream getStream(String path) {
-	InputStream input = null;
-	File file;
+    return input;
+  }
 
-	try {
-	    file = new File(path);
-	    if (file.exists()) {
-		return new FileInputStream(file);
-	    }
+  public static URL getResource(String path) {
+    URL url;
 
-	    input = ResourceHelper.getClassPath(path);
+    try {
+      url = ResourceHelper.getMetaResourceAsURL(path);
 
-	    if (input == null) {
-		input = ResourceHelper.getMetaResource(path);
-	    }
-	} catch (Exception e) {
-	    e.printStackTrace();
-	}
+      if (url == null) {
+        url = ResourceHelper.getClassPathAsURL(path);
+      }
 
-	return input;
+      if (url == null) {
+        url = new URL("jndi:" + path);
+      }
+    } catch (MalformedURLException e) {
+      e.printStackTrace();
+      url = null;
     }
 
-    public static URL getResource(String path) {
-	URL url;
+    return url;
+  }
 
-	try {
-	    url = ResourceHelper.getMetaResourceAsURL(path);
+  public static InputStream getMetaResource(String path) {
+    return ResourceHelper.getClassPath(ResourceHelper.META_INF + path);
+  }
 
-	    if (url == null) {
-		url = ResourceHelper.getClassPathAsURL(path);
-	    }
+  public static URL getMetaResourceAsURL(String path) {
+    return ResourceHelper.getClassPathAsURL(ResourceHelper.META_INF + path);
+  }
 
-	    if (url == null) {
-		url = new URL("jndi:" + path);
-	    }
-	} catch (MalformedURLException e) {
-	    e.printStackTrace();
-	    url = null;
-	}
+  public static Enumeration<URL> getMetaResources(String path) throws IOException {
+    return ResourceHelper.getClassPathResources(ResourceHelper.META_INF + path);
+  }
 
-	return url;
+  public static InputStream getClassPath(String path) {
+    return ResourceHelper.class.getClassLoader().getResourceAsStream(path);
+  }
+
+  public static URL getClassPathAsURL(String path) {
+    return ResourceHelper.class.getClassLoader().getResource(ResourceHelper.parse(path));
+  }
+
+  public static Enumeration<URL> getClassPathResources(String path) throws IOException {
+    return ResourceHelper.class.getClassLoader().getResources(path);
+  }
+
+  protected static String parse(String path) {
+    if (path.startsWith("/")) {
+      path = path.substring(1);
     }
 
-    public static InputStream getMetaResource(String path) {
-	return ResourceHelper.getClassPath(ResourceHelper.META_INF + path);
-    }
+    path = path.replace("//", "/");
 
-    public static URL getMetaResourceAsURL(String path) {
-	return ResourceHelper.getClassPathAsURL(ResourceHelper.META_INF + path);
-    }
+    return path;
+  }
 
-    public static Enumeration<URL> getMetaResources(String path)
-	throws IOException {
-	return ResourceHelper.getClassPathResources(ResourceHelper.META_INF + path);
-    }
-
-    public static InputStream getClassPath(String path) {
-	return ResourceHelper.class.getClassLoader().getResourceAsStream(path);
-    }
-
-    public static URL getClassPathAsURL(String path) {
-	return ResourceHelper.class.getClassLoader().getResource(ResourceHelper.parse(path));
-    }
-
-    public static Enumeration<URL> getClassPathResources(String path)
-	throws IOException {
-	return ResourceHelper.class.getClassLoader().getResources(path);
-    }
-
-    protected static String parse(String path) {
-	if (path.startsWith("/")) {
-	    path = path.substring(1);
-	}
-
-	path = path.replace("//", "/");
-
-	return path;
-    }
-
-    private static final String META_INF = "META-INF/";
+  private static final String META_INF = "META-INF/";
 }

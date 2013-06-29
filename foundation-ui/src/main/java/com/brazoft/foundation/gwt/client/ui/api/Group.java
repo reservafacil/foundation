@@ -10,7 +10,7 @@ import com.google.gwt.dom.client.Style.Unit;
 public abstract class Group<G extends Group<G>>
     extends Composite<G> {
 
-    private LabelGroup label = new LabelGroup();
+    private LabelGroup label   = new LabelGroup();
 
     private int        colspan = 1;
 
@@ -43,11 +43,11 @@ public abstract class Group<G extends Group<G>>
 	extends Component<LabelGroup>
 	implements HasText<LabelGroup> {
 
-	private LabeledText         label = new LabeledText().align(Alignment.LEFT);
+	private LabeledText       label = new LabeledText().align(Alignment.LEFT);
 
-	private HTML<SpanElement>   mark  = HTML.asSpan().className("required");
+	private HTML<SpanElement> mark  = HTML.asSpan().className("required");
 
-	private HTML<AnchorElement> hint  = HTML.asAnchor("#").className("hint");
+	private HTML<SpanElement> hint  = HTML.asSpan().className("hint");
 
 	public LabelGroup() {
 	    super(ElementResolver.div());

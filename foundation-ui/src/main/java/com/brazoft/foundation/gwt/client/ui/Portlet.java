@@ -1,10 +1,7 @@
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.HTML;
-import com.brazoft.foundation.gwt.client.component.api.Component;
-import com.brazoft.foundation.gwt.client.component.api.HasText;
-import com.brazoft.foundation.gwt.client.component.api.ResponsiveComponent;
+import com.brazoft.foundation.gwt.client.component.*;
+import com.brazoft.foundation.gwt.client.component.api.*;
 import com.brazoft.foundation.gwt.client.ui.api.UIButton;
 import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.user.client.ui.Widget;
@@ -78,7 +75,7 @@ public final class Portlet
 	    }
 
 	    public Toolbar button(UIButton<?> button) {
-		return this.add(button.asWidget());
+		return this.add(button.size(Size.SMALL).asWidget());
 	    }
 	}
     }
@@ -109,15 +106,6 @@ public final class Portlet
 	    public Row() {
 		super(ElementResolver.div());
 		this.className("portlet-row clearfix");
-	    }
-
-	    @Override
-	    public Row add(Widget child) {
-		if (child instanceof ResponsiveComponent) {
-		    ((ResponsiveComponent<?>)child).responsiveTo(this);
-		}
-
-		return super.add(child);
 	    }
 	}
     }

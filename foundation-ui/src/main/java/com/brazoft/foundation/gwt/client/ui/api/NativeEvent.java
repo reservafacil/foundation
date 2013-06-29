@@ -27,21 +27,20 @@ public abstract class NativeEvent<N extends NativeEvent<N>>
 	if (this.eventBus() == null) {
 	    return;
 	}
-	
+
 	Iterable<EventType> types = this.eventBus().types();
 	for (EventType type : types) {
-	    this.registerEvent((N) this, this.toMethod(type), type, this.getId());
+	    this.registerEvent((N)this, this.toMethod(type), type, this.getId());
 	}
     }
-    
+
     protected native void registerEvent(N widget, String method, EventType type, String id) /*-{
-    	$wnd.$("#" + id).on(method, function () {
-    		widget.@com.brazoft.foundation.gwt.client.component.api.EventSource::fireEvent(Lcom/brazoft/foundation/gwt/client/event/api/EventType;)(type);
-    	});
-    }-*/;
-    
-    protected String toMethod(EventType type)
-    {
+	                                                                                    $wnd.$("#" + id).on(method, function () {
+	                                                                                    widget.@com.brazoft.foundation.gwt.client.component.api.EventSource::fireEvent(Lcom/brazoft/foundation/gwt/client/event/api/EventType;)(type);
+	                                                                                    });
+	                                                                                    }-*/;
+
+    protected String toMethod(EventType type) {
 	return type.name().toLowerCase();
     }
 }

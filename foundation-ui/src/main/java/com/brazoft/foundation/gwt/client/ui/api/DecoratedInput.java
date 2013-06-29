@@ -1,53 +1,35 @@
 /**
- * Copyright (C) 2009-2012 the original author or authors.
- * See the notice.md file distributed with this work for additional
- * information regarding copyright ownership.
+ * Copyright (C) 2009-2012 the original author or authors. See the notice.md file distributed with
+ * this work for additional information regarding copyright ownership.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.brazoft.foundation.gwt.client.ui.api;
 
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.HTML;
-import com.brazoft.foundation.gwt.client.component.api.Component;
-import com.brazoft.foundation.gwt.client.component.api.ResponsiveComponent;
+import com.brazoft.foundation.gwt.client.component.*;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
+import com.brazoft.foundation.gwt.client.event.api.*;
 import com.brazoft.foundation.gwt.client.event.api.HasChangeHandlers;
+import com.brazoft.foundation.gwt.client.event.api.HasClickHandlers;
 import com.brazoft.foundation.gwt.client.event.api.HasFocusHandlers;
-import com.brazoft.foundation.gwt.client.event.api.HasKeyHandlers;
-import com.brazoft.foundation.gwt.client.event.api.HasMouseHandlers;
 import com.brazoft.foundation.gwt.client.ui.*;
 import com.google.gwt.dom.client.SpanElement;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.BlurHandler;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.FocusHandler;
-import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.dom.client.MouseDownHandler;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.event.dom.client.MouseOutHandler;
-import com.google.gwt.event.dom.client.MouseOverHandler;
-import com.google.gwt.event.dom.client.MouseUpHandler;
-import com.google.gwt.event.dom.client.MouseWheelHandler;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
 public abstract class DecoratedInput<D extends DecoratedInput<D, V>, V>
     extends Bootstrap<D>
-    implements UIInput<D, V>, HasKeyHandlers<D>, HasFocusHandlers<D>, HasMouseHandlers<D>, HasChangeHandlers<D>, ResponsiveComponent<D> {
+    implements UIInput<D, V>, HasClickHandlers<D>, HasKeyHandlers<D>, HasFocusHandlers<D>, HasMouseHandlers<D>, HasChangeHandlers<D> {
 
     private Input<?, String> input;
 
@@ -67,6 +49,18 @@ public abstract class DecoratedInput<D extends DecoratedInput<D, V>, V>
 	super(ElementResolver.div());
 	this.input = input;
 	this.add(this.input);
+    }
+
+    @Override
+    public D onClick(ClickHandler handler) {
+	this.input.onClick(handler);
+	return (D)this;
+    }
+
+    @Override
+    public D onDoubleClick(DoubleClickHandler handler) {
+	this.input.onDoubleClick(handler);
+	return (D)this;
     }
 
     public D onChange(ChangeHandler handler) {
@@ -226,31 +220,6 @@ public abstract class DecoratedInput<D extends DecoratedInput<D, V>, V>
 	return (D)this;
     }
 
-    public D responsiveTo(final Widget container) {
-	return Component.Util.responsiveBehavior(this, container);
-    }
-
-    public D adaptSize(Widget container) {
-	double addOnWidth = 0;
-	double containerWidth = Component.Util.innerWidth(container);
-
-	for (Widget child : this.getChildren()) {
-	    if (!child.equals(this.input)) {
-		addOnWidth += child.getOffsetWidth();
-	    }
-	}
-
-	double inputWidth = containerWidth
-	        - addOnWidth
-	        - Component.Util.computeInnerLeft(container)
-	        - Component.Util.computeInnerRight(this.input)
-	        - Component.Util.computeInnerLeft(this.input);
-
-	this.input.style().width(inputWidth, Unit.PX);
-
-	return (D)this;
-    }
-    
     public D prepend(String text) {
 	return this.add(text, Decoration.PREPENDED);
     }
@@ -285,11 +254,6 @@ public abstract class DecoratedInput<D extends DecoratedInput<D, V>, V>
 
     public Input<?, String> input() {
 	return this.input;
-    }
-
-    @Override
-    protected D add(Widget add) {
-	return super.add(add);
     }
 
     protected D add(Icon icon, Decoration decoration) {

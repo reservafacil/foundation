@@ -1,7 +1,8 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.commons.format.api.Format;
-import com.brazoft.foundation.gwt.client.ui.api.*;
+import com.brazoft.foundation.gwt.client.ui.api.TextGridColumn;
+import com.brazoft.foundation.gwt.client.util.JSArrays;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.jso.JSObject;
 
@@ -20,15 +21,7 @@ public final class NumberColumn<J extends JSObject>
     }
 
     @Override
-    protected native void doSort(JsArray<J> rows, String name, int direction)/*-{
-	                                                                     rows.sort(function(a,b) 
-	                                                                     { 
-	                                                                     if(direction > 0)
-	                                                                     {
-	                                                                     return a[name] - b[name];
-	                                                                     }
-	                                                                     
-	                                                                     return b[name] - a[name];
-	                                                                     });
-	                                                                     }-*/;
+    protected void doSort(JsArray<J> rows, String name, SortDirection direction) {
+	JSArrays.sortNumber(rows, name, direction.direction());
+    }
 }

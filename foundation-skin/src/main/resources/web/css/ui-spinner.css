@@ -15,6 +15,16 @@
  * See the License for the specific language governing permissions and
  * limitations under the License.
  */
+ 
+.spinner {
+	position: relative;
+}
+
+.spinner input.input-block-level .spinner-buttons{
+	top: -30px;
+	left: 94%;
+}
+
 .spinner input {
 	float: left;
 	width: 43px;

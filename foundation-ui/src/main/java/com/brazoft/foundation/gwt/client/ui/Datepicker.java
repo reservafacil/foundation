@@ -1,19 +1,16 @@
 /**
- * Copyright (C) 2009-2012 the original author or authors.
- * See the notice.md file distributed with this work for additional
- * information regarding copyright ownership.
+ * Copyright (C) 2009-2012 the original author or authors. See the notice.md file distributed with
+ * this work for additional information regarding copyright ownership.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.brazoft.foundation.gwt.client.ui;
@@ -21,7 +18,7 @@ package com.brazoft.foundation.gwt.client.ui;
 import java.util.Date;
 
 import com.brazoft.foundation.gwt.client.component.*;
-import com.brazoft.foundation.gwt.client.component.api.*;
+import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.Event;
 import com.brazoft.foundation.gwt.client.event.api.*;
 import com.brazoft.foundation.gwt.client.event.api.HasChangeHandlers;
@@ -35,12 +32,10 @@ import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.event.shared.GwtEvent.Type;
-import com.google.gwt.query.client.GQuery;
-import com.google.gwt.user.client.ui.Widget;
 
 public final class Datepicker
     extends Bootstrap<Datepicker>
-    implements UIInput<Datepicker, Date>, ResponsiveComponent<Datepicker>, HasChangeHandlers<Datepicker>, HasFocusHandlers<Datepicker> {
+    implements UIInput<Datepicker, Date>, HasChangeHandlers<Datepicker>, HasFocusHandlers<Datepicker> {
 
     private TextBox          input;
 
@@ -64,17 +59,12 @@ public final class Datepicker
     }
 
     private void init(DateFormat format) {
+	this.style().position(Position.RELATIVE);
 	this.format = format;
-	Button icon = new Button().icon(Icon.CALENDAR);
-	icon.onClick(new ClickHandler() {
 
-	    @Override
-	    public void onClick(ClickEvent event) {
-		Datepicker.this.input.focus();
-	    }
-	});
-	this.input = new TextBox().append(icon);
+	this.input = new TextBox();
 	this.editable();
+
 	this.input.onFocus(new FocusHandler() {
 
 	    @Override
@@ -107,6 +97,25 @@ public final class Datepicker
 	this.add(this.picker.add(this.panel)).hide();
     }
 
+    public Datepicker icon() {
+	Button icon = new Button().icon(Icon.CALENDAR);
+	icon.onClick(new ClickHandler() {
+
+	    @Override
+	    public void onClick(ClickEvent event) {
+		Datepicker.this.input.focus();
+	    }
+	});
+
+	this.input.append(icon);
+
+	return this;
+    }
+
+    public InputText input() {
+	return input.input();
+    }
+
     @Override
     public Datepicker onChange(ChangeHandler handler) {
 	this.input.onChange(handler);
@@ -130,12 +139,6 @@ public final class Datepicker
 	return this;
     }
 
-    @Override
-    public Datepicker adaptSize(Widget container) {
-	this.input.adaptSize(container);
-	return this;
-    }
-
     public Datepicker block() {
 	this.input.block();
 	return this;
@@ -152,14 +155,11 @@ public final class Datepicker
     }
 
     public Datepicker range(Date start, Date end) {
-	if (Calendar.as(start).after(this.panel.current())) {
-	    this.panel.range(start, end);
-	    this.value(new Date(start.getTime()));
-	    return this;
-	}
-
 	this.panel.range(start, end);
-	this.value(this.getValue());
+
+	if (Calendar.as(start).after(this.panel.current())) {
+	    this.value(new Date(start.getTime()));
+	}
 
 	return this;
     }
@@ -173,21 +173,21 @@ public final class Datepicker
 	Display display = this.picker.style().getDisplay().equals(Display.NONE.getCssName()) ? Display.BLOCK : Display.NONE;
 	this.picker.style().display(display);
 
-	return this.position();
+	return this.toPosition();
     }
 
-    Datepicker show() {
+    public Datepicker show() {
 	if (!this.shown && !this.isReadOnly()) {
 	    this.picker.style().display(Display.BLOCK);
 
 	    this.shown = true;
-	    return this.position();
+	    return this.toPosition();
 	}
 
 	return this;
     }
 
-    Datepicker hide() {
+    public Datepicker hide() {
 	this.shown = false;
 	this.picker.hidden();
 	this.panel.selected(false);
@@ -233,7 +233,7 @@ public final class Datepicker
 
     @Override
     public Datepicker readonly() {
-	this.input.input().style().clearBackgroundColor();
+	this.input.input().readonly().style().clearBackgroundColor();
 	this.readOnly = true;
 	return this;
     }
@@ -272,11 +272,6 @@ public final class Datepicker
 	return this;
     }
 
-    public Datepicker responsiveTo(Widget container) {
-	this.input.responsiveTo(container);
-	return this;
-    }
-
     @Override
     public Datepicker removeHandlers(Event<?> event) {
 	this.panel.removeHandlers(event);
@@ -297,12 +292,12 @@ public final class Datepicker
 	                             }
 	                         };
 
-    Datepicker position() {
-	GQuery input = this.input.input().asQuery();
+    Datepicker toPosition() {
+	InputText input = this.input.input();
 
-	double left = input.position().left + input.scrollLeft() + Component.Util.computeInnerLeft(this.getParent());
-	double top = input.position().top + input.scrollTop() + input.outerHeight(true);
-	this.picker.style().zIndex(1000).position(Position.ABSOLUTE).left(left, Unit.PX).display(Display.BLOCK).top(top, Unit.PX);
+	double left = 0;
+	double top = input.top() + input.position().top() + input.scrollTop() + input.outerHeight(true);
+	this.picker.style().zIndex(10000).position(Position.ABSOLUTE).display(Display.BLOCK).top(top, Unit.PX).left(left, Unit.PX);
 
 	return this;
     }

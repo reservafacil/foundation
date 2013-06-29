@@ -34,7 +34,7 @@ abstract class RequestNoLogCallback<T>
 		        null);
 		String content = response.getText();
 		if (content != null && content.length() > 0) {
-		    //GWT.log(content, null);
+		    // GWT.log(content, null);
 		    value = parseResult();
 		} else {
 		    value = null;

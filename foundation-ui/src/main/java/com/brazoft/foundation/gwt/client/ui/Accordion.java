@@ -1,19 +1,16 @@
 /**
- * Copyright (C) 2009-2012 the original author or authors.
- * See the notice.md file distributed with this work for additional
- * information regarding copyright ownership.
+ * Copyright (C) 2009-2012 the original author or authors. See the notice.md file distributed with
+ * this work for additional information regarding copyright ownership.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.brazoft.foundation.gwt.client.ui;
@@ -50,7 +47,6 @@ public final class Accordion
 
     public Accordion item(Widget heading, Widget content) {
 	this.newItem(heading, content);
-
 	return this;
     }
 
@@ -60,22 +56,6 @@ public final class Accordion
 
 	return heading;
     }
-    
-    public Accordion show()
-    {
-	this.jsFunction(this.getId(), Type.SHOW.name().toLowerCase());
-	return this;
-    }
-    
-    public Accordion hide()
-    {
-	this.jsFunction(this.getId(), Type.HIDE.name().toLowerCase());
-	return this;
-    }
-    
-    private native void jsFunction(String id, String method)/*-{
-    	$("#" + id).collapse(method);
-    }-*/;
 
     AccordionItem newItem(Widget heading, Widget content) {
 	AccordionItem item = new AccordionItem(this.hasChildren());
@@ -95,6 +75,15 @@ public final class Accordion
 	return ((AccordionItem)this.getChild(index)).collapse.getContent();
     }
 
+    public Accordion toogle() {
+	this.item(0).toogle();
+	return this;
+    }
+
+    AccordionItem item(int index) {
+	return (AccordionItem)this.getChild(index);
+    }
+
     public class RemovableItem
 	extends Component<RemovableItem>
 	implements HasText<RemovableItem> {
@@ -108,12 +97,12 @@ public final class Accordion
 	    this.add(this.link).add(this.button);
 	}
 
-	public RemovableItem onRemove(final EventHandler<?> handler) {
+	public RemovableItem onRemove(final EventHandler<Void> handler) {
 	    ClickHandler clickHandler = new ClickHandler() {
 
 		@Override
 		public void onClick(ClickEvent e) {
-		    handler.onEvent(new Event(Type.REMOVE, RemovableItem.this));
+		    handler.onEvent(new Event<Void>(Type.REMOVE, RemovableItem.this));
 		}
 	    };
 
@@ -145,7 +134,7 @@ public final class Accordion
 	}
     }
 
-    class AccordionItem
+    public class AccordionItem
 	extends Bootstrap<AccordionItem> {
 
 	private AccordionHeading  heading  = new AccordionHeading();
@@ -162,6 +151,15 @@ public final class Accordion
 		this.heading.toogle.className("collapsed");
 	    }
 	}
+
+	public AccordionItem toogle() {
+	    this.doToogle(this.getId());
+	    return this;
+	}
+
+	private native void doToogle(String id)/*-{
+	                                       $wnd.$("#" + id).collapse('toogle');
+	                                       }-*/;
     }
 
     class AccordionCollapse
@@ -188,7 +186,7 @@ public final class Accordion
 	}
 
 	@Override
-	protected AccordionCollapse add(Widget add) {
+	public AccordionCollapse add(Widget add) {
 	    this.inner.add(add);
 	    return this;
 	}
@@ -233,24 +231,24 @@ public final class Accordion
 	}
     }
 
-    public Accordion onShow(EventHandler<?> event) {
+    public Accordion onShow(EventHandler<Void> event) {
 	return this.addHandler(Type.SHOW, event);
     }
 
-    public Accordion whenShown(EventHandler<?> event) {
+    public Accordion whenShown(EventHandler<Void> event) {
 	return this.addHandler(Type.SHOWN, event);
     }
 
-    public Accordion onHide(EventHandler<?> event) {
+    public Accordion onHide(EventHandler<Void> event) {
 	return this.addHandler(Type.HIDE, event);
     }
 
-    public Accordion whenHidden(EventHandler<?> event) {
+    public Accordion whenHidden(EventHandler<Void> event) {
 	return this.addHandler(Type.HIDDEN, event);
     }
 
     enum Type
 	implements EventType {
-	HIDE, HIDDEN, REMOVE, SHOW, SHOWN;
+	HIDE, HIDDEN, REMOVE, SHOW, SHOWN, TOGGLE;
     }
 }

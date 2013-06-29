@@ -1,8 +1,7 @@
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.api.ResponsiveComponent;
+import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 import com.google.gwt.user.client.ui.Widget;
 
 public final class LayoutPanel
@@ -15,10 +14,6 @@ public final class LayoutPanel
 
     public Item item(Widget child) {
 	Item item = new Item(child);
-
-	if (child instanceof ResponsiveComponent) {
-	    ((ResponsiveComponent<?>)child).responsiveTo(this);
-	}
 
 	this.add(item);
 

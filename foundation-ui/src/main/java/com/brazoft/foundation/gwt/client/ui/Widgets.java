@@ -1,40 +1,62 @@
 /**
- * Copyright (C) 2009-2012 the original author or authors.
- * See the notice.md file distributed with this work for additional
- * information regarding copyright ownership.
+ * Copyright (C) 2009-2012 the original author or authors. See the notice.md file distributed with
+ * this work for additional information regarding copyright ownership.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.HTML;
-import com.brazoft.foundation.gwt.client.ui.api.Input;
-import com.brazoft.foundation.gwt.client.ui.api.UIButton;
-import com.google.gwt.dom.client.BodyElement;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.LabelElement;
-import com.google.gwt.regexp.shared.MatchResult;
-import com.google.gwt.regexp.shared.RegExp;
+import java.util.ArrayList;
+
+import com.brazoft.foundation.gwt.client.component.*;
+import com.brazoft.foundation.gwt.client.ui.api.*;
+import com.google.gwt.dom.client.*;
+import com.google.gwt.event.dom.client.KeyCodes;
+import com.google.gwt.regexp.shared.*;
 import com.google.gwt.user.client.DOM;
 import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
 public final class Widgets {
 
-    static final StyleChooser<Widget> btnChooser = new StyleChooser<Widget>("btn-primary", "btn-info", "btn-success", "btn-warning",
-	                                                                    "btn-danger", "btn-inverse");
+    static final StyleChooser<Widget>            btnChooser  = new StyleChooser<Widget>("btn-primary", "btn-info", "btn-success",
+	                                                                                "btn-warning", "btn-danger", "btn-inverse");
+
+    private static final java.util.List<Integer> controlKeys = new ArrayList<Integer>();
+
+    static {
+	controlKeys.add(KeyCodes.KEY_ALT);
+	controlKeys.add(KeyCodes.KEY_CTRL);
+	controlKeys.add(KeyCodes.KEY_BACKSPACE);
+	controlKeys.add(KeyCodes.KEY_DELETE);
+	controlKeys.add(KeyCodes.KEY_LEFT);
+	controlKeys.add(KeyCodes.KEY_RIGHT);
+	controlKeys.add(KeyCodes.KEY_SHIFT);
+	controlKeys.add(KeyCodes.KEY_TAB);
+	controlKeys.add(KeyCodes.KEY_ENTER);
+	controlKeys.add(KeyCodes.KEY_UP);
+	controlKeys.add(KeyCodes.KEY_DOWN);
+	controlKeys.add(KeyCodes.KEY_LEFT);
+	controlKeys.add(KeyCodes.KEY_RIGHT);
+	controlKeys.add(KeyCodes.KEY_PAGEDOWN);
+	controlKeys.add(KeyCodes.KEY_PAGEUP);
+	controlKeys.add(KeyCodes.KEY_HOME);
+	controlKeys.add(KeyCodes.KEY_END);
+	controlKeys.add(KeyCodes.KEY_ESCAPE);
+    }
+
+    public static java.util.List<Integer> controlKeys() {
+	return controlKeys;
+    }
 
     public static <W extends Widget> W setData(W widget, String value) {
 	widget.getElement().setAttribute("data-value", value);

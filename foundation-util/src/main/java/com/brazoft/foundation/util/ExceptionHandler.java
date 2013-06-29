@@ -5,16 +5,16 @@ package com.brazoft.foundation.util;
  */
 public class ExceptionHandler {
 
-    public static void handleRuntime(Throwable e) {
-	ExceptionHandler.print(e);
-	throw new RuntimeException(e);
-    }
+  public static void handleRuntime(Throwable e) {
+    ExceptionHandler.print(e);
+    throw new RuntimeException(e);
+  }
 
-    public static void handleRuntime(String message) {
-	throw new RuntimeException(message);
-    }
+  public static void handleRuntime(String message) {
+    throw new RuntimeException(message);
+  }
 
-    private static void print(Throwable e) {
-	e.printStackTrace();
-    }
+  private static void print(Throwable e) {
+    e.printStackTrace();
+  }
 }

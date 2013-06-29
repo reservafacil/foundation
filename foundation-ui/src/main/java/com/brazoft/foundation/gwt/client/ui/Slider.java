@@ -1,38 +1,33 @@
 /**
- * Copyright (C) 2009-2012 the original author or authors.
- * See the notice.md file distributed with this work for additional
- * information regarding copyright ownership.
+ * Copyright (C) 2009-2012 the original author or authors. See the notice.md file distributed with
+ * this work for additional information regarding copyright ownership.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.*;
-import com.brazoft.foundation.gwt.client.component.api.*;
+import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.Event;
 import com.brazoft.foundation.gwt.client.event.api.*;
 import com.brazoft.foundation.gwt.client.json.*;
 import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 import com.brazoft.foundation.gwt.client.util.MessageFormat;
 import com.google.gwt.core.client.*;
-import com.google.gwt.dom.client.*;
-import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.dom.client.DivElement;
 
 public final class Slider
     extends Bootstrap<Slider>
-    implements UIInput<Slider, Double>, ResponsiveComponent<Slider> {
+    implements UIInput<Slider, Double> {
 
     private JSONObject       options = JSON.asObject();
 
@@ -53,22 +48,22 @@ public final class Slider
 	this.add(this.slider).range(0, 100).step(1).value(0d);
     }
 
-    public Slider onChange(EventHandler handler) {
+    public Slider onChange(EventHandler<JsArrayNumber> handler) {
 	this.addHandler(SliderEvent.CHANGE, handler);
 	return this;
     }
 
-    public Slider onSlide(EventHandler handler) {
+    public Slider onSlide(EventHandler<JsArrayNumber> handler) {
 	this.addHandler(SliderEvent.SLIDE, handler);
 	return this;
     }
 
-    public Slider onStart(EventHandler handler) {
+    public Slider onStart(EventHandler<JsArrayNumber> handler) {
 	this.addHandler(SliderEvent.START, handler);
 	return this;
     }
 
-    public Slider onStop(EventHandler handler) {
+    public Slider onStop(EventHandler<JsArrayNumber> handler) {
 	this.addHandler(SliderEvent.STOP, handler);
 	return this;
     }
@@ -171,7 +166,7 @@ public final class Slider
 	return getValueJS(this.slider.getId(), index);
     }
 
-    public static Double getValue(Event event) {
+    public static Double getValue(Event<JsArrayNumber> event) {
 	JsArrayNumber values = Slider.getValues(event);
 
 	if (values.length() == 0) {
@@ -181,8 +176,8 @@ public final class Slider
 	return values.get(0);
     }
 
-    public static JsArrayNumber getValues(Event event) {
-	return (JsArrayNumber)event.data();
+    public static JsArrayNumber getValues(Event<JsArrayNumber> event) {
+	return event.data();
     }
 
     public Slider values(Double[] values) {
@@ -210,10 +205,10 @@ public final class Slider
 	    this.updatePlaceHolder(placeholder);
 	    this.insert(this.placeholder, this.slider);
 
-	    this.onSlide(new EventHandler() {
+	    this.onSlide(new EventHandler<JsArrayNumber>() {
 
 		@Override
-		public void onEvent(Event e) {
+		public void onEvent(Event<JsArrayNumber> e) {
 		    Slider.this.updatePlaceHolder(placeholder);
 		}
 	    });
@@ -279,25 +274,13 @@ public final class Slider
 	return this;
     }
 
-    @Override
-    public Slider adaptSize(Widget container) {
-	this.style().width(Component.Util.innerWidth(container), Unit.PX);
-
-	return this;
-    }
-
-    @Override
-    public Slider responsiveTo(Widget container) {
-	return Component.Util.responsiveBehavior(this, container);
-    }
-
     public enum Range {
 	MINIMUM, MAXIMUM, VALUES;
     }
 
     @Override
     protected void onLoad() {
-	this.createSliderJS(this, this.slider.getId(), this.options.getJavaScriptObject());
+	this.createSliderJS(this, this.slider.getId(), this.options.toJavaScriptObject());
     }
 
     @Override
@@ -375,12 +358,12 @@ public final class Slider
 	                                                                                   };
 	                                                                                   options.change = function(event, ui) {
 	                                                                                   var has = event.originalEvent ? true : false;
-	                                                                                   widget.@com.brazoft.foundation.gwt.client.ui.Slider::fireOnChangeEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;Z)(event, ui.values, has);                
+	                                                                                   widget.@com.brazoft.foundation.gwt.client.ui.Slider::fireOnChangeEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;Z)(event, ui.values, has);
 	                                                                                   };
 	                                                                                   options.stop = function(event, ui) {
 	                                                                                   widget.@com.brazoft.foundation.gwt.client.ui.Slider::fireOnStopEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;)(event, ui.values);
 	                                                                                   };
-	                                                                                   
+
 	                                                                                   $wnd.$("#" + id).slider(options);
 	                                                                                   }-*/;
 

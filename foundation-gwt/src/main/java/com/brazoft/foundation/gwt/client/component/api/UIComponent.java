@@ -1,8 +1,7 @@
 package com.brazoft.foundation.gwt.client.component.api;
 
 import com.brazoft.foundation.gwt.client.component.Style;
-import com.google.gwt.user.client.ui.IsWidget;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.user.client.ui.*;
 
 public interface UIComponent<W extends Widget>
     extends IsWidget {
@@ -30,4 +29,6 @@ public interface UIComponent<W extends Widget>
     W hidden();
 
     void removeFromParent();
+    
+    Selector<?> asSelector();
 }

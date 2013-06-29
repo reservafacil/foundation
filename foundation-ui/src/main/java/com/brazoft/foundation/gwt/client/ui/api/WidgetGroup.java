@@ -3,8 +3,7 @@ package com.brazoft.foundation.gwt.client.ui.api;
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.api.HasChangeHandlers;
-import com.brazoft.foundation.gwt.client.ui.Label;
-import com.brazoft.foundation.gwt.client.ui.Orientation;
+import com.brazoft.foundation.gwt.client.ui.*;
 import com.google.gwt.event.dom.client.ChangeHandler;
 import com.google.gwt.user.client.ui.Widget;
 

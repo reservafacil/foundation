@@ -1,11 +1,9 @@
 package com.brazoft.foundation.gwt.client.ui.api;
 
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.HTML;
+import com.brazoft.foundation.gwt.client.component.*;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
-import com.brazoft.foundation.gwt.client.ui.HelpText;
+import com.brazoft.foundation.gwt.client.ui.*;
 import com.brazoft.foundation.gwt.client.ui.HelpText.HelpOptions;
-import com.brazoft.foundation.gwt.client.ui.StyleChooser;
 import com.google.gwt.dom.client.DivElement;
 
 public final class InputControl

@@ -7,7 +7,7 @@ import com.google.gwt.dom.client.Style.Unit;
 public final class ProgressCategory
     extends Bootstrap<ProgressCategory> {
 
-    private int                            total   = 100;
+    private double                         total   = 100;
 
     private StyleChooser<ProgressCategory> chooser = new StyleChooser<ProgressCategory>("bar-success", "bar-warning", "bar-danger",
 	                                                                                "bar-info");
@@ -33,13 +33,13 @@ public final class ProgressCategory
 	return this.chooser.className(this, "bar-info");
     }
 
-    public ProgressCategory total(int total) {
+    public ProgressCategory total(double total) {
 	this.total = total;
 	return this;
     }
 
-    public ProgressCategory worked(int amount) {
-	this.style().width((amount / this.total) * 100, Unit.PCT);
+    public ProgressCategory worked(double amount) {
+	this.style().width((amount / this.total) * 100d, Unit.PCT);
 	return this;
     }
 }

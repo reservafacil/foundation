@@ -1,0 +1,13 @@
+.data-panel .help-block, .data-panel .control-group {
+	margin-bottom: 0 !important;
+}
+
+.data-panel td
+{
+	padding-top: 5px;
+}
+
+.data-panel h1, .data-panel h2, .data-panel h3, .data-panel h4, .data-panel h5, .data-panel h6
+{
+	margin: 0 !important;
+}

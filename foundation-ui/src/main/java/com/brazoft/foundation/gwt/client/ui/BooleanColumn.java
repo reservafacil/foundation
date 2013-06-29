@@ -2,6 +2,7 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.commons.format.api.Format;
 import com.brazoft.foundation.gwt.client.ui.api.TextGridColumn;
+import com.brazoft.foundation.gwt.client.util.JSArrays;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.jso.JSObject;
 
@@ -40,30 +41,7 @@ public final class BooleanColumn<J extends JSObject>
     }
 
     @Override
-    protected native void doSort(JsArray<J> rows, String name, int direction)/*-{
-	                                                                     rows.sort(function(a, b)
-	                                                                     {
-	                                                                     if(a[name] && b[name] || !a[name] && !b[name])
-	                                                                     { 
-	                                                                     return 0; 
-	                                                                     }
-	                                                                     
-	                                                                     if(direction > 0)
-	                                                                     {
-	                                                                     if(!a[name] && b[name])
-	                                                                     { 
-	                                                                     return -1;
-	                                                                     } 
-	                                                                     
-	                                                                     return 1; 
-	                                                                     }
-	                                                                     
-	                                                                     if(!b[name] && a[name])
-	                                                                     { 
-	                                                                     return -1;
-	                                                                     }
-	                                                                     
-	                                                                     return 1;
-	                                                                     });
-	                                                                     }-*/;
+    protected void doSort(JsArray<J> rows, String name, SortDirection direction) {
+	JSArrays.sortBoolean(rows, name, direction.direction());
+    }
 }

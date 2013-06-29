@@ -1,19 +1,16 @@
 /**
- * Copyright (C) 2009-2012 the original author or authors.
- * See the notice.md file distributed with this work for additional
- * information regarding copyright ownership.
+ * Copyright (C) 2009-2012 the original author or authors. See the notice.md file distributed with
+ * this work for additional information regarding copyright ownership.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.brazoft.foundation.gwt.client.ui;
@@ -38,32 +35,47 @@ public final class Modal
     public Modal() {
 	super(ElementResolver.div());
 	String id = ElementResolver.document().createUniqueId();
-	this.id(id).className("modal hide fade in").attribute("role", "dialog").attribute("aria-labelledby", id + "_label").attribute("aria-hidden",
-	                                                                                                                              "true").attribute("data-keyboard",
-	                                                                                                                                                "true");
+	this.id(id).className("modal hide fade in").attribute("role", "dialog");
+	this.attribute("aria-labelledby", id + "_label").attribute("aria-hidden", "true");
+	this.attribute("data-keyboard", "true");
+
+	this.add(this.header.hidden()).add(this.body.hidden()).add(this.footer.hidden());
+    }
+
+    @Override
+    public Modal detachChildren() {
+	this.body.detachChildren();
+	this.footer.detachChildren();
+	return this;
+    }
+
+    public Modal hideOnComplete() {
+	this.header.closeButton.hidden();
+	return this.attribute("data-keyboard", "false");
     }
 
     public Modal statical() {
 	return this.attribute("data-backdrop", "static");
     }
 
-    public Button trigger(String label) {
+    public Button trigger() {
 	return new Button(ButtonOptions.ANCHOR).attribute("href", "#" + this.getId()).attribute("role", "button").attribute("data-toggle",
-	                                                                                                                    "modal").text(label);
+	                                                                                                                    "modal");
     }
 
     public Modal heading(String text) {
+	this.header.visible();
 	return this.add(this.header.text(text));
     }
 
     public ModalBody body() {
-	this.add(this.body);
+	this.body.visible();
 
 	return this.body;
     }
 
     public ModalFooter footer() {
-	this.add(this.footer);
+	this.footer.visible();
 
 	return this.footer;
     }
@@ -74,6 +86,11 @@ public final class Modal
 	public ModalBody() {
 	    super(ElementResolver.div());
 	    this.className("modal-body");
+	}
+
+	@Override
+	public ModalBody detachChildren() {
+	    return super.detachChildren();
 	}
 
 	@Override
@@ -91,6 +108,11 @@ public final class Modal
 	}
 
 	@Override
+	public ModalFooter detachChildren() {
+	    return super.detachChildren();
+	}
+
+	@Override
 	public ModalFooter add(Widget add) {
 	    return super.add(add);
 	}
@@ -100,12 +122,14 @@ public final class Modal
 	extends Bootstrap<ModalHeader>
 	implements HasText<ModalHeader> {
 
-	private Heading heading = new Heading(3);
+	private Heading heading     = new Heading(3);
+
+	private Button  closeButton = new Button().className("close").attribute("data-dismiss", "modal").attribute("aria-hidden", "true").text("×");
 
 	public ModalHeader() {
 	    super(ElementResolver.div());
 	    this.className("modal-header");
-	    this.add(new Button().className("close").attribute("data-dismiss", "modal").attribute("aria-hidden", "true").text("×")).add(this.heading);
+	    this.add(this.closeButton).add(this.heading);
 	}
 
 	@Override
@@ -120,19 +144,19 @@ public final class Modal
 	}
     }
 
-    public Modal onShow(EventHandler<?> handler) {
+    public Modal onShow(EventHandler<Void> handler) {
 	return this.addHandler(Type.SHOW, handler);
     }
 
-    public Modal whenShown(EventHandler<?> handler) {
+    public Modal whenShown(EventHandler<Void> handler) {
 	return this.addHandler(Type.SHOWN, handler);
     }
 
-    public Modal onHide(EventHandler<?> handler) {
+    public Modal onHide(EventHandler<Void> handler) {
 	return this.addHandler(Type.HIDE, handler);
     }
 
-    public Modal whenHidden(EventHandler<?> handler) {
+    public Modal whenHidden(EventHandler<Void> handler) {
 	return this.addHandler(Type.HIDDEN, handler);
     }
 
@@ -140,21 +164,20 @@ public final class Modal
 	if (!this.isAttached()) {
 	    RootPanel.get().add(this);
 	}
-
-	this.jsFunction(this.getId(), Type.SHOW.method());
-
+	this.doFunction(Type.SHOW.method(), this.getId());
+	this.getElement().focus();
 	return this;
     }
 
     public Modal hide() {
-	this.jsFunction(this.getId(), Type.HIDE.method());
+	this.doFunction(Type.HIDE.method(), this.getId());
 	return this;
     }
 
-    private native void jsFunction(String id, String method)/*-{
+    protected native void doFunction(String method, String id) /*-{
 	$wnd.$("#" + id).modal(method);
     }-*/;
-    
+
     enum Type
 	implements EventType {
 	HIDE, HIDDEN, SHOW, SHOWN;

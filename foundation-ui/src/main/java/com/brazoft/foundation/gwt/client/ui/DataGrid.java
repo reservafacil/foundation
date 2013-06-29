@@ -1,19 +1,16 @@
 /**
- * Copyright (C) 2009-2012 the original author or authors.
- * See the notice.md file distributed with this work for additional
- * information regarding copyright ownership.
+ * Copyright (C) 2009-2012 the original author or authors. See the notice.md file distributed with
+ * this work for additional information regarding copyright ownership.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.brazoft.foundation.gwt.client.ui;
@@ -87,6 +84,10 @@ public final class DataGrid<J extends JSObject>
 	return this.addHandler(Type.DRAW, handler);
     }
 
+    public DataGrid<J> onSelection(EventHandler<J> handler) {
+	return this.addHandler(Type.SELECTION, handler);
+    }
+
     public DataGrid<J> add(final GridColumn<?, J> column) {
 	column.headerCell(this.headerColumns.cell());
 	column.onClick(new ClickHandler() {
@@ -143,6 +144,10 @@ public final class DataGrid<J extends JSObject>
 	    J row = this.rows.get(i);
 
 	    for (GridFilter<J> filter : this.filters) {
+		if (!filter.isActive()) {
+		    continue;
+		}
+
 		apply = filter.filter(row);
 		row.set("_skip_", !apply);
 
@@ -212,9 +217,9 @@ public final class DataGrid<J extends JSObject>
 		break;
 	    }
 
-	    J object = this.rows.get(index++);
+	    final J object = this.rows.get(index++);
 
-	    if (object.hasProperty("_skip_") && object.getBoolean("_skip_")) {
+	    if (object.hasKey("_skip_") && object.getBoolean("_skip_")) {
 		continue;
 	    }
 
@@ -225,7 +230,14 @@ public final class DataGrid<J extends JSObject>
 
 	    rowIndex++;
 
-	    Row row = this.body.row();
+	    Row row = this.body.row().className("highlight");
+	    row.onClick(new ClickHandler() {
+
+		@Override
+		public void onClick(ClickEvent event) {
+		    fireEvent(new Event<J>(Type.SELECTION, object));
+		}
+	    });
 
 	    for (GridColumn<?, J> column : this.columns) {
 		column.render((index - 1), row.cell(), object);
@@ -262,7 +274,17 @@ public final class DataGrid<J extends JSObject>
 	    return this;
 	}
 
-	public Spinner rowsPerPage() {
+	public DataGridOptions disableCaption() {
+	    DataGrid.this.caption.hidden();
+	    return this;
+	}
+
+	public DataGridOptions enableCaption() {
+	    DataGrid.this.caption.visible();
+	    return this;
+	}
+
+	public VerticalSpinner rowsPerPage() {
 	    return DataGrid.this.footer.rowsPerPage;
 	}
     }
@@ -329,6 +351,16 @@ public final class DataGrid<J extends JSObject>
 
 	GridCaption colspan(int colspan) {
 	    this.cell.colspan(colspan);
+	    return this;
+	}
+
+	GridCaption hidden() {
+	    this.cell.hidden();
+	    return this;
+	}
+
+	GridCaption visible() {
+	    this.cell.visible();
 	    return this;
 	}
 
@@ -418,11 +450,11 @@ public final class DataGrid<J extends JSObject>
 
     class GridFooter {
 
-	private Cell    cell;
+	private Cell            cell;
 
-	private Spinner rowsPerPage = new Spinner().range(0, 100).value(5).step(5);
+	private VerticalSpinner rowsPerPage = new VerticalSpinner().range(0, Integer.MAX_VALUE).value(5).step(5);
 
-	private Pager   pager       = new Pager().className("grid-pager");
+	private Pager           pager       = new Pager().className("grid-pager");
 
 	public GridFooter(Row row) {
 	    super();
@@ -491,7 +523,7 @@ public final class DataGrid<J extends JSObject>
 	extends GridFilter<J> {
 
 	@Override
-	protected boolean doFilter(J row) {
+	public boolean filter(J row) {
 	    String search = DataGrid.this.caption.search.input.getValue();
 
 	    if ("".equals(search.trim())) {
@@ -511,6 +543,6 @@ public final class DataGrid<J extends JSObject>
     enum Type
 	implements EventType {
 
-	DRAW;
+	DRAW, SELECTION;
     }
 }

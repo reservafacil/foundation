@@ -1,6 +1,5 @@
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.event.Event;
 import com.brazoft.foundation.gwt.client.ui.api.Pagination;
 import com.google.gwt.event.dom.client.*;
 
@@ -109,10 +108,6 @@ public final class Paginator
 	}
 
 	return this;
-    }
-
-    public static int getValue(Event event) {
-	return (Integer)event.data();
     }
 
     public int getCurrentPage() {

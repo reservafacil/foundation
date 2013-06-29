@@ -1,53 +1,36 @@
 /**
- * Copyright (C) 2009-2012 the original author or authors.
- * See the notice.md file distributed with this work for additional
- * information regarding copyright ownership.
+ * Copyright (C) 2009-2012 the original author or authors. See the notice.md file distributed with
+ * this work for additional information regarding copyright ownership.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
-import com.brazoft.foundation.gwt.client.ui.api.UIButton;
-import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.component.HTML;
+import com.brazoft.foundation.gwt.client.component.*;
 import com.brazoft.foundation.gwt.client.component.api.Component;
 import com.brazoft.foundation.gwt.client.event.Events;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.SpanElement;
+import com.brazoft.foundation.gwt.client.ui.api.*;
+import com.google.gwt.dom.client.*;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.BlurHandler;
-import com.google.gwt.event.dom.client.ClickHandler;
-import com.google.gwt.event.dom.client.DoubleClickHandler;
-import com.google.gwt.event.dom.client.FocusHandler;
-import com.google.gwt.event.dom.client.KeyDownHandler;
-import com.google.gwt.event.dom.client.KeyPressHandler;
-import com.google.gwt.event.dom.client.KeyUpHandler;
-import com.google.gwt.event.dom.client.MouseDownHandler;
-import com.google.gwt.event.dom.client.MouseMoveHandler;
-import com.google.gwt.event.dom.client.MouseOutHandler;
-import com.google.gwt.event.dom.client.MouseOverHandler;
-import com.google.gwt.event.dom.client.MouseUpHandler;
-import com.google.gwt.event.dom.client.MouseWheelHandler;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.event.dom.client.*;
 
 public final class Button
     extends Bootstrap<Button>
     implements UIButton<Button> {
 
-    private HTML<SpanElement> text = HTML.asSpan();
+    private HTML<SpanElement> text = HTML.asSpan().hidden();
+
+    private ButtonOptions     option;
 
     public Button() {
 	this(ButtonOptions.BUTTON);
@@ -55,6 +38,7 @@ public final class Button
 
     public Button(ButtonOptions option) {
 	super(option.resolveElement());
+	this.option = option;
 	this.add(this.text).setStyleName("btn");
 	this.inline();
     }
@@ -124,9 +108,14 @@ public final class Button
 	return Events.on(this, handler);
     }
 
-    @Override
-    protected Button add(Widget add) {
-	return super.add(add);
+    public Button disable() {
+	this.option.disable(this);
+	return this;
+    }
+
+    public Button enable() {
+	this.option.enable(this);
+	return this;
     }
 
     public Button loadingText(String text) {
@@ -189,7 +178,7 @@ public final class Button
 
     @Override
     public Button text(String text) {
-	Component.Util.setHTML(this.text, " " + text.trim() + " ");
+	Component.Util.setHTML(this.text.visible(), " " + text.trim() + " ");
 	return this;
     }
 
@@ -214,6 +203,26 @@ public final class Button
 	    }
 
 	    return ElementResolver.button();
+	}
+
+	void disable(Button button) {
+	    switch (this) {
+		case ANCHOR:
+		    Widgets.disabledClass(button);
+		    break;
+		default:
+		    button.attribute("disabled", "disabled");
+	    }
+	}
+
+	void enable(Button button) {
+	    switch (this) {
+		case ANCHOR:
+		    Widgets.enabledClass(button);
+		    break;
+		default:
+		    button.removeAttribute("disabled");
+	    }
 	}
     }
 }

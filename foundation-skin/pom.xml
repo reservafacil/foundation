@@ -57,14 +57,16 @@
                 <include>${project.build.directory}/classes/web/css/bootstrap.css</include>
                 <include>${project.build.directory}/classes/web/css/bootstrap-responsive.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-datagrid.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-datapanel.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-datepicker.css</include>
-                <include>${project.build.directory}/classes/web/css/ui-layout-panel.css</include>
-                <include>${project.build.directory}/classes/web/css/ui-quick-button.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-panel.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-plan.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-portlet.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-quick-button.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-select2.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-slider.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-spinner.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-wizard.css</include>
               </includes>
             </aggregation>
           </aggregations>

@@ -19,7 +19,7 @@ public class EventSource<E extends EventSource<E>>
     }
 
     public E fireEvent(EventType type) {
-	return this.fireEvent(new Event<Object>(type, this));
+	return this.fireEvent(new Event<Void>(type, this));
     }
 
     public <T> E fireEvent(Event<T> event) {
@@ -31,9 +31,8 @@ public class EventSource<E extends EventSource<E>>
 	this.eventBus.remove(event.type());
 	return (E)this;
     }
-    
-    public <H extends com.google.gwt.event.shared.EventHandler> E removeHandlers(Type<H> type, H handler)
-    {
+
+    public <H extends com.google.gwt.event.shared.EventHandler> E removeHandlers(Type<H> type, H handler) {
 	this.getHandlerManager().removeHandler(type, handler);
 	return (E)this;
     }

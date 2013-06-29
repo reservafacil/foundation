@@ -1,6 +1,5 @@
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row.Cell;
 import com.brazoft.foundation.gwt.client.ui.api.*;
 import com.google.gwt.user.client.ui.Widget;
 

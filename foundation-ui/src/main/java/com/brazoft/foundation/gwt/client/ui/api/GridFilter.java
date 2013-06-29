@@ -6,21 +6,19 @@ public abstract class GridFilter<J extends JSObject> {
 
     private boolean active;
 
-    public void activate() {
+    public GridFilter<J> activate() {
 	this.active = true;
+	return this;
     }
 
-    public void deactivate() {
+    public GridFilter<J> deactivate() {
 	this.active = false;
+	return this;
     }
 
-    public boolean filter(J row) {
-	if (this.active) {
-	    return this.doFilter(row);
-	}
-
-	return true;
+    public boolean isActive() {
+	return active;
     }
 
-    protected abstract boolean doFilter(J row);
+    public abstract boolean filter(J row);
 }

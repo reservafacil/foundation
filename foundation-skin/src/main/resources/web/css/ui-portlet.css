@@ -85,11 +85,11 @@
 
 .portlet-header > .toolbar {
 	float: right;
-	margin: 3px 3px 0 0;
+	margin: 5px 1px 0 0;
 }
 
 .portlet-header > .toolbar > button{
-	maring-right: 3px;
+	margin-right: 3px;
 }
 
 .portlet-header .label {

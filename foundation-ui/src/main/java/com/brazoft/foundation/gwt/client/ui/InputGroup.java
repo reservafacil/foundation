@@ -6,7 +6,9 @@ import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.ui.api.Group;
 import com.brazoft.foundation.gwt.client.util.ValidationProcess.ValidationAction;
 import com.brazoft.foundation.gwt.client.util.ValidationProcess.ValidationConstraint;
+import com.google.gwt.user.client.ui.Widget;
 
+@SuppressWarnings("unchecked")
 public class InputGroup<V>
     extends Group<InputGroup<V>>
     implements UIInput<InputGroup<V>, V> {
@@ -22,9 +24,9 @@ public class InputGroup<V>
 	this.initWidget(input.asWidget());
 	this.constraint = new ValidationConstraint<V>(input);
     }
-    
-    public UIInput<?, V> input() {
-	return this.input;
+
+    public <I extends UIInput<? extends Widget, V>> I input() {
+	return (I)this.input;
     }
 
     public InputGroup<V> requiredMessage(String text) {
@@ -130,5 +132,17 @@ public class InputGroup<V>
 	this.constraint.add(this.validator);
 	this.input.required();
 	return this;
+    }
+
+    @Override
+    public InputGroup<V> visible() {
+	this.input.visible();
+	return super.visible();
+    }
+
+    @Override
+    public InputGroup<V> hidden() {
+	this.input.hidden();
+	return super.hidden();
     }
 }

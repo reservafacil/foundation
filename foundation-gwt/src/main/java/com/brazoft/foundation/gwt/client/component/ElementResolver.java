@@ -1,55 +1,21 @@
 /**
- * Copyright (C) 2009-2012 the original author or authors.
- * See the notice.md file distributed with this work for additional
- * information regarding copyright ownership.
+ * Copyright (C) 2009-2012 the original author or authors. See the notice.md file distributed with
+ * this work for additional information regarding copyright ownership.
  * 
- * Licensed under the Apache License, Version 2.0 (the "License");
- * you may not use this file except in compliance with the License.
- * You may obtain a copy of the License at
+ * Licensed under the Apache License, Version 2.0 (the "License"); you may not use this file except
+ * in compliance with the License. You may obtain a copy of the License at
  * 
  * http://www.apache.org/licenses/LICENSE-2.0
  * 
- * Unless required by applicable law or agreed to in writing, software
- * distributed under the License is distributed on an "AS IS" BASIS,
- * WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express or implied.
- * See the License for the specific language governing permissions and
- * limitations under the License.
+ * Unless required by applicable law or agreed to in writing, software distributed under the License
+ * is distributed on an "AS IS" BASIS, WITHOUT WARRANTIES OR CONDITIONS OF ANY KIND, either express
+ * or implied. See the License for the specific language governing permissions and limitations under
+ * the License.
  */
 
 package com.brazoft.foundation.gwt.client.component;
 
-import com.google.gwt.dom.client.AnchorElement;
-import com.google.gwt.dom.client.BRElement;
-import com.google.gwt.dom.client.BodyElement;
-import com.google.gwt.dom.client.ButtonElement;
-import com.google.gwt.dom.client.DListElement;
-import com.google.gwt.dom.client.DivElement;
-import com.google.gwt.dom.client.Document;
-import com.google.gwt.dom.client.Element;
-import com.google.gwt.dom.client.FieldSetElement;
-import com.google.gwt.dom.client.FormElement;
-import com.google.gwt.dom.client.HeadingElement;
-import com.google.gwt.dom.client.ImageElement;
-import com.google.gwt.dom.client.InputElement;
-import com.google.gwt.dom.client.LIElement;
-import com.google.gwt.dom.client.LabelElement;
-import com.google.gwt.dom.client.LegendElement;
-import com.google.gwt.dom.client.NodeList;
-import com.google.gwt.dom.client.OListElement;
-import com.google.gwt.dom.client.OptionElement;
-import com.google.gwt.dom.client.ParagraphElement;
-import com.google.gwt.dom.client.PreElement;
-import com.google.gwt.dom.client.QuoteElement;
-import com.google.gwt.dom.client.ScriptElement;
-import com.google.gwt.dom.client.SelectElement;
-import com.google.gwt.dom.client.SpanElement;
-import com.google.gwt.dom.client.TableCaptionElement;
-import com.google.gwt.dom.client.TableCellElement;
-import com.google.gwt.dom.client.TableElement;
-import com.google.gwt.dom.client.TableRowElement;
-import com.google.gwt.dom.client.TableSectionElement;
-import com.google.gwt.dom.client.TextAreaElement;
-import com.google.gwt.dom.client.UListElement;
+import com.google.gwt.dom.client.*;
 
 public class ElementResolver {
 
@@ -63,16 +29,21 @@ public class ElementResolver {
 	return null;
     }
 
-    public static Element[] getElementsByTagName(Element parent, String tagName) {
-	NodeList<Element> nodeList = parent.getElementsByTagName(tagName);
+    public static NodeIterable<Element> getElementsByTagName(Element parent, String tagName) {
+	return new NodeIterable<Element>(parent.getElementsByTagName(tagName));
+    }
 
-	Element[] list = new Element[nodeList.getLength()];
+    public static Element getChildById(Element parent, String id) {
+	NodeIterable<Node> elements = new NodeIterable<Node>(parent.getChildNodes());
 
-	for (int i = 0; i < nodeList.getLength(); i++) {
-	    list[i] = nodeList.getItem(i);
+	for (Node node : elements) {
+	    Element child = (Element)node;
+	    if (child.getId().equals(id)) {
+		return child;
+	    }
 	}
 
-	return list;
+	return null;
     }
 
     public static Element create(String tagName) {

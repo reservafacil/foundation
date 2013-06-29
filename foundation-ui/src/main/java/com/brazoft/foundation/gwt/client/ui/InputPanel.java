@@ -1,14 +1,11 @@
 package com.brazoft.foundation.gwt.client.ui;
 
-import com.brazoft.foundation.gwt.client.component.HTML;
 import com.brazoft.foundation.gwt.client.event.api.*;
 import com.brazoft.foundation.gwt.client.event.api.HasFocusHandlers;
 import com.brazoft.foundation.gwt.client.ui.api.*;
 import com.brazoft.foundation.gwt.client.util.*;
 import com.brazoft.foundation.gwt.client.util.ValidationProcess.ValidationAction;
 import com.brazoft.foundation.gwt.client.util.ValidationProcess.ValidationResult;
-import com.google.gwt.dom.client.*;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.*;
 
 @SuppressWarnings("unchecked")
@@ -20,29 +17,26 @@ public abstract class InputPanel<I extends InputPanel<I>>
     public InputPanel(PanelOptions option, int columns) {
 	super(option, columns);
     }
-    
+
     public InputItem adopt(InputGroup<?> input) {
-	
+
 	input.hidden().removeFromParent();
 	InputItem item = this.item(input);
-	input.asQuery().fadeIn();
-	
+	input.fadeIn();
+
 	return item;
     }
 
     public InputItem item(final InputGroup<?> group) {
 	UICell<?> cell = this.cell(group.getColspan());
 
-	if (group.getInput() instanceof Select) {
+	if (group.getInput() instanceof Select2) {
 	    group.getInput().style().property("width", cell.style().getWidth());
 	}
 
 	final InputControl control = new InputControl().input(group);
-	
-	HTML<DivElement> label = HTML.asDiv().add(group.getLabel());
-	label.style().marginTop(10, Unit.PX);
-	
-	cell.add(label);
+
+	cell.add(group.getLabel().detach());
 	cell.add(control);
 
 	if (group.getInput() instanceof HasFocusHandlers) {
@@ -82,10 +76,10 @@ public abstract class InputPanel<I extends InputPanel<I>>
     public boolean validate() {
 	return this.process.validate();
     }
-    
+
     public static class InputItem {
 
-	private UICell<?>         cell;
+	private UICell<?>    cell;
 
 	private InputControl control;
 

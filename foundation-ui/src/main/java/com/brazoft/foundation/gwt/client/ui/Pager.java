@@ -1,7 +1,6 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
-import com.brazoft.foundation.gwt.client.event.Event;
 import com.brazoft.foundation.gwt.client.ui.api.Pagination;
 import com.google.gwt.event.dom.client.*;
 

@@ -3,12 +3,8 @@ package com.brazoft.foundation.gwt.client.ui;
 import com.brazoft.foundation.commons.Validator;
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
-import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
-import com.brazoft.foundation.gwt.client.ui.api.Input;
-import com.google.gwt.event.dom.client.ChangeEvent;
-import com.google.gwt.event.dom.client.ChangeHandler;
-import com.google.gwt.event.dom.client.ClickEvent;
-import com.google.gwt.event.dom.client.ClickHandler;
+import com.brazoft.foundation.gwt.client.ui.api.*;
+import com.google.gwt.event.dom.client.*;
 
 public final class InputFile
     extends Bootstrap<InputFile>

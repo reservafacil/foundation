@@ -1,18 +1,14 @@
 package com.brazoft.foundation.gwt.client.event.api;
 
-import com.google.gwt.event.dom.client.TouchCancelHandler;
-import com.google.gwt.event.dom.client.TouchEndHandler;
-import com.google.gwt.event.dom.client.TouchMoveHandler;
-import com.google.gwt.event.dom.client.TouchStartHandler;
-import com.google.gwt.user.client.ui.Widget;
+import com.google.gwt.event.dom.client.*;
 
-public interface HasTouchHandlers<W extends Widget> {
+public interface HasTouchHandlers<T> {
 
-    W onTouchCancel(TouchCancelHandler handler);
+    T onTouchCancel(TouchCancelHandler handler);
 
-    W onTouchEnd(TouchEndHandler handler);
+    T onTouchEnd(TouchEndHandler handler);
 
-    W onTouchMove(TouchMoveHandler handler);
+    T onTouchMove(TouchMoveHandler handler);
 
-    W onTouchStart(TouchStartHandler handler);
+    T onTouchStart(TouchStartHandler handler);
 }

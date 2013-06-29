@@ -19,111 +19,106 @@ import com.sun.org.apache.xerces.internal.jaxp.datatype.XMLGregorianCalendarImpl
  */
 public abstract class JAXBUtil {
 
-    /**
-     * @param xml
-     * @return Returns byte[] from xml
-     * @throws Exception
-     */
-    public static byte[] toByteArray(Object xml)
-	throws Exception {
-	ByteArrayOutputStream output;
+  /**
+   * @param xml
+   * @return Returns byte[] from xml
+   * @throws Exception
+   */
+  public static byte[] toByteArray(Object xml) throws Exception {
+    ByteArrayOutputStream output;
 
-	output = new ByteArrayOutputStream();
+    output = new ByteArrayOutputStream();
 
-	JAXBCompiler.serialize(xml, output, xml.getClass().getPackage().getName());
+    JAXBCompiler.serialize(xml, output, xml.getClass().getPackage().getName());
 
-	return output.toByteArray();
+    return output.toByteArray();
+  }
+
+  /**
+   * @param bytes
+   * @param packageImpl
+   * @return Returns Object from byte[]
+   * @throws Exception
+   */
+  public static Object toObject(byte[] bytes, String packageImpl) throws Exception {
+    return (Object) JAXBCompiler.compile(new ByteArrayInputStream(bytes), packageImpl);
+  }
+
+  /**
+   * @param bytes
+   * @param packageImpl
+   * @return Returns Object from byte[]
+   * @throws Exception
+   */
+  public static String toString(byte[] bytes, String packageImpl) throws Exception {
+    return JAXBCompiler.serializeToString(JAXBUtil.toObject(bytes, packageImpl), packageImpl);
+  }
+
+  /**
+   * @param input
+   * @param packageImpl
+   * @return Returns Object from InputStream
+   * @throws Exception
+   */
+  public static Object toObject(InputStream input, String packageImpl) throws Exception {
+    return JAXBUtil.toObject(IOHandler.read(input), packageImpl);
+  }
+
+  /**
+   * @param xml
+   * @return Returns InputStream
+   * @throws Exception
+   */
+  public static InputStream toInputStream(Object xml) throws Exception {
+    return new ByteArrayInputStream(JAXBUtil.toByteArray(xml));
+  }
+
+  /**
+   * @param date
+   * @return Returns XMLGregorianCalendar
+   */
+  public static XMLGregorianCalendar toXMLGregorianCalendar(Date date) {
+    if (date != null) {
+      return JAXBUtil.toXMLGregorianCalendar(date.getTime());
     }
 
-    /**
-     * @param bytes
-     * @param packageImpl
-     * @return Returns Object from byte[]
-     * @throws Exception
-     */
-    public static Object toObject(byte[] bytes, String packageImpl)
-	throws Exception {
-	return (Object)JAXBCompiler.compile(new ByteArrayInputStream(bytes), packageImpl);
-    }
+    return null;
+  }
 
-    /**
-     * @param bytes
-     * @param packageImpl
-     * @return Returns Object from byte[]
-     * @throws Exception
-     */
-    public static String toString(byte[] bytes, String packageImpl)
-	throws Exception {
-	return JAXBCompiler.serializeToString(JAXBUtil.toObject(bytes, packageImpl), packageImpl);
-    }
+  /**
+   * @param miliseconds
+   * @return Returns XMLGregorianCalendar
+   */
+  public static XMLGregorianCalendar toXMLGregorianCalendar(long miliseconds) {
+    GregorianCalendar calendar;
 
-    /**
-     * @param input
-     * @param packageImpl
-     * @return Returns Object from InputStream
-     * @throws Exception
-     */
-    public static Object toObject(InputStream input, String packageImpl)
-	throws Exception {
-	return JAXBUtil.toObject(IOHandler.read(input), packageImpl);
-    }
+    calendar = (GregorianCalendar) GregorianCalendar.getInstance();
+    calendar.setTimeInMillis(miliseconds);
 
-    /**
-     * @param xml
-     * @return Returns InputStream
-     * @throws Exception
-     */
-    public static InputStream toInputStream(Object xml)
-	throws Exception {
-	return new ByteArrayInputStream(JAXBUtil.toByteArray(xml));
-    }
+    return new XMLGregorianCalendarImpl(calendar);
+  }
 
-    /**
-     * @param date
-     * @return Returns XMLGregorianCalendar
-     */
-    public static XMLGregorianCalendar toXMLGregorianCalendar(Date date) {
-	if (date != null) {
-	    return JAXBUtil.toXMLGregorianCalendar(date.getTime());
-	}
+  /**
+   * @param value
+   * @return Returns TimesTamp
+   */
+  public static Timestamp toTimesTamp(String value) {
+    return Converter.toTimestamp(JAXBUtil.toDate(value));
+  }
 
-	return null;
-    }
+  /**
+   * @param value
+   * @return Returns TimesTamp
+   */
+  public static Date toDate(String value) {
+    return DatatypeConverter.parseDate(value).getTime();
+  }
 
-    /**
-     * @param miliseconds
-     * @return Returns XMLGregorianCalendar
-     */
-    public static XMLGregorianCalendar toXMLGregorianCalendar(long miliseconds) {
-	GregorianCalendar calendar;
-
-	calendar = (GregorianCalendar)GregorianCalendar.getInstance();
-	calendar.setTimeInMillis(miliseconds);
-
-	return new XMLGregorianCalendarImpl(calendar);
-    }
-
-    /**
-     * @param value
-     * @return Returns TimesTamp
-     */
-    public static Timestamp toTimesTamp(String value) {
-	return Converter.toTimestamp(JAXBUtil.toDate(value));
-    }
-
-    /**
-     * @param value
-     * @return Returns TimesTamp
-     */
-    public static Date toDate(String value) {
-	return DatatypeConverter.parseDate(value).getTime();
-    }
-
-    /**
-     * @param calendar
-     * @return Returns Date
-     */
-    public static Date toDate(XMLGregorianCalendar calendar) {
-	return JAXBUtil.toDate(calendar.toXMLFormat());
-    }
+  /**
+   * @param calendar
+   * @return Returns Date
+   */
+  public static Date toDate(XMLGregorianCalendar calendar) {
+    return JAXBUtil.toDate(calendar.toXMLFormat());
+  }
 }

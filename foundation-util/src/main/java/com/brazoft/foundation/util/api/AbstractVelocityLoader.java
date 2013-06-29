@@ -14,41 +14,38 @@ import com.brazoft.foundation.util.ResourceHelper;
 /**
  * @author Anderson Braz - anderson.braz@brazoft.com.br
  */
-public abstract class AbstractVelocityLoader
-    extends FileResourceLoader {
+public abstract class AbstractVelocityLoader extends FileResourceLoader {
 
-    @Override
-    public long getLastModified(Resource resource) {
-	return resource.getLastModified();
+  @Override
+  public long getLastModified(Resource resource) {
+    return resource.getLastModified();
+  }
+
+  @Override
+  public InputStream getResourceStream(String resource) throws ResourceNotFoundException {
+    Enumeration<URL> resources;
+
+    try {
+      resources = ResourceHelper.getMetaResources(resource.substring(1));
+      if (resources.hasMoreElements()) {
+        return resources.nextElement().openStream();
+      }
+
+      return this.getStreamFor(resource);
+    } catch (Exception e) {
+      throw new ResourceNotFoundException(e.getMessage());
     }
+  }
 
-    @Override
-    public InputStream getResourceStream(String resource)
-	throws ResourceNotFoundException {
-	Enumeration<URL> resources;
+  @Override
+  public boolean isSourceModified(Resource resource) {
+    return false;
+  }
 
-	try {
-	    resources = ResourceHelper.getMetaResources(resource.substring(1));
-	    if (resources.hasMoreElements()) {
-		return resources.nextElement().openStream();
-	    }
-
-	    return this.getStreamFor(resource);
-	} catch (Exception e) {
-	    throw new ResourceNotFoundException(e.getMessage());
-	}
-    }
-
-    @Override
-    public boolean isSourceModified(Resource resource) {
-	return false;
-    }
-
-    /**
-     * @param resource
-     * @return Returns InputStream
-     * @throws IOException
-     */
-    protected abstract InputStream getStreamFor(String resource)
-	throws IOException;
+  /**
+   * @param resource
+   * @return Returns InputStream
+   * @throws IOException
+   */
+  protected abstract InputStream getStreamFor(String resource) throws IOException;
 }
