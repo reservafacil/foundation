@@ -1,10 +1,9 @@
 package com.google.gwt.jso;
 
-import com.brazoft.foundation.commons.ResponseStatus;
 import com.google.gwt.core.client.JsArray;
 
 public class ResponseJSO<J extends JSObject>
-    extends JSObject {
+    extends StatusResponseJSO<J> {
 
 	protected ResponseJSO() {}
 
@@ -18,10 +17,6 @@ public class ResponseJSO<J extends JSObject>
 
 	public final Collection<J> data() {
 		return new Collection<J>(this.array());
-	}
-
-	public final ResponseStatus status() {
-		return ResponseStatus.valueOf(this.getInt("status"));
 	}
 
 	public final native int start() /*-{
