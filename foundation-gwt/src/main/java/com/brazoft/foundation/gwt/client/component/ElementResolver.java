@@ -19,222 +19,222 @@ import com.google.gwt.dom.client.*;
 
 public class ElementResolver {
 
-    public static Element getElementByTagName(Element parent, String tagName) {
-	NodeList<Element> nodeList = parent.getElementsByTagName(tagName);
+	public static Element getElementByTagName(Element parent, String tagName) {
+		NodeList<Element> nodeList = parent.getElementsByTagName(tagName);
 
-	if (nodeList.getLength() > 0) {
-	    return nodeList.getItem(0);
+		if (nodeList.getLength() > 0) {
+			return nodeList.getItem(0);
+		}
+
+		return null;
 	}
 
-	return null;
-    }
-
-    public static NodeIterable<Element> getElementsByTagName(Element parent, String tagName) {
-	return new NodeIterable<Element>(parent.getElementsByTagName(tagName));
-    }
-
-    public static Element getChildById(Element parent, String id) {
-	NodeIterable<Node> elements = new NodeIterable<Node>(parent.getChildNodes());
-
-	for (Node node : elements) {
-	    Element child = (Element)node;
-	    if (child.getId().equals(id)) {
-		return child;
-	    }
+	public static NodeIterable<Element> getElementsByTagName(Element parent, String tagName) {
+		return new NodeIterable<Element>(parent.getElementsByTagName(tagName));
 	}
 
-	return null;
-    }
+	public static Element getChildById(Element parent, String id) {
+		NodeIterable<Node> elements = new NodeIterable<Node>(parent.getChildNodes());
 
-    public static Element create(String tagName) {
-	return document().createElement(tagName);
-    }
+		for (Node node : elements) {
+			Element child = (Element)node;
+			if (child.getId().equals(id)) {
+				return child;
+			}
+		}
 
-    public static AnchorElement a() {
-	return document().createAnchorElement();
-    }
+		return null;
+	}
 
-    public static Element abbr() {
-	return create("abbr");
-    }
+	public static Element create(String tagName) {
+		return document().createElement(tagName);
+	}
 
-    public static Element address() {
-	return create("address");
-    }
+	public static AnchorElement a() {
+		return document().createAnchorElement();
+	}
 
-    public static QuoteElement blockquote() {
-	return document().createBlockQuoteElement();
-    }
+	public static Element abbr() {
+		return create("abbr");
+	}
 
-    public static BodyElement body() {
-	return document().getBody();
-    }
+	public static Element address() {
+		return create("address");
+	}
 
-    public static BRElement br() {
-	return document().createBRElement();
-    }
+	public static QuoteElement blockquote() {
+		return document().createBlockQuoteElement();
+	}
 
-    public static ButtonElement button() {
-	return document().createPushButtonElement();
-    }
+	public static BodyElement body() {
+		return document().getBody();
+	}
 
-    public static TableCaptionElement caption() {
-	return document().createCaptionElement();
-    }
+	public static BRElement br() {
+		return document().createBRElement();
+	}
 
-    public static InputElement checkbox() {
-	return document().createCheckInputElement();
-    }
+	public static ButtonElement button() {
+		return document().createPushButtonElement();
+	}
 
-    public static DivElement div() {
-	return document().createDivElement();
-    }
+	public static TableCaptionElement caption() {
+		return document().createCaptionElement();
+	}
 
-    public static Element dd() {
-	return create("dd");
-    }
+	public static InputElement checkbox() {
+		return document().createCheckInputElement();
+	}
 
-    public static DListElement dl() {
-	return document().createDLElement();
-    }
+	public static DivElement div() {
+		return document().createDivElement();
+	}
 
-    public static Element dt() {
-	return create("dt");
-    }
+	public static Element dd() {
+		return create("dd");
+	}
 
-    public static Document document() {
-	return Document.get();
-    }
+	public static DListElement dl() {
+		return document().createDLElement();
+	}
 
-    public static Element em() {
-	return create("em");
-    }
+	public static Element dt() {
+		return create("dt");
+	}
 
-    public static FieldSetElement fieldset() {
-	return document().createFieldSetElement();
-    }
+	public static Document document() {
+		return Document.get();
+	}
 
-    public static InputElement file() {
-	return document().createFileInputElement();
-    }
+	public static Element em() {
+		return create("em");
+	}
 
-    public static FormElement form() {
-	return document().createFormElement();
-    }
+	public static FieldSetElement fieldset() {
+		return document().createFieldSetElement();
+	}
 
-    public static HeadingElement heading(int level) {
-	return document().createHElement(level);
-    }
+	public static InputElement file() {
+		return document().createFileInputElement();
+	}
 
-    public static InputElement hidden() {
-	return document().createHiddenInputElement();
-    }
+	public static FormElement form() {
+		return document().createFormElement();
+	}
 
-    public static ImageElement img() {
-	return document().createImageElement();
-    }
+	public static HeadingElement heading(int level) {
+		return document().createHElement(level);
+	}
 
-    public static LabelElement label() {
-	return document().createLabelElement();
-    }
+	public static InputElement hidden() {
+		return document().createHiddenInputElement();
+	}
 
-    public static LegendElement legend() {
-	return document().createLegendElement();
-    }
+	public static ImageElement img() {
+		return document().createImageElement();
+	}
 
-    public static LIElement li() {
-	return document().createLIElement();
-    }
+	public static LabelElement label() {
+		return document().createLabelElement();
+	}
 
-    public static OListElement ol() {
-	return document().createOLElement();
-    }
+	public static LegendElement legend() {
+		return document().createLegendElement();
+	}
 
-    public static OptionElement option() {
-	return document().createOptionElement();
-    }
+	public static LIElement li() {
+		return document().createLIElement();
+	}
 
-    public static ParagraphElement p() {
-	return document().createPElement();
-    }
+	public static OListElement ol() {
+		return document().createOLElement();
+	}
 
-    public static InputElement password() {
-	return document().createPasswordInputElement();
-    }
+	public static OptionElement option() {
+		return document().createOptionElement();
+	}
 
-    public static PreElement pre() {
-	return document().createPreElement();
-    }
+	public static ParagraphElement p() {
+		return document().createPElement();
+	}
 
-    public static InputElement radio(String name) {
-	return document().createRadioInputElement(name);
-    }
+	public static InputElement password() {
+		return document().createPasswordInputElement();
+	}
 
-    public static ButtonElement reset() {
-	return document().createResetButtonElement();
-    }
+	public static PreElement pre() {
+		return document().createPreElement();
+	}
 
-    public static ScriptElement script() {
-	return document().createScriptElement();
-    }
+	public static InputElement radio(String name) {
+		return document().createRadioInputElement(name);
+	}
 
-    public static SelectElement select(boolean multiple) {
-	return document().createSelectElement(multiple);
-    }
+	public static ButtonElement reset() {
+		return document().createResetButtonElement();
+	}
 
-    public static Element small() {
-	return create("small");
-    }
+	public static ScriptElement script() {
+		return document().createScriptElement();
+	}
 
-    public static SpanElement span() {
-	return document().createSpanElement();
-    }
+	public static SelectElement select(boolean multiple) {
+		return document().createSelectElement(multiple);
+	}
 
-    public static Element strong() {
-	return create("strong");
-    }
+	public static Element small() {
+		return create("small");
+	}
 
-    public static ButtonElement submit() {
-	return document().createSubmitButtonElement();
-    }
+	public static SpanElement span() {
+		return document().createSpanElement();
+	}
 
-    public static TableElement table() {
-	return document().createTableElement();
-    }
+	public static Element strong() {
+		return create("strong");
+	}
 
-    public static TableSectionElement tbody() {
-	return document().createTBodyElement();
-    }
+	public static ButtonElement submit() {
+		return document().createSubmitButtonElement();
+	}
 
-    public static TableSectionElement thead() {
-	return document().createTHeadElement();
-    }
+	public static TableElement table() {
+		return document().createTableElement();
+	}
 
-    public static TableSectionElement tfoot() {
-	return document().createTFootElement();
-    }
+	public static TableSectionElement tbody() {
+		return document().createTBodyElement();
+	}
 
-    public static TableCellElement th() {
-	return document().createTHElement();
-    }
+	public static TableSectionElement thead() {
+		return document().createTHeadElement();
+	}
 
-    public static TableRowElement tr() {
-	return document().createTRElement();
-    }
+	public static TableSectionElement tfoot() {
+		return document().createTFootElement();
+	}
 
-    public static TableCellElement td() {
-	return document().createTDElement();
-    }
+	public static TableCellElement th() {
+		return document().createTHElement();
+	}
 
-    public static InputElement text() {
-	return document().createTextInputElement();
-    }
+	public static TableRowElement tr() {
+		return document().createTRElement();
+	}
 
-    public static TextAreaElement textarea() {
-	return document().createTextAreaElement();
-    }
+	public static TableCellElement td() {
+		return document().createTDElement();
+	}
 
-    public static UListElement ul() {
-	return document().createULElement();
-    }
+	public static InputElement text() {
+		return document().createTextInputElement();
+	}
+
+	public static TextAreaElement textarea() {
+		return document().createTextAreaElement();
+	}
+
+	public static UListElement ul() {
+		return document().createULElement();
+	}
 }

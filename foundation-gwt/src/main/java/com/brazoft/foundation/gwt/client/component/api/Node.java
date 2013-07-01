@@ -8,70 +8,70 @@ import com.google.gwt.user.client.ui.Widget;
 public class Node<N extends Node<N>>
     extends Composite<N> {
 
-    private Panel panel;
+	private Panel panel;
 
-    public Node(Element element) {
-	this.panel = new Panel(element);
-	super.initWidget(this.panel);
-	element.setId(Document.get().createUniqueId());
-    }
-
-    public N detachChildren() {
-	for (Widget child : this.getChildren()) {
-	    child.removeFromParent();
+	public Node(Element element) {
+		this.panel = new Panel(element);
+		super.initWidget(this.panel);
+		element.setId(Document.get().createUniqueId());
 	}
 
-	this.panel.clear();
-	return (N)this;
-    }
+	public N detachChildren() {
+		for (Widget child : this.getChildren()) {
+			child.removeFromParent();
+		}
 
-    public N remove(Widget child) {
-	this.panel.remove(child);
-	return (N)this;
-    }
-
-    public N add(Widget add) {
-	return this.add(add, true);
-    }
-
-    public N add(Widget add, boolean ignoreIfParent) {
-	if (ignoreIfParent && add.getParent() != null) {
-	    return (N)this;
+		this.panel.clear();
+		return (N)this;
 	}
 
-	this.panel.add(add);
+	public N remove(Widget child) {
+		this.panel.remove(child);
+		return (N)this;
+	}
 
-	return (N)this;
-    }
+	public N add(Widget add) {
+		return this.add(add, true);
+	}
 
-    public N insert(Widget add, Widget before) {
-	this.panel.insert(add, before);
+	public N add(Widget add, boolean ignoreIfParent) {
+		if (ignoreIfParent && add.getParent() != null) {
+			return (N)this;
+		}
 
-	return (N)this;
-    }
+		this.panel.add(add);
 
-    public Iterable<Widget> getChildren() {
-	return this.panel.children();
-    }
+		return (N)this;
+	}
 
-    public Widget getChild(int index) {
-	return this.panel.getWidget(index);
-    }
+	public N insert(Widget add, Widget before) {
+		this.panel.insert(add, before);
 
-    public int getIndex(Widget child) {
-	return this.panel.getWidgetIndex(child);
-    }
+		return (N)this;
+	}
 
-    public int childrenCount() {
-	return this.panel.getWidgetCount();
-    }
+	public Iterable<Widget> getChildren() {
+		return this.panel.children();
+	}
 
-    public boolean hasChildren() {
-	return this.panel.getWidgetCount() > 0;
-    }
+	public Widget getChild(int index) {
+		return this.panel.getWidget(index);
+	}
 
-    @Override
-    protected Panel getWidget() {
-	return this.panel;
-    }
+	public int getIndex(Widget child) {
+		return this.panel.getWidgetIndex(child);
+	}
+
+	public int childrenCount() {
+		return this.panel.getWidgetCount();
+	}
+
+	public boolean hasChildren() {
+		return this.panel.getWidgetCount() > 0;
+	}
+
+	@Override
+	protected Panel getWidget() {
+		return this.panel;
+	}
 }

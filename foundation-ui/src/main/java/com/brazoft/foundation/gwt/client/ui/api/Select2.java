@@ -211,23 +211,23 @@ public abstract class Select2<S extends Select2<S, V>, V>
 	}
 
 	protected native String getSelection(String id) /*-{
-	                                                var value = $wnd.$("#" + id).select2("val");
-	                                                return value.toString();
-	                                                }-*/;
+		var value = $wnd.$("#" + id).select2("val");
+		return value.toString();
+	}-*/;
 
 	protected native void select(String id, String value)/*-{
-	                                                     $wnd.$("#" + id).select2("val", value);
-	                                                     }-*/;
+		$wnd.$("#" + id).select2("val", value);
+	}-*/;
 
 	native void update(String id)/*-{
-	                             $wnd.$('#' + id).select2().trigger('change');
-	                             }-*/;
+		$wnd.$('#' + id).select2().trigger('change');
+	}-*/;
 
 	native void doIt(String id, String action)/*-{
-	                                          $wnd.$("#" + id).select2(action);
-	                                          }-*/;
+		$wnd.$("#" + id).select2(action);
+	}-*/;
 
 	native void initJS(String id, JavaScriptObject options)/*-{
-	                                                       $wnd.$("#" + id).select2(options);
-	                                                       }-*/;
+		$wnd.$("#" + id).select2(options);
+	}-*/;
 }

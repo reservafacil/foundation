@@ -158,8 +158,8 @@ public final class Accordion
 		}
 
 		private native void doToogle(String id)/*-{
-		                                       $wnd.$("#" + id).collapse('toogle');
-		                                       }-*/;
+			$wnd.$("#" + id).collapse('toogle');
+		}-*/;
 	}
 
 	class AccordionCollapse

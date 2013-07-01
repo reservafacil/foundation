@@ -23,72 +23,72 @@ import com.google.gwt.json.client.JSONValue;
 public abstract class JSONCollection<V>
     implements Iterable<V>, Iterator<V> {
 
-    private JSONArray array;
+	private JSONArray array;
 
-    int               index;
+	int               index;
 
-    JSONCollection() {
-	this(new JSONArray());
-    }
-
-    public JSONCollection(JSONArray array) {
-	super();
-	this.array = array;
-    }
-
-    void setArray(JSONArray array) {
-	this.array = array;
-    }
-
-    public JSONCollection<V> add(V value) {
-	this.array.set(this.array.size(), this.toJSONValue(value));
-	return this;
-    }
-
-    public V get(int index) {
-	return this.toValue(this.array.get(index));
-    }
-
-    public JSONArray array() {
-	return this.array;
-    }
-
-    public int size() {
-	return this.array.size();
-    }
-
-    @Override
-    public String toString() {
-	return this.array.toString();
-    }
-
-    @Override
-    public Iterator<V> iterator() {
-	return this;
-    }
-
-    @Override
-    public boolean hasNext() {
-	boolean hasNext = this.index < this.size();
-
-	if (!hasNext) {
-	    this.index = 0;
+	JSONCollection() {
+		this(new JSONArray());
 	}
 
-	return hasNext;
-    }
+	public JSONCollection(JSONArray array) {
+		super();
+		this.array = array;
+	}
 
-    @Override
-    public V next() {
-	return this.get(this.index++);
-    }
+	void setArray(JSONArray array) {
+		this.array = array;
+	}
 
-    @Override
-    public void remove() {
-	return;
-    }
+	public JSONCollection<V> add(V value) {
+		this.array.set(this.array.size(), this.toJSONValue(value));
+		return this;
+	}
 
-    abstract JSONValue toJSONValue(V value);
+	public V get(int index) {
+		return this.toValue(this.array.get(index));
+	}
 
-    abstract V toValue(JSONValue value);
+	public JSONArray array() {
+		return this.array;
+	}
+
+	public int size() {
+		return this.array.size();
+	}
+
+	@Override
+	public String toString() {
+		return this.array.toString();
+	}
+
+	@Override
+	public Iterator<V> iterator() {
+		return this;
+	}
+
+	@Override
+	public boolean hasNext() {
+		boolean hasNext = this.index < this.size();
+
+		if (!hasNext) {
+			this.index = 0;
+		}
+
+		return hasNext;
+	}
+
+	@Override
+	public V next() {
+		return this.get(this.index++);
+	}
+
+	@Override
+	public void remove() {
+		return;
+	}
+
+	abstract JSONValue toJSONValue(V value);
+
+	abstract V toValue(JSONValue value);
 }

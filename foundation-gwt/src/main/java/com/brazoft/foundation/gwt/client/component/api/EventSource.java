@@ -11,44 +11,44 @@ public class EventSource<E extends EventSource<E>>
     extends Control
     implements IsWidget {
 
-    private EventBus eventBus = new EventBus();
+	private EventBus eventBus = new EventBus();
 
-    protected <T> E addHandler(EventType type, EventHandler<T> handler) {
-	this.eventBus.add(type, handler);
-	return (E)this;
-    }
-
-    public E fireEvent(EventType type) {
-	return this.fireEvent(new Event<Void>(type, this));
-    }
-
-    public <T> E fireEvent(Event<T> event) {
-	this.eventBus.fire(event);
-	return (E)this;
-    }
-
-    public E removeHandlers(Event<?> event) {
-	this.eventBus.remove(event.type());
-	return (E)this;
-    }
-
-    public <H extends com.google.gwt.event.shared.EventHandler> E removeHandlers(Type<H> type, H handler) {
-	this.getHandlerManager().removeHandler(type, handler);
-	return (E)this;
-    }
-
-    public <H extends com.google.gwt.event.shared.EventHandler> E removeHandlers(GwtEvent.Type<H> type) {
-	int counter = this.getHandlerManager().getHandlerCount(type);
-
-	for (int index = 0; index < counter; index++) {
-	    H handler = this.getHandlerManager().getHandler(type, index);
-	    this.getHandlerManager().removeHandler(type, handler);
+	protected <T> E addHandler(EventType type, EventHandler<T> handler) {
+		this.eventBus.add(type, handler);
+		return (E)this;
 	}
 
-	return (E)this;
-    }
+	public E fireEvent(EventType type) {
+		return this.fireEvent(new Event<Void>(type, this));
+	}
 
-    protected EventBus eventBus() {
-	return eventBus;
-    }
+	public <T> E fireEvent(Event<T> event) {
+		this.eventBus.fire(event);
+		return (E)this;
+	}
+
+	public E removeHandlers(Event<?> event) {
+		this.eventBus.remove(event.type());
+		return (E)this;
+	}
+
+	public <H extends com.google.gwt.event.shared.EventHandler> E removeHandlers(Type<H> type, H handler) {
+		this.getHandlerManager().removeHandler(type, handler);
+		return (E)this;
+	}
+
+	public <H extends com.google.gwt.event.shared.EventHandler> E removeHandlers(GwtEvent.Type<H> type) {
+		int counter = this.getHandlerManager().getHandlerCount(type);
+
+		for (int index = 0; index < counter; index++) {
+			H handler = this.getHandlerManager().getHandler(type, index);
+			this.getHandlerManager().removeHandler(type, handler);
+		}
+
+		return (E)this;
+	}
+
+	protected EventBus eventBus() {
+		return eventBus;
+	}
 }

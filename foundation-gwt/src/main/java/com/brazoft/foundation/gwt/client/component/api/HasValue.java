@@ -19,7 +19,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public interface HasValue<W extends Widget, V> {
 
-    W value(V value);
+	W value(V value);
 
-    V getValue();
+	V getValue();
 }

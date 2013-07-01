@@ -19,7 +19,7 @@ import com.google.gwt.event.dom.client.*;
 
 public interface HasFocusHandlers<T> {
 
-    T onFocus(FocusHandler handler);
+	T onFocus(FocusHandler handler);
 
-    T onBlur(BlurHandler handler);
+	T onBlur(BlurHandler handler);
 }

@@ -20,23 +20,23 @@ import com.google.gwt.user.client.ui.Widget;
 public interface UIInput<W extends Widget, V>
     extends UIComponent<W>, HasValue<W, V> {
 
-    W placeholder(String placeholder);
+	W placeholder(String placeholder);
 
-    boolean isReadOnly();
+	boolean isReadOnly();
 
-    W readonly();
+	W readonly();
 
-    boolean isEditable();
+	boolean isEditable();
 
-    W editable();
+	W editable();
 
-    boolean isNullable();
+	boolean isNullable();
 
-    W nullable();
+	W nullable();
 
-    boolean isRequired();
+	boolean isRequired();
 
-    W required();
+	W required();
 
-    W clear();
+	W clear();
 }

@@ -6,16 +6,16 @@ import com.google.gwt.user.client.ui.IsWidget;
 public interface HasVisibility<T>
     extends IsWidget {
 
-    T visible();
+	T visible();
 
-    T hidden();
+	T hidden();
 
-    T onVisible(EventHandler<Void> handler);
+	T onVisible(EventHandler<Void> handler);
 
-    T onHidden(EventHandler<Void> handler);
+	T onHidden(EventHandler<Void> handler);
 
-    public enum TriggerEvent
-	implements EventType {
-	HIDDEN, VISIBLE;
-    }
+	public enum TriggerEvent
+	    implements EventType {
+		HIDDEN, VISIBLE;
+	}
 }

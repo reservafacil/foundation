@@ -6,29 +6,29 @@ import com.google.gwt.user.client.ui.*;
 public interface UIComponent<W extends Widget>
     extends IsWidget {
 
-    W attribute(String name, String value);
+	W attribute(String name, String value);
 
-    String getAttribute(String name);
+	String getAttribute(String name);
 
-    W className(String className);
+	W className(String className);
 
-    W removeClassName(String className);
+	W removeClassName(String className);
 
-    String getId();
+	String getId();
 
-    W id(String id);
+	W id(String id);
 
-    W name(String name);
+	W name(String name);
 
-    Style<W> style();
+	Style<W> style();
 
-    W title(String title);
+	W title(String title);
 
-    W visible();
+	W visible();
 
-    W hidden();
+	W hidden();
 
-    void removeFromParent();
-    
-    Selector<?> asSelector();
+	void removeFromParent();
+
+	Selector<?> asSelector();
 }
