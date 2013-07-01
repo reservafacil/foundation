@@ -21,30 +21,30 @@ import com.brazoft.foundation.gwt.client.ui.api.Input;
 public final class InputPassword
     extends Input<InputPassword, String> {
 
-    public InputPassword() {
-	super(ElementResolver.password());
-    }
+	public InputPassword() {
+		super(ElementResolver.password());
+	}
 
-    @Override
-    public InputPassword clear() {
-	return this.value("");
-    }
+	@Override
+	public InputPassword clear() {
+		return this.value("");
+	}
 
-    public InputPassword value(String value) {
-	this.element().setValue(value);
-	return this;
-    }
+	public InputPassword value(String value) {
+		this.element().setValue(value);
+		return this;
+	}
 
-    public String getValue() {
-	return this.element().getValue();
-    }
+	public String getValue() {
+		return this.element().getValue();
+	}
 
-    public InputPassword block() {
-	return this.className("input-block-level");
-    }
+	public InputPassword block() {
+		return this.className("input-block-level");
+	}
 
-    public InputPassword maxLength(int maxLength) {
-	this.element().setMaxLength(maxLength);
-	return this;
-    }
+	public InputPassword maxLength(int maxLength) {
+		this.element().setMaxLength(maxLength);
+		return this;
+	}
 }

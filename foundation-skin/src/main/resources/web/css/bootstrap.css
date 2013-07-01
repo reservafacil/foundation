@@ -5423,7 +5423,7 @@ input[type="submit"].btn.btn-mini {
   margin-left: -10px;
 }
 
-.popover-title {
+.popover-title, .popover-footer {
   padding: 8px 14px;
   margin: 0;
   font-size: 14px;

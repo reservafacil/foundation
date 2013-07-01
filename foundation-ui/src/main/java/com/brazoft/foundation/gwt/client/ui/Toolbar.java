@@ -21,24 +21,24 @@ import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 public final class Toolbar
     extends Bootstrap<Toolbar> {
 
-    public Toolbar() {
-	super(ElementResolver.div());
-	this.className("btn-toolbar");
-    }
+	public Toolbar() {
+		super(ElementResolver.div());
+		this.className("btn-toolbar");
+	}
 
-    public Toolbar button(Button button) {
-	return this.add(button);
-    }
+	public Toolbar button(Button button) {
+		return this.add(button);
+	}
 
-    public Toolbar group(ButtonGroup group) {
-	return this.add(group);
-    }
+	public Toolbar group(ButtonGroup group) {
+		return this.add(group);
+	}
 
-    public Toolbar group(DropButton group) {
-	return this.add(group);
-    }
+	public Toolbar group(DropButton group) {
+		return this.add(group);
+	}
 
-    public Toolbar group(SplitButton group) {
-	return this.add(group);
-    }
+	public Toolbar group(SplitButton group) {
+		return this.add(group);
+	}
 }

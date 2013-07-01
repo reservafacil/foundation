@@ -9,27 +9,27 @@ import com.google.gwt.jso.JSObject;
 public final class StringColumn<J extends JSObject>
     extends TextGridColumn<StringColumn<J>, J> {
 
-    private Format<String> format;
+	private Format<String> format;
 
-    public StringColumn() {
-	super();
-    }
-
-    public StringColumn(Format<String> format) {
-	this.format = format;
-    }
-
-    public final String toString(J object) {
-	String value = object.get(this.getName());
-	if (this.format != null) {
-	    value = this.format.format(value);
+	public StringColumn() {
+		super();
 	}
 
-	return value;
-    }
+	public StringColumn(Format<String> format) {
+		this.format = format;
+	}
 
-    @Override
-    protected void doSort(JsArray<J> rows, String name, SortDirection direction) {
-	JSArrays.sort(rows, name, direction.direction());
-    }
+	public final String toString(J object) {
+		String value = object.get(this.getName());
+		if (this.format != null) {
+			value = this.format.format(value);
+		}
+
+		return value;
+	}
+
+	@Override
+	protected void doSort(JsArray<J> rows, String name, SortDirection direction) {
+		JSArrays.sort(rows, name, direction.direction());
+	}
 }

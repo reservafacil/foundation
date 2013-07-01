@@ -6,51 +6,51 @@ import com.google.gwt.user.client.ui.Widget;
 public final class RadioGroup
     extends WidgetGroup<RadioGroup, String> {
 
-    private String name;
+	private String name;
 
-    public RadioGroup(Orientation orientation, String name) {
-	super(orientation);
-	this.name = name;
-    }
-
-    public RadioGroup item(String text, String value) {
-	RadioButton button = new RadioButton(this.name).value(value);
-
-	return this.input(button, text);
-    }
-
-    @Override
-    public RadioGroup clear() {
-	for (Widget child : getChildren()) {
-	    RadioButton radio = this.radio(child);
-	    radio.clear();
+	public RadioGroup(Orientation orientation, String name) {
+		super(orientation);
+		this.name = name;
 	}
 
-	return this;
-    }
+	public RadioGroup item(String text, String value) {
+		RadioButton button = new RadioButton(this.name).value(value);
 
-    public RadioGroup value(String value) {
-	for (Widget child : getChildren()) {
-	    RadioButton radio = this.radio(child);
-	    radio.checked(radio.getValue().equals(value));
+		return this.input(button, text);
 	}
 
-	return this;
-    }
+	@Override
+	public RadioGroup clear() {
+		for (Widget child : getChildren()) {
+			RadioButton radio = this.radio(child);
+			radio.clear();
+		}
 
-    public String getValue() {
-	for (Widget child : getChildren()) {
-	    RadioButton radio = this.radio(child);
-	    if (radio.isChecked()) {
-		return radio.getValue();
-	    }
+		return this;
 	}
 
-	return null;
-    }
+	public RadioGroup value(String value) {
+		for (Widget child : getChildren()) {
+			RadioButton radio = this.radio(child);
+			radio.checked(radio.getValue().equals(value));
+		}
 
-    private RadioButton radio(Widget child) {
-	Label label = (Label)child;
-	return (RadioButton)label.getInput();
-    }
+		return this;
+	}
+
+	public String getValue() {
+		for (Widget child : getChildren()) {
+			RadioButton radio = this.radio(child);
+			if (radio.isChecked()) {
+				return radio.getValue();
+			}
+		}
+
+		return null;
+	}
+
+	private RadioButton radio(Widget child) {
+		Label label = (Label)child;
+		return (RadioButton)label.getInput();
+	}
 }

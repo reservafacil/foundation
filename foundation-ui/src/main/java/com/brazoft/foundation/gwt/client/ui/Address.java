@@ -23,17 +23,17 @@ public final class Address
     extends Bootstrap<Address>
     implements HasText<Address> {
 
-    public Address() {
-	super(ElementResolver.address());
-    }
+	public Address() {
+		super(ElementResolver.address());
+	}
 
-    @Override
-    public Address text(String text) {
-	return Component.Util.setHTML(this, text);
-    }
+	@Override
+	public Address text(String text) {
+		return Component.Util.setHTML(this, text);
+	}
 
-    @Override
-    public String getText() {
-	return Component.Util.getHTML(this);
-    }
+	@Override
+	public String getText() {
+		return Component.Util.getHTML(this);
+	}
 }

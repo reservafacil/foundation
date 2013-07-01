@@ -23,17 +23,17 @@ import com.google.gwt.user.client.ui.Widget;
 public class WizardPage
     extends Component<WizardPage> {
 
-    public WizardPage() {
-	super(ElementResolver.div());
-	this.className("wizard-card").style().display(Display.BLOCK);
-    }
+	public WizardPage() {
+		super(ElementResolver.div());
+		this.className("wizard-card").style().display(Display.BLOCK);
+	}
 
-    @Override
-    public WizardPage add(Widget add) {
-	return super.add(add);
-    }
+	@Override
+	public WizardPage add(Widget add) {
+		return super.add(add);
+	}
 
-    protected boolean validate() {
-	return true;
-    }
+	protected boolean validate() {
+		return true;
+	}
 }

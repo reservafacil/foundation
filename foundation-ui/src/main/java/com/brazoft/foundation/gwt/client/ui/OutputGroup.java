@@ -6,14 +6,14 @@ import com.google.gwt.user.client.ui.Widget;
 public final class OutputGroup
     extends Group<OutputGroup> {
 
-    private final Widget output;
+	private final Widget output;
 
-    public OutputGroup(Widget output) {
-	this.output = output;
-	this.initWidget(output);
-    }
+	public OutputGroup(Widget output) {
+		this.output = output;
+		this.initWidget(output);
+	}
 
-    public Widget getOutput() {
-	return this.output;
-    }
+	public Widget getOutput() {
+		return this.output;
+	}
 }

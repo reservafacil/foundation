@@ -24,113 +24,113 @@ public abstract class LabeledInput<L extends LabeledInput<L>>
     extends Composite<L>
     implements UISelection<L, String>, HasText<L> {
 
-    private final Label                  label = new Label();
+	private final Label                  label = new Label();
 
-    private final UISelection<?, String> input;
+	private final UISelection<?, String> input;
 
-    protected LabeledInput(UISelection<?, String> input) {
-	this.input = input;
-	this.label.forInput(this.input);
-	this.initWidget(this.label);
-    }
+	protected LabeledInput(UISelection<?, String> input) {
+		this.input = input;
+		this.label.forInput(this.input);
+		this.initWidget(this.label);
+	}
 
-    @Override
-    public L clear() {
-	this.input.clear();
-	return (L)this;
-    }
+	@Override
+	public L clear() {
+		this.input.clear();
+		return (L)this;
+	}
 
-    @Override
-    public L id(String id) {
-	this.label.forId(id);
-	this.input.id(id);
+	@Override
+	public L id(String id) {
+		this.label.forId(id);
+		this.input.id(id);
 
-	return (L)this;
-    }
+		return (L)this;
+	}
 
-    @Override
-    public L onChange(ChangeHandler handler) {
-	this.input.onChange(handler);
+	@Override
+	public L onChange(ChangeHandler handler) {
+		this.input.onChange(handler);
 
-	return (L)this;
-    }
+		return (L)this;
+	}
 
-    public L checked(Boolean selected) {
-	this.input.checked(selected);
-	return (L)this;
-    }
+	public L checked(Boolean selected) {
+		this.input.checked(selected);
+		return (L)this;
+	}
 
-    public Boolean isChecked() {
-	return this.input.isChecked();
-    }
+	public Boolean isChecked() {
+		return this.input.isChecked();
+	}
 
-    public L value(String value) {
-	this.input.value(value);
-	return (L)this;
-    }
+	public L value(String value) {
+		this.input.value(value);
+		return (L)this;
+	}
 
-    public String getValue() {
-	return this.input.getValue();
-    }
+	public String getValue() {
+		return this.input.getValue();
+	}
 
-    @Override
-    public L placeholder(String placeholder) {
-	this.input.placeholder(placeholder);
-	return (L)this;
-    }
+	@Override
+	public L placeholder(String placeholder) {
+		this.input.placeholder(placeholder);
+		return (L)this;
+	}
 
-    @Override
-    public boolean isReadOnly() {
-	return this.input.isReadOnly();
-    }
+	@Override
+	public boolean isReadOnly() {
+		return this.input.isReadOnly();
+	}
 
-    @Override
-    public L readonly() {
-	this.input.readonly();
-	return (L)this;
-    }
+	@Override
+	public L readonly() {
+		this.input.readonly();
+		return (L)this;
+	}
 
-    @Override
-    public boolean isEditable() {
-	return this.input.isEditable();
-    }
+	@Override
+	public boolean isEditable() {
+		return this.input.isEditable();
+	}
 
-    @Override
-    public L editable() {
-	this.input.editable();
-	return (L)this;
-    }
+	@Override
+	public L editable() {
+		this.input.editable();
+		return (L)this;
+	}
 
-    @Override
-    public boolean isNullable() {
-	return this.input.isNullable();
-    }
+	@Override
+	public boolean isNullable() {
+		return this.input.isNullable();
+	}
 
-    @Override
-    public L nullable() {
-	this.input.nullable();
-	return (L)this;
-    }
+	@Override
+	public L nullable() {
+		this.input.nullable();
+		return (L)this;
+	}
 
-    @Override
-    public boolean isRequired() {
-	return this.input.isRequired();
-    }
+	@Override
+	public boolean isRequired() {
+		return this.input.isRequired();
+	}
 
-    @Override
-    public L required() {
-	this.input.required();
-	return (L)this;
-    }
+	@Override
+	public L required() {
+		this.input.required();
+		return (L)this;
+	}
 
-    @Override
-    public L text(String text) {
-	this.label.text(text);
-	return (L)this;
-    }
+	@Override
+	public L text(String text) {
+		this.label.text(text);
+		return (L)this;
+	}
 
-    @Override
-    public String getText() {
-	return this.label.getText();
-    }
+	@Override
+	public String getText() {
+		return this.label.getText();
+	}
 }

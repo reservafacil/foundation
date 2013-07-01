@@ -22,54 +22,54 @@ public final class CheckBox
     extends Input<CheckBox, String>
     implements UISelection<CheckBox, String> {
 
-    public CheckBox() {
-	super(ElementResolver.checkbox());
-    }
+	public CheckBox() {
+		super(ElementResolver.checkbox());
+	}
 
-    @Override
-    public CheckBox clear() {
-	return this.checked(false);
-    }
+	@Override
+	public CheckBox clear() {
+		return this.checked(false);
+	}
 
-    public CheckBox checked(Boolean selected) {
-	this.element().setChecked(selected);
-	return this;
-    }
+	public CheckBox checked(Boolean selected) {
+		this.element().setChecked(selected);
+		return this;
+	}
 
-    public Boolean isChecked() {
-	return this.element().isChecked();
-    }
+	public Boolean isChecked() {
+		return this.element().isChecked();
+	}
 
-    public CheckBox value(String value) {
-	this.element().setValue(value);
-	return this;
-    }
+	public CheckBox value(String value) {
+		this.element().setValue(value);
+		return this;
+	}
 
-    public String getValue() {
-	return this.element().getValue();
-    }
+	public String getValue() {
+		return this.element().getValue();
+	}
 
-    @Override
-    public CheckBox editable() {
-	this.element().setDisabled(false);
-	return this;
-    }
+	@Override
+	public CheckBox editable() {
+		this.element().setDisabled(false);
+		return this;
+	}
 
-    @Override
-    public CheckBox readonly() {
-	this.element().setDisabled(true);
-	return this;
-    }
+	@Override
+	public CheckBox readonly() {
+		this.element().setDisabled(true);
+		return this;
+	}
 
-    @Override
-    public boolean isReadOnly() {
-	return this.element().isDisabled();
-    }
+	@Override
+	public boolean isReadOnly() {
+		return this.element().isDisabled();
+	}
 
-    @Override
-    public CheckBox placeholder(String placeholder) {
-	Widgets.adaptPlaceholder(this, placeholder, "checkbox");
+	@Override
+	public CheckBox placeholder(String placeholder) {
+		Widgets.adaptPlaceholder(this, placeholder, "checkbox");
 
-	return this;
-    }
+		return this;
+	}
 }

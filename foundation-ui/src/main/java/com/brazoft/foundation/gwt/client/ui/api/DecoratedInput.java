@@ -31,251 +31,251 @@ public abstract class DecoratedInput<D extends DecoratedInput<D, V>, V>
     extends Bootstrap<D>
     implements UIInput<D, V>, HasClickHandlers<D>, HasKeyHandlers<D>, HasFocusHandlers<D>, HasMouseHandlers<D>, HasChangeHandlers<D> {
 
-    private Input<?, String> input;
+	private Input<?, String> input;
 
-    public enum Decoration {
-	APPENDED, PREPENDED;
+	public enum Decoration {
+		APPENDED, PREPENDED;
 
-	String className() {
-	    if (this.equals(APPENDED)) {
-		return "input-append";
-	    }
+		String className() {
+			if (this.equals(APPENDED)) {
+				return "input-append";
+			}
 
-	    return "input-prepend";
-	}
-    }
-
-    public DecoratedInput(Input<?, String> input) {
-	super(ElementResolver.div());
-	this.input = input;
-	this.add(this.input);
-    }
-
-    @Override
-    public D onClick(ClickHandler handler) {
-	this.input.onClick(handler);
-	return (D)this;
-    }
-
-    @Override
-    public D onDoubleClick(DoubleClickHandler handler) {
-	this.input.onDoubleClick(handler);
-	return (D)this;
-    }
-
-    public D onChange(ChangeHandler handler) {
-	this.input.onChange(handler);
-	return (D)this;
-    }
-
-    @Override
-    public D onMouseDown(MouseDownHandler handler) {
-	this.input.onMouseDown(handler);
-	return (D)this;
-    }
-
-    @Override
-    public D onMouseMove(MouseMoveHandler handler) {
-	this.input.onMouseMove(handler);
-	return (D)this;
-    }
-
-    @Override
-    public D onMouseOut(MouseOutHandler handler) {
-	this.input.onMouseOut(handler);
-	return (D)this;
-    }
-
-    @Override
-    public D onMouseOver(MouseOverHandler handler) {
-	this.input.onMouseOver(handler);
-	return (D)this;
-    }
-
-    @Override
-    public D onMouseUp(MouseUpHandler handler) {
-	this.input.onMouseUp(handler);
-	return (D)this;
-    }
-
-    @Override
-    public D onMouseWheel(MouseWheelHandler handler) {
-	this.input.onMouseWheel(handler);
-	return (D)this;
-    }
-
-    @Override
-    public D onFocus(FocusHandler handler) {
-	this.input.onFocus(handler);
-	return (D)this;
-    }
-
-    @Override
-    public D onBlur(BlurHandler handler) {
-	this.input.onBlur(handler);
-	return (D)this;
-    }
-
-    @Override
-    public D onKeyPress(KeyPressHandler handler) {
-	this.input.onKeyPress(handler);
-	return (D)this;
-    }
-
-    @Override
-    public D onKeyDown(KeyDownHandler handler) {
-	this.input.onKeyDown(handler);
-	return (D)this;
-    }
-
-    @Override
-    public D onKeyUp(KeyUpHandler handler) {
-	this.input.onKeyUp(handler);
-	return (D)this;
-    }
-
-    public D blur() {
-	this.input.blur();
-
-	return (D)this;
-    }
-
-    public D focus() {
-	this.input.focus();
-
-	return (D)this;
-    }
-
-    public D span(int span) {
-	this.input.span(span);
-	return (D)this;
-    }
-
-    public D placeholder(String placeholder) {
-	this.input.placeholder(placeholder);
-
-	return (D)this;
-    }
-
-    public D size(Size size) {
-	switch (size) {
-	    case LARGE:
-		this.input.className("input-large");
-		return (D)this;
-	    case MINI:
-		this.input.className("input-mini");
-		return (D)this;
-	    case SMALL:
-		this.input.className("input-small");
-		return (D)this;
-	    default:
-		break;
+			return "input-prepend";
+		}
 	}
 
-	this.input.className("input-medium");
-	return (D)this;
-    }
-
-    @Override
-    public boolean isReadOnly() {
-	return this.input.isReadOnly();
-    }
-
-    @Override
-    public D readonly() {
-	this.input.readonly();
-	return (D)this;
-    }
-
-    @Override
-    public boolean isEditable() {
-	return this.input.isEditable();
-    }
-
-    @Override
-    public D editable() {
-	this.input.editable();
-	return (D)this;
-    }
-
-    @Override
-    public boolean isNullable() {
-	return this.input.isNullable();
-    }
-
-    @Override
-    public D nullable() {
-	this.input.nullable();
-	return (D)this;
-    }
-
-    @Override
-    public boolean isRequired() {
-	return this.input.isRequired();
-    }
-
-    @Override
-    public D required() {
-	this.input.required();
-	return (D)this;
-    }
-
-    public D prepend(String text) {
-	return this.add(text, Decoration.PREPENDED);
-    }
-
-    public D append(String text) {
-	return this.add(text, Decoration.APPENDED);
-    }
-
-    public D prepend(Icon icon) {
-	return this.add(icon, Decoration.PREPENDED);
-    }
-
-    public D append(Icon icon) {
-	return this.add(icon, Decoration.APPENDED);
-    }
-
-    public D prepend(Button button) {
-	return this.add(button, Decoration.PREPENDED);
-    }
-
-    public D append(Button button) {
-	return this.add(button, Decoration.APPENDED);
-    }
-
-    public D prepend(SplitButton button) {
-	return this.add(button, Decoration.PREPENDED);
-    }
-
-    public D append(SplitButton button) {
-	return this.add(button, Decoration.APPENDED);
-    }
-
-    public Input<?, String> input() {
-	return this.input;
-    }
-
-    protected D add(Icon icon, Decoration decoration) {
-	HTML<SpanElement> addOn = HTML.asSpan().className("add-on");
-	Widgets.setIcon(addOn, icon);
-
-	return this.add(addOn, decoration);
-    }
-
-    protected D add(String text, Decoration decoration) {
-	HTML<SpanElement> addOn = HTML.asSpan().className("add-on").text(text);
-
-	return this.add(addOn, decoration);
-    }
-
-    protected D add(Widget addOn, Decoration decoration) {
-	this.className(decoration.className());
-
-	if (decoration.equals(Decoration.PREPENDED)) {
-	    return this.insert(addOn, this.input);
+	public DecoratedInput(Input<?, String> input) {
+		super(ElementResolver.div());
+		this.input = input;
+		this.add(this.input);
 	}
 
-	return this.add(addOn);
-    }
+	@Override
+	public D onClick(ClickHandler handler) {
+		this.input.onClick(handler);
+		return (D)this;
+	}
+
+	@Override
+	public D onDoubleClick(DoubleClickHandler handler) {
+		this.input.onDoubleClick(handler);
+		return (D)this;
+	}
+
+	public D onChange(ChangeHandler handler) {
+		this.input.onChange(handler);
+		return (D)this;
+	}
+
+	@Override
+	public D onMouseDown(MouseDownHandler handler) {
+		this.input.onMouseDown(handler);
+		return (D)this;
+	}
+
+	@Override
+	public D onMouseMove(MouseMoveHandler handler) {
+		this.input.onMouseMove(handler);
+		return (D)this;
+	}
+
+	@Override
+	public D onMouseOut(MouseOutHandler handler) {
+		this.input.onMouseOut(handler);
+		return (D)this;
+	}
+
+	@Override
+	public D onMouseOver(MouseOverHandler handler) {
+		this.input.onMouseOver(handler);
+		return (D)this;
+	}
+
+	@Override
+	public D onMouseUp(MouseUpHandler handler) {
+		this.input.onMouseUp(handler);
+		return (D)this;
+	}
+
+	@Override
+	public D onMouseWheel(MouseWheelHandler handler) {
+		this.input.onMouseWheel(handler);
+		return (D)this;
+	}
+
+	@Override
+	public D onFocus(FocusHandler handler) {
+		this.input.onFocus(handler);
+		return (D)this;
+	}
+
+	@Override
+	public D onBlur(BlurHandler handler) {
+		this.input.onBlur(handler);
+		return (D)this;
+	}
+
+	@Override
+	public D onKeyPress(KeyPressHandler handler) {
+		this.input.onKeyPress(handler);
+		return (D)this;
+	}
+
+	@Override
+	public D onKeyDown(KeyDownHandler handler) {
+		this.input.onKeyDown(handler);
+		return (D)this;
+	}
+
+	@Override
+	public D onKeyUp(KeyUpHandler handler) {
+		this.input.onKeyUp(handler);
+		return (D)this;
+	}
+
+	public D blur() {
+		this.input.blur();
+
+		return (D)this;
+	}
+
+	public D focus() {
+		this.input.focus();
+
+		return (D)this;
+	}
+
+	public D span(int span) {
+		this.input.span(span);
+		return (D)this;
+	}
+
+	public D placeholder(String placeholder) {
+		this.input.placeholder(placeholder);
+
+		return (D)this;
+	}
+
+	public D size(Size size) {
+		switch (size) {
+			case LARGE:
+				this.input.className("input-large");
+				return (D)this;
+			case MINI:
+				this.input.className("input-mini");
+				return (D)this;
+			case SMALL:
+				this.input.className("input-small");
+				return (D)this;
+			default:
+				break;
+		}
+
+		this.input.className("input-medium");
+		return (D)this;
+	}
+
+	@Override
+	public boolean isReadOnly() {
+		return this.input.isReadOnly();
+	}
+
+	@Override
+	public D readonly() {
+		this.input.readonly();
+		return (D)this;
+	}
+
+	@Override
+	public boolean isEditable() {
+		return this.input.isEditable();
+	}
+
+	@Override
+	public D editable() {
+		this.input.editable();
+		return (D)this;
+	}
+
+	@Override
+	public boolean isNullable() {
+		return this.input.isNullable();
+	}
+
+	@Override
+	public D nullable() {
+		this.input.nullable();
+		return (D)this;
+	}
+
+	@Override
+	public boolean isRequired() {
+		return this.input.isRequired();
+	}
+
+	@Override
+	public D required() {
+		this.input.required();
+		return (D)this;
+	}
+
+	public D prepend(String text) {
+		return this.add(text, Decoration.PREPENDED);
+	}
+
+	public D append(String text) {
+		return this.add(text, Decoration.APPENDED);
+	}
+
+	public D prepend(Icon icon) {
+		return this.add(icon, Decoration.PREPENDED);
+	}
+
+	public D append(Icon icon) {
+		return this.add(icon, Decoration.APPENDED);
+	}
+
+	public D prepend(Button button) {
+		return this.add(button, Decoration.PREPENDED);
+	}
+
+	public D append(Button button) {
+		return this.add(button, Decoration.APPENDED);
+	}
+
+	public D prepend(SplitButton button) {
+		return this.add(button, Decoration.PREPENDED);
+	}
+
+	public D append(SplitButton button) {
+		return this.add(button, Decoration.APPENDED);
+	}
+
+	public Input<?, String> input() {
+		return this.input;
+	}
+
+	protected D add(Icon icon, Decoration decoration) {
+		HTML<SpanElement> addOn = HTML.asSpan().className("add-on");
+		Widgets.setIcon(addOn, icon);
+
+		return this.add(addOn, decoration);
+	}
+
+	protected D add(String text, Decoration decoration) {
+		HTML<SpanElement> addOn = HTML.asSpan().className("add-on").text(text);
+
+		return this.add(addOn, decoration);
+	}
+
+	protected D add(Widget addOn, Decoration decoration) {
+		this.className(decoration.className());
+
+		if (decoration.equals(Decoration.PREPENDED)) {
+			return this.insert(addOn, this.input);
+		}
+
+		return this.add(addOn);
+	}
 }

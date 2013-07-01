@@ -22,15 +22,15 @@ import com.google.gwt.jso.JSObject;
 public abstract class TextGridColumn<T extends TextGridColumn<T, J>, J extends JSObject>
     extends SortableGridColumn<T, J> {
 
-    @Override
-    public boolean isFilterable() {
-	return true;
-    }
+	@Override
+	public boolean isFilterable() {
+		return true;
+	}
 
-    public T render(int rowIndex, Cell cell, J object) {
-	cell.text(this.toString(object));
-	return (T)this;
-    }
+	public T render(int rowIndex, Cell cell, J object) {
+		cell.text(this.toString(object));
+		return (T)this;
+	}
 
-    public abstract String toString(J object);
+	public abstract String toString(J object);
 }

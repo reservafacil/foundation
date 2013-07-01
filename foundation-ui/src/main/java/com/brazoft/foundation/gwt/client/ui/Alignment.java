@@ -16,26 +16,26 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 public enum Alignment {
-    LEFT, RIGHT, CENTER, NONE;
+	LEFT, RIGHT, CENTER, NONE;
 
-    public String className() {
-	switch (this) {
-	    case LEFT:
-		return "pull-left";
-	    case RIGHT:
-		return "pull-right";
-	    default:
-		break;
+	public String className() {
+		switch (this) {
+			case LEFT:
+				return "pull-left";
+			case RIGHT:
+				return "pull-right";
+			default:
+				break;
+		}
+
+		return "clearfix";
 	}
 
-	return "clearfix";
-    }
+	public String toString() {
+		if (this == NONE) {
+			return LEFT.toString();
+		}
 
-    public String toString() {
-	if (this == NONE) {
-	    return LEFT.toString();
+		return this.name().toLowerCase();
 	}
-
-	return this.name().toLowerCase();
-    }
 }

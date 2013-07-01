@@ -23,46 +23,46 @@ import com.brazoft.foundation.gwt.client.ui.api.Select2;
 public final class ListBox
     extends Select2<ListBox, String[]> {
 
-    public ListBox() {
-	super(true);
-    }
-
-    public ListBox closeOnSelect(boolean close) {
-	this.getOptions().put("closeOnSelect", close);
-	return this.update();
-    }
-
-    public ListBox maximumSelectionSize(int size) {
-	this.getOptions().put("maximumSelectionSize", size);
-	return this.update();
-    }
-
-    @Override
-    public ListBox value(String[] value) {
-	return this.select(value);
-    }
-
-    protected ListBox select(String... values) {
-	JSONCollection<String> selection = JSON.asStringCollection();
-
-	for (String value : values) {
-	    selection.add(value);
+	public ListBox() {
+		super(true);
 	}
 
-	this.select(this.getId(), selection.toString());
-
-	return this;
-    }
-
-    @Override
-    public String[] getValue() {
-	java.util.List<String> values = new ArrayList<String>();
-	JSONCollection<String> jsonValues = JSON.asStringCollection(this.getSelection(this.getId()));
-
-	for (String value : jsonValues) {
-	    values.add(value);
+	public ListBox closeOnSelect(boolean close) {
+		this.getOptions().put("closeOnSelect", close);
+		return this.update();
 	}
 
-	return values.toArray(new String[values.size()]);
-    }
+	public ListBox maximumSelectionSize(int size) {
+		this.getOptions().put("maximumSelectionSize", size);
+		return this.update();
+	}
+
+	@Override
+	public ListBox value(String[] value) {
+		return this.select(value);
+	}
+
+	protected ListBox select(String... values) {
+		JSONCollection<String> selection = JSON.asStringCollection();
+
+		for (String value : values) {
+			selection.add(value);
+		}
+
+		this.select(this.getId(), selection.toString());
+
+		return this;
+	}
+
+	@Override
+	public String[] getValue() {
+		java.util.List<String> values = new ArrayList<String>();
+		JSONCollection<String> jsonValues = JSON.asStringCollection(this.getSelection(this.getId()));
+
+		for (String value : jsonValues) {
+			values.add(value);
+		}
+
+		return values.toArray(new String[values.size()]);
+	}
 }

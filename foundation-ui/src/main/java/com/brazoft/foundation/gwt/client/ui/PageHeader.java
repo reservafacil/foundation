@@ -22,17 +22,17 @@ import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 public final class PageHeader
     extends Bootstrap<PageHeader> {
 
-    private Heading heading = new Heading(1);
+	private Heading heading = new Heading(1);
 
-    public PageHeader(String heading, String subtext) {
-	super(ElementResolver.div());
-	this.init(heading, subtext);
-    }
+	public PageHeader(String heading, String subtext) {
+		super(ElementResolver.div());
+		this.init(heading, subtext);
+	}
 
-    private void init(String heading, String subtext) {
-	this.className("page-header");
-	this.add(this.heading);
+	private void init(String heading, String subtext) {
+		this.className("page-header");
+		this.add(this.heading);
 
-	this.heading.text(heading).add(new Emphasis(EmphasisOptions.SMALL).text(subtext));
-    }
+		this.heading.text(heading).add(new Emphasis(EmphasisOptions.SMALL).text(subtext));
+	}
 }

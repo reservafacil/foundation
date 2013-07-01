@@ -16,5 +16,5 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 public enum DropOptions {
-    DOWN, UP;
+	DOWN, UP;
 }

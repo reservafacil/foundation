@@ -27,81 +27,81 @@ public final class Badge
     extends Bootstrap<Badge>
     implements HasText<Badge>, HasClickHandlers<Badge>, HasMouseHandlers<Badge> {
 
-    private StyleChooser<Badge> chooser = new StyleChooser<Badge>("badge-success", "badge-warning", "badge-important", "badge-info",
-	                                                          "badge-inverse");
+	private StyleChooser<Badge> chooser = new StyleChooser<Badge>("badge-success", "badge-warning", "badge-important", "badge-info",
+	                                                              "badge-inverse");
 
-    public Badge() {
-	super(ElementResolver.span());
-	this.className("badge");
-    }
+	public Badge() {
+		super(ElementResolver.span());
+		this.className("badge");
+	}
 
-    @Override
-    public Badge onClick(ClickHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public Badge onClick(ClickHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public Badge onDoubleClick(DoubleClickHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public Badge onDoubleClick(DoubleClickHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public Badge onMouseDown(MouseDownHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public Badge onMouseDown(MouseDownHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public Badge onMouseMove(MouseMoveHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public Badge onMouseMove(MouseMoveHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public Badge onMouseOut(MouseOutHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public Badge onMouseOut(MouseOutHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public Badge onMouseOver(MouseOverHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public Badge onMouseOver(MouseOverHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public Badge onMouseUp(MouseUpHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public Badge onMouseUp(MouseUpHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public Badge onMouseWheel(MouseWheelHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public Badge onMouseWheel(MouseWheelHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    public Badge success() {
-	return this.chooser.className(this, "badge-success");
-    }
+	public Badge success() {
+		return this.chooser.className(this, "badge-success");
+	}
 
-    public Badge warning() {
-	return this.chooser.className(this, "badge-warning");
-    }
+	public Badge warning() {
+		return this.chooser.className(this, "badge-warning");
+	}
 
-    public Badge important() {
-	return this.chooser.className(this, "badge-important");
-    }
+	public Badge important() {
+		return this.chooser.className(this, "badge-important");
+	}
 
-    public Badge info() {
-	return this.chooser.className(this, "badge-info");
-    }
+	public Badge info() {
+		return this.chooser.className(this, "badge-info");
+	}
 
-    public Badge inverse() {
-	return this.chooser.className(this, "badge-inverse");
-    }
+	public Badge inverse() {
+		return this.chooser.className(this, "badge-inverse");
+	}
 
-    @Override
-    public Badge text(String text) {
-	return Component.Util.setHTML(this, text);
-    }
+	@Override
+	public Badge text(String text) {
+		return Component.Util.setHTML(this, text);
+	}
 
-    @Override
-    public String getText() {
-	return Component.Util.getHTML(this);
-    }
+	@Override
+	public String getText() {
+		return Component.Util.getHTML(this);
+	}
 }

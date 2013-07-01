@@ -22,24 +22,24 @@ import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row;
 public abstract class OrientationForm<O extends OrientationForm<O>>
     extends Composite<O> {
 
-    private Table table = new Table();
+	private Table table = new Table();
 
-    public OrientationForm() {
-	this.initWidget(this.table);
-    }
+	public OrientationForm() {
+		this.initWidget(this.table);
+	}
 
-    public <V> O item(InputGroup<V> group) {
-	Row row = this.row();
-	group.getLabel().detach().style().clearMarginBottom();
-	row.cell().verticalAlign(VerticalAlignment.MIDDLE).add(group.getLabel());
-	row.cell().add(group);
+	public <V> O item(InputGroup<V> group) {
+		Row row = this.row();
+		group.getLabel().detach().style().clearMarginBottom();
+		row.cell().verticalAlign(VerticalAlignment.MIDDLE).add(group.getLabel());
+		row.cell().add(group);
 
-	return (O)this;
-    }
+		return (O)this;
+	}
 
-    protected Table table() {
-	return this.table;
-    }
+	protected Table table() {
+		return this.table;
+	}
 
-    protected abstract Row row();
+	protected abstract Row row();
 }

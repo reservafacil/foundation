@@ -21,39 +21,39 @@ import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 public final class Layout
     extends Bootstrap<Layout> {
 
-    private LayoutOptions option;
+	private LayoutOptions option;
 
-    public Layout(LayoutOptions option) {
-	super(ElementResolver.div());
-	this.setStyleName(option.className());
-	this.option = option;
-    }
-
-    public LayoutRow row() {
-	LayoutRow row = new LayoutRow(this.option);
-
-	this.add(row);
-
-	return row;
-    }
-
-    public enum LayoutOptions {
-	FIXED, FLUID;
-
-	String className() {
-	    if (FLUID.equals(this)) {
-		return "container-fluid";
-	    }
-
-	    return "container";
+	public Layout(LayoutOptions option) {
+		super(ElementResolver.div());
+		this.setStyleName(option.className());
+		this.option = option;
 	}
 
-	String rowClass() {
-	    if (FLUID.equals(this)) {
-		return "row-fluid";
-	    }
+	public LayoutRow row() {
+		LayoutRow row = new LayoutRow(this.option);
 
-	    return "row";
+		this.add(row);
+
+		return row;
 	}
-    }
+
+	public enum LayoutOptions {
+		FIXED, FLUID;
+
+		String className() {
+			if (FLUID.equals(this)) {
+				return "container-fluid";
+			}
+
+			return "container";
+		}
+
+		String rowClass() {
+			if (FLUID.equals(this)) {
+				return "row-fluid";
+			}
+
+			return "row";
+		}
+	}
 }

@@ -28,128 +28,128 @@ import com.google.gwt.user.client.ui.Widget;
 public final class Breadcrumb
     extends Bootstrap<Breadcrumb> {
 
-    private String separator;
+	private String separator;
 
-    public Breadcrumb() {
-	this("/");
-    }
-
-    public Breadcrumb(String separator) {
-	super(ElementResolver.ul());
-	this.className("breadcrumb");
-	this.separator = separator;
-    }
-
-    public BreadcrumbItem item(String label) {
-	BreadcrumbItem item = new BreadcrumbItem().text(label);
-
-	if (this.hasChildren()) {
-	    ((BreadcrumbItem)this.getChild(this.childrenCount() - 1)).activate();
-	    item.insert(this.divider());
+	public Breadcrumb() {
+		this("/");
 	}
 
-	this.add(item);
-
-	return item;
-    }
-
-    HTML<SpanElement> divider() {
-	return HTML.asSpan().className("divider").text(this.separator);
-    }
-
-    public static class BreadcrumbItem
-	extends Bootstrap<BreadcrumbItem>
-	implements HasText<BreadcrumbItem>, HasClickHandlers<BreadcrumbItem>, HasMouseHandlers<BreadcrumbItem>,
-	HasFocusHandlers<BreadcrumbItem> {
-
-	private HTML<AnchorElement> link = HTML.asAnchor("#");
-
-	public BreadcrumbItem() {
-	    super(ElementResolver.li());
-	    this.add(this.link);
-	    Widgets.muted(this.link);
+	public Breadcrumb(String separator) {
+		super(ElementResolver.ul());
+		this.className("breadcrumb");
+		this.separator = separator;
 	}
 
-	@Override
-	public BreadcrumbItem onBlur(BlurHandler handler) {
-	    this.link.onBlur(handler);
-	    return this;
+	public BreadcrumbItem item(String label) {
+		BreadcrumbItem item = new BreadcrumbItem().text(label);
+
+		if (this.hasChildren()) {
+			((BreadcrumbItem)this.getChild(this.childrenCount() - 1)).activate();
+			item.insert(this.divider());
+		}
+
+		this.add(item);
+
+		return item;
 	}
 
-	@Override
-	public BreadcrumbItem onFocus(FocusHandler handler) {
-	    this.link.onFocus(handler);
-	    return this;
+	HTML<SpanElement> divider() {
+		return HTML.asSpan().className("divider").text(this.separator);
 	}
 
-	@Override
-	public BreadcrumbItem onMouseDown(MouseDownHandler handler) {
-	    this.link.onMouseDown(handler);
-	    return this;
-	}
+	public static class BreadcrumbItem
+	    extends Bootstrap<BreadcrumbItem>
+	    implements HasText<BreadcrumbItem>, HasClickHandlers<BreadcrumbItem>, HasMouseHandlers<BreadcrumbItem>,
+	    HasFocusHandlers<BreadcrumbItem> {
 
-	@Override
-	public BreadcrumbItem onMouseMove(MouseMoveHandler handler) {
-	    this.link.onMouseMove(handler);
-	    return this;
-	}
+		private HTML<AnchorElement> link = HTML.asAnchor("#");
 
-	@Override
-	public BreadcrumbItem onMouseOut(MouseOutHandler handler) {
-	    this.link.onMouseOut(handler);
-	    return this;
-	}
+		public BreadcrumbItem() {
+			super(ElementResolver.li());
+			this.add(this.link);
+			Widgets.muted(this.link);
+		}
 
-	@Override
-	public BreadcrumbItem onMouseOver(MouseOverHandler handler) {
-	    this.link.onMouseOver(handler);
-	    return this;
-	}
+		@Override
+		public BreadcrumbItem onBlur(BlurHandler handler) {
+			this.link.onBlur(handler);
+			return this;
+		}
 
-	@Override
-	public BreadcrumbItem onMouseUp(MouseUpHandler handler) {
-	    this.link.onMouseUp(handler);
-	    return this;
-	}
+		@Override
+		public BreadcrumbItem onFocus(FocusHandler handler) {
+			this.link.onFocus(handler);
+			return this;
+		}
 
-	@Override
-	public BreadcrumbItem onMouseWheel(MouseWheelHandler handler) {
-	    this.link.onMouseWheel(handler);
-	    return this;
-	}
+		@Override
+		public BreadcrumbItem onMouseDown(MouseDownHandler handler) {
+			this.link.onMouseDown(handler);
+			return this;
+		}
 
-	@Override
-	public BreadcrumbItem onClick(ClickHandler handler) {
-	    this.link.onClick(handler);
-	    return this;
-	}
+		@Override
+		public BreadcrumbItem onMouseMove(MouseMoveHandler handler) {
+			this.link.onMouseMove(handler);
+			return this;
+		}
 
-	@Override
-	public BreadcrumbItem onDoubleClick(DoubleClickHandler handler) {
-	    this.link.onDoubleClick(handler);
-	    return this;
-	}
+		@Override
+		public BreadcrumbItem onMouseOut(MouseOutHandler handler) {
+			this.link.onMouseOut(handler);
+			return this;
+		}
 
-	@Override
-	public BreadcrumbItem text(String text) {
-	    this.link.text(text);
-	    return this;
-	}
+		@Override
+		public BreadcrumbItem onMouseOver(MouseOverHandler handler) {
+			this.link.onMouseOver(handler);
+			return this;
+		}
 
-	@Override
-	public String getText() {
-	    return this.link.getText();
-	}
+		@Override
+		public BreadcrumbItem onMouseUp(MouseUpHandler handler) {
+			this.link.onMouseUp(handler);
+			return this;
+		}
 
-	protected BreadcrumbItem insert(Widget child) {
-	    return super.insert(child, this.link);
-	}
+		@Override
+		public BreadcrumbItem onMouseWheel(MouseWheelHandler handler) {
+			this.link.onMouseWheel(handler);
+			return this;
+		}
 
-	BreadcrumbItem activate() {
-	    this.link.element().setHref("#");
-	    this.link.removeClassName("muted");
+		@Override
+		public BreadcrumbItem onClick(ClickHandler handler) {
+			this.link.onClick(handler);
+			return this;
+		}
 
-	    return this;
+		@Override
+		public BreadcrumbItem onDoubleClick(DoubleClickHandler handler) {
+			this.link.onDoubleClick(handler);
+			return this;
+		}
+
+		@Override
+		public BreadcrumbItem text(String text) {
+			this.link.text(text);
+			return this;
+		}
+
+		@Override
+		public String getText() {
+			return this.link.getText();
+		}
+
+		protected BreadcrumbItem insert(Widget child) {
+			return super.insert(child, this.link);
+		}
+
+		BreadcrumbItem activate() {
+			this.link.element().setHref("#");
+			this.link.removeClassName("muted");
+
+			return this;
+		}
 	}
-    }
 }

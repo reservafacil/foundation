@@ -24,52 +24,52 @@ import com.google.gwt.user.client.ui.Widget;
 public final class TabPanel
     extends Bootstrap<TabPanel> {
 
-    private Tab              tabs    = new Tab();
+	private Tab              tabs    = new Tab();
 
-    private HTML<DivElement> content = HTML.asDiv().className("tab-content");
+	private HTML<DivElement> content = HTML.asDiv().className("tab-content");
 
-    public TabPanel() {
-	this(Direction.TOP);
-    }
-
-    public TabPanel(Direction direction) {
-	super(ElementResolver.div());
-	this.init(direction);
-    }
-
-    private void init(Direction direction) {
-	this.className("tabbable");
-
-	switch (direction) {
-	    case BOTTOM:
-		this.className("tabs-below");
-		break;
-	    case LEFT:
-		this.className("tabs-left");
-		break;
-	    case RIGHT:
-		this.className("tabs-right");
-		break;
-	    default:
-		break;
+	public TabPanel() {
+		this(Direction.TOP);
 	}
 
-	this.add(this.tabs).add(this.content);
-    }
-
-    public TabItem tab(String id, String label, Widget content) {
-	boolean active = !this.tabs.hasChildren();
-
-	TabItem item = this.tabs.item(id, label, active);
-
-	HTML<DivElement> tabPanel = HTML.asDiv().id(id).className("tab-pane");
-	if (active) {
-	    Widgets.activateClass(tabPanel);
+	public TabPanel(Direction direction) {
+		super(ElementResolver.div());
+		this.init(direction);
 	}
 
-	tabPanel.add(content);
-	this.content.add(tabPanel);
+	private void init(Direction direction) {
+		this.className("tabbable");
 
-	return item;
-    }
+		switch (direction) {
+			case BOTTOM:
+				this.className("tabs-below");
+				break;
+			case LEFT:
+				this.className("tabs-left");
+				break;
+			case RIGHT:
+				this.className("tabs-right");
+				break;
+			default:
+				break;
+		}
+
+		this.add(this.tabs).add(this.content);
+	}
+
+	public TabItem tab(String id, String label, Widget content) {
+		boolean active = !this.tabs.hasChildren();
+
+		TabItem item = this.tabs.item(id, label, active);
+
+		HTML<DivElement> tabPanel = HTML.asDiv().id(id).className("tab-pane");
+		if (active) {
+			Widgets.activateClass(tabPanel);
+		}
+
+		tabPanel.add(content);
+		this.content.add(tabPanel);
+
+		return item;
+	}
 }

@@ -23,45 +23,45 @@ import com.google.gwt.resources.client.ImageResource;
 public final class Image
     extends Bootstrap<Image> {
 
-    public Image() {
-	this(ImageOptions.DEFAULT);
-    }
-
-    public Image(ImageOptions option) {
-	super(ElementResolver.img());
-	this.className(option.className());
-    }
-
-    public Image src(ImageResource resource) {
-	return this.src(resource.getSafeUri().asString());
-    }
-
-    public Image src(String url) {
-	this.element().setSrc(url);
-
-	return this;
-    }
-
-    private ImageElement element() {
-	return this.getElement().cast();
-    }
-
-    public enum ImageOptions {
-	CIRCLE, DEFAULT, POLAROID, ROUNDED;
-
-	String className() {
-	    switch (this) {
-		case CIRCLE:
-		    return "img-circle";
-		case POLAROID:
-		    return "img-polaroid";
-		case ROUNDED:
-		    return "img-rounded";
-		default:
-		    break;
-	    }
-
-	    return "img";
+	public Image() {
+		this(ImageOptions.DEFAULT);
 	}
-    }
+
+	public Image(ImageOptions option) {
+		super(ElementResolver.img());
+		this.className(option.className());
+	}
+
+	public Image src(ImageResource resource) {
+		return this.src(resource.getSafeUri().asString());
+	}
+
+	public Image src(String url) {
+		this.element().setSrc(url);
+
+		return this;
+	}
+
+	private ImageElement element() {
+		return this.getElement().cast();
+	}
+
+	public enum ImageOptions {
+		CIRCLE, DEFAULT, POLAROID, ROUNDED;
+
+		String className() {
+			switch (this) {
+				case CIRCLE:
+					return "img-circle";
+				case POLAROID:
+					return "img-polaroid";
+				case ROUNDED:
+					return "img-rounded";
+				default:
+					break;
+			}
+
+			return "img";
+		}
+	}
 }

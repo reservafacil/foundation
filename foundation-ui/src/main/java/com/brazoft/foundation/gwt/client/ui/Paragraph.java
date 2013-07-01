@@ -23,21 +23,21 @@ public final class Paragraph
     extends Bootstrap<Paragraph>
     implements HasText<Paragraph> {
 
-    public Paragraph() {
-	super(ElementResolver.p());
-    }
+	public Paragraph() {
+		super(ElementResolver.p());
+	}
 
-    public Paragraph lead() {
-	return this.className("lead");
-    }
+	public Paragraph lead() {
+		return this.className("lead");
+	}
 
-    @Override
-    public Paragraph text(String text) {
-	return Component.Util.setHTML(this, text);
-    }
+	@Override
+	public Paragraph text(String text) {
+		return Component.Util.setHTML(this, text);
+	}
 
-    @Override
-    public String getText() {
-	return Component.Util.getHTML(this);
-    }
+	@Override
+	public String getText() {
+		return Component.Util.getHTML(this);
+	}
 }

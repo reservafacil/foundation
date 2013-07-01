@@ -27,93 +27,93 @@ import com.google.gwt.jso.JSObject;
 @SuppressWarnings("unchecked")
 public abstract class GridColumn<G extends GridColumn<G, J>, J extends JSObject> {
 
-    private Cell              headerCell;
+	private Cell              headerCell;
 
-    private HTML<SpanElement> label = HTML.asSpan();
+	private HTML<SpanElement> label = HTML.asSpan();
 
-    private String            name;
+	private String            name;
 
-    private boolean           sortable;
+	private boolean           sortable;
 
-    private double            width;
+	private double            width;
 
-    private Unit              widthUnit;
+	private Unit              widthUnit;
 
-    protected Cell headerCell() {
-	return this.headerCell;
-    }
-
-    public boolean isFilterable() {
-	return false;
-    }
-
-    public G width(double width, Unit unit) {
-	this.width = width;
-	this.widthUnit = unit;
-	return (G)this;
-    }
-
-    public G sort(JsArray<J> rows) {
-	return (G)this;
-    }
-
-    public G unsort() {
-	return (G)this;
-    }
-
-    public G headerCell(Cell cell) {
-	this.headerCell = cell;
-	this.headerCell.add(this.label);
-
-	if (this.sortable) {
-	    this.headerCell.className("sortable");
+	protected Cell headerCell() {
+		return this.headerCell;
 	}
 
-	if (this.width > 0) {
-	    this.headerCell.style().width(this.width, this.widthUnit);
+	public boolean isFilterable() {
+		return false;
 	}
 
-	return (G)this;
-    }
+	public G width(double width, Unit unit) {
+		this.width = width;
+		this.widthUnit = unit;
+		return (G)this;
+	}
 
-    public G sortable() {
-	this.sortable = true;
-	return (G)this;
-    }
+	public G sort(JsArray<J> rows) {
+		return (G)this;
+	}
 
-    public G onClick(ClickHandler handler) {
-	this.headerCell.onClick(handler);
-	return (G)this;
-    }
+	public G unsort() {
+		return (G)this;
+	}
 
-    public G icon(Icon icon) {
-	this.headerCell.icon(icon);
-	return (G)this;
-    }
+	public G headerCell(Cell cell) {
+		this.headerCell = cell;
+		this.headerCell.add(this.label);
 
-    public G text(String text) {
-	this.label.text(text);
-	return (G)this;
-    }
+		if (this.sortable) {
+			this.headerCell.className("sortable");
+		}
 
-    public String getName() {
-	return name;
-    }
+		if (this.width > 0) {
+			this.headerCell.style().width(this.width, this.widthUnit);
+		}
 
-    public G name(String name) {
-	this.name = name;
+		return (G)this;
+	}
 
-	return (G)this;
-    }
+	public G sortable() {
+		this.sortable = true;
+		return (G)this;
+	}
 
-    public G label(String label) {
-	this.label.text(label);
-	return (G)this;
-    }
+	public G onClick(ClickHandler handler) {
+		this.headerCell.onClick(handler);
+		return (G)this;
+	}
 
-    public String toString(J object) {
-	return object.toString();
-    }
+	public G icon(Icon icon) {
+		this.headerCell.icon(icon);
+		return (G)this;
+	}
 
-    public abstract G render(int rowIndex, Cell cell, J object);
+	public G text(String text) {
+		this.label.text(text);
+		return (G)this;
+	}
+
+	public String getName() {
+		return name;
+	}
+
+	public G name(String name) {
+		this.name = name;
+
+		return (G)this;
+	}
+
+	public G label(String label) {
+		this.label.text(label);
+		return (G)this;
+	}
+
+	public String toString(J object) {
+		return object.toString();
+	}
+
+	public abstract G render(int rowIndex, Cell cell, J object);
 }

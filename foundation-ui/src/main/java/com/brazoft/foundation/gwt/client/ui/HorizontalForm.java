@@ -20,14 +20,14 @@ import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row;
 public final class HorizontalForm
     extends OrientationForm<HorizontalForm> {
 
-    private Row row;
+	private Row row;
 
-    public HorizontalForm() {
-	this.row = this.table().body().row();
-    }
+	public HorizontalForm() {
+		this.row = this.table().body().row();
+	}
 
-    @Override
-    protected Row row() {
-	return this.row;
-    }
+	@Override
+	protected Row row() {
+		return this.row;
+	}
 }

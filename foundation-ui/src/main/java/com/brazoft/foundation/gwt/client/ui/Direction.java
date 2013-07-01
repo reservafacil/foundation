@@ -16,13 +16,13 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 public enum Direction {
-    BOTTOM, LEFT, RIGHT, TOP;
+	BOTTOM, LEFT, RIGHT, TOP;
 
-    public static enum Horizontal {
-	LEFT, RIGHT;
-    }
+	public static enum Horizontal {
+		LEFT, RIGHT;
+	}
 
-    public static enum Vertical {
-	BOTTOM, TOP;
-    }
+	public static enum Vertical {
+		BOTTOM, TOP;
+	}
 }

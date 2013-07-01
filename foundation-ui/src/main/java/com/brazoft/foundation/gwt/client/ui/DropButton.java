@@ -23,166 +23,166 @@ public final class DropButton
     extends Bootstrap<DropButton>
     implements UIButton<DropButton> {
 
-    private ToggleButton toggle = new ToggleButton().className("btn");
+	private ToggleButton toggle = new ToggleButton().className("btn");
 
-    public DropButton() {
-	this(DropOptions.DOWN);
-    }
-
-    public DropButton(DropOptions option) {
-	super(ElementResolver.div());
-	this.init(option);
-    }
-
-    private void init(DropOptions option) {
-	this.className("btn-group");
-	if (option.equals(DropOptions.UP)) {
-	    this.className("dropup");
+	public DropButton() {
+		this(DropOptions.DOWN);
 	}
-	this.add(this.toggle);
-    }
 
-    @Override
-    public DropButton onClick(ClickHandler handler) {
-	this.toggle.onClick(handler);
-	return this;
-    }
+	public DropButton(DropOptions option) {
+		super(ElementResolver.div());
+		this.init(option);
+	}
 
-    @Override
-    public DropButton onDoubleClick(DoubleClickHandler handler) {
-	this.toggle.onDoubleClick(handler);
-	return this;
-    }
+	private void init(DropOptions option) {
+		this.className("btn-group");
+		if (option.equals(DropOptions.UP)) {
+			this.className("dropup");
+		}
+		this.add(this.toggle);
+	}
 
-    @Override
-    public DropButton onKeyPress(KeyPressHandler handler) {
-	this.toggle.onKeyPress(handler);
-	return this;
-    }
+	@Override
+	public DropButton onClick(ClickHandler handler) {
+		this.toggle.onClick(handler);
+		return this;
+	}
 
-    @Override
-    public DropButton onKeyDown(KeyDownHandler handler) {
-	this.toggle.onKeyDown(handler);
-	return this;
-    }
+	@Override
+	public DropButton onDoubleClick(DoubleClickHandler handler) {
+		this.toggle.onDoubleClick(handler);
+		return this;
+	}
 
-    @Override
-    public DropButton onKeyUp(KeyUpHandler handler) {
-	this.toggle.onKeyUp(handler);
-	return this;
-    }
+	@Override
+	public DropButton onKeyPress(KeyPressHandler handler) {
+		this.toggle.onKeyPress(handler);
+		return this;
+	}
 
-    @Override
-    public DropButton onMouseDown(MouseDownHandler handler) {
-	this.toggle.onMouseDown(handler);
-	return this;
-    }
+	@Override
+	public DropButton onKeyDown(KeyDownHandler handler) {
+		this.toggle.onKeyDown(handler);
+		return this;
+	}
 
-    @Override
-    public DropButton onMouseMove(MouseMoveHandler handler) {
-	this.toggle.onMouseMove(handler);
-	return this;
-    }
+	@Override
+	public DropButton onKeyUp(KeyUpHandler handler) {
+		this.toggle.onKeyUp(handler);
+		return this;
+	}
 
-    @Override
-    public DropButton onMouseOut(MouseOutHandler handler) {
-	this.toggle.onMouseOut(handler);
-	return this;
-    }
+	@Override
+	public DropButton onMouseDown(MouseDownHandler handler) {
+		this.toggle.onMouseDown(handler);
+		return this;
+	}
 
-    @Override
-    public DropButton onMouseOver(MouseOverHandler handler) {
-	this.toggle.onMouseOver(handler);
-	return this;
-    }
+	@Override
+	public DropButton onMouseMove(MouseMoveHandler handler) {
+		this.toggle.onMouseMove(handler);
+		return this;
+	}
 
-    @Override
-    public DropButton onMouseUp(MouseUpHandler handler) {
-	this.toggle.onMouseUp(handler);
-	return this;
-    }
+	@Override
+	public DropButton onMouseOut(MouseOutHandler handler) {
+		this.toggle.onMouseOut(handler);
+		return this;
+	}
 
-    @Override
-    public DropButton onMouseWheel(MouseWheelHandler handler) {
-	this.toggle.onMouseWheel(handler);
-	return this;
-    }
+	@Override
+	public DropButton onMouseOver(MouseOverHandler handler) {
+		this.toggle.onMouseOver(handler);
+		return this;
+	}
 
-    @Override
-    public DropButton onFocus(FocusHandler handler) {
-	this.toggle.onFocus(handler);
-	return this;
-    }
+	@Override
+	public DropButton onMouseUp(MouseUpHandler handler) {
+		this.toggle.onMouseUp(handler);
+		return this;
+	}
 
-    @Override
-    public DropButton onBlur(BlurHandler handler) {
-	this.toggle.onBlur(handler);
-	return this;
-    }
+	@Override
+	public DropButton onMouseWheel(MouseWheelHandler handler) {
+		this.toggle.onMouseWheel(handler);
+		return this;
+	}
 
-    @Override
-    public String getText() {
-	return this.toggle.getText();
-    }
+	@Override
+	public DropButton onFocus(FocusHandler handler) {
+		this.toggle.onFocus(handler);
+		return this;
+	}
 
-    public DropButton menu(DropItems menu) {
-	return this.add(menu);
-    }
+	@Override
+	public DropButton onBlur(BlurHandler handler) {
+		this.toggle.onBlur(handler);
+		return this;
+	}
 
-    @Override
-    public DropButton text(String text) {
-	this.toggle.text(text);
+	@Override
+	public String getText() {
+		return this.toggle.getText();
+	}
 
-	return this;
-    }
+	public DropButton menu(DropItems menu) {
+		return this.add(menu);
+	}
 
-    public DropButton size(Size size) {
-	this.toggle.size(size);
-	return this;
-    }
+	@Override
+	public DropButton text(String text) {
+		this.toggle.text(text);
 
-    public DropButton primary() {
-	this.toggle.primary();
-	return this;
-    }
+		return this;
+	}
 
-    public DropButton info() {
-	this.toggle.info();
-	return this;
-    }
+	public DropButton size(Size size) {
+		this.toggle.size(size);
+		return this;
+	}
 
-    public DropButton success() {
-	this.toggle.success();
-	return this;
-    }
+	public DropButton primary() {
+		this.toggle.primary();
+		return this;
+	}
 
-    public DropButton warning() {
-	this.toggle.warning();
-	return this;
-    }
+	public DropButton info() {
+		this.toggle.info();
+		return this;
+	}
 
-    public DropButton danger() {
-	this.toggle.danger();
-	return this;
-    }
+	public DropButton success() {
+		this.toggle.success();
+		return this;
+	}
 
-    public DropButton inverse() {
-	this.toggle.inverse();
-	return this;
-    }
+	public DropButton warning() {
+		this.toggle.warning();
+		return this;
+	}
 
-    public DropButton link() {
-	this.toggle.link();
-	return this;
-    }
+	public DropButton danger() {
+		this.toggle.danger();
+		return this;
+	}
 
-    public DropButton expanded() {
-	this.toggle.expanded();
-	return this;
-    }
+	public DropButton inverse() {
+		this.toggle.inverse();
+		return this;
+	}
 
-    public DropButton icon(Icon icon) {
-	this.toggle.icon(icon);
-	return this;
-    }
+	public DropButton link() {
+		this.toggle.link();
+		return this;
+	}
+
+	public DropButton expanded() {
+		this.toggle.expanded();
+		return this;
+	}
+
+	public DropButton icon(Icon icon) {
+		this.toggle.icon(icon);
+		return this;
+	}
 }

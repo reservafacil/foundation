@@ -24,43 +24,43 @@ import com.google.gwt.dom.client.Style.Unit;
 public final class Menu
     extends Bootstrap<Menu> {
 
-    private DropItems dropdown = new DropItems(false);
+	private DropItems dropdown = new DropItems(false);
 
-    public Menu() {
-	this(MenuOptions.DROPDOWN);
-    }
-
-    public Menu(MenuOptions... options) {
-	super(ElementResolver.div());
-	this.add(this.dropdown);
-	this.init(options);
-    }
-
-    private void init(MenuOptions... options) {
-	for (MenuOptions option : options) {
-	    if (option.equals(MenuOptions.STATIC)) {
-		this.dropdown.style().display(Display.BLOCK).position(Position.STATIC).marginBottom(5, Unit.PX);
-		continue;
-	    }
-	    if (option.equals(MenuOptions.DROPUP)) {
-		this.className("dropup");
-		continue;
-	    }
-	    this.className("dropdown");
+	public Menu() {
+		this(MenuOptions.DROPDOWN);
 	}
-    }
 
-    public Menu item(String label) {
-	this.dropdown.item(label);
+	public Menu(MenuOptions... options) {
+		super(ElementResolver.div());
+		this.add(this.dropdown);
+		this.init(options);
+	}
 
-	return this;
-    }
+	private void init(MenuOptions... options) {
+		for (MenuOptions option : options) {
+			if (option.equals(MenuOptions.STATIC)) {
+				this.dropdown.style().display(Display.BLOCK).position(Position.STATIC).marginBottom(5, Unit.PX);
+				continue;
+			}
+			if (option.equals(MenuOptions.DROPUP)) {
+				this.className("dropup");
+				continue;
+			}
+			this.className("dropdown");
+		}
+	}
 
-    public DropItems subItem(String label) {
-	return this.dropdown.subItem(label);
-    }
+	public Menu item(String label) {
+		this.dropdown.item(label);
 
-    public enum MenuOptions {
-	STATIC, DROPDOWN, DROPUP;
-    }
+		return this;
+	}
+
+	public DropItems subItem(String label) {
+		return this.dropdown.subItem(label);
+	}
+
+	public enum MenuOptions {
+		STATIC, DROPDOWN, DROPUP;
+	}
 }

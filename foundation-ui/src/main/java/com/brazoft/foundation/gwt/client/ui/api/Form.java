@@ -25,21 +25,21 @@ import com.google.gwt.user.client.ui.FormPanel.SubmitHandler;
 public abstract class Form<F extends Form<F>>
     extends Bootstrap<F> {
 
-    public Form() {
-	super(ElementResolver.form());
-    }
+	public Form() {
+		super(ElementResolver.form());
+	}
 
-    public F onSubmit(SubmitHandler handler) {
-	this.addHandler(handler, SubmitEvent.getType());
-	return (F)this;
-    }
+	public F onSubmit(SubmitHandler handler) {
+		this.addHandler(handler, SubmitEvent.getType());
+		return (F)this;
+	}
 
-    public F onSubmitComplete(SubmitCompleteHandler handler) {
-	this.addHandler(handler, SubmitCompleteEvent.getType());
-	return (F)this;
-    }
+	public F onSubmitComplete(SubmitCompleteHandler handler) {
+		this.addHandler(handler, SubmitCompleteEvent.getType());
+		return (F)this;
+	}
 
-    public F button(UIButton<?> button) {
-	return this.add(button.asWidget());
-    }
+	public F button(UIButton<?> button) {
+		return this.add(button.asWidget());
+	}
 }

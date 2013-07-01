@@ -23,201 +23,201 @@ public final class SplitButton
     extends Bootstrap<SplitButton>
     implements UIButton<SplitButton> {
 
-    private Button main   = new Button();
+	private Button main   = new Button();
 
-    private Button toggle = new Button();
+	private Button toggle = new Button();
 
-    public SplitButton() {
-	this(DropOptions.DOWN);
-    }
-
-    public SplitButton(DropOptions option) {
-	super(ElementResolver.div());
-	this.init(option);
-    }
-
-    private void init(DropOptions option) {
-	this.className("btn-group");
-
-	if (option.equals(DropOptions.UP)) {
-	    this.className("dropup");
+	public SplitButton() {
+		this(DropOptions.DOWN);
 	}
 
-	this.toggle.className("btn dropdown-toggle").attribute("data-toggle", "dropdown");
-	this.toggle.add(new Caret());
+	public SplitButton(DropOptions option) {
+		super(ElementResolver.div());
+		this.init(option);
+	}
 
-	this.add(main).add(toggle);
-    }
+	private void init(DropOptions option) {
+		this.className("btn-group");
 
-    @Override
-    public SplitButton onClick(ClickHandler handler) {
-	this.main.onClick(handler);
-	return this;
-    }
+		if (option.equals(DropOptions.UP)) {
+			this.className("dropup");
+		}
 
-    @Override
-    public SplitButton onDoubleClick(DoubleClickHandler handler) {
-	this.main.onDoubleClick(handler);
-	return this;
-    }
+		this.toggle.className("btn dropdown-toggle").attribute("data-toggle", "dropdown");
+		this.toggle.add(new Caret());
 
-    @Override
-    public SplitButton onFocus(FocusHandler handler) {
-	this.main.onFocus(handler);
-	return this;
-    }
+		this.add(main).add(toggle);
+	}
 
-    @Override
-    public SplitButton onBlur(BlurHandler handler) {
-	this.main.onBlur(handler);
-	return this;
-    }
+	@Override
+	public SplitButton onClick(ClickHandler handler) {
+		this.main.onClick(handler);
+		return this;
+	}
 
-    @Override
-    public SplitButton onKeyPress(KeyPressHandler handler) {
-	this.main.onKeyPress(handler);
-	return this;
-    }
+	@Override
+	public SplitButton onDoubleClick(DoubleClickHandler handler) {
+		this.main.onDoubleClick(handler);
+		return this;
+	}
 
-    @Override
-    public SplitButton onKeyDown(KeyDownHandler handler) {
-	this.main.onKeyDown(handler);
-	return this;
-    }
+	@Override
+	public SplitButton onFocus(FocusHandler handler) {
+		this.main.onFocus(handler);
+		return this;
+	}
 
-    @Override
-    public SplitButton onKeyUp(KeyUpHandler handler) {
-	this.main.onKeyUp(handler);
-	return this;
-    }
+	@Override
+	public SplitButton onBlur(BlurHandler handler) {
+		this.main.onBlur(handler);
+		return this;
+	}
 
-    @Override
-    public SplitButton onMouseDown(MouseDownHandler handler) {
-	this.main.onMouseDown(handler);
-	return this;
-    }
+	@Override
+	public SplitButton onKeyPress(KeyPressHandler handler) {
+		this.main.onKeyPress(handler);
+		return this;
+	}
 
-    @Override
-    public SplitButton onMouseMove(MouseMoveHandler handler) {
-	this.main.onMouseMove(handler);
-	return this;
-    }
+	@Override
+	public SplitButton onKeyDown(KeyDownHandler handler) {
+		this.main.onKeyDown(handler);
+		return this;
+	}
 
-    @Override
-    public SplitButton onMouseOut(MouseOutHandler handler) {
-	this.main.onMouseOut(handler);
-	return this;
-    }
+	@Override
+	public SplitButton onKeyUp(KeyUpHandler handler) {
+		this.main.onKeyUp(handler);
+		return this;
+	}
 
-    @Override
-    public SplitButton onMouseOver(MouseOverHandler handler) {
-	this.main.onMouseOver(handler);
-	return this;
-    }
+	@Override
+	public SplitButton onMouseDown(MouseDownHandler handler) {
+		this.main.onMouseDown(handler);
+		return this;
+	}
 
-    @Override
-    public SplitButton onMouseUp(MouseUpHandler handler) {
-	this.main.onMouseUp(handler);
-	return this;
-    }
+	@Override
+	public SplitButton onMouseMove(MouseMoveHandler handler) {
+		this.main.onMouseMove(handler);
+		return this;
+	}
 
-    @Override
-    public SplitButton onMouseWheel(MouseWheelHandler handler) {
-	this.main.onMouseWheel(handler);
-	return this;
-    }
+	@Override
+	public SplitButton onMouseOut(MouseOutHandler handler) {
+		this.main.onMouseOut(handler);
+		return this;
+	}
 
-    public SplitButton menu(DropItems items) {
-	return this.add(items);
-    }
+	@Override
+	public SplitButton onMouseOver(MouseOverHandler handler) {
+		this.main.onMouseOver(handler);
+		return this;
+	}
 
-    @Override
-    public SplitButton text(String text) {
-	this.main.text(text);
-	return this;
-    }
+	@Override
+	public SplitButton onMouseUp(MouseUpHandler handler) {
+		this.main.onMouseUp(handler);
+		return this;
+	}
 
-    @Override
-    public String getText() {
-	return this.main.getText();
-    }
+	@Override
+	public SplitButton onMouseWheel(MouseWheelHandler handler) {
+		this.main.onMouseWheel(handler);
+		return this;
+	}
 
-    @Override
-    public SplitButton size(Size size) {
-	this.main.size(size);
-	this.toggle.size(size);
+	public SplitButton menu(DropItems items) {
+		return this.add(items);
+	}
 
-	return this;
-    }
+	@Override
+	public SplitButton text(String text) {
+		this.main.text(text);
+		return this;
+	}
 
-    @Override
-    public SplitButton primary() {
-	this.main.primary();
-	this.toggle.primary();
+	@Override
+	public String getText() {
+		return this.main.getText();
+	}
 
-	return this;
-    }
+	@Override
+	public SplitButton size(Size size) {
+		this.main.size(size);
+		this.toggle.size(size);
 
-    @Override
-    public SplitButton info() {
-	this.main.info();
-	this.toggle.info();
+		return this;
+	}
 
-	return this;
-    }
+	@Override
+	public SplitButton primary() {
+		this.main.primary();
+		this.toggle.primary();
 
-    @Override
-    public SplitButton success() {
-	this.main.success();
-	this.toggle.success();
+		return this;
+	}
 
-	return this;
-    }
+	@Override
+	public SplitButton info() {
+		this.main.info();
+		this.toggle.info();
 
-    @Override
-    public SplitButton warning() {
-	this.main.warning();
-	this.toggle.warning();
+		return this;
+	}
 
-	return this;
-    }
+	@Override
+	public SplitButton success() {
+		this.main.success();
+		this.toggle.success();
 
-    @Override
-    public SplitButton danger() {
-	this.main.danger();
-	this.toggle.danger();
+		return this;
+	}
 
-	return this;
-    }
+	@Override
+	public SplitButton warning() {
+		this.main.warning();
+		this.toggle.warning();
 
-    @Override
-    public SplitButton inverse() {
-	this.main.inverse();
-	this.toggle.inverse();
+		return this;
+	}
 
-	return this;
-    }
+	@Override
+	public SplitButton danger() {
+		this.main.danger();
+		this.toggle.danger();
 
-    @Override
-    public SplitButton link() {
-	this.main.link();
-	this.toggle.link();
+		return this;
+	}
 
-	return this;
-    }
+	@Override
+	public SplitButton inverse() {
+		this.main.inverse();
+		this.toggle.inverse();
 
-    @Override
-    public SplitButton expanded() {
-	this.main.expanded();
-	this.toggle.expanded();
+		return this;
+	}
 
-	return this;
-    }
+	@Override
+	public SplitButton link() {
+		this.main.link();
+		this.toggle.link();
 
-    @Override
-    public SplitButton icon(Icon icon) {
-	this.main.icon(icon);
+		return this;
+	}
 
-	return this;
-    }
+	@Override
+	public SplitButton expanded() {
+		this.main.expanded();
+		this.toggle.expanded();
+
+		return this;
+	}
+
+	@Override
+	public SplitButton icon(Icon icon) {
+		this.main.icon(icon);
+
+		return this;
+	}
 }

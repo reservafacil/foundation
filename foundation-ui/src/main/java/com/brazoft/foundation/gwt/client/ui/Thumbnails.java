@@ -21,12 +21,12 @@ import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 public final class Thumbnails
     extends Bootstrap<Thumbnails> {
 
-    public Thumbnails() {
-	super(ElementResolver.ul());
-	this.className("thumbnails");
-    }
+	public Thumbnails() {
+		super(ElementResolver.ul());
+		this.className("thumbnails");
+	}
 
-    public Thumbnails item(Thumbnail thumbnail) {
-	return this.item(thumbnail);
-    }
+	public Thumbnails item(Thumbnail thumbnail) {
+		return this.item(thumbnail);
+	}
 }

@@ -23,23 +23,23 @@ import com.google.gwt.user.client.ui.Widget;
 public interface UIButton<W extends Widget>
     extends HasText<W>, HasClickHandlers<W>, HasFocusHandlers<W>, HasMouseHandlers<W>, HasKeyHandlers<W>, UIComponent<W> {
 
-    W size(Size size);
+	W size(Size size);
 
-    W primary();
+	W primary();
 
-    W info();
+	W info();
 
-    W success();
+	W success();
 
-    W warning();
+	W warning();
 
-    W danger();
+	W danger();
 
-    W inverse();
+	W inverse();
 
-    W link();
+	W link();
 
-    W expanded();
+	W expanded();
 
-    W icon(Icon icon);
+	W icon(Icon icon);
 }

@@ -21,43 +21,43 @@ import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 public final class Grid
     extends Bootstrap<Grid> {
 
-    private GridOptions option;
+	private GridOptions option;
 
-    public Grid() {
-	this(GridOptions.DEFAULT);
-    }
-
-    public Grid(GridOptions option) {
-	super(ElementResolver.div());
-	this.setStyleName(option.gridClass());
-	this.option = option;
-    }
-
-    public LayoutRow row() {
-	LayoutRow row = new LayoutRow(this.option);
-
-	this.add(row);
-
-	return row;
-    }
-
-    public enum GridOptions {
-	DEFAULT, FLUID;
-
-	String gridClass() {
-	    if (FLUID.equals(this)) {
-		return "container-fluid";
-	    }
-
-	    return "container";
+	public Grid() {
+		this(GridOptions.DEFAULT);
 	}
 
-	String rowClass() {
-	    if (FLUID.equals(this)) {
-		return "row-fluid";
-	    }
-
-	    return "row";
+	public Grid(GridOptions option) {
+		super(ElementResolver.div());
+		this.setStyleName(option.gridClass());
+		this.option = option;
 	}
-    }
+
+	public LayoutRow row() {
+		LayoutRow row = new LayoutRow(this.option);
+
+		this.add(row);
+
+		return row;
+	}
+
+	public enum GridOptions {
+		DEFAULT, FLUID;
+
+		String gridClass() {
+			if (FLUID.equals(this)) {
+				return "container-fluid";
+			}
+
+			return "container";
+		}
+
+		String rowClass() {
+			if (FLUID.equals(this)) {
+				return "row-fluid";
+			}
+
+			return "row";
+		}
+	}
 }

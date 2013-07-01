@@ -21,8 +21,8 @@ import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 final class Caret
     extends Bootstrap<Caret> {
 
-    public Caret() {
-	super(ElementResolver.span());
-	this.className("caret");
-    }
+	public Caret() {
+		super(ElementResolver.span());
+		this.className("caret");
+	}
 }

@@ -20,8 +20,8 @@ import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row;
 public final class VerticalForm
     extends OrientationForm<VerticalForm> {
 
-    @Override
-    protected Row row() {
-	return this.table().body().row();
-    }
+	@Override
+	protected Row row() {
+		return this.table().body().row();
+	}
 }

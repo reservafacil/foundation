@@ -21,38 +21,38 @@ import com.brazoft.foundation.gwt.client.ui.InputText;
 public class DecoratedInputText<D extends DecoratedInputText<D>>
     extends DecoratedInput<D, String> {
 
-    public DecoratedInputText() {
-	super(new InputText());
-    }
+	public DecoratedInputText() {
+		super(new InputText());
+	}
 
-    @Override
-    public InputText input() {
-	return (InputText)super.input();
-    }
+	@Override
+	public InputText input() {
+		return (InputText)super.input();
+	}
 
-    public D maxLength(int maxLength) {
-	this.input().maxLength(maxLength);
-	return (D)this;
-    }
+	public D maxLength(int maxLength) {
+		this.input().maxLength(maxLength);
+		return (D)this;
+	}
 
-    public D block() {
-	this.input().block();
-	return (D)this;
-    }
+	public D block() {
+		this.input().block();
+		return (D)this;
+	}
 
-    @Override
-    public D clear() {
-	return this.value("");
-    }
+	@Override
+	public D clear() {
+		return this.value("");
+	}
 
-    @Override
-    public String getValue() {
-	return this.input().getValue();
-    }
+	@Override
+	public String getValue() {
+		return this.input().getValue();
+	}
 
-    @Override
-    public D value(String value) {
-	this.input().value(value);
-	return (D)this;
-    }
+	@Override
+	public D value(String value) {
+		this.input().value(value);
+		return (D)this;
+	}
 }

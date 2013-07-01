@@ -22,77 +22,77 @@ import com.google.gwt.dom.client.Style.Unit;
 public final class ProgressBar
     extends Bootstrap<ProgressBar> {
 
-    private ProgressCategory          category = new ProgressCategory();
+	private ProgressCategory          category = new ProgressCategory();
 
-    private StyleChooser<ProgressBar> chooser  = new StyleChooser<ProgressBar>("progress-success", "progress-warning", "progress-danger",
-	                                                                       "progress-info");
+	private StyleChooser<ProgressBar> chooser  = new StyleChooser<ProgressBar>("progress-success", "progress-warning", "progress-danger",
+	                                                                           "progress-info");
 
-    public ProgressBar(ProgressBarOptions option) {
-	super(ElementResolver.div());
-	this.init(option);
-    }
-
-    public ProgressBar height(double value, Unit unit) {
-	this.style().height(value, unit);
-	this.category.style().height(value, unit);
-	return this;
-    }
-
-    public ProgressBar width(double value, Unit unit) {
-	this.style().width(value, unit);
-	return this;
-    }
-
-    private void init(ProgressBarOptions option) {
-	this.className("progress");
-	this.add(this.category);
-
-	switch (option) {
-	    case ANIMATED:
-		this.className("progress-striped active");
-		break;
-	    case STRIPED:
-		this.className("progress-striped");
-	    default:
-		break;
+	public ProgressBar(ProgressBarOptions option) {
+		super(ElementResolver.div());
+		this.init(option);
 	}
-    }
 
-    public ProgressBar success() {
-	return this.chooser.className(this, "progress-success");
-    }
+	public ProgressBar height(double value, Unit unit) {
+		this.style().height(value, unit);
+		this.category.style().height(value, unit);
+		return this;
+	}
 
-    public ProgressBar warning() {
-	return this.chooser.className(this, "progress-warning");
-    }
+	public ProgressBar width(double value, Unit unit) {
+		this.style().width(value, unit);
+		return this;
+	}
 
-    public ProgressBar danger() {
-	return this.chooser.className(this, "progress-danger");
-    }
+	private void init(ProgressBarOptions option) {
+		this.className("progress");
+		this.add(this.category);
 
-    public ProgressBar info() {
-	return this.chooser.className(this, "progress-info");
-    }
+		switch (option) {
+			case ANIMATED:
+				this.className("progress-striped active");
+				break;
+			case STRIPED:
+				this.className("progress-striped");
+			default:
+				break;
+		}
+	}
 
-    public ProgressBar total(int total) {
-	this.category.total(total);
-	return this;
-    }
+	public ProgressBar success() {
+		return this.chooser.className(this, "progress-success");
+	}
 
-    public ProgressBar worked(int amount) {
-	this.category.worked(amount);
-	return this;
-    }
+	public ProgressBar warning() {
+		return this.chooser.className(this, "progress-warning");
+	}
 
-    public ProgressBar show() {
-	return this.visible();
-    }
+	public ProgressBar danger() {
+		return this.chooser.className(this, "progress-danger");
+	}
 
-    public ProgressBar hide() {
-	return this.hidden();
-    }
+	public ProgressBar info() {
+		return this.chooser.className(this, "progress-info");
+	}
 
-    public enum ProgressBarOptions {
-	BASIC, STRIPED, ANIMATED;
-    }
+	public ProgressBar total(int total) {
+		this.category.total(total);
+		return this;
+	}
+
+	public ProgressBar worked(int amount) {
+		this.category.worked(amount);
+		return this;
+	}
+
+	public ProgressBar show() {
+		return this.visible();
+	}
+
+	public ProgressBar hide() {
+		return this.hidden();
+	}
+
+	public enum ProgressBarOptions {
+		BASIC, STRIPED, ANIMATED;
+	}
 }

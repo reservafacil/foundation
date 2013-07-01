@@ -22,26 +22,26 @@ import com.google.gwt.user.client.ui.Widget;
 public final class Well
     extends Bootstrap<Well> {
 
-    public Well() {
-	super(ElementResolver.div());
-	Well.decorate(this);
-    }
+	public Well() {
+		super(ElementResolver.div());
+		Well.decorate(this);
+	}
 
-    @Override
-    public Well add(Widget add) {
-	return super.add(add);
-    }
+	@Override
+	public Well add(Widget add) {
+		return super.add(add);
+	}
 
-    public Well size(Size size) {
-	Well.decorate(this, size);
-	return this;
-    }
+	public Well size(Size size) {
+		Well.decorate(this, size);
+		return this;
+	}
 
-    public static void decorate(Widget widget) {
-	widget.addStyleName("well");
-    }
+	public static void decorate(Widget widget) {
+		widget.addStyleName("well");
+	}
 
-    public static void decorate(Widget widget, Size size) {
-	widget.addStyleName("well-" + size.name().toLowerCase());
-    }
+	public static void decorate(Widget widget, Size size) {
+		widget.addStyleName("well-" + size.name().toLowerCase());
+	}
 }

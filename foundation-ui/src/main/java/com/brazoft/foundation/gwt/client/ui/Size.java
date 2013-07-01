@@ -16,5 +16,5 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 public enum Size {
-    LARGE, DEFAULT, SMALL, MINI;
+	LARGE, DEFAULT, SMALL, MINI;
 }

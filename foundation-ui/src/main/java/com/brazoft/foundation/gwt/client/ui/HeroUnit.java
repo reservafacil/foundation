@@ -22,25 +22,25 @@ import com.google.gwt.user.client.ui.Widget;
 public final class HeroUnit
     extends Bootstrap<HeroUnit> {
 
-    private Heading heading = new Heading(1);
+	private Heading heading = new Heading(1);
 
-    public HeroUnit() {
-	super(ElementResolver.div());
-	this.className("hero-unit");
-	this.item(this.heading);
-    }
-
-    public HeroUnit heading(String text) {
-	this.heading.text(text);
-
-	return this;
-    }
-
-    public HeroUnit item(Widget widget) {
-	if (widget instanceof Paragraph) {
-	    return super.add(widget);
+	public HeroUnit() {
+		super(ElementResolver.div());
+		this.className("hero-unit");
+		this.item(this.heading);
 	}
 
-	return super.add(new Paragraph().add(widget));
-    }
+	public HeroUnit heading(String text) {
+		this.heading.text(text);
+
+		return this;
+	}
+
+	public HeroUnit item(Widget widget) {
+		if (widget instanceof Paragraph) {
+			return super.add(widget);
+		}
+
+		return super.add(new Paragraph().add(widget));
+	}
 }

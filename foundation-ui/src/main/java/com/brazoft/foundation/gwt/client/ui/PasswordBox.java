@@ -20,65 +20,65 @@ import com.brazoft.foundation.gwt.client.ui.api.DecoratedInput;
 public final class PasswordBox
     extends DecoratedInput<PasswordBox, String> {
 
-    public PasswordBox() {
-	super(new InputPassword());
-    }
+	public PasswordBox() {
+		super(new InputPassword());
+	}
 
-    @Override
-    public InputPassword input() {
-	return (InputPassword)super.input();
-    }
+	@Override
+	public InputPassword input() {
+		return (InputPassword)super.input();
+	}
 
-    public PasswordBox block() {
-	this.input().block();
-	return this;
-    }
+	public PasswordBox block() {
+		this.input().block();
+		return this;
+	}
 
-    public PasswordBox prepend(String text) {
-	return this.add(text, Decoration.PREPENDED);
-    }
+	public PasswordBox prepend(String text) {
+		return this.add(text, Decoration.PREPENDED);
+	}
 
-    public PasswordBox append(String text) {
-	return this.add(text, Decoration.APPENDED);
-    }
+	public PasswordBox append(String text) {
+		return this.add(text, Decoration.APPENDED);
+	}
 
-    public PasswordBox prepend(Icon icon) {
-	return this.add(icon, Decoration.PREPENDED);
-    }
+	public PasswordBox prepend(Icon icon) {
+		return this.add(icon, Decoration.PREPENDED);
+	}
 
-    public PasswordBox append(Icon icon) {
-	return this.add(icon, Decoration.APPENDED);
-    }
+	public PasswordBox append(Icon icon) {
+		return this.add(icon, Decoration.APPENDED);
+	}
 
-    public PasswordBox prepend(Button button) {
-	return this.add(button, Decoration.PREPENDED);
-    }
+	public PasswordBox prepend(Button button) {
+		return this.add(button, Decoration.PREPENDED);
+	}
 
-    public PasswordBox append(Button button) {
-	return this.add(button, Decoration.APPENDED);
-    }
+	public PasswordBox append(Button button) {
+		return this.add(button, Decoration.APPENDED);
+	}
 
-    public PasswordBox prepend(SplitButton button) {
-	return this.add(button, Decoration.PREPENDED);
-    }
+	public PasswordBox prepend(SplitButton button) {
+		return this.add(button, Decoration.PREPENDED);
+	}
 
-    public PasswordBox append(SplitButton button) {
-	return this.add(button, Decoration.APPENDED);
-    }
+	public PasswordBox append(SplitButton button) {
+		return this.add(button, Decoration.APPENDED);
+	}
 
-    @Override
-    public PasswordBox clear() {
-	return this.value("");
-    }
+	@Override
+	public PasswordBox clear() {
+		return this.value("");
+	}
 
-    @Override
-    public String getValue() {
-	return this.input().getValue();
-    }
+	@Override
+	public String getValue() {
+		return this.input().getValue();
+	}
 
-    @Override
-    public PasswordBox value(String value) {
-	this.input().value(value);
-	return this;
-    }
+	@Override
+	public PasswordBox value(String value) {
+		this.input().value(value);
+		return this;
+	}
 }

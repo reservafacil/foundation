@@ -7,7 +7,7 @@ import com.google.gwt.user.client.ui.Widget;
 public interface UISelection<W extends Widget, V>
     extends UIInput<W, V>, HasChangeHandlers<W> {
 
-    W checked(Boolean checked);
+	W checked(Boolean checked);
 
-    Boolean isChecked();
+	Boolean isChecked();
 }

@@ -23,108 +23,108 @@ import com.google.gwt.resources.client.ImageResource;
 public final class Carousel
     extends Bootstrap<Carousel> {
 
-    private HTML<DivElement>    inner        = HTML.asDiv().className("carousel-inner");
+	private HTML<DivElement>    inner        = HTML.asDiv().className("carousel-inner");
 
-    private HTML<AnchorElement> leftControl  = HTML.asAnchor("#").className("left carousel-control").attribute("data-slide", "prev").text("‹");
+	private HTML<AnchorElement> leftControl  = HTML.asAnchor("#").className("left carousel-control").attribute("data-slide", "prev").text("‹");
 
-    private HTML<AnchorElement> rightControl = HTML.asAnchor("#").className("right carousel-control").attribute("data-slide", "next").text("›");
+	private HTML<AnchorElement> rightControl = HTML.asAnchor("#").className("right carousel-control").attribute("data-slide", "next").text("›");
 
-    public Carousel() {
-	super(ElementResolver.div());
-	this.id(ElementResolver.document().createUniqueId());
-	this.className("carousel slide");
-	this.leftControl.element().setHref("#" + this.getId());
-	this.rightControl.element().setHref("#" + this.getId());
-	this.add(this.inner).add(this.leftControl).add(this.rightControl);
-    }
-
-    public Carousel item(ImageResource resource) {
-	this.item().src(resource);
-	return this;
-    }
-
-    public Carousel item(String url) {
-	this.item().src(url);
-	return this;
-    }
-
-    public Carousel item(ImageResource resource, String heading, String description) {
-	this.item().src(resource).caption(heading, description);
-	return this;
-    }
-
-    public Carousel item(String url, String heading, String description) {
-	this.item().src(url).caption(heading, description);
-	return this;
-    }
-
-    Item item() {
-	Item item = new Item();
-
-	if (!this.inner.hasChildren()) {
-	    Widgets.activateClass(item);
-	}
-
-	this.inner.add(item);
-
-	return item;
-    }
-
-    class Item
-	extends Bootstrap<Item> {
-
-	private Image   image = new Image();
-
-	private Caption caption;
-
-	public Item() {
-	    super(ElementResolver.div());
-	    this.className("item").add(this.image);
-	}
-
-	Item src(ImageResource resource) {
-	    this.image.src(resource);
-	    return this;
-	}
-
-	Item src(String url) {
-	    this.image.src(url);
-
-	    return this;
-	}
-
-	Item caption(String heading, String description) {
-	    if (this.caption == null) {
-		this.caption = new Caption();
-		this.add(this.caption);
-	    }
-
-	    this.caption.heading(heading).description(description);
-
-	    return this;
-	}
-
-	class Caption
-	    extends Bootstrap<Caption> {
-
-	    private Heading   heading     = new Heading(4);
-
-	    private Paragraph description = new Paragraph();
-
-	    public Caption() {
+	public Carousel() {
 		super(ElementResolver.div());
-		this.add(this.heading).add(this.description).className("carousel-caption");
-	    }
-
-	    Caption heading(String text) {
-		this.heading.text(text);
-		return this;
-	    }
-
-	    Caption description(String text) {
-		this.description.text(text);
-		return this;
-	    }
+		this.id(ElementResolver.document().createUniqueId());
+		this.className("carousel slide");
+		this.leftControl.element().setHref("#" + this.getId());
+		this.rightControl.element().setHref("#" + this.getId());
+		this.add(this.inner).add(this.leftControl).add(this.rightControl);
 	}
-    }
+
+	public Carousel item(ImageResource resource) {
+		this.item().src(resource);
+		return this;
+	}
+
+	public Carousel item(String url) {
+		this.item().src(url);
+		return this;
+	}
+
+	public Carousel item(ImageResource resource, String heading, String description) {
+		this.item().src(resource).caption(heading, description);
+		return this;
+	}
+
+	public Carousel item(String url, String heading, String description) {
+		this.item().src(url).caption(heading, description);
+		return this;
+	}
+
+	Item item() {
+		Item item = new Item();
+
+		if (!this.inner.hasChildren()) {
+			Widgets.activateClass(item);
+		}
+
+		this.inner.add(item);
+
+		return item;
+	}
+
+	class Item
+	    extends Bootstrap<Item> {
+
+		private Image   image = new Image();
+
+		private Caption caption;
+
+		public Item() {
+			super(ElementResolver.div());
+			this.className("item").add(this.image);
+		}
+
+		Item src(ImageResource resource) {
+			this.image.src(resource);
+			return this;
+		}
+
+		Item src(String url) {
+			this.image.src(url);
+
+			return this;
+		}
+
+		Item caption(String heading, String description) {
+			if (this.caption == null) {
+				this.caption = new Caption();
+				this.add(this.caption);
+			}
+
+			this.caption.heading(heading).description(description);
+
+			return this;
+		}
+
+		class Caption
+		    extends Bootstrap<Caption> {
+
+			private Heading   heading     = new Heading(4);
+
+			private Paragraph description = new Paragraph();
+
+			public Caption() {
+				super(ElementResolver.div());
+				this.add(this.heading).add(this.description).className("carousel-caption");
+			}
+
+			Caption heading(String text) {
+				this.heading.text(text);
+				return this;
+			}
+
+			Caption description(String text) {
+				this.description.text(text);
+				return this;
+			}
+		}
+	}
 }

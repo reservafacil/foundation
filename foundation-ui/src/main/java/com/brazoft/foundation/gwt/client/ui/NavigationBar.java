@@ -33,295 +33,295 @@ public final class NavigationBar
     extends Bootstrap<NavigationBar>
     implements HasText<NavigationBar> {
 
-    private HTML<AnchorElement> brand = HTML.asAnchor("#").className("brand");
+	private HTML<AnchorElement> brand = HTML.asAnchor("#").className("brand");
 
-    private HTML<DivElement>    content;
+	private HTML<DivElement>    content;
 
-    private ItemsBar            items;
+	private ItemsBar            items;
 
-    private NavigationForm      form;
+	private NavigationForm      form;
 
-    private SearchForm          search;
+	private SearchForm          search;
 
-    public NavigationBar() {
-	this(NavigationBarOptions.DEFAULT);
-    }
-
-    public NavigationBar(NavigationBarOptions option) {
-	super(ElementResolver.div());
-	this.init(option);
-    }
-
-    private void init(NavigationBarOptions option) {
-	this.className("navbar");
-
-	if (option.equals(NavigationBarOptions.RESPONSIVE)) {
-	    HTML<DivElement> innerNav = HTML.asDiv().className("navbar-inner");
-	    this.add(innerNav);
-
-	    HTML<DivElement> container = HTML.asDiv().className("container");
-	    innerNav.add(container);
-
-	    HTML<AnchorElement> toggle = HTML.asAnchor("#").className("btn btn-navbar");
-	    toggle.attribute("data-toggle", "collapse").attribute("data-target", ".nav-collapse");
-	    toggle.add(HTML.asSpan().className("icon-bar")).add(HTML.asSpan().className("icon-bar")).add(HTML.asSpan().className("icon-bar"));
-
-	    this.content = HTML.asDiv().className("nav-collapse collapse");
-
-	    container.add(toggle).add(this.brand).add(this.content);
-	    return;
+	public NavigationBar() {
+		this(NavigationBarOptions.DEFAULT);
 	}
 
-	switch (option) {
-	    case FIX_AT_TOP:
-		this.className("navbar-fixed-top");
-		break;
-	    case FIX_AT_BOTTOM:
-		this.className("navbar-fixed-bottom");
-		break;
-	    case STATIC:
-		this.className("navbar-static-top");
-		break;
-	    default:
-		break;
+	public NavigationBar(NavigationBarOptions option) {
+		super(ElementResolver.div());
+		this.init(option);
 	}
 
-	this.content = HTML.asDiv().className("navbar-inner");
-	this.add(this.content);
+	private void init(NavigationBarOptions option) {
+		this.className("navbar");
 
-	this.content.add(this.brand);
-	this.add(this.content);
-    }
+		if (option.equals(NavigationBarOptions.RESPONSIVE)) {
+			HTML<DivElement> innerNav = HTML.asDiv().className("navbar-inner");
+			this.add(innerNav);
 
-    public NavigationBar inverse() {
-	return this.className("navbar-inverse");
-    }
+			HTML<DivElement> container = HTML.asDiv().className("container");
+			innerNav.add(container);
 
-    public SearchForm search() {
-	if (this.search == null) {
-	    this.search = new SearchForm(SearchOptions.APPEND);
-	    this.search.setStyleName("navbar-search");
-	    // this.search.getInput().className("search-query");
-	}
-	this.content.add(search);
+			HTML<AnchorElement> toggle = HTML.asAnchor("#").className("btn btn-navbar");
+			toggle.attribute("data-toggle", "collapse").attribute("data-target", ".nav-collapse");
+			toggle.add(HTML.asSpan().className("icon-bar")).add(HTML.asSpan().className("icon-bar")).add(HTML.asSpan().className("icon-bar"));
 
-	return this.search;
-    }
+			this.content = HTML.asDiv().className("nav-collapse collapse");
 
-    public NavigationForm form() {
-	if (this.form == null) {
-	    this.form = new NavigationForm();
-	}
+			container.add(toggle).add(this.brand).add(this.content);
+			return;
+		}
 
-	this.content.add(this.form);
+		switch (option) {
+			case FIX_AT_TOP:
+				this.className("navbar-fixed-top");
+				break;
+			case FIX_AT_BOTTOM:
+				this.className("navbar-fixed-bottom");
+				break;
+			case STATIC:
+				this.className("navbar-static-top");
+				break;
+			default:
+				break;
+		}
 
-	return this.form;
-    }
+		this.content = HTML.asDiv().className("navbar-inner");
+		this.add(this.content);
 
-    public ItemsBar items() {
-	if (this.items == null) {
-	    this.items = new ItemsBar();
-	}
-
-	this.content.add(this.items);
-	return this.items;
-    }
-
-    @Override
-    public String getText() {
-	return Component.Util.getHTML(this.brand);
-    }
-
-    @Override
-    public NavigationBar text(String text) {
-	this.brand.text(text);
-
-	return this;
-    }
-
-    public NavigationBar brand(Image image) {
-	this.brand.add(image);
-	return this;
-    }
-
-    public NavigationBar brand(Icon icon) {
-	this.brand.add(new Iconic().icon(icon));
-	return this;
-    }
-
-    public static class NavigationForm
-	extends Form<NavigationForm> {
-
-	public NavigationForm() {
-	    this.className("navbar-form");
+		this.content.add(this.brand);
+		this.add(this.content);
 	}
 
-	public NavigationForm input(UIInput<? extends Widget, ?> input, String labelText) {
-	    return this.add(input.placeholder(labelText).asWidget());
-	}
-    }
-
-    public static class ItemsBar
-	extends Bootstrap<ItemsBar> {
-
-	public ItemsBar() {
-	    super(ElementResolver.ul());
-	    this.className("nav");
+	public NavigationBar inverse() {
+		return this.className("navbar-inverse");
 	}
 
-	public ItemsBar activate(int index) {
-	    Widgets.activateClass(this.getWidget().getWidget(index));
+	public SearchForm search() {
+		if (this.search == null) {
+			this.search = new SearchForm(SearchOptions.APPEND);
+			this.search.setStyleName("navbar-search");
+			// this.search.getInput().className("search-query");
+		}
+		this.content.add(search);
 
-	    return this;
+		return this.search;
 	}
 
-	public ItemsBar divider() {
-	    HTML<LIElement> divider = HTML.asListItem().className("divider-vertical");
-	    return this.add(divider);
+	public NavigationForm form() {
+		if (this.form == null) {
+			this.form = new NavigationForm();
+		}
+
+		this.content.add(this.form);
+
+		return this.form;
 	}
 
-	public Item item(String label) {
-	    return this.item().text(label);
+	public ItemsBar items() {
+		if (this.items == null) {
+			this.items = new ItemsBar();
+		}
+
+		this.content.add(this.items);
+		return this.items;
 	}
 
-	public Item item(UIButton<? extends Widget> button) {
-	    Item item = this.item().add(button);
-
-	    if (button instanceof DropButton) {
-		item.className("dropdown");
-	    }
-
-	    return item;
+	@Override
+	public String getText() {
+		return Component.Util.getHTML(this.brand);
 	}
 
-	Item item() {
-	    Item item = new Item();
-	    this.add(item);
+	@Override
+	public NavigationBar text(String text) {
+		this.brand.text(text);
 
-	    return item;
+		return this;
 	}
 
-	public class Item
-	    extends Bootstrap<Item>
-	    implements HasText<Item>, HasFocusHandlers<Item>, HasClickHandlers<Item>, HasMouseHandlers<Item>, HasKeyHandlers<Item> {
-
-	    private HTML<AnchorElement> link = HTML.asAnchor("#");
-
-	    public Item() {
-		super(ElementResolver.li());
-	    }
-
-	    @Override
-	    public Item onKeyPress(KeyPressHandler handler) {
-		this.link.onKeyPress(handler);
+	public NavigationBar brand(Image image) {
+		this.brand.add(image);
 		return this;
-	    }
-
-	    @Override
-	    public Item onKeyDown(KeyDownHandler handler) {
-		this.link.onKeyDown(handler);
-		return this;
-	    }
-
-	    @Override
-	    public Item onKeyUp(KeyUpHandler handler) {
-		this.link.onKeyUp(handler);
-		return this;
-	    }
-
-	    @Override
-	    public Item onMouseDown(MouseDownHandler handler) {
-		this.link.onMouseDown(handler);
-		return this;
-	    }
-
-	    @Override
-	    public Item onMouseMove(MouseMoveHandler handler) {
-		this.link.onMouseMove(handler);
-		return this;
-	    }
-
-	    @Override
-	    public Item onMouseOut(MouseOutHandler handler) {
-		this.link.onMouseOut(handler);
-		return this;
-	    }
-
-	    @Override
-	    public Item onMouseOver(MouseOverHandler handler) {
-		this.link.onMouseOver(handler);
-		return this;
-	    }
-
-	    @Override
-	    public Item onMouseUp(MouseUpHandler handler) {
-		this.link.onMouseUp(handler);
-		return this;
-	    }
-
-	    @Override
-	    public Item onMouseWheel(MouseWheelHandler handler) {
-		this.link.onMouseWheel(handler);
-		return this;
-	    }
-
-	    @Override
-	    public Item onClick(ClickHandler handler) {
-		this.link.onClick(handler);
-		return this;
-	    }
-
-	    @Override
-	    public Item onDoubleClick(DoubleClickHandler handler) {
-		this.link.onDoubleClick(handler);
-		return this;
-	    }
-
-	    @Override
-	    public Item onFocus(FocusHandler handler) {
-		this.link.onFocus(handler);
-		return this;
-	    }
-
-	    @Override
-	    public Item onBlur(BlurHandler handler) {
-		this.link.onBlur(handler);
-		return this;
-	    }
-
-	    Item add(UIButton<?> button) {
-		return this.add(button.asWidget());
-	    }
-
-	    @Override
-	    public String getText() {
-		return Component.Util.getHTML(this.link);
-	    }
-
-	    @Override
-	    public Item text(String text) {
-		this.link.element().setHref("#");
-		this.add(this.link);
-		Component.Util.setHTML(this.link, text);
-
-		return this;
-	    }
-	    
-	    @Override
-	    public Item focus() {
-	        this.link.focus();
-		return this;
-	    }
-	    
-	    @Override
-	    public Item blur() {
-	        this.link.blur();
-		return this;
-	    }
 	}
-    }
 
-    public enum NavigationBarOptions {
-	DEFAULT, FIX_AT_TOP, FIX_AT_BOTTOM, STATIC, RESPONSIVE;
-    }
+	public NavigationBar brand(Icon icon) {
+		this.brand.add(new Iconic().icon(icon));
+		return this;
+	}
+
+	public static class NavigationForm
+	    extends Form<NavigationForm> {
+
+		public NavigationForm() {
+			this.className("navbar-form");
+		}
+
+		public NavigationForm input(UIInput<? extends Widget, ?> input, String labelText) {
+			return this.add(input.placeholder(labelText).asWidget());
+		}
+	}
+
+	public static class ItemsBar
+	    extends Bootstrap<ItemsBar> {
+
+		public ItemsBar() {
+			super(ElementResolver.ul());
+			this.className("nav");
+		}
+
+		public ItemsBar activate(int index) {
+			Widgets.activateClass(this.getWidget().getWidget(index));
+
+			return this;
+		}
+
+		public ItemsBar divider() {
+			HTML<LIElement> divider = HTML.asListItem().className("divider-vertical");
+			return this.add(divider);
+		}
+
+		public Item item(String label) {
+			return this.item().text(label);
+		}
+
+		public Item item(UIButton<? extends Widget> button) {
+			Item item = this.item().add(button);
+
+			if (button instanceof DropButton) {
+				item.className("dropdown");
+			}
+
+			return item;
+		}
+
+		Item item() {
+			Item item = new Item();
+			this.add(item);
+
+			return item;
+		}
+
+		public class Item
+		    extends Bootstrap<Item>
+		    implements HasText<Item>, HasFocusHandlers<Item>, HasClickHandlers<Item>, HasMouseHandlers<Item>, HasKeyHandlers<Item> {
+
+			private HTML<AnchorElement> link = HTML.asAnchor("#");
+
+			public Item() {
+				super(ElementResolver.li());
+			}
+
+			@Override
+			public Item onKeyPress(KeyPressHandler handler) {
+				this.link.onKeyPress(handler);
+				return this;
+			}
+
+			@Override
+			public Item onKeyDown(KeyDownHandler handler) {
+				this.link.onKeyDown(handler);
+				return this;
+			}
+
+			@Override
+			public Item onKeyUp(KeyUpHandler handler) {
+				this.link.onKeyUp(handler);
+				return this;
+			}
+
+			@Override
+			public Item onMouseDown(MouseDownHandler handler) {
+				this.link.onMouseDown(handler);
+				return this;
+			}
+
+			@Override
+			public Item onMouseMove(MouseMoveHandler handler) {
+				this.link.onMouseMove(handler);
+				return this;
+			}
+
+			@Override
+			public Item onMouseOut(MouseOutHandler handler) {
+				this.link.onMouseOut(handler);
+				return this;
+			}
+
+			@Override
+			public Item onMouseOver(MouseOverHandler handler) {
+				this.link.onMouseOver(handler);
+				return this;
+			}
+
+			@Override
+			public Item onMouseUp(MouseUpHandler handler) {
+				this.link.onMouseUp(handler);
+				return this;
+			}
+
+			@Override
+			public Item onMouseWheel(MouseWheelHandler handler) {
+				this.link.onMouseWheel(handler);
+				return this;
+			}
+
+			@Override
+			public Item onClick(ClickHandler handler) {
+				this.link.onClick(handler);
+				return this;
+			}
+
+			@Override
+			public Item onDoubleClick(DoubleClickHandler handler) {
+				this.link.onDoubleClick(handler);
+				return this;
+			}
+
+			@Override
+			public Item onFocus(FocusHandler handler) {
+				this.link.onFocus(handler);
+				return this;
+			}
+
+			@Override
+			public Item onBlur(BlurHandler handler) {
+				this.link.onBlur(handler);
+				return this;
+			}
+
+			Item add(UIButton<?> button) {
+				return this.add(button.asWidget());
+			}
+
+			@Override
+			public String getText() {
+				return Component.Util.getHTML(this.link);
+			}
+
+			@Override
+			public Item text(String text) {
+				this.link.element().setHref("#");
+				this.add(this.link);
+				Component.Util.setHTML(this.link, text);
+
+				return this;
+			}
+
+			@Override
+			public Item focus() {
+				this.link.focus();
+				return this;
+			}
+
+			@Override
+			public Item blur() {
+				this.link.blur();
+				return this;
+			}
+		}
+	}
+
+	public enum NavigationBarOptions {
+		DEFAULT, FIX_AT_TOP, FIX_AT_BOTTOM, STATIC, RESPONSIVE;
+	}
 }

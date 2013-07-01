@@ -11,19 +11,19 @@ import com.google.gwt.jso.JSObject;
 public final class DateColumn<J extends JSObject>
     extends TextGridColumn<DateColumn<J>, J> {
 
-    private Format<Date> format;
+	private Format<Date> format;
 
-    public DateColumn(Format<Date> format) {
-	super();
-	this.format = format;
-    }
+	public DateColumn(Format<Date> format) {
+		super();
+		this.format = format;
+	}
 
-    public final String toString(J object) {
-	return this.format.format(object.getDate(this.getName()));
-    }
+	public final String toString(J object) {
+		return this.format.format(object.getDate(this.getName()));
+	}
 
-    @Override
-    protected void doSort(JsArray<J> rows, String name, SortDirection direction) {
-	JSArrays.sort(rows, name, direction.direction());
-    }
+	@Override
+	protected void doSort(JsArray<J> rows, String name, SortDirection direction) {
+		JSArrays.sort(rows, name, direction.direction());
+	}
 }

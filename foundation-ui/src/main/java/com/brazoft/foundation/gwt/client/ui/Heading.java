@@ -24,21 +24,21 @@ public final class Heading
     extends Bootstrap<Heading>
     implements HasText<Heading> {
 
-    public Heading(int level) {
-	super(ElementResolver.heading(level));
-    }
+	public Heading(int level) {
+		super(ElementResolver.heading(level));
+	}
 
-    public Heading add(Widget add) {
-	return super.add(add);
-    }
+	public Heading add(Widget add) {
+		return super.add(add);
+	}
 
-    @Override
-    public Heading text(String text) {
-	return Component.Util.setHTML(this, text);
-    }
+	@Override
+	public Heading text(String text) {
+		return Component.Util.setHTML(this, text);
+	}
 
-    @Override
-    public String getText() {
-	return Component.Util.getHTML(this);
-    }
+	@Override
+	public String getText() {
+		return Component.Util.getHTML(this);
+	}
 }

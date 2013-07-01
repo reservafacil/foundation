@@ -37,268 +37,268 @@ public final class Datepicker
     extends Bootstrap<Datepicker>
     implements UIInput<Datepicker, Date>, HasChangeHandlers<Datepicker>, HasFocusHandlers<Datepicker> {
 
-    private TextBox          input;
+	private TextBox          input;
 
-    private MonthPanel       panel;
+	private MonthPanel       panel;
 
-    private HTML<DivElement> picker = HTML.asDiv().className("datepicker");
+	private HTML<DivElement> picker = HTML.asDiv().className("datepicker");
 
-    private DateFormat       format;
+	private DateFormat       format;
 
-    private boolean          shown;
+	private boolean          shown;
 
-    private boolean          readOnly;
+	private boolean          readOnly;
 
-    public Datepicker() {
-	this(DateFormat.DATE_SHORT);
-    }
+	public Datepicker() {
+		this(DateFormat.DATE_SHORT);
+	}
 
-    public Datepicker(DateFormat format) {
-	super(ElementResolver.div());
-	this.init(format);
-    }
+	public Datepicker(DateFormat format) {
+		super(ElementResolver.div());
+		this.init(format);
+	}
 
-    private void init(DateFormat format) {
-	this.style().position(Position.RELATIVE);
-	this.format = format;
+	private void init(DateFormat format) {
+		this.style().position(Position.RELATIVE);
+		this.format = format;
 
-	this.input = new TextBox();
-	this.editable();
+		this.input = new TextBox();
+		this.editable();
 
-	this.input.onFocus(new FocusHandler() {
+		this.input.onFocus(new FocusHandler() {
 
-	    @Override
-	    public void onFocus(FocusEvent event) {
-		Datepicker.this.show();
-	    }
-	});
-	this.input.onBlur(new BlurHandler() {
+			@Override
+			public void onFocus(FocusEvent event) {
+				Datepicker.this.show();
+			}
+		});
+		this.input.onBlur(new BlurHandler() {
 
-	    @Override
-	    public void onBlur(BlurEvent event) {
-		if (Datepicker.this.panel.isSelected()) {
-		    return;
+			@Override
+			public void onBlur(BlurEvent event) {
+				if (Datepicker.this.panel.isSelected()) {
+					return;
+				}
+
+				Datepicker.this.hide();
+			}
+		});
+		this.add(this.input);
+
+		this.panel = new MonthPanel();
+		this.panel.onSelection(new EventHandler<Date>() {
+
+			@Override
+			public void onEvent(Event<Date> e) {
+				Datepicker.this.value(e.data());
+				Datepicker.this.hide();
+			}
+		}).onNext(this.doFocus).onPrevious(this.doFocus);
+		this.add(this.picker.add(this.panel)).hide();
+	}
+
+	public Datepicker icon() {
+		Button icon = new Button().icon(Icon.CALENDAR);
+		icon.onClick(new ClickHandler() {
+
+			@Override
+			public void onClick(ClickEvent event) {
+				Datepicker.this.input.focus();
+			}
+		});
+
+		this.input.append(icon);
+
+		return this;
+	}
+
+	public InputText input() {
+		return input.input();
+	}
+
+	@Override
+	public Datepicker onChange(ChangeHandler handler) {
+		this.input.onChange(handler);
+		return this;
+	}
+
+	@Override
+	public Datepicker onFocus(FocusHandler handler) {
+		this.input.onFocus(handler);
+		return this;
+	}
+
+	@Override
+	public Datepicker onBlur(BlurHandler handler) {
+		this.input.onBlur(handler);
+		return this;
+	}
+
+	public Datepicker onSelection(EventHandler<Date> handler) {
+		this.panel.onSelection(handler);
+		return this;
+	}
+
+	public Datepicker block() {
+		this.input.block();
+		return this;
+	}
+
+	public Datepicker span(int span) {
+		this.input.span(span);
+		return this;
+	}
+
+	public Datepicker size(Size size) {
+		this.input.size(size);
+		return this;
+	}
+
+	public Datepicker range(Date start, Date end) {
+		this.panel.range(start, end);
+
+		if (Calendar.as(start).after(this.panel.current())) {
+			this.value(new Date(start.getTime()));
 		}
 
-		Datepicker.this.hide();
-	    }
-	});
-	this.add(this.input);
-
-	this.panel = new MonthPanel();
-	this.panel.onSelection(new EventHandler<Date>() {
-
-	    @Override
-	    public void onEvent(Event<Date> e) {
-		Datepicker.this.value(e.data());
-		Datepicker.this.hide();
-	    }
-	}).onNext(this.doFocus).onPrevious(this.doFocus);
-	this.add(this.picker.add(this.panel)).hide();
-    }
-
-    public Datepicker icon() {
-	Button icon = new Button().icon(Icon.CALENDAR);
-	icon.onClick(new ClickHandler() {
-
-	    @Override
-	    public void onClick(ClickEvent event) {
-		Datepicker.this.input.focus();
-	    }
-	});
-
-	this.input.append(icon);
-
-	return this;
-    }
-
-    public InputText input() {
-	return input.input();
-    }
-
-    @Override
-    public Datepicker onChange(ChangeHandler handler) {
-	this.input.onChange(handler);
-	return this;
-    }
-
-    @Override
-    public Datepicker onFocus(FocusHandler handler) {
-	this.input.onFocus(handler);
-	return this;
-    }
-
-    @Override
-    public Datepicker onBlur(BlurHandler handler) {
-	this.input.onBlur(handler);
-	return this;
-    }
-
-    public Datepicker onSelection(EventHandler<Date> handler) {
-	this.panel.onSelection(handler);
-	return this;
-    }
-
-    public Datepicker block() {
-	this.input.block();
-	return this;
-    }
-
-    public Datepicker span(int span) {
-	this.input.span(span);
-	return this;
-    }
-
-    public Datepicker size(Size size) {
-	this.input.size(size);
-	return this;
-    }
-
-    public Datepicker range(Date start, Date end) {
-	this.panel.range(start, end);
-
-	if (Calendar.as(start).after(this.panel.current())) {
-	    this.value(new Date(start.getTime()));
+		return this;
 	}
 
-	return this;
-    }
-
-    public Datepicker focus() {
-	this.input.focus();
-	return this;
-    }
-
-    Datepicker toggle() {
-	Display display = this.picker.style().getDisplay().equals(Display.NONE.getCssName()) ? Display.BLOCK : Display.NONE;
-	this.picker.style().display(display);
-
-	return this.toPosition();
-    }
-
-    public Datepicker show() {
-	if (!this.shown && !this.isReadOnly()) {
-	    this.picker.style().display(Display.BLOCK);
-
-	    this.shown = true;
-	    return this.toPosition();
+	public Datepicker focus() {
+		this.input.focus();
+		return this;
 	}
 
-	return this;
-    }
+	Datepicker toggle() {
+		Display display = this.picker.style().getDisplay().equals(Display.NONE.getCssName()) ? Display.BLOCK : Display.NONE;
+		this.picker.style().display(display);
 
-    public Datepicker hide() {
-	this.shown = false;
-	this.picker.hidden();
-	this.panel.selected(false);
-
-	return this;
-    }
-
-    @Override
-    public Datepicker clear() {
-	this.input.clear();
-	return this;
-    }
-
-    @Override
-    public Datepicker value(Date value) {
-	if (value == null) {
-	    this.input.value(null);
-	    return this;
+		return this.toPosition();
 	}
 
-	this.panel.set(value);
-	this.input.value(this.format.format(value));
+	public Datepicker show() {
+		if (!this.shown && !this.isReadOnly()) {
+			this.picker.style().display(Display.BLOCK);
 
-	return this;
-    }
+			this.shown = true;
+			return this.toPosition();
+		}
 
-    @Override
-    public Date getValue() {
-	return this.format.unformat(this.input.getValue());
-    }
+		return this;
+	}
 
-    @Override
-    public Datepicker placeholder(String placeholder) {
-	this.input.placeholder(placeholder);
+	public Datepicker hide() {
+		this.shown = false;
+		this.picker.hidden();
+		this.panel.selected(false);
 
-	return this;
-    }
+		return this;
+	}
 
-    @Override
-    public boolean isReadOnly() {
-	return this.readOnly;
-    }
+	@Override
+	public Datepicker clear() {
+		this.input.clear();
+		return this;
+	}
 
-    @Override
-    public Datepicker readonly() {
-	this.input.input().readonly().style().clearBackgroundColor();
-	this.readOnly = true;
-	return this;
-    }
+	@Override
+	public Datepicker value(Date value) {
+		if (value == null) {
+			this.input.value(null);
+			return this;
+		}
 
-    @Override
-    public boolean isEditable() {
-	return !this.readOnly;
-    }
+		this.panel.set(value);
+		this.input.value(this.format.format(value));
 
-    @Override
-    public Datepicker editable() {
-	this.input.input().style().backgroundColor("white");
-	this.readOnly = false;
-	return this;
-    }
+		return this;
+	}
 
-    @Override
-    public boolean isNullable() {
-	return this.input.isNullable();
-    }
+	@Override
+	public Date getValue() {
+		return this.format.unformat(this.input.getValue());
+	}
 
-    @Override
-    public Datepicker nullable() {
-	this.input.nullable();
-	return this;
-    }
+	@Override
+	public Datepicker placeholder(String placeholder) {
+		this.input.placeholder(placeholder);
 
-    @Override
-    public boolean isRequired() {
-	return this.input.isRequired();
-    }
+		return this;
+	}
 
-    @Override
-    public Datepicker required() {
-	this.input.required();
-	return this;
-    }
+	@Override
+	public boolean isReadOnly() {
+		return this.readOnly;
+	}
 
-    @Override
-    public Datepicker removeHandlers(Event<?> event) {
-	this.panel.removeHandlers(event);
-	return super.removeHandlers(event);
-    }
+	@Override
+	public Datepicker readonly() {
+		this.input.input().readonly().style().clearBackgroundColor();
+		this.readOnly = true;
+		return this;
+	}
 
-    @Override
-    public <H extends com.google.gwt.event.shared.EventHandler> Datepicker removeHandlers(Type<H> type) {
-	this.panel.removeHandlers(type);
-	return super.removeHandlers(type);
-    }
+	@Override
+	public boolean isEditable() {
+		return !this.readOnly;
+	}
 
-    private ClickHandler doFocus = new ClickHandler() {
+	@Override
+	public Datepicker editable() {
+		this.input.input().style().backgroundColor("white");
+		this.readOnly = false;
+		return this;
+	}
 
-	                             @Override
-	                             public void onClick(ClickEvent event) {
-		                         Datepicker.this.focus();
-	                             }
-	                         };
+	@Override
+	public boolean isNullable() {
+		return this.input.isNullable();
+	}
 
-    Datepicker toPosition() {
-	InputText input = this.input.input();
+	@Override
+	public Datepicker nullable() {
+		this.input.nullable();
+		return this;
+	}
 
-	double left = 0;
-	double top = input.top() + input.position().top() + input.scrollTop() + input.outerHeight(true);
-	this.picker.style().zIndex(10000).position(Position.ABSOLUTE).display(Display.BLOCK).top(top, Unit.PX).left(left, Unit.PX);
+	@Override
+	public boolean isRequired() {
+		return this.input.isRequired();
+	}
 
-	return this;
-    }
+	@Override
+	public Datepicker required() {
+		this.input.required();
+		return this;
+	}
+
+	@Override
+	public Datepicker removeHandlers(Event<?> event) {
+		this.panel.removeHandlers(event);
+		return super.removeHandlers(event);
+	}
+
+	@Override
+	public <H extends com.google.gwt.event.shared.EventHandler> Datepicker removeHandlers(Type<H> type) {
+		this.panel.removeHandlers(type);
+		return super.removeHandlers(type);
+	}
+
+	private ClickHandler doFocus = new ClickHandler() {
+
+		                             @Override
+		                             public void onClick(ClickEvent event) {
+			                             Datepicker.this.focus();
+		                             }
+	                             };
+
+	Datepicker toPosition() {
+		InputText input = this.input.input();
+
+		double left = 0;
+		double top = input.top() + input.position().top() + input.scrollTop() + input.outerHeight(true);
+		this.picker.style().zIndex(10000).position(Position.ABSOLUTE).display(Display.BLOCK).top(top, Unit.PX).left(left, Unit.PX);
+
+		return this;
+	}
 }

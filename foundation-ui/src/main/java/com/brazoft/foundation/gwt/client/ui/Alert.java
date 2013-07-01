@@ -23,64 +23,64 @@ import com.google.gwt.user.client.ui.Widget;
 public final class Alert
     extends Bootstrap<Alert> {
 
-    private Button              dismiss = new Button().className("close").text("×");
+	private Button              dismiss = new Button().className("close").text("×");
 
-    private StyleChooser<Alert> chooser = new StyleChooser<Alert>("alert-warning", "alert-error", "alert-info", "alert-success");
+	private StyleChooser<Alert> chooser = new StyleChooser<Alert>("alert-warning", "alert-error", "alert-info", "alert-success");
 
-    public Alert() {
-	super(ElementResolver.div());
-	this.init();
-    }
+	public Alert() {
+		super(ElementResolver.div());
+		this.init();
+	}
 
-    private void init() {
-	this.className("alert fade in");
+	private void init() {
+		this.className("alert fade in");
 
-	this.dismiss.onClick(new ClickHandler() {
+		this.dismiss.onClick(new ClickHandler() {
 
-	    @Override
-	    public void onClick(ClickEvent event) {
-		Alert.this.hidden();
-	    }
-	});
-    }
+			@Override
+			public void onClick(ClickEvent event) {
+				Alert.this.hidden();
+			}
+		});
+	}
 
-    public Alert warning() {
-	return this.chooser.className(this, "alert-warning");
-    }
+	public Alert warning() {
+		return this.chooser.className(this, "alert-warning");
+	}
 
-    public Alert error() {
-	return this.chooser.className(this, "alert-error");
-    }
+	public Alert error() {
+		return this.chooser.className(this, "alert-error");
+	}
 
-    public Alert info() {
-	return this.chooser.className(this, "alert-info");
-    }
+	public Alert info() {
+		return this.chooser.className(this, "alert-info");
+	}
 
-    public Alert success() {
-	return this.chooser.className(this, "alert-success");
-    }
+	public Alert success() {
+		return this.chooser.className(this, "alert-success");
+	}
 
-    public Alert hidden() {
-	this.removeClassName("in").className("out");
-	return super.hidden();
-    }
+	public Alert hidden() {
+		this.removeClassName("in").className("out");
+		return super.hidden();
+	}
 
-    @Override
-    public Alert visible() {
-	this.removeClassName("out").className("in");
-	return super.visible();
-    }
+	@Override
+	public Alert visible() {
+		this.removeClassName("out").className("in");
+		return super.visible();
+	}
 
-    public Alert block() {
-	return this.className("alert-block");
-    }
+	public Alert block() {
+		return this.className("alert-block");
+	}
 
-    public Alert closeable() {
-	return this.add(dismiss);
-    }
+	public Alert closeable() {
+		return this.add(dismiss);
+	}
 
-    @Override
-    public Alert add(Widget add) {
-	return super.add(add);
-    }
+	@Override
+	public Alert add(Widget add) {
+		return super.add(add);
+	}
 }

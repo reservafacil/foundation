@@ -20,23 +20,23 @@ import com.brazoft.foundation.gwt.client.ui.api.AbstractTable;
 public final class Table
     extends AbstractTable<Table> {
 
-    @Override
-    public Body body() {
-	return super.body();
-    }
+	@Override
+	public Body body() {
+		return super.body();
+	}
 
-    @Override
-    public Caption caption() {
-	return super.caption();
-    }
+	@Override
+	public Caption caption() {
+		return super.caption();
+	}
 
-    @Override
-    public Header header() {
-	return super.header();
-    }
+	@Override
+	public Header header() {
+		return super.header();
+	}
 
-    @Override
-    public Footer footer() {
-	return super.footer();
-    }
+	@Override
+	public Footer footer() {
+		return super.footer();
+	}
 }

@@ -24,52 +24,52 @@ public final class Emphasis
     extends Bootstrap<Emphasis>
     implements HasText<Emphasis> {
 
-    private StyleChooser<Emphasis> chooser = new StyleChooser<Emphasis>("text-warning", "text-error", "text-info", "text-success");
+	private StyleChooser<Emphasis> chooser = new StyleChooser<Emphasis>("text-warning", "text-error", "text-info", "text-success");
 
-    public Emphasis(EmphasisOptions option) {
-	super(option.resolveElement());
-    }
-
-    public Emphasis warning() {
-	return this.chooser.className(this, "text-warning");
-    }
-
-    public Emphasis error() {
-	return this.chooser.className(this, "text-error");
-    }
-
-    public Emphasis info() {
-	return this.chooser.className(this, "text-info");
-    }
-
-    public Emphasis success() {
-	return this.chooser.className(this, "text-success");
-    }
-
-    @Override
-    public String getText() {
-	return Component.Util.getHTML(this);
-    }
-
-    @Override
-    public Emphasis text(String text) {
-	return Component.Util.setHTML(this, text);
-    }
-
-    public enum EmphasisOptions {
-	SMALL, BOLD, ITALIC;
-
-	Element resolveElement() {
-	    switch (this) {
-		case SMALL:
-		    return ElementResolver.small();
-		case BOLD:
-		    return ElementResolver.strong();
-		case ITALIC:
-		    return ElementResolver.em();
-	    }
-
-	    return null;
+	public Emphasis(EmphasisOptions option) {
+		super(option.resolveElement());
 	}
-    }
+
+	public Emphasis warning() {
+		return this.chooser.className(this, "text-warning");
+	}
+
+	public Emphasis error() {
+		return this.chooser.className(this, "text-error");
+	}
+
+	public Emphasis info() {
+		return this.chooser.className(this, "text-info");
+	}
+
+	public Emphasis success() {
+		return this.chooser.className(this, "text-success");
+	}
+
+	@Override
+	public String getText() {
+		return Component.Util.getHTML(this);
+	}
+
+	@Override
+	public Emphasis text(String text) {
+		return Component.Util.setHTML(this, text);
+	}
+
+	public enum EmphasisOptions {
+		SMALL, BOLD, ITALIC;
+
+		Element resolveElement() {
+			switch (this) {
+				case SMALL:
+					return ElementResolver.small();
+				case BOLD:
+					return ElementResolver.strong();
+				case ITALIC:
+					return ElementResolver.em();
+			}
+
+			return null;
+		}
+	}
 }

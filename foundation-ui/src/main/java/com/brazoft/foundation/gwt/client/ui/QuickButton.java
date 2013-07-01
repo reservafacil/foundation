@@ -11,156 +11,156 @@ public final class QuickButton
     extends Component<QuickButton>
     implements UIButton<QuickButton> {
 
-    private Paragraph                       text         = new Paragraph();
+	private Paragraph                       text         = new Paragraph();
 
-    private HTML<SpanElement>               notification = HTML.asSpan().className("notification");
+	private HTML<SpanElement>               notification = HTML.asSpan().className("notification");
 
-    private StyleChooser<HTML<SpanElement>> chooser      = new StyleChooser<HTML<SpanElement>>("btn-primary", "btn-info", "btn-success",
-	                                                                                       "btn-warning", "btn-danger", "btn-inverse");
+	private StyleChooser<HTML<SpanElement>> chooser      = new StyleChooser<HTML<SpanElement>>("btn-primary", "btn-info", "btn-success",
+	                                                                                           "btn-warning", "btn-danger", "btn-inverse");
 
-    public QuickButton() {
-	super(ElementResolver.a());
-	this.className("quick-button");
-	this.add(this.text).add(this.notification);
-    }
+	public QuickButton() {
+		super(ElementResolver.a());
+		this.className("quick-button");
+		this.add(this.text).add(this.notification);
+	}
 
-    @Override
-    public QuickButton onFocus(FocusHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onFocus(FocusHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton onBlur(BlurHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onBlur(BlurHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton onClick(ClickHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onClick(ClickHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton onDoubleClick(DoubleClickHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onDoubleClick(DoubleClickHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton onMouseDown(MouseDownHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onMouseDown(MouseDownHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton onMouseMove(MouseMoveHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onMouseMove(MouseMoveHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton onMouseOut(MouseOutHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onMouseOut(MouseOutHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton onMouseOver(MouseOverHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onMouseOver(MouseOverHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton onMouseUp(MouseUpHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onMouseUp(MouseUpHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton onMouseWheel(MouseWheelHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onMouseWheel(MouseWheelHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton onKeyPress(KeyPressHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onKeyPress(KeyPressHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton onKeyDown(KeyDownHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onKeyDown(KeyDownHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton onKeyUp(KeyUpHandler handler) {
-	return Events.on(this, handler);
-    }
+	@Override
+	public QuickButton onKeyUp(KeyUpHandler handler) {
+		return Events.on(this, handler);
+	}
 
-    @Override
-    public QuickButton size(Size size) {
-	return Widgets.setSize(this, size);
-    }
+	@Override
+	public QuickButton size(Size size) {
+		return Widgets.setSize(this, size);
+	}
 
-    @Override
-    public QuickButton primary() {
-	this.chooser.className(this.notification, "btn-primary");
-	return this;
-    }
+	@Override
+	public QuickButton primary() {
+		this.chooser.className(this.notification, "btn-primary");
+		return this;
+	}
 
-    @Override
-    public QuickButton info() {
-	this.chooser.className(this.notification, "btn-info");
-	return this;
-    }
+	@Override
+	public QuickButton info() {
+		this.chooser.className(this.notification, "btn-info");
+		return this;
+	}
 
-    @Override
-    public QuickButton success() {
-	this.chooser.className(this.notification, "btn-success");
-	return this;
-    }
+	@Override
+	public QuickButton success() {
+		this.chooser.className(this.notification, "btn-success");
+		return this;
+	}
 
-    @Override
-    public QuickButton warning() {
-	this.chooser.className(this.notification, "btn-warning");
-	return this;
-    }
+	@Override
+	public QuickButton warning() {
+		this.chooser.className(this.notification, "btn-warning");
+		return this;
+	}
 
-    @Override
-    public QuickButton danger() {
-	this.chooser.className(this.notification, "btn-danger");
-	return this;
-    }
+	@Override
+	public QuickButton danger() {
+		this.chooser.className(this.notification, "btn-danger");
+		return this;
+	}
 
-    @Override
-    public QuickButton inverse() {
-	this.chooser.className(this.notification, "btn-inverse");
-	return this;
-    }
+	@Override
+	public QuickButton inverse() {
+		this.chooser.className(this.notification, "btn-inverse");
+		return this;
+	}
 
-    @Override
-    public QuickButton link() {
-	this.notification.className("btn-link");
-	return this;
-    }
+	@Override
+	public QuickButton link() {
+		this.notification.className("btn-link");
+		return this;
+	}
 
-    @Override
-    public QuickButton expanded() {
-	this.notification.className("btn-block");
-	return this;
-    }
+	@Override
+	public QuickButton expanded() {
+		this.notification.className("btn-block");
+		return this;
+	}
 
-    @Override
-    public QuickButton icon(Icon icon) {
-	Widgets.setIcon(this, icon, true);
-	return this;
-    }
+	@Override
+	public QuickButton icon(Icon icon) {
+		Widgets.setIcon(this, icon, true);
+		return this;
+	}
 
-    public QuickButton notification(String notification) {
-	this.notification.text(notification);
-	return this;
-    }
+	public QuickButton notification(String notification) {
+		this.notification.text(notification);
+		return this;
+	}
 
-    @Override
-    public QuickButton text(String text) {
-	this.text.text(text);
-	return this;
-    }
+	@Override
+	public QuickButton text(String text) {
+		this.text.text(text);
+		return this;
+	}
 
-    @Override
-    public String getText() {
-	return this.text.getText();
-    }
+	@Override
+	public String getText() {
+		return this.text.getText();
+	}
 }

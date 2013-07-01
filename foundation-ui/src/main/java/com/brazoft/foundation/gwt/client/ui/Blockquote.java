@@ -22,23 +22,23 @@ import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 public final class Blockquote
     extends Bootstrap<Blockquote> {
 
-    public Blockquote() {
-	super(ElementResolver.blockquote());
-    }
+	public Blockquote() {
+		super(ElementResolver.blockquote());
+	}
 
-    public Blockquote quote(String text) {
-	return this.add(new Paragraph().text(text));
-    }
+	public Blockquote quote(String text) {
+		return this.add(new Paragraph().text(text));
+	}
 
-    public Blockquote quote(String text, String source) {
-	return this.quote(text).add(new Emphasis(EmphasisOptions.SMALL).text(source));
-    }
+	public Blockquote quote(String text, String source) {
+		return this.quote(text).add(new Emphasis(EmphasisOptions.SMALL).text(source));
+	}
 
-    public Blockquote toLeft() {
-	return this.removeClassName("pull-right");
-    }
+	public Blockquote toLeft() {
+		return this.removeClassName("pull-right");
+	}
 
-    public Blockquote toRight() {
-	return this.className("pull-right");
-    }
+	public Blockquote toRight() {
+		return this.className("pull-right");
+	}
 }

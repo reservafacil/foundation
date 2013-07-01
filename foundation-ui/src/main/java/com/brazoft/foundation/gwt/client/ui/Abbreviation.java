@@ -23,27 +23,27 @@ public final class Abbreviation
     extends Bootstrap<Abbreviation>
     implements HasText<Abbreviation> {
 
-    public Abbreviation(String title) {
-	super(ElementResolver.abbr());
-    }
+	public Abbreviation(String title) {
+		super(ElementResolver.abbr());
+	}
 
-    public Abbreviation initialism() {
-	return this.className("initialism");
-    }
+	public Abbreviation initialism() {
+		return this.className("initialism");
+	}
 
-    public Abbreviation title(String title) {
-	this.getElement().setTitle(title);
+	public Abbreviation title(String title) {
+		this.getElement().setTitle(title);
 
-	return this;
-    }
+		return this;
+	}
 
-    @Override
-    public Abbreviation text(String text) {
-	return Component.Util.setHTML(this, text);
-    }
+	@Override
+	public Abbreviation text(String text) {
+		return Component.Util.setHTML(this, text);
+	}
 
-    @Override
-    public String getText() {
-	return Component.Util.getHTML(this);
-    }
+	@Override
+	public String getText() {
+		return Component.Util.getHTML(this);
+	}
 }

@@ -22,32 +22,32 @@ import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 public final class ButtonGroup
     extends Bootstrap<ButtonGroup> {
 
-    public ButtonGroup() {
-	super(ElementResolver.div());
-	this.className("btn-group");
-    }
+	public ButtonGroup() {
+		super(ElementResolver.div());
+		this.className("btn-group");
+	}
 
-    public ButtonGroup behaveAsCheckbox() {
-	return this.attribute("data-toggle", "buttons-checkbox");
-    }
+	public ButtonGroup behaveAsCheckbox() {
+		return this.attribute("data-toggle", "buttons-checkbox");
+	}
 
-    public ButtonGroup behaveAsRadio() {
-	return this.attribute("data-toggle", "buttons-radio");
-    }
+	public ButtonGroup behaveAsRadio() {
+		return this.attribute("data-toggle", "buttons-radio");
+	}
 
-    public ButtonGroup vertical() {
-	return this.className("btn-group-vertical");
-    }
+	public ButtonGroup vertical() {
+		return this.className("btn-group-vertical");
+	}
 
-    public Button button(String label) {
-	return this.button(label, ButtonOptions.BUTTON);
-    }
+	public Button button(String label) {
+		return this.button(label, ButtonOptions.BUTTON);
+	}
 
-    public Button button(String label, ButtonOptions options) {
-	Button button = new Button(options).text(label);
+	public Button button(String label, ButtonOptions options) {
+		Button button = new Button(options).text(label);
 
-	this.add(button);
+		this.add(button);
 
-	return button;
-    }
+		return button;
+	}
 }

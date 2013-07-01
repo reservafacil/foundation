@@ -26,164 +26,164 @@ import com.google.gwt.user.client.ui.*;
 public final class Modal
     extends NativeEvent<Modal> {
 
-    private ModalHeader header = new ModalHeader();
+	private ModalHeader header = new ModalHeader();
 
-    private ModalBody   body   = new ModalBody();
+	private ModalBody   body   = new ModalBody();
 
-    private ModalFooter footer = new ModalFooter();
+	private ModalFooter footer = new ModalFooter();
 
-    public Modal() {
-	super(ElementResolver.div());
-	String id = ElementResolver.document().createUniqueId();
-	this.id(id).className("modal hide fade in").attribute("role", "dialog");
-	this.attribute("aria-labelledby", id + "_label").attribute("aria-hidden", "true");
-	this.attribute("data-keyboard", "true");
+	public Modal() {
+		super(ElementResolver.div());
+		String id = ElementResolver.document().createUniqueId();
+		this.id(id).className("modal hide fade in").attribute("role", "dialog");
+		this.attribute("aria-labelledby", id + "_label").attribute("aria-hidden", "true");
+		this.attribute("data-keyboard", "true");
 
-	this.add(this.header.hidden()).add(this.body.hidden()).add(this.footer.hidden());
-    }
-
-    @Override
-    public Modal detachChildren() {
-	this.body.detachChildren();
-	this.footer.detachChildren();
-	return this;
-    }
-
-    public Modal hideOnComplete() {
-	this.header.closeButton.hidden();
-	return this.attribute("data-keyboard", "false");
-    }
-
-    public Modal statical() {
-	return this.attribute("data-backdrop", "static");
-    }
-
-    public Button trigger() {
-	return new Button(ButtonOptions.ANCHOR).attribute("href", "#" + this.getId()).attribute("role", "button").attribute("data-toggle",
-	                                                                                                                    "modal");
-    }
-
-    public Modal heading(String text) {
-	this.header.visible();
-	return this.add(this.header.text(text));
-    }
-
-    public ModalBody body() {
-	this.body.visible();
-
-	return this.body;
-    }
-
-    public ModalFooter footer() {
-	this.footer.visible();
-
-	return this.footer;
-    }
-
-    public static class ModalBody
-	extends Bootstrap<ModalBody> {
-
-	public ModalBody() {
-	    super(ElementResolver.div());
-	    this.className("modal-body");
+		this.add(this.header.hidden()).add(this.body.hidden()).add(this.footer.hidden());
 	}
 
 	@Override
-	public ModalBody detachChildren() {
-	    return super.detachChildren();
+	public Modal detachChildren() {
+		this.body.detachChildren();
+		this.footer.detachChildren();
+		return this;
 	}
 
-	@Override
-	public ModalBody add(Widget add) {
-	    return super.add(add);
-	}
-    }
-
-    public static class ModalFooter
-	extends Bootstrap<ModalFooter> {
-
-	public ModalFooter() {
-	    super(ElementResolver.div());
-	    this.className("modal-footer");
+	public Modal hideOnComplete() {
+		this.header.closeButton.hidden();
+		return this.attribute("data-keyboard", "false");
 	}
 
-	@Override
-	public ModalFooter detachChildren() {
-	    return super.detachChildren();
+	public Modal statical() {
+		return this.attribute("data-backdrop", "static");
 	}
 
-	@Override
-	public ModalFooter add(Widget add) {
-	    return super.add(add);
-	}
-    }
-
-    public static class ModalHeader
-	extends Bootstrap<ModalHeader>
-	implements HasText<ModalHeader> {
-
-	private Heading heading     = new Heading(3);
-
-	private Button  closeButton = new Button().className("close").attribute("data-dismiss", "modal").attribute("aria-hidden", "true").text("×");
-
-	public ModalHeader() {
-	    super(ElementResolver.div());
-	    this.className("modal-header");
-	    this.add(this.closeButton).add(this.heading);
+	public Button trigger() {
+		return new Button(ButtonOptions.ANCHOR).attribute("href", "#" + this.getId()).attribute("role", "button").attribute("data-toggle",
+		                                                                                                                    "modal");
 	}
 
-	@Override
-	public String getText() {
-	    return this.heading.getText();
+	public Modal heading(String text) {
+		this.header.visible();
+		return this.add(this.header.text(text));
 	}
 
-	@Override
-	public ModalHeader text(String text) {
-	    Component.Util.setHTML(this.heading, text);
-	    return this;
+	public ModalBody body() {
+		this.body.visible();
+
+		return this.body;
 	}
-    }
 
-    public Modal onShow(EventHandler<Void> handler) {
-	return this.addHandler(Type.SHOW, handler);
-    }
+	public ModalFooter footer() {
+		this.footer.visible();
 
-    public Modal whenShown(EventHandler<Void> handler) {
-	return this.addHandler(Type.SHOWN, handler);
-    }
-
-    public Modal onHide(EventHandler<Void> handler) {
-	return this.addHandler(Type.HIDE, handler);
-    }
-
-    public Modal whenHidden(EventHandler<Void> handler) {
-	return this.addHandler(Type.HIDDEN, handler);
-    }
-
-    public Modal show() {
-	if (!this.isAttached()) {
-	    RootPanel.get().add(this);
+		return this.footer;
 	}
-	this.doFunction(Type.SHOW.method(), this.getId());
-	this.getElement().focus();
-	return this;
-    }
 
-    public Modal hide() {
-	this.doFunction(Type.HIDE.method(), this.getId());
-	return this;
-    }
+	public static class ModalBody
+	    extends Bootstrap<ModalBody> {
 
-    protected native void doFunction(String method, String id) /*-{
-	$wnd.$("#" + id).modal(method);
-    }-*/;
+		public ModalBody() {
+			super(ElementResolver.div());
+			this.className("modal-body");
+		}
 
-    enum Type
-	implements EventType {
-	HIDE, HIDDEN, SHOW, SHOWN;
+		@Override
+		public ModalBody detachChildren() {
+			return super.detachChildren();
+		}
 
-	public String method() {
-	    return this.name().toLowerCase();
+		@Override
+		public ModalBody add(Widget add) {
+			return super.add(add);
+		}
 	}
-    }
+
+	public static class ModalFooter
+	    extends Bootstrap<ModalFooter> {
+
+		public ModalFooter() {
+			super(ElementResolver.div());
+			this.className("modal-footer");
+		}
+
+		@Override
+		public ModalFooter detachChildren() {
+			return super.detachChildren();
+		}
+
+		@Override
+		public ModalFooter add(Widget add) {
+			return super.add(add);
+		}
+	}
+
+	public static class ModalHeader
+	    extends Bootstrap<ModalHeader>
+	    implements HasText<ModalHeader> {
+
+		private Heading heading     = new Heading(3);
+
+		private Button  closeButton = new Button().className("close").attribute("data-dismiss", "modal").attribute("aria-hidden", "true").text("×");
+
+		public ModalHeader() {
+			super(ElementResolver.div());
+			this.className("modal-header");
+			this.add(this.closeButton).add(this.heading);
+		}
+
+		@Override
+		public String getText() {
+			return this.heading.getText();
+		}
+
+		@Override
+		public ModalHeader text(String text) {
+			Component.Util.setHTML(this.heading, text);
+			return this;
+		}
+	}
+
+	public Modal onShow(EventHandler<Void> handler) {
+		return this.addHandler(Type.SHOW, handler);
+	}
+
+	public Modal whenShown(EventHandler<Void> handler) {
+		return this.addHandler(Type.SHOWN, handler);
+	}
+
+	public Modal onHide(EventHandler<Void> handler) {
+		return this.addHandler(Type.HIDE, handler);
+	}
+
+	public Modal whenHidden(EventHandler<Void> handler) {
+		return this.addHandler(Type.HIDDEN, handler);
+	}
+
+	public Modal show() {
+		if (!this.isAttached()) {
+			RootPanel.get().add(this);
+		}
+		this.doFunction(Type.SHOW.method(), this.getId());
+		this.getElement().focus();
+		return this;
+	}
+
+	public Modal hide() {
+		this.doFunction(Type.HIDE.method(), this.getId());
+		return this;
+	}
+
+	protected native void doFunction(String method, String id) /*-{
+	                                                           $wnd.$("#" + id).modal(method);
+	                                                           }-*/;
+
+	enum Type
+	    implements EventType {
+		HIDE, HIDDEN, SHOW, SHOWN;
+
+		public String method() {
+			return this.name().toLowerCase();
+		}
+	}
 }

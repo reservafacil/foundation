@@ -36,340 +36,340 @@ import com.google.gwt.user.client.ui.Widget;
 public final class MonthPanel
     extends Bootstrap<MonthPanel> {
 
-    private Table    table       = new Table().className("table-condensed");
+	private Table    table       = new Table().className("table-condensed");
 
-    private Selector selector;
+	private Selector selector;
 
-    private Days     days;
+	private Days     days;
 
-    private Calendar currentDate = Calendar.now();
+	private Calendar currentDate = Calendar.now();
 
-    private boolean  selected;
+	private boolean  selected;
 
-    public MonthPanel() {
-	super(ElementResolver.div());
-	this.init();
-    }
-
-    MonthPanel onPrevious(ClickHandler handler) {
-	this.selector.onPrevious(handler);
-	return this;
-    }
-
-    MonthPanel onNext(ClickHandler handler) {
-	this.selector.onNext(handler);
-	return this;
-    }
-
-    Calendar current() {
-	return this.currentDate;
-    }
-
-    private void init() {
-	this.className("calendar").add(this.table);
-
-	this.selector = new Selector(this.table.header());
-
-	this.days = new Days(this.table.body());
-
-	this.selector.onPrevious(new ClickHandler() {
-
-	    @Override
-	    public void onClick(ClickEvent event) {
-		MonthPanel.this.previous();
-		MonthPanel.this.selected = false;
-	    }
-	});
-
-	this.selector.onNext(new ClickHandler() {
-
-	    @Override
-	    public void onClick(ClickEvent event) {
-		MonthPanel.this.next();
-		MonthPanel.this.selected = false;
-	    }
-	});
-    }
-
-    public MonthPanel selected(boolean selected) {
-	this.selected = selected;
-	return this;
-    }
-
-    public boolean isSelected() {
-	return this.selected;
-    }
-
-    public MonthPanel onSelection(EventHandler<Date> handler) {
-	return this.<Date> addHandler(Type.SELECTION, handler);
-    }
-
-    public MonthPanel range(Date start, Date end) {
-	return this.range(Calendar.as(start), Calendar.as(end));
-    }
-
-    public MonthPanel range(Calendar start, Calendar end) {
-	this.days.range.start(start);
-	this.days.range.end(end);
-
-	if (start.after(this.currentDate)) {
-	    this.currentDate = Calendar.clone(start);
+	public MonthPanel() {
+		super(ElementResolver.div());
+		this.init();
 	}
 
-	this.days.renderMonth(this.currentDate);
-	this.selector.set(this.currentDate);
-
-	return this;
-    }
-
-    MonthPanel next() {
-	return this.runToMonth(1);
-    }
-
-    MonthPanel previous() {
-	return this.runToMonth(-1);
-    }
-
-    private MonthPanel runToMonth(int months) {
-	this.currentDate.addMonths(months);
-
-	this.selector.set(this.currentDate);
-	this.days.renderMonth(this.currentDate);
-	this.days.range.currentMonth = this.currentDate.getMonth();
-
-	return this;
-    }
-
-    public MonthPanel set(Calendar calendar) {
-	if (this.currentDate != null && !this.currentDate.equals(calendar)) {
-	    this.currentDate = calendar;
-	    this.fireEvent(new Event<Date>(Type.SELECTION, calendar.toDate()));
+	MonthPanel onPrevious(ClickHandler handler) {
+		this.selector.onPrevious(handler);
+		return this;
 	}
 
-	this.selector.set(calendar);
-	this.days.set(calendar);
-
-	return this;
-    }
-
-    public MonthPanel set(Date date) {
-	return this.set(Calendar.as(date));
-    }
-
-    class Days {
-
-	private Body  body;
-
-	private Cell  currentDay;
-
-	private Range range;
-
-	public Days(Body body) {
-	    this.init(body);
+	MonthPanel onNext(ClickHandler handler) {
+		this.selector.onNext(handler);
+		return this;
 	}
 
-	private void init(Body body) {
-	    this.range = new Range();
-	    this.body = body;
+	Calendar current() {
+		return this.currentDate;
+	}
 
-	    for (int w = 0; w < 6; w++) {
-		Row row = body.row();
-		for (int d = 0; d < 7; d++) {
-		    row.cell().onClick(new ClickHandler() {
+	private void init() {
+		this.className("calendar").add(this.table);
+
+		this.selector = new Selector(this.table.header());
+
+		this.days = new Days(this.table.body());
+
+		this.selector.onPrevious(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-			    Cell cell = (Cell)event.getSource();
-			    Calendar calendar = Days.this.toCalendar(cell);
-			    if (Days.this.range.eval(calendar) && !cell.getStyleName().contains("off")) {
-				Days.this.selectDate(calendar, cell);
-				MonthPanel.this.fireEvent(new Event<Date>(Type.SELECTION, MonthPanel.this, calendar.toDate()));
-			    }
+				MonthPanel.this.previous();
+				MonthPanel.this.selected = false;
 			}
-		    }).onMouseDown(new MouseDownHandler() {
+		});
+
+		this.selector.onNext(new ClickHandler() {
 
 			@Override
-			public void onMouseDown(MouseDownEvent event) {
-			    MonthPanel.this.selected = true;
+			public void onClick(ClickEvent event) {
+				MonthPanel.this.next();
+				MonthPanel.this.selected = false;
 			}
-		    });
-		}
-	    }
-
-	    this.renderMonth(MonthPanel.this.currentDate);
+		});
 	}
 
-	Calendar toCalendar(Cell cell) {
-	    return Calendar.time(Long.valueOf(cell.getAttribute("date-time")));
-	}
-
-	public Days set(Calendar calendar) {
-	    if (!this.range.currentMonth.equals(calendar.getMonth())) {
-		this.renderMonth(calendar);
+	public MonthPanel selected(boolean selected) {
+		this.selected = selected;
 		return this;
-	    }
-
-	    // find cell to select
-	    for (Widget widget : this.body.getChildren()) {
-		Row row = (Row)widget;
-		Cell cell = row.cell(calendar.getDay().ordinal());
-		Calendar cellCalendar = this.toCalendar(cell);
-
-		if (cellCalendar.equalsIgnoreTime(calendar)) {
-		    this.selectDate(calendar, cell);
-		    break;
-		}
-	    }
-
-	    return this;
 	}
 
-	void selectDate(Calendar calendar, Cell cell) {
-	    // remove active from last active day
-	    if (this.currentDay != null) {
-		this.decorate(this.currentDay, this.toCalendar(this.currentDay));
-	    }
-
-	    cell.setStyleName("active");
-	    this.currentDay = cell;
+	public boolean isSelected() {
+		return this.selected;
 	}
 
-	void renderMonth(Calendar base) {
-	    Calendar runner = Calendar.clone(base).moveToFirstDayOfMonth();
-
-	    this.range.currentMonth = runner.getMonth();
-
-	    // Adjust calendar to the first day of week (Sunday)
-	    while (!runner.getDay().equals(WeekDay.SUNDAY)) {
-		runner.addDays(-1);
-	    }
-
-	    for (int w = 0; w < 6; w++) {
-		Row row = this.body.row(w);
-		for (int d = 0; d < 7; d++) {
-		    Cell cell = row.cell(d).text(String.valueOf(runner.getDate())).attribute("date-time", String.valueOf(runner.getTime()));
-
-		    this.decorate(cell, runner);
-
-		    runner.addDays(1);
-		}
-	    }
+	public MonthPanel onSelection(EventHandler<Date> handler) {
+		return this.<Date> addHandler(Type.SELECTION, handler);
 	}
 
-	void decorate(Cell cell, Calendar runner) {
-	    if (!range.eval(runner)) {
-		cell.setStyleName("off disabled");
-		return;
-	    }
-
-	    cell.setStyleName("available in-range");
+	public MonthPanel range(Date start, Date end) {
+		return this.range(Calendar.as(start), Calendar.as(end));
 	}
 
-	class Range {
+	public MonthPanel range(Calendar start, Calendar end) {
+		this.days.range.start(start);
+		this.days.range.end(end);
 
-	    private Calendar start;
-
-	    private Calendar end;
-
-	    private Month    currentMonth;
-
-	    void start(Calendar start) {
-		if (start == null) {
-		    return;
-		}
-		this.start = start.clearTime();
-	    }
-
-	    void end(Calendar end) {
-		if (end == null) {
-		    return;
-		}
-		this.end = end.clearTime();
-	    }
-
-	    public boolean eval(Calendar calendar) {
-		boolean eval = true;
-
-		if (!calendar.getMonth().equals(this.currentMonth)) {
-		    return false;
+		if (start.after(this.currentDate)) {
+			this.currentDate = Calendar.clone(start);
 		}
 
-		if (this.start == null && this.end == null) {
-		    return true;
+		this.days.renderMonth(this.currentDate);
+		this.selector.set(this.currentDate);
+
+		return this;
+	}
+
+	MonthPanel next() {
+		return this.runToMonth(1);
+	}
+
+	MonthPanel previous() {
+		return this.runToMonth(-1);
+	}
+
+	private MonthPanel runToMonth(int months) {
+		this.currentDate.addMonths(months);
+
+		this.selector.set(this.currentDate);
+		this.days.renderMonth(this.currentDate);
+		this.days.range.currentMonth = this.currentDate.getMonth();
+
+		return this;
+	}
+
+	public MonthPanel set(Calendar calendar) {
+		if (this.currentDate != null && !this.currentDate.equals(calendar)) {
+			this.currentDate = calendar;
+			this.fireEvent(new Event<Date>(Type.SELECTION, calendar.toDate()));
 		}
 
-		if (this.start != null && !(calendar.equalsIgnoreTime(this.start) || calendar.after(this.start))) {
-		    eval = false;
+		this.selector.set(calendar);
+		this.days.set(calendar);
+
+		return this;
+	}
+
+	public MonthPanel set(Date date) {
+		return this.set(Calendar.as(date));
+	}
+
+	class Days {
+
+		private Body  body;
+
+		private Cell  currentDay;
+
+		private Range range;
+
+		public Days(Body body) {
+			this.init(body);
 		}
 
-		if (this.end != null && !(calendar.equalsIgnoreTime(this.end) || calendar.before(this.end))) {
-		    eval = eval && false;
+		private void init(Body body) {
+			this.range = new Range();
+			this.body = body;
+
+			for (int w = 0; w < 6; w++) {
+				Row row = body.row();
+				for (int d = 0; d < 7; d++) {
+					row.cell().onClick(new ClickHandler() {
+
+						@Override
+						public void onClick(ClickEvent event) {
+							Cell cell = (Cell)event.getSource();
+							Calendar calendar = Days.this.toCalendar(cell);
+							if (Days.this.range.eval(calendar) && !cell.getStyleName().contains("off")) {
+								Days.this.selectDate(calendar, cell);
+								MonthPanel.this.fireEvent(new Event<Date>(Type.SELECTION, MonthPanel.this, calendar.toDate()));
+							}
+						}
+					}).onMouseDown(new MouseDownHandler() {
+
+						@Override
+						public void onMouseDown(MouseDownEvent event) {
+							MonthPanel.this.selected = true;
+						}
+					});
+				}
+			}
+
+			this.renderMonth(MonthPanel.this.currentDate);
 		}
 
-		return eval;
-	    }
+		Calendar toCalendar(Cell cell) {
+			return Calendar.time(Long.valueOf(cell.getAttribute("date-time")));
+		}
+
+		public Days set(Calendar calendar) {
+			if (!this.range.currentMonth.equals(calendar.getMonth())) {
+				this.renderMonth(calendar);
+				return this;
+			}
+
+			// find cell to select
+			for (Widget widget : this.body.getChildren()) {
+				Row row = (Row)widget;
+				Cell cell = row.cell(calendar.getDay().ordinal());
+				Calendar cellCalendar = this.toCalendar(cell);
+
+				if (cellCalendar.equalsIgnoreTime(calendar)) {
+					this.selectDate(calendar, cell);
+					break;
+				}
+			}
+
+			return this;
+		}
+
+		void selectDate(Calendar calendar, Cell cell) {
+			// remove active from last active day
+			if (this.currentDay != null) {
+				this.decorate(this.currentDay, this.toCalendar(this.currentDay));
+			}
+
+			cell.setStyleName("active");
+			this.currentDay = cell;
+		}
+
+		void renderMonth(Calendar base) {
+			Calendar runner = Calendar.clone(base).moveToFirstDayOfMonth();
+
+			this.range.currentMonth = runner.getMonth();
+
+			// Adjust calendar to the first day of week (Sunday)
+			while (!runner.getDay().equals(WeekDay.SUNDAY)) {
+				runner.addDays(-1);
+			}
+
+			for (int w = 0; w < 6; w++) {
+				Row row = this.body.row(w);
+				for (int d = 0; d < 7; d++) {
+					Cell cell = row.cell(d).text(String.valueOf(runner.getDate())).attribute("date-time", String.valueOf(runner.getTime()));
+
+					this.decorate(cell, runner);
+
+					runner.addDays(1);
+				}
+			}
+		}
+
+		void decorate(Cell cell, Calendar runner) {
+			if (!range.eval(runner)) {
+				cell.setStyleName("off disabled");
+				return;
+			}
+
+			cell.setStyleName("available in-range");
+		}
+
+		class Range {
+
+			private Calendar start;
+
+			private Calendar end;
+
+			private Month    currentMonth;
+
+			void start(Calendar start) {
+				if (start == null) {
+					return;
+				}
+				this.start = start.clearTime();
+			}
+
+			void end(Calendar end) {
+				if (end == null) {
+					return;
+				}
+				this.end = end.clearTime();
+			}
+
+			public boolean eval(Calendar calendar) {
+				boolean eval = true;
+
+				if (!calendar.getMonth().equals(this.currentMonth)) {
+					return false;
+				}
+
+				if (this.start == null && this.end == null) {
+					return true;
+				}
+
+				if (this.start != null && !(calendar.equalsIgnoreTime(this.start) || calendar.after(this.start))) {
+					eval = false;
+				}
+
+				if (this.end != null && !(calendar.equalsIgnoreTime(this.end) || calendar.before(this.end))) {
+					eval = eval && false;
+				}
+
+				return eval;
+			}
+		}
 	}
-    }
 
-    class Selector {
+	class Selector {
 
-	private Cell       previous;
+		private Cell       previous;
 
-	private Cell       month;
+		private Cell       month;
 
-	private Cell       next;
+		private Cell       next;
 
-	private DateFormat monthNameFormat = DateFormat.YEAR_MONTH_ABBR;
+		private DateFormat monthNameFormat = DateFormat.YEAR_MONTH_ABBR;
 
-	public Selector(Header header) {
-	    this.init(header);
+		public Selector(Header header) {
+			this.init(header);
+		}
+
+		void onPrevious(ClickHandler handler) {
+			this.previous.onClick(handler);
+		}
+
+		void onNext(ClickHandler handler) {
+			this.next.onClick(handler);
+		}
+
+		private void init(Header header) {
+			Calendar now = Calendar.now();
+			Row controls = header.row();
+
+			this.previous = controls.cell().onMouseDown(this.selection);
+			Widgets.setIcon(this.previous, Icon.CHEVRON_LEFT);
+
+			this.month = controls.cell().colspan(5);
+			this.set(now);
+
+			this.next = controls.cell().onMouseDown(this.selection);
+			Widgets.setIcon(this.next, Icon.CHEVRON_RIGHT);
+
+			Row monthDays = header.row();
+
+			JSONCollection<String> monthDayNames = Calendar.getMonthDayNames(now, WeekDay.SUNDAY);
+			for (int i = 0; i < monthDayNames.size(); i++) {
+				monthDays.cell().text(monthDayNames.get(i));
+			}
+		}
+
+		private MouseDownHandler selection = new MouseDownHandler() {
+
+			                                   @Override
+			                                   public void onMouseDown(MouseDownEvent event) {
+				                                   MonthPanel.this.selected = true;
+			                                   }
+		                                   };
+
+		Selector set(Calendar calendar) {
+			this.month.text(calendar.toString(this.monthNameFormat));
+			return this;
+		}
 	}
 
-	void onPrevious(ClickHandler handler) {
-	    this.previous.onClick(handler);
+	enum Type
+	    implements EventType {
+		SELECTION;
 	}
-
-	void onNext(ClickHandler handler) {
-	    this.next.onClick(handler);
-	}
-
-	private void init(Header header) {
-	    Calendar now = Calendar.now();
-	    Row controls = header.row();
-
-	    this.previous = controls.cell().onMouseDown(this.selection);
-	    Widgets.setIcon(this.previous, Icon.CHEVRON_LEFT);
-
-	    this.month = controls.cell().colspan(5);
-	    this.set(now);
-
-	    this.next = controls.cell().onMouseDown(this.selection);
-	    Widgets.setIcon(this.next, Icon.CHEVRON_RIGHT);
-
-	    Row monthDays = header.row();
-
-	    JSONCollection<String> monthDayNames = Calendar.getMonthDayNames(now, WeekDay.SUNDAY);
-	    for (int i = 0; i < monthDayNames.size(); i++) {
-		monthDays.cell().text(monthDayNames.get(i));
-	    }
-	}
-
-	private MouseDownHandler selection = new MouseDownHandler() {
-
-		                               @Override
-		                               public void onMouseDown(MouseDownEvent event) {
-		                                   MonthPanel.this.selected = true;
-		                               }
-	                                   };
-
-	Selector set(Calendar calendar) {
-	    this.month.text(calendar.toString(this.monthNameFormat));
-	    return this;
-	}
-    }
-
-    enum Type
-	implements EventType {
-	SELECTION;
-    }
 }

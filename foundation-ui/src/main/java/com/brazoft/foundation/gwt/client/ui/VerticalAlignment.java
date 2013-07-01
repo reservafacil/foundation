@@ -16,9 +16,9 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 public enum VerticalAlignment {
-    BOTTOM, MIDDLE, TOP;
+	BOTTOM, MIDDLE, TOP;
 
-    public String toString() {
-	return this.name().toLowerCase();
-    }
+	public String toString() {
+		return this.name().toLowerCase();
+	}
 }

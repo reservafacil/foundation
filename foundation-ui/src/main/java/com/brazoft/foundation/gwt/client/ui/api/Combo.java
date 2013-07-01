@@ -21,42 +21,42 @@ import com.google.gwt.dom.client.OptionElement;
 public abstract class Combo<C extends Combo<C, V>, V>
     extends Select2<C, V> {
 
-    public Combo() {
-	super(false);
-    }
-
-    protected String getSelection() {
-	return this.getSelection(this.getId());
-    }
-
-    protected C select(String value) {
-
-	for (OptionElement option : this.options()) {
-	    option.setSelected(option.getValue().equals(value));
+	public Combo() {
+		super(false);
 	}
 
-	this.select(this.getId(), value);
+	protected String getSelection() {
+		return this.getSelection(this.getId());
+	}
 
-	return (C)this;
-    }
+	protected C select(String value) {
 
-    public C hideSearch() {
-	this.minimumResultsForSearch(-1);
-	return (C)this;
-    }
+		for (OptionElement option : this.options()) {
+			option.setSelected(option.getValue().equals(value));
+		}
 
-    public C minimumResultsForSearch(int minimum) {
-	this.getOptions().put("minimumResultsForSearch", minimum);
-	return this.update();
-    }
+		this.select(this.getId(), value);
 
-    public C selectOnBlur(boolean select) {
-	this.getOptions().put("selectOnBlur", select);
-	return this.update();
-    }
+		return (C)this;
+	}
 
-    public C allowDeselection(boolean allow) {
-	this.getOptions().put("allow_single_deselect", allow);
-	return (C)this;
-    }
+	public C hideSearch() {
+		this.minimumResultsForSearch(-1);
+		return (C)this;
+	}
+
+	public C minimumResultsForSearch(int minimum) {
+		this.getOptions().put("minimumResultsForSearch", minimum);
+		return this.update();
+	}
+
+	public C selectOnBlur(boolean select) {
+		this.getOptions().put("selectOnBlur", select);
+		return this.update();
+	}
+
+	public C allowDeselection(boolean allow) {
+		this.getOptions().put("allow_single_deselect", allow);
+		return (C)this;
+	}
 }

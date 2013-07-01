@@ -23,41 +23,41 @@ public final class LabeledText
     extends Bootstrap<LabeledText>
     implements HasText<LabeledText> {
 
-    private StyleChooser<LabeledText> chooser = new StyleChooser<LabeledText>("label-success", "label-warning", "label-important",
-	                                                                      "label-info", "label-inverse");
+	private StyleChooser<LabeledText> chooser = new StyleChooser<LabeledText>("label-success", "label-warning", "label-important",
+	                                                                          "label-info", "label-inverse");
 
-    public LabeledText() {
-	super(ElementResolver.span());
-	this.className("label");
-    }
+	public LabeledText() {
+		super(ElementResolver.span());
+		this.className("label");
+	}
 
-    public LabeledText success() {
-	return this.chooser.className(this, "label-success");
-    }
+	public LabeledText success() {
+		return this.chooser.className(this, "label-success");
+	}
 
-    public LabeledText warning() {
-	return this.chooser.className(this, "label-warning");
-    }
+	public LabeledText warning() {
+		return this.chooser.className(this, "label-warning");
+	}
 
-    public LabeledText important() {
-	return this.chooser.className(this, "label-important");
-    }
+	public LabeledText important() {
+		return this.chooser.className(this, "label-important");
+	}
 
-    public LabeledText info() {
-	return this.chooser.className(this, "label-info");
-    }
+	public LabeledText info() {
+		return this.chooser.className(this, "label-info");
+	}
 
-    public LabeledText inverse() {
-	return this.chooser.className(this, "label-inverse");
-    }
+	public LabeledText inverse() {
+		return this.chooser.className(this, "label-inverse");
+	}
 
-    @Override
-    public LabeledText text(String text) {
-	return Component.Util.setHTML(this, text);
-    }
+	@Override
+	public LabeledText text(String text) {
+		return Component.Util.setHTML(this, text);
+	}
 
-    @Override
-    public String getText() {
-	return Component.Util.getHTML(this);
-    }
+	@Override
+	public String getText() {
+		return Component.Util.getHTML(this);
+	}
 }

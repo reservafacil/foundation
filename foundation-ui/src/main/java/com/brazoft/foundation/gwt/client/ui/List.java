@@ -24,52 +24,52 @@ import com.google.gwt.user.client.ui.Widget;
 public final class List
     extends Bootstrap<List> {
 
-    public List(ListOptions option) {
-	super(option.resolveElement());
-    }
-
-    public List unstyled() {
-	return this.className("unstyled");
-    }
-
-    public List inline() {
-	return this.className("inline");
-    }
-
-    public List item(String value) {
-	return this.add(new ListItem(value));
-    }
-
-    public List items(String... values) {
-	for (String value : values) {
-	    this.item(value);
+	public List(ListOptions option) {
+		super(option.resolveElement());
 	}
 
-	return this;
-    }
-
-    public List add(List add) {
-	return this.add(add);
-    }
-
-    static class ListItem
-	extends Widget {
-
-	public ListItem(String text) {
-	    this.setElement(ElementResolver.li());
-	    Component.Util.setHTML(this, text);
+	public List unstyled() {
+		return this.className("unstyled");
 	}
-    }
 
-    public enum ListOptions {
-	UNORDERED, ORDERED;
-
-	Element resolveElement() {
-	    if (this.equals(UNORDERED)) {
-		return ElementResolver.ul();
-	    }
-
-	    return ElementResolver.ol();
+	public List inline() {
+		return this.className("inline");
 	}
-    }
+
+	public List item(String value) {
+		return this.add(new ListItem(value));
+	}
+
+	public List items(String... values) {
+		for (String value : values) {
+			this.item(value);
+		}
+
+		return this;
+	}
+
+	public List add(List add) {
+		return this.add(add);
+	}
+
+	static class ListItem
+	    extends Widget {
+
+		public ListItem(String text) {
+			this.setElement(ElementResolver.li());
+			Component.Util.setHTML(this, text);
+		}
+	}
+
+	public enum ListOptions {
+		UNORDERED, ORDERED;
+
+		Element resolveElement() {
+			if (this.equals(UNORDERED)) {
+				return ElementResolver.ul();
+			}
+
+			return ElementResolver.ol();
+		}
+	}
 }

@@ -23,37 +23,37 @@ import com.google.gwt.user.client.ui.Widget;
 public final class Description
     extends Bootstrap<Description> {
 
-    public Description() {
-	super(ElementResolver.dl());
-    }
-
-    public Description define(String title, String description) {
-	return this.add(new Title(title)).add(new Definition(description));
-    }
-
-    public Description horizontal() {
-	return this.className("dl-horizontal");
-    }
-
-    public Description vertical() {
-	return this.removeClassName("dl-horizontal");
-    }
-
-    static class Title
-	extends Widget {
-
-	public Title(String text) {
-	    this.setElement(ElementResolver.dt());
-	    Component.Util.setHTML(this, text);
+	public Description() {
+		super(ElementResolver.dl());
 	}
-    }
 
-    static class Definition
-	extends Widget {
-
-	public Definition(String text) {
-	    this.setElement(ElementResolver.dd());
-	    Component.Util.setHTML(this, text);
+	public Description define(String title, String description) {
+		return this.add(new Title(title)).add(new Definition(description));
 	}
-    }
+
+	public Description horizontal() {
+		return this.className("dl-horizontal");
+	}
+
+	public Description vertical() {
+		return this.removeClassName("dl-horizontal");
+	}
+
+	static class Title
+	    extends Widget {
+
+		public Title(String text) {
+			this.setElement(ElementResolver.dt());
+			Component.Util.setHTML(this, text);
+		}
+	}
+
+	static class Definition
+	    extends Widget {
+
+		public Definition(String text) {
+			this.setElement(ElementResolver.dd());
+			Component.Util.setHTML(this, text);
+		}
+	}
 }

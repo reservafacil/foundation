@@ -23,31 +23,31 @@ import com.google.gwt.dom.client.Element;
 public abstract class Bootstrap<B extends Bootstrap<B>>
     extends Component<B> {
 
-    public Bootstrap(Element element) {
-	super(element);
-    }
-
-    public B muted() {
-	return (B)Widgets.muted(this);
-    }
-
-    public B align(Alignment alignment) {
-	return this.className(alignment.className());
-    }
-
-    public B visibleOn(ViewPort... viewPorts) {
-	for (ViewPort viewPort : viewPorts) {
-	    viewPort.visible(this);
+	public Bootstrap(Element element) {
+		super(element);
 	}
 
-	return (B)this;
-    }
-
-    public B hiddenOn(ViewPort... viewPorts) {
-	for (ViewPort viewPort : viewPorts) {
-	    viewPort.hidden(this);
+	public B muted() {
+		return (B)Widgets.muted(this);
 	}
 
-	return (B)this;
-    }
+	public B align(Alignment alignment) {
+		return this.className(alignment.className());
+	}
+
+	public B visibleOn(ViewPort... viewPorts) {
+		for (ViewPort viewPort : viewPorts) {
+			viewPort.visible(this);
+		}
+
+		return (B)this;
+	}
+
+	public B hiddenOn(ViewPort... viewPorts) {
+		for (ViewPort viewPort : viewPorts) {
+			viewPort.hidden(this);
+		}
+
+		return (B)this;
+	}
 }

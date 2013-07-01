@@ -20,7 +20,7 @@ import com.brazoft.foundation.gwt.client.ui.api.LabeledInput;
 public final class LabeledRadioButton
     extends LabeledInput<LabeledRadioButton> {
 
-    public LabeledRadioButton(String name) {
-	super(new RadioButton(name));
-    }
+	public LabeledRadioButton(String name) {
+		super(new RadioButton(name));
+	}
 }

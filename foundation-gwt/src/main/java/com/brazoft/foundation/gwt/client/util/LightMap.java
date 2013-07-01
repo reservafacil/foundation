@@ -1,60 +1,84 @@
 package com.brazoft.foundation.gwt.client.util;
 
+import com.google.gwt.core.client.*;
 import com.google.gwt.jso.*;
 
 public class LightMap
-    extends JSObject {
+    extends JavaScriptObject {
 
-    protected LightMap() {}
+	protected LightMap() {}
 
-    public static final native LightMap create()/*-{
-	                                        return new Object();
-	                                        }-*/;
+	public static final native LightMap create()/*-{
+		return new Object();
+	}-*/;
 
-    public final native int size() /*-{
-	                           return this.length;
-	                           }-*/;
+	public final native int size() /*-{
+		return this.length;
+	}-*/;
 
-    public final native boolean isEmpty() /*-{
-	                                  return this.length == 0;
-	                                  }-*/;
+	public final native boolean isEmpty() /*-{
+		return this.length == 0;
+	}-*/;
 
-    public final native boolean containsValue(String value) /*-{
-	                                                    for ( var key in this) {
-	                                                    if (this[key] === value) {
-	                                                    return true;
-	                                                    }
-	                                                    }
+	public final native boolean containsKey(String key) /*-{
+		return this[key] != undefined;
+	}-*/;
 
-	                                                    return false;
-	                                                    }-*/;
+	public final native boolean containsValue(String value) /*-{
+		for ( var key in this) {
+			if (this[key] === value) {
+				return true;
+			}
+		}
 
-    public final native LightMap remove(String key) /*-{
-	                                            delete this[key];
-	                                            return this;
-	                                            }-*/;
+		return false;
+	}-*/;
 
-    public final native LightMap putAll(LightMap map) /*-{
-	                                              for ( var key in map) {
-	                                              this[key] = map[key];
-	                                              }
-	                                              
-	                                              return this;
-	                                              }-*/;
+	public final native void remove(String key) /*-{
+		delete this[key];
+	}-*/;
 
-    public final LightMap putAll(Collection<Entry> entries) {
-	for (Entry entry : entries) {
-	    this.set(entry.getKey(), entry.getValue());
+	public final native void putAll(LightMap map) /*-{
+		for ( var key in map) {
+			this[key] = map[key];
+		}
+	}-*/;
+
+	public final void putAll(Collection<Entry> entries) {
+		for (Entry entry : entries) {
+			this.put(entry);
+		}
 	}
 
-	return this;
-    }
+	public final void put(Entry entry) {
+		this.put(entry.getKey(), entry.getValue());
+	}
 
-    public final native LightMap clear() /*-{
-	                                 for (var key in this) {
-	                                 delete this[key];
-	                                 }
-	                                 
-	                                 return this;
-	                                 }-*/;
+	public final native void put(String key, String value) /*-{
+		this[key] = value;
+	}-*/;
+	
+	public final native String get(String property) /*-{
+		return this[property];
+	}-*/;
+
+	public final native LightMap clear() /*-{
+		for ( var key in this) {
+			delete this[key];
+		}
+
+		return this;
+	}-*/;
+
+	public final Iterable<String> keys() {
+		return JSIterable.from(this.arrayOfKeys());
+	}
+
+	private final native JsArrayString arrayOfKeys() /*-{
+		var a = new Array();
+		for ( var e in this) {
+			a.push(e);
+		}
+		return a;
+	}-*/;
 }

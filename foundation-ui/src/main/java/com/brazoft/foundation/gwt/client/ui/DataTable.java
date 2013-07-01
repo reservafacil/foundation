@@ -21,7 +21,7 @@ import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 public final class DataTable
     extends Bootstrap<DataTable> {
 
-    public DataTable() {
-	super(ElementResolver.table());
-    }
+	public DataTable() {
+		super(ElementResolver.table());
+	}
 }

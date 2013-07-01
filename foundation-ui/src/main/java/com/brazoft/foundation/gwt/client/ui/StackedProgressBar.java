@@ -21,28 +21,28 @@ import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 public final class StackedProgressBar
     extends Bootstrap<StackedProgressBar> {
 
-    public StackedProgressBar() {
-	super(ElementResolver.div());
-	this.className("progress");
-    }
-
-    public StackedProgressBar category(ProgressCategory category) {
-	return this.add(category);
-    }
-
-    public StackedProgressBar categories(ProgressCategory... categories) {
-	for (ProgressCategory category : categories) {
-	    this.category(category);
+	public StackedProgressBar() {
+		super(ElementResolver.div());
+		this.className("progress");
 	}
 
-	return this;
-    }
+	public StackedProgressBar category(ProgressCategory category) {
+		return this.add(category);
+	}
 
-    public StackedProgressBar show() {
-	return this.visible();
-    }
+	public StackedProgressBar categories(ProgressCategory... categories) {
+		for (ProgressCategory category : categories) {
+			this.category(category);
+		}
 
-    public StackedProgressBar hide() {
-	return this.hidden();
-    }
+		return this;
+	}
+
+	public StackedProgressBar show() {
+		return this.visible();
+	}
+
+	public StackedProgressBar hide() {
+		return this.hidden();
+	}
 }

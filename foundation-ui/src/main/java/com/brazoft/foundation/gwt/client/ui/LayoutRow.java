@@ -29,147 +29,147 @@ import com.google.gwt.user.client.ui.Widget;
 public final class LayoutRow
     extends Bootstrap<LayoutRow> {
 
-    private LayoutRow() {
-	super(ElementResolver.div());
-    }
-
-    LayoutRow(GridOptions option) {
-	this();
-	this.setStyleName(option.rowClass());
-    }
-
-    public LayoutRow(LayoutOptions option) {
-	this();
-	this.setStyleName(option.rowClass());
-    }
-
-    public LayoutCell cell() {
-	LayoutCell cell = new LayoutCell();
-
-	this.add(cell);
-
-	return cell;
-    }
-
-    public class LayoutCell
-	extends Bootstrap<LayoutCell>
-	implements UICell<LayoutCell> {
-
-	private int span;
-
-	private int offset;
-
-	public LayoutCell() {
-	    this(1);
+	private LayoutRow() {
+		super(ElementResolver.div());
 	}
 
-	public LayoutCell(int span) {
-	    super(ElementResolver.div());
-	    this.span(span);
+	LayoutRow(GridOptions option) {
+		this();
+		this.setStyleName(option.rowClass());
 	}
 
-	public LayoutCell span(int span) {
-	    this.removeClassName("span" + this.span);
-	    this.span = span;
-
-	    return this.className("span" + span);
+	public LayoutRow(LayoutOptions option) {
+		this();
+		this.setStyleName(option.rowClass());
 	}
 
-	public LayoutCell offset(int offset) {
-	    this.removeClassName("offset" + this.offset);
-	    this.offset = offset;
+	public LayoutCell cell() {
+		LayoutCell cell = new LayoutCell();
 
-	    return this.className("offset" + offset);
+		this.add(cell);
+
+		return cell;
 	}
 
-	public LayoutCell add(Widget add) {
-	    return super.add(add);
-	}
+	public class LayoutCell
+	    extends Bootstrap<LayoutCell>
+	    implements UICell<LayoutCell> {
 
-	@Override
-	public LayoutCell detachChildren() {
-	    return super.detachChildren();
-	}
+		private int span;
 
-	@Override
-	public LayoutCell text(String text) {
-	    return Component.Util.setHTML(this, text);
-	}
+		private int offset;
 
-	@Override
-	public String getText() {
-	    return Component.Util.getHTML(this);
-	}
+		public LayoutCell() {
+			this(1);
+		}
 
-	@Override
-	public LayoutCell onClick(ClickHandler handler) {
-	    return Events.on(this, handler);
-	}
+		public LayoutCell(int span) {
+			super(ElementResolver.div());
+			this.span(span);
+		}
 
-	@Override
-	public LayoutCell onDoubleClick(DoubleClickHandler handler) {
-	    return Events.on(this, handler);
-	}
+		public LayoutCell span(int span) {
+			this.removeClassName("span" + this.span);
+			this.span = span;
 
-	@Override
-	public LayoutCell onMouseDown(MouseDownHandler handler) {
-	    return Events.on(this, handler);
-	}
+			return this.className("span" + span);
+		}
 
-	@Override
-	public LayoutCell onMouseMove(MouseMoveHandler handler) {
-	    return Events.on(this, handler);
-	}
+		public LayoutCell offset(int offset) {
+			this.removeClassName("offset" + this.offset);
+			this.offset = offset;
 
-	@Override
-	public LayoutCell onMouseOut(MouseOutHandler handler) {
-	    return Events.on(this, handler);
-	}
+			return this.className("offset" + offset);
+		}
 
-	@Override
-	public LayoutCell onMouseOver(MouseOverHandler handler) {
-	    return Events.on(this, handler);
-	}
+		public LayoutCell add(Widget add) {
+			return super.add(add);
+		}
 
-	@Override
-	public LayoutCell onMouseUp(MouseUpHandler handler) {
-	    return Events.on(this, handler);
-	}
+		@Override
+		public LayoutCell detachChildren() {
+			return super.detachChildren();
+		}
 
-	@Override
-	public LayoutCell onMouseWheel(MouseWheelHandler handler) {
-	    return Events.on(this, handler);
-	}
+		@Override
+		public LayoutCell text(String text) {
+			return Component.Util.setHTML(this, text);
+		}
 
-	@Override
-	public LayoutCell colspan(int colspan) {
-	    GWT.log("LayoutRow does not support colspan(). Using span() instead.");
-	    this.span(this.span * colspan);
-	    return this;
-	}
+		@Override
+		public String getText() {
+			return Component.Util.getHTML(this);
+		}
 
-	@Override
-	public LayoutCell rowspan(int rowspan) {
-	    GWT.log("LayoutRow does not support rowspan(). Using offset() instead.");
-	    this.offset(this.span * rowspan);
-	    return this;
-	}
+		@Override
+		public LayoutCell onClick(ClickHandler handler) {
+			return Events.on(this, handler);
+		}
 
-	@Override
-	public LayoutCell icon(Icon icon) {
-	    Widgets.setIcon(this, icon);
-	    return this;
-	}
+		@Override
+		public LayoutCell onDoubleClick(DoubleClickHandler handler) {
+			return Events.on(this, handler);
+		}
 
-	@Override
-	public LayoutCell verticalAlign(VerticalAlignment vAlign) {
-	    if (VerticalAlignment.MIDDLE.equals(vAlign)) {
-		this.style().verticalAlign(50, Unit.PCT);
-	    } else if (VerticalAlignment.BOTTOM.equals(vAlign)) {
-		this.style().verticalAlign(100, Unit.PCT);
-	    }
+		@Override
+		public LayoutCell onMouseDown(MouseDownHandler handler) {
+			return Events.on(this, handler);
+		}
 
-	    return this;
+		@Override
+		public LayoutCell onMouseMove(MouseMoveHandler handler) {
+			return Events.on(this, handler);
+		}
+
+		@Override
+		public LayoutCell onMouseOut(MouseOutHandler handler) {
+			return Events.on(this, handler);
+		}
+
+		@Override
+		public LayoutCell onMouseOver(MouseOverHandler handler) {
+			return Events.on(this, handler);
+		}
+
+		@Override
+		public LayoutCell onMouseUp(MouseUpHandler handler) {
+			return Events.on(this, handler);
+		}
+
+		@Override
+		public LayoutCell onMouseWheel(MouseWheelHandler handler) {
+			return Events.on(this, handler);
+		}
+
+		@Override
+		public LayoutCell colspan(int colspan) {
+			GWT.log("LayoutRow does not support colspan(). Using span() instead.");
+			this.span(this.span * colspan);
+			return this;
+		}
+
+		@Override
+		public LayoutCell rowspan(int rowspan) {
+			GWT.log("LayoutRow does not support rowspan(). Using offset() instead.");
+			this.offset(this.span * rowspan);
+			return this;
+		}
+
+		@Override
+		public LayoutCell icon(Icon icon) {
+			Widgets.setIcon(this, icon);
+			return this;
+		}
+
+		@Override
+		public LayoutCell verticalAlign(VerticalAlignment vAlign) {
+			if (VerticalAlignment.MIDDLE.equals(vAlign)) {
+				this.style().verticalAlign(50, Unit.PCT);
+			} else if (VerticalAlignment.BOTTOM.equals(vAlign)) {
+				this.style().verticalAlign(100, Unit.PCT);
+			}
+
+			return this;
+		}
 	}
-    }
 }

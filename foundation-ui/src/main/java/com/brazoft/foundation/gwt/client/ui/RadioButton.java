@@ -22,54 +22,54 @@ public final class RadioButton
     extends Input<RadioButton, String>
     implements UISelection<RadioButton, String> {
 
-    public RadioButton(String name) {
-	super(ElementResolver.radio(name));
-    }
+	public RadioButton(String name) {
+		super(ElementResolver.radio(name));
+	}
 
-    public RadioButton checked(Boolean value) {
-	this.element().setChecked(value);
-	return this;
-    }
+	public RadioButton checked(Boolean value) {
+		this.element().setChecked(value);
+		return this;
+	}
 
-    public Boolean isChecked() {
-	return this.element().isChecked();
-    }
+	public Boolean isChecked() {
+		return this.element().isChecked();
+	}
 
-    public RadioButton value(String value) {
-	this.element().setValue(value);
-	return this;
-    }
+	public RadioButton value(String value) {
+		this.element().setValue(value);
+		return this;
+	}
 
-    @Override
-    public RadioButton clear() {
-	return this.checked(false);
-    }
+	@Override
+	public RadioButton clear() {
+		return this.checked(false);
+	}
 
-    public String getValue() {
-	return this.element().getValue();
-    }
+	public String getValue() {
+		return this.element().getValue();
+	}
 
-    @Override
-    public RadioButton editable() {
-	this.element().setDisabled(false);
-	return this;
-    }
+	@Override
+	public RadioButton editable() {
+		this.element().setDisabled(false);
+		return this;
+	}
 
-    @Override
-    public RadioButton readonly() {
-	this.element().setDisabled(true);
-	return this;
-    }
+	@Override
+	public RadioButton readonly() {
+		this.element().setDisabled(true);
+		return this;
+	}
 
-    @Override
-    public boolean isReadOnly() {
-	return this.element().isDisabled();
-    }
+	@Override
+	public boolean isReadOnly() {
+		return this.element().isDisabled();
+	}
 
-    @Override
-    public RadioButton placeholder(String placeholder) {
-	Widgets.adaptPlaceholder(this, placeholder, "radio");
+	@Override
+	public RadioButton placeholder(String placeholder) {
+		Widgets.adaptPlaceholder(this, placeholder, "radio");
 
-	return this;
-    }
+		return this;
+	}
 }

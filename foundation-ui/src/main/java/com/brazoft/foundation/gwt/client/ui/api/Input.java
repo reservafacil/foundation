@@ -32,177 +32,177 @@ public abstract class Input<I extends Input<I, V>, V>
     extends Bootstrap<I>
     implements UIInput<I, V>, HasClickHandlers<I>, HasMouseHandlers<I>, HasKeyHandlers<I>, HasFocusHandlers<I>, HasChangeHandlers<I> {
 
-    private InputElement       element;
+	private InputElement       element;
 
-    private boolean            required;
+	private boolean            required;
 
-    private static TextBoxImpl impl = GWT.create(TextBoxImpl.class);
+	private static TextBoxImpl impl = GWT.create(TextBoxImpl.class);
 
-    public Input(InputElement element) {
-	super(element);
-	this.element = element;
-    }
-
-    protected InputElement element() {
-	return this.element;
-    }
-
-    @Override
-    public I onClick(ClickHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    @Override
-    public I onDoubleClick(DoubleClickHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    @Override
-    public I onFocus(FocusHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    @Override
-    public I onBlur(BlurHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    public I onChange(ChangeHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    @Override
-    public I onKeyPress(KeyPressHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    @Override
-    public I onKeyDown(KeyDownHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    @Override
-    public I onKeyUp(KeyUpHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    @Override
-    public I onMouseDown(MouseDownHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    @Override
-    public I onMouseMove(MouseMoveHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    @Override
-    public I onMouseOut(MouseOutHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    @Override
-    public I onMouseOver(MouseOverHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    @Override
-    public I onMouseUp(MouseUpHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    @Override
-    public I onMouseWheel(MouseWheelHandler handler) {
-	return (I)Events.on(this, handler);
-    }
-
-    public I size(Size size) {
-	switch (size) {
-	    case MINI:
-		return this.className("input-mini");
-	    case SMALL:
-		return this.className("input-small");
-	    case LARGE:
-		return this.className("input-large");
-	    default:
-		break;
+	public Input(InputElement element) {
+		super(element);
+		this.element = element;
 	}
 
-	return this.className("input-medium");
-    }
-
-    public I cursorAt(int index) {
-	this.selectRange(index, 0);
-	return (I)this;
-    }
-
-    public I span(int span) {
-	return this.className("span" + span);
-    }
-
-    public I disable() {
-	this.element.setDisabled(true);
-	return (I)this;
-    }
-
-    public I enable() {
-	this.element.setDisabled(false);
-	return (I)this;
-    }
-
-    @Override
-    public boolean isEditable() {
-	return !this.isReadOnly();
-    }
-
-    public I editable() {
-	this.element.setReadOnly(false);
-	return (I)this;
-    }
-
-    @Override
-    public boolean isReadOnly() {
-	return this.element.isReadOnly();
-    }
-
-    public I readonly() {
-	this.element.setReadOnly(true);
-	return (I)this;
-    }
-
-    @Override
-    public boolean isNullable() {
-	return !this.isRequired();
-    }
-
-    public I nullable() {
-	this.required = false;
-	return (I)this;
-    }
-
-    @Override
-    public boolean isRequired() {
-	return this.required;
-    }
-
-    public I required() {
-	this.required = true;
-	return (I)this;
-    }
-
-    public I placeholder(String placeholder) {
-	return this.attribute("placeholder", placeholder);
-    }
-
-    public I selectAll() {
-	int length = this.element.getValue().length();
-	if (length > 0) {
-	    this.selectRange(0, length);
+	protected InputElement element() {
+		return this.element;
 	}
-	return (I)this;
-    }
 
-    private void selectRange(int index, int length) {
-	Input.impl.setSelectionRange((com.google.gwt.user.client.Element)this.element.cast(), index, length);
-    }
+	@Override
+	public I onClick(ClickHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	@Override
+	public I onDoubleClick(DoubleClickHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	@Override
+	public I onFocus(FocusHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	@Override
+	public I onBlur(BlurHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	public I onChange(ChangeHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	@Override
+	public I onKeyPress(KeyPressHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	@Override
+	public I onKeyDown(KeyDownHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	@Override
+	public I onKeyUp(KeyUpHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	@Override
+	public I onMouseDown(MouseDownHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	@Override
+	public I onMouseMove(MouseMoveHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	@Override
+	public I onMouseOut(MouseOutHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	@Override
+	public I onMouseOver(MouseOverHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	@Override
+	public I onMouseUp(MouseUpHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	@Override
+	public I onMouseWheel(MouseWheelHandler handler) {
+		return (I)Events.on(this, handler);
+	}
+
+	public I size(Size size) {
+		switch (size) {
+			case MINI:
+				return this.className("input-mini");
+			case SMALL:
+				return this.className("input-small");
+			case LARGE:
+				return this.className("input-large");
+			default:
+				break;
+		}
+
+		return this.className("input-medium");
+	}
+
+	public I cursorAt(int index) {
+		this.selectRange(index, 0);
+		return (I)this;
+	}
+
+	public I span(int span) {
+		return this.className("span" + span);
+	}
+
+	public I disable() {
+		this.element.setDisabled(true);
+		return (I)this;
+	}
+
+	public I enable() {
+		this.element.setDisabled(false);
+		return (I)this;
+	}
+
+	@Override
+	public boolean isEditable() {
+		return !this.isReadOnly();
+	}
+
+	public I editable() {
+		this.element.setReadOnly(false);
+		return (I)this;
+	}
+
+	@Override
+	public boolean isReadOnly() {
+		return this.element.isReadOnly();
+	}
+
+	public I readonly() {
+		this.element.setReadOnly(true);
+		return (I)this;
+	}
+
+	@Override
+	public boolean isNullable() {
+		return !this.isRequired();
+	}
+
+	public I nullable() {
+		this.required = false;
+		return (I)this;
+	}
+
+	@Override
+	public boolean isRequired() {
+		return this.required;
+	}
+
+	public I required() {
+		this.required = true;
+		return (I)this;
+	}
+
+	public I placeholder(String placeholder) {
+		return this.attribute("placeholder", placeholder);
+	}
+
+	public I selectAll() {
+		int length = this.element.getValue().length();
+		if (length > 0) {
+			this.selectRange(0, length);
+		}
+		return (I)this;
+	}
+
+	private void selectRange(int index, int length) {
+		Input.impl.setSelectionRange((com.google.gwt.user.client.Element)this.element.cast(), index, length);
+	}
 }

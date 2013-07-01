@@ -20,19 +20,19 @@ import com.brazoft.foundation.gwt.client.ui.api.DecoratedInputText;
 public final class TextBox
     extends DecoratedInputText<TextBox> {
 
-    @Override
-    public InputText input() {
-	return (InputText)super.input();
-    }
+	@Override
+	public InputText input() {
+		return (InputText)super.input();
+	}
 
-    public TextBox mask(String pattern) {
-	this.input().mask(pattern);
+	public TextBox mask(String pattern) {
+		this.input().mask(pattern);
 
-	return this;
-    }
+		return this;
+	}
 
-    public TextBox mask(String placeholder, String pattern) {
-	this.input().mask(pattern, placeholder);
-	return this;
-    }
+	public TextBox mask(String placeholder, String pattern) {
+		this.input().mask(pattern, placeholder);
+		return this;
+	}
 }

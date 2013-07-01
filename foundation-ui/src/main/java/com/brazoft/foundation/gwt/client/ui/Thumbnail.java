@@ -24,59 +24,59 @@ import com.google.gwt.user.client.ui.Widget;
 public final class Thumbnail
     extends Bootstrap<Thumbnail> {
 
-    private HTML<DivElement> thumbnail = HTML.asDiv().className("thumbnail");
+	private HTML<DivElement> thumbnail = HTML.asDiv().className("thumbnail");
 
-    private Caption          caption;
+	private Caption          caption;
 
-    public Thumbnail(Image image) {
-	super(ElementResolver.li());
-	this.add(this.thumbnail.add(image));
-    }
-
-    public Thumbnail span(int span) {
-	return this.className("span" + span);
-    }
-
-    public Caption caption() {
-	if (this.caption == null) {
-	    this.caption = new Caption();
+	public Thumbnail(Image image) {
+		super(ElementResolver.li());
+		this.add(this.thumbnail.add(image));
 	}
 
-	this.add(this.caption);
-
-	return this.caption;
-    }
-
-    public static class Caption
-	extends Bootstrap<Caption>
-	implements HasText<Caption> {
-
-	private Heading heading = new Heading(3);
-
-	public Caption() {
-	    super(ElementResolver.div());
-	    this.className("caption");
-	    this.add(heading);
+	public Thumbnail span(int span) {
+		return this.className("span" + span);
 	}
 
-	@Override
-	public Caption add(Widget add) {
-	    if (add instanceof Paragraph) {
-		return super.add(add);
-	    }
+	public Caption caption() {
+		if (this.caption == null) {
+			this.caption = new Caption();
+		}
 
-	    return super.add(new Paragraph().add(add));
+		this.add(this.caption);
+
+		return this.caption;
 	}
 
-	@Override
-	public String getText() {
-	    return Component.Util.getHTML(this.heading);
-	}
+	public static class Caption
+	    extends Bootstrap<Caption>
+	    implements HasText<Caption> {
 
-	@Override
-	public Caption text(String text) {
-	    this.heading.text(text);
-	    return this;
+		private Heading heading = new Heading(3);
+
+		public Caption() {
+			super(ElementResolver.div());
+			this.className("caption");
+			this.add(heading);
+		}
+
+		@Override
+		public Caption add(Widget add) {
+			if (add instanceof Paragraph) {
+				return super.add(add);
+			}
+
+			return super.add(new Paragraph().add(add));
+		}
+
+		@Override
+		public String getText() {
+			return Component.Util.getHTML(this.heading);
+		}
+
+		@Override
+		public Caption text(String text) {
+			this.heading.text(text);
+			return this;
+		}
 	}
-    }
 }

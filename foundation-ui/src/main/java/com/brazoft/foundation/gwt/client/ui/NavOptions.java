@@ -16,5 +16,5 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 public enum NavOptions {
-    DEFAULT, STACKED;
+	DEFAULT, STACKED;
 }

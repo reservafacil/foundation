@@ -23,31 +23,31 @@ import com.google.gwt.dom.client.Element;
 public final class Code
     extends Bootstrap<Code> {
 
-    public Code() {
-	this(CodeOptions.INLINE);
-    }
-
-    public Code(CodeOptions option) {
-	super(option.resolveElement());
-    }
-
-    public Code source(String source) {
-	return Component.Util.setHTML(this, source);
-    }
-
-    public Code scrollable() {
-	return this.className("pre-scrollable");
-    }
-
-    public enum CodeOptions {
-	INLINE, BLOCK;
-
-	Element resolveElement() {
-	    if (BLOCK.equals(this)) {
-		return ElementResolver.pre();
-	    }
-
-	    return ElementResolver.create("code");
+	public Code() {
+		this(CodeOptions.INLINE);
 	}
-    }
+
+	public Code(CodeOptions option) {
+		super(option.resolveElement());
+	}
+
+	public Code source(String source) {
+		return Component.Util.setHTML(this, source);
+	}
+
+	public Code scrollable() {
+		return this.className("pre-scrollable");
+	}
+
+	public enum CodeOptions {
+		INLINE, BLOCK;
+
+		Element resolveElement() {
+			if (BLOCK.equals(this)) {
+				return ElementResolver.pre();
+			}
+
+			return ElementResolver.create("code");
+		}
+	}
 }

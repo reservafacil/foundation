@@ -25,47 +25,47 @@ public final class SearchForm
     extends Bootstrap<SearchForm>
     implements HasText<SearchForm> {
 
-    private InputText search = new InputText();
+	private InputText search = new InputText();
 
-    private Button    button = new Button(ButtonOptions.BUTTON);
+	private Button    button = new Button(ButtonOptions.BUTTON);
 
-    public SearchForm() {
-	this(SearchOptions.DEFAULT);
-    }
-
-    public SearchForm(SearchOptions option) {
-	super(ElementResolver.form());
-	this.init(option);
-    }
-
-    @Override
-    public String getText() {
-	return this.button.getText();
-    }
-
-    public SearchForm text(String text) {
-	this.button.text(text);
-	return this;
-    }
-
-    private void init(SearchOptions option) {
-	if (option.equals(SearchOptions.DEFAULT)) {
-	    this.add(search);
-	    this.add(button);
-	    return;
+	public SearchForm() {
+		this(SearchOptions.DEFAULT);
 	}
 
-	HTML<DivElement> div = HTML.asDiv();
-	if (option.equals(SearchOptions.APPEND)) {
-	    div.className("input-append").add(search).add(button);
-	    this.add(div);
-	    return;
+	public SearchForm(SearchOptions option) {
+		super(ElementResolver.form());
+		this.init(option);
 	}
 
-	div.className("input-prepend").add(button).add(search);
-    }
+	@Override
+	public String getText() {
+		return this.button.getText();
+	}
 
-    public enum SearchOptions {
-	APPEND, DEFAULT, PREPEND;
-    }
+	public SearchForm text(String text) {
+		this.button.text(text);
+		return this;
+	}
+
+	private void init(SearchOptions option) {
+		if (option.equals(SearchOptions.DEFAULT)) {
+			this.add(search);
+			this.add(button);
+			return;
+		}
+
+		HTML<DivElement> div = HTML.asDiv();
+		if (option.equals(SearchOptions.APPEND)) {
+			div.className("input-append").add(search).add(button);
+			this.add(div);
+			return;
+		}
+
+		div.className("input-prepend").add(button).add(search);
+	}
+
+	public enum SearchOptions {
+		APPEND, DEFAULT, PREPEND;
+	}
 }

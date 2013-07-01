@@ -20,7 +20,7 @@ import com.brazoft.foundation.gwt.client.ui.api.LabeledInput;
 public final class LabeledCheckBox
     extends LabeledInput<LabeledCheckBox> {
 
-    public LabeledCheckBox() {
-	super(new CheckBox());
-    }
+	public LabeledCheckBox() {
+		super(new CheckBox());
+	}
 }

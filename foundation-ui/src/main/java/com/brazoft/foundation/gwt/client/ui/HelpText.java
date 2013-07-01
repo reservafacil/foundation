@@ -24,40 +24,40 @@ public final class HelpText
     extends Bootstrap<HelpText>
     implements HasText<HelpText> {
 
-    private Emphasis container = new Emphasis(EmphasisOptions.SMALL);
+	private Emphasis container = new Emphasis(EmphasisOptions.SMALL);
 
-    public HelpText() {
-	this(HelpOptions.BLOCK);
-    }
-
-    public HelpText(HelpOptions option) {
-	super(ElementResolver.div());
-	this.className(option.className()).add(this.container);
-    }
-
-    @Override
-    public HelpText text(String text) {
-	this.container.text(text);
-	return this;
-    }
-
-    @Override
-    public String getText() {
-	return this.container.getText();
-    }
-
-    public enum HelpOptions {
-	BLOCK, INLINE;
-
-	String className() {
-	    switch (this) {
-		case BLOCK:
-		    return "help-block";
-		default:
-		    break;
-	    }
-
-	    return "help-inline";
+	public HelpText() {
+		this(HelpOptions.BLOCK);
 	}
-    }
+
+	public HelpText(HelpOptions option) {
+		super(ElementResolver.div());
+		this.className(option.className()).add(this.container);
+	}
+
+	@Override
+	public HelpText text(String text) {
+		this.container.text(text);
+		return this;
+	}
+
+	@Override
+	public String getText() {
+		return this.container.getText();
+	}
+
+	public enum HelpOptions {
+		BLOCK, INLINE;
+
+		String className() {
+			switch (this) {
+				case BLOCK:
+					return "help-block";
+				default:
+					break;
+			}
+
+			return "help-inline";
+		}
+	}
 }

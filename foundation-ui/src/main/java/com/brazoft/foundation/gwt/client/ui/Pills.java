@@ -27,222 +27,222 @@ import com.google.gwt.event.dom.client.*;
 public final class Pills
     extends Bootstrap<Pills> {
 
-    public Pills() {
-	this(NavOptions.DEFAULT);
-    }
-
-    public Pills(NavOptions option) {
-	super(ElementResolver.ul());
-	this.className("nav nav-pills");
-	if (option.equals(NavOptions.STACKED)) {
-	    this.className("nav-stacked");
-	}
-    }
-
-    public PillItem dropItem(DropItems items) {
-	return this.dropItem("", items);
-    }
-
-    public PillItem dropItem(String label, DropItems items) {
-	return this.newItem().toggle().text(label).add(items).className("dropdown");
-    }
-
-    public PillItem item() {
-	return this.item("");
-    }
-
-    public PillItem item(String label) {
-	return this.newItem().link().text(label);
-    }
-
-    PillItem newItem() {
-	PillItem item = new PillItem();
-	this.add(item);
-
-	return item;
-    }
-
-    public static class PillItem
-	extends Bootstrap<PillItem>
-	implements HasText<PillItem>, HasClickHandlers<PillItem>, HasMouseHandlers<PillItem>, HasKeyHandlers<PillItem>,
-	HasFocusHandlers<PillItem> {
-
-	private HTML<AnchorElement> link;
-
-	private ToggleButton        toggle;
-
-	public PillItem() {
-	    super(ElementResolver.li());
+	public Pills() {
+		this(NavOptions.DEFAULT);
 	}
 
-	public PillItem icon(Icon icon) {
-	    if (link != null)
-		Widgets.setIcon(this.link, icon);
-	    if (toggle != null)
-		Widgets.setIcon(toggle, icon);
-	    return this;
+	public Pills(NavOptions option) {
+		super(ElementResolver.ul());
+		this.className("nav nav-pills");
+		if (option.equals(NavOptions.STACKED)) {
+			this.className("nav-stacked");
+		}
 	}
 
-	@Override
-	public PillItem onFocus(FocusHandler handler) {
-	    if (link != null)
-		link.onFocus(handler);
-	    if (toggle != null)
-		toggle.onFocus(handler);
-	    return this;
+	public PillItem dropItem(DropItems items) {
+		return this.dropItem("", items);
 	}
 
-	@Override
-	public PillItem onBlur(BlurHandler handler) {
-	    if (link != null)
-		link.onBlur(handler);
-	    if (toggle != null)
-		toggle.onBlur(handler);
-	    return this;
+	public PillItem dropItem(String label, DropItems items) {
+		return this.newItem().toggle().text(label).add(items).className("dropdown");
 	}
 
-	@Override
-	public PillItem onKeyPress(KeyPressHandler handler) {
-	    if (link != null)
-		link.onKeyPress(handler);
-	    if (toggle != null)
-		toggle.onKeyPress(handler);
-	    return this;
+	public PillItem item() {
+		return this.item("");
 	}
 
-	@Override
-	public PillItem onKeyDown(KeyDownHandler handler) {
-	    if (link != null)
-		link.onKeyDown(handler);
-	    if (toggle != null)
-		toggle.onKeyDown(handler);
-	    return this;
+	public PillItem item(String label) {
+		return this.newItem().link().text(label);
 	}
 
-	@Override
-	public PillItem onKeyUp(KeyUpHandler handler) {
-	    if (link != null)
-		link.onKeyUp(handler);
-	    if (toggle != null)
-		toggle.onKeyUp(handler);
-	    return this;
+	PillItem newItem() {
+		PillItem item = new PillItem();
+		this.add(item);
+
+		return item;
 	}
 
-	@Override
-	public PillItem onMouseDown(MouseDownHandler handler) {
-	    if (link != null)
-		link.onMouseDown(handler);
-	    if (toggle != null)
-		toggle.onMouseDown(handler);
-	    return this;
+	public static class PillItem
+	    extends Bootstrap<PillItem>
+	    implements HasText<PillItem>, HasClickHandlers<PillItem>, HasMouseHandlers<PillItem>, HasKeyHandlers<PillItem>,
+	    HasFocusHandlers<PillItem> {
+
+		private HTML<AnchorElement> link;
+
+		private ToggleButton        toggle;
+
+		public PillItem() {
+			super(ElementResolver.li());
+		}
+
+		public PillItem icon(Icon icon) {
+			if (link != null)
+				Widgets.setIcon(this.link, icon);
+			if (toggle != null)
+				Widgets.setIcon(toggle, icon);
+			return this;
+		}
+
+		@Override
+		public PillItem onFocus(FocusHandler handler) {
+			if (link != null)
+				link.onFocus(handler);
+			if (toggle != null)
+				toggle.onFocus(handler);
+			return this;
+		}
+
+		@Override
+		public PillItem onBlur(BlurHandler handler) {
+			if (link != null)
+				link.onBlur(handler);
+			if (toggle != null)
+				toggle.onBlur(handler);
+			return this;
+		}
+
+		@Override
+		public PillItem onKeyPress(KeyPressHandler handler) {
+			if (link != null)
+				link.onKeyPress(handler);
+			if (toggle != null)
+				toggle.onKeyPress(handler);
+			return this;
+		}
+
+		@Override
+		public PillItem onKeyDown(KeyDownHandler handler) {
+			if (link != null)
+				link.onKeyDown(handler);
+			if (toggle != null)
+				toggle.onKeyDown(handler);
+			return this;
+		}
+
+		@Override
+		public PillItem onKeyUp(KeyUpHandler handler) {
+			if (link != null)
+				link.onKeyUp(handler);
+			if (toggle != null)
+				toggle.onKeyUp(handler);
+			return this;
+		}
+
+		@Override
+		public PillItem onMouseDown(MouseDownHandler handler) {
+			if (link != null)
+				link.onMouseDown(handler);
+			if (toggle != null)
+				toggle.onMouseDown(handler);
+			return this;
+		}
+
+		@Override
+		public PillItem onMouseMove(MouseMoveHandler handler) {
+			if (link != null)
+				link.onMouseMove(handler);
+			if (toggle != null)
+				toggle.onMouseMove(handler);
+			return this;
+		}
+
+		@Override
+		public PillItem onMouseOut(MouseOutHandler handler) {
+			if (link != null)
+				link.onMouseOut(handler);
+			if (toggle != null)
+				toggle.onMouseOut(handler);
+			return this;
+		}
+
+		@Override
+		public PillItem onMouseOver(MouseOverHandler handler) {
+			if (link != null)
+				link.onMouseOver(handler);
+			if (toggle != null)
+				toggle.onMouseOver(handler);
+			return this;
+		}
+
+		@Override
+		public PillItem onMouseUp(MouseUpHandler handler) {
+			if (link != null)
+				link.onMouseUp(handler);
+			if (toggle != null)
+				toggle.onMouseUp(handler);
+			return this;
+		}
+
+		@Override
+		public PillItem onMouseWheel(MouseWheelHandler handler) {
+			if (link != null)
+				link.onMouseWheel(handler);
+			if (toggle != null)
+				toggle.onMouseWheel(handler);
+			return this;
+		}
+
+		@Override
+		public PillItem onClick(ClickHandler handler) {
+			if (link != null)
+				link.onClick(handler);
+			if (toggle != null)
+				toggle.onClick(handler);
+			return this;
+		}
+
+		@Override
+		public PillItem onDoubleClick(DoubleClickHandler handler) {
+			if (link != null)
+				link.onDoubleClick(handler);
+			if (toggle != null)
+				toggle.onDoubleClick(handler);
+			return this;
+		}
+
+		public PillItem activate() {
+			return Widgets.activateClass(this);
+		}
+
+		PillItem link() {
+			return this.link("");
+		}
+
+		PillItem link(String id) {
+			this.link = HTML.asAnchor("#" + id).attribute("data-toggle", "tab");
+
+			return this.add(this.link);
+		}
+
+		PillItem toggle() {
+			this.toggle = new ToggleButton();
+
+			return this.add(this.toggle);
+		}
+
+		public PillItem disable() {
+			return this.className("disabled");
+		}
+
+		@Override
+		public PillItem text(String text) {
+			if (link != null) {
+				this.link.text(text);
+			}
+			if (toggle != null) {
+				this.toggle.text(text);
+			}
+
+			return this;
+		}
+
+		@Override
+		public String getText() {
+			if (this.toggle != null) {
+				this.toggle.getText();
+			}
+
+			return this.link.getText();
+		}
 	}
-
-	@Override
-	public PillItem onMouseMove(MouseMoveHandler handler) {
-	    if (link != null)
-		link.onMouseMove(handler);
-	    if (toggle != null)
-		toggle.onMouseMove(handler);
-	    return this;
-	}
-
-	@Override
-	public PillItem onMouseOut(MouseOutHandler handler) {
-	    if (link != null)
-		link.onMouseOut(handler);
-	    if (toggle != null)
-		toggle.onMouseOut(handler);
-	    return this;
-	}
-
-	@Override
-	public PillItem onMouseOver(MouseOverHandler handler) {
-	    if (link != null)
-		link.onMouseOver(handler);
-	    if (toggle != null)
-		toggle.onMouseOver(handler);
-	    return this;
-	}
-
-	@Override
-	public PillItem onMouseUp(MouseUpHandler handler) {
-	    if (link != null)
-		link.onMouseUp(handler);
-	    if (toggle != null)
-		toggle.onMouseUp(handler);
-	    return this;
-	}
-
-	@Override
-	public PillItem onMouseWheel(MouseWheelHandler handler) {
-	    if (link != null)
-		link.onMouseWheel(handler);
-	    if (toggle != null)
-		toggle.onMouseWheel(handler);
-	    return this;
-	}
-
-	@Override
-	public PillItem onClick(ClickHandler handler) {
-	    if (link != null)
-		link.onClick(handler);
-	    if (toggle != null)
-		toggle.onClick(handler);
-	    return this;
-	}
-
-	@Override
-	public PillItem onDoubleClick(DoubleClickHandler handler) {
-	    if (link != null)
-		link.onDoubleClick(handler);
-	    if (toggle != null)
-		toggle.onDoubleClick(handler);
-	    return this;
-	}
-
-	public PillItem activate() {
-	    return Widgets.activateClass(this);
-	}
-
-	PillItem link() {
-	    return this.link("");
-	}
-
-	PillItem link(String id) {
-	    this.link = HTML.asAnchor("#" + id).attribute("data-toggle", "tab");
-
-	    return this.add(this.link);
-	}
-
-	PillItem toggle() {
-	    this.toggle = new ToggleButton();
-
-	    return this.add(this.toggle);
-	}
-
-	public PillItem disable() {
-	    return this.className("disabled");
-	}
-
-	@Override
-	public PillItem text(String text) {
-	    if (link != null) {
-		this.link.text(text);
-	    }
-	    if (toggle != null) {
-		this.toggle.text(text);
-	    }
-
-	    return this;
-	}
-
-	@Override
-	public String getText() {
-	    if (this.toggle != null) {
-		this.toggle.getText();
-	    }
-
-	    return this.link.getText();
-	}
-    }
 }

@@ -12,89 +12,89 @@ import com.google.gwt.event.dom.client.*;
 public abstract class InputPanel<I extends InputPanel<I>>
     extends OutputPanel<I> {
 
-    private ValidationProcess process = new ValidationProcess();
+	private ValidationProcess process = new ValidationProcess();
 
-    public InputPanel(PanelOptions option, int columns) {
-	super(option, columns);
-    }
-
-    public InputItem adopt(InputGroup<?> input) {
-
-	input.hidden().removeFromParent();
-	InputItem item = this.item(input);
-	input.fadeIn();
-
-	return item;
-    }
-
-    public InputItem item(final InputGroup<?> group) {
-	UICell<?> cell = this.cell(group.getColspan());
-
-	if (group.getInput() instanceof Select2) {
-	    group.getInput().style().property("width", cell.style().getWidth());
+	public InputPanel(PanelOptions option, int columns) {
+		super(option, columns);
 	}
 
-	final InputControl control = new InputControl().input(group);
+	public InputItem adopt(InputGroup<?> input) {
 
-	cell.add(group.getLabel().detach());
-	cell.add(control);
+		input.hidden().removeFromParent();
+		InputItem item = this.item(input);
+		input.fadeIn();
 
-	if (group.getInput() instanceof HasFocusHandlers) {
-	    ((HasFocusHandlers<?>)group.getInput()).onBlur(new BlurHandler() {
+		return item;
+	}
 
-		@Override
-		public void onBlur(BlurEvent event) {
-		    group.validate();
+	public InputItem item(final InputGroup<?> group) {
+		UICell<?> cell = this.cell(group.getColspan());
+
+		if (group.getInput() instanceof Select2) {
+			group.getInput().style().property("width", cell.style().getWidth());
 		}
-	    });
+
+		final InputControl control = new InputControl().input(group);
+
+		cell.add(group.getLabel().detach());
+		cell.add(control);
+
+		if (group.getInput() instanceof HasFocusHandlers) {
+			((HasFocusHandlers<?>)group.getInput()).onBlur(new BlurHandler() {
+
+				@Override
+				public void onBlur(BlurEvent event) {
+					group.validate();
+				}
+			});
+		}
+
+		ValidationAction action = new ValidationAction() {
+
+			@Override
+			public void whenValid() {
+				control.reset();
+			}
+
+			@Override
+			public void whenInvalid(String message) {
+				control.error().message(message);
+			}
+		};
+
+		group.action(action);
+		this.process.add(group.getConstraint());
+
+		return new InputItem(cell, control);
 	}
 
-	ValidationAction action = new ValidationAction() {
-
-	    @Override
-	    public void whenValid() {
-		control.reset();
-	    }
-
-	    @Override
-	    public void whenInvalid(String message) {
-		control.error().message(message);
-	    }
-	};
-
-	group.action(action);
-	this.process.add(group.getConstraint());
-
-	return new InputItem(cell, control);
-    }
-
-    public I onValidation(EventHandler<ValidationResult> handler) {
-	this.process.onComplete(handler);
-	return (I)this;
-    }
-
-    public boolean validate() {
-	return this.process.validate();
-    }
-
-    public static class InputItem {
-
-	private UICell<?>    cell;
-
-	private InputControl control;
-
-	InputItem(UICell<?> cell, InputControl control) {
-	    super();
-	    this.cell = cell;
-	    this.control = control;
+	public I onValidation(EventHandler<ValidationResult> handler) {
+		this.process.onComplete(handler);
+		return (I)this;
 	}
 
-	public UICell<?> cell() {
-	    return this.cell;
+	public boolean validate() {
+		return this.process.validate();
 	}
 
-	public InputControl control() {
-	    return this.control;
+	public static class InputItem {
+
+		private UICell<?>    cell;
+
+		private InputControl control;
+
+		InputItem(UICell<?> cell, InputControl control) {
+			super();
+			this.cell = cell;
+			this.control = control;
+		}
+
+		public UICell<?> cell() {
+			return this.cell;
+		}
+
+		public InputControl control() {
+			return this.control;
+		}
 	}
-    }
 }

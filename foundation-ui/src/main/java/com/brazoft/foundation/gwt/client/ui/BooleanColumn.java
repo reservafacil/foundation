@@ -9,39 +9,39 @@ import com.google.gwt.jso.JSObject;
 public final class BooleanColumn<J extends JSObject>
     extends TextGridColumn<BooleanColumn<J>, J> {
 
-    private Format<Boolean> format;
+	private Format<Boolean> format;
 
-    public BooleanColumn() {
-	this(new Format<Boolean>() {
+	public BooleanColumn() {
+		this(new Format<Boolean>() {
 
-	    @Override
-	    public Boolean unformat(String value) {
-		return Boolean.valueOf(value);
-	    }
+			@Override
+			public Boolean unformat(String value) {
+				return Boolean.valueOf(value);
+			}
 
-	    @Override
-	    public String pattern() {
-		return "true|false";
-	    }
+			@Override
+			public String pattern() {
+				return "true|false";
+			}
 
-	    @Override
-	    public String format(Boolean value) {
-		return String.valueOf(value);
-	    }
-	});
-    }
+			@Override
+			public String format(Boolean value) {
+				return String.valueOf(value);
+			}
+		});
+	}
 
-    public BooleanColumn(Format<Boolean> format) {
-	this.format = format;
-	this.sortable();
-    }
+	public BooleanColumn(Format<Boolean> format) {
+		this.format = format;
+		this.sortable();
+	}
 
-    public String toString(J object) {
-	return this.format.format(object.getBoolean(this.getName()));
-    }
+	public String toString(J object) {
+		return this.format.format(object.getBoolean(this.getName()));
+	}
 
-    @Override
-    protected void doSort(JsArray<J> rows, String name, SortDirection direction) {
-	JSArrays.sortBoolean(rows, name, direction.direction());
-    }
+	@Override
+	protected void doSort(JsArray<J> rows, String name, SortDirection direction) {
+		JSArrays.sortBoolean(rows, name, direction.direction());
+	}
 }

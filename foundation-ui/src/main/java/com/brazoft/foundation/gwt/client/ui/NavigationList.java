@@ -28,158 +28,158 @@ import com.google.gwt.user.client.ui.Widget;
 public final class NavigationList
     extends Bootstrap<NavigationList> {
 
-    public NavigationList() {
-	super(ElementResolver.ul());
-	this.className("nav nav-list");
-    }
-
-    public NavigationList activate(int index) {
-	for (Widget child : this.getChildren()) {
-	    Widgets.deactivateClass(child);
+	public NavigationList() {
+		super(ElementResolver.ul());
+		this.className("nav nav-list");
 	}
 
-	Widgets.activateClass(this.getChild(index));
-	return this;
-    }
+	public NavigationList activate(int index) {
+		for (Widget child : this.getChildren()) {
+			Widgets.deactivateClass(child);
+		}
 
-    public HeadItem header(String label) {
-	HeadItem item = new HeadItem().text(label);
-	this.add(item);
-
-	return item;
-    }
-
-    public ListItem item(String label) {
-	ListItem item = new ListItem().text(label);
-	this.add(item);
-
-	return item;
-    }
-
-    public static class HeadItem
-	extends Bootstrap<HeadItem>
-	implements HasText<HeadItem> {
-
-	public HeadItem() {
-	    super(ElementResolver.li());
-	    this.className("nav-header");
+		Widgets.activateClass(this.getChild(index));
+		return this;
 	}
 
-	@Override
-	public HeadItem text(String text) {
-	    return Component.Util.setHTML(this, text);
+	public HeadItem header(String label) {
+		HeadItem item = new HeadItem().text(label);
+		this.add(item);
+
+		return item;
 	}
 
-	@Override
-	public String getText() {
-	    return Component.Util.getHTML(this);
-	}
-    }
+	public ListItem item(String label) {
+		ListItem item = new ListItem().text(label);
+		this.add(item);
 
-    public static class ListItem
-	extends Bootstrap<ListItem>
-	implements HasText<ListItem>, HasFocusHandlers<ListItem>, HasClickHandlers<ListItem>, HasKeyHandlers<ListItem>,
-	HasMouseHandlers<ListItem> {
-
-	private HTML<AnchorElement> link = HTML.asAnchor("#");
-
-	public ListItem() {
-	    super(ElementResolver.li());
-	    this.add(this.link);
-	    this.link.element().setHref("#");
+		return item;
 	}
 
-	@Override
-	public ListItem onMouseDown(MouseDownHandler handler) {
-	    this.link.onMouseDown(handler);
-	    return this;
+	public static class HeadItem
+	    extends Bootstrap<HeadItem>
+	    implements HasText<HeadItem> {
+
+		public HeadItem() {
+			super(ElementResolver.li());
+			this.className("nav-header");
+		}
+
+		@Override
+		public HeadItem text(String text) {
+			return Component.Util.setHTML(this, text);
+		}
+
+		@Override
+		public String getText() {
+			return Component.Util.getHTML(this);
+		}
 	}
 
-	@Override
-	public ListItem onMouseMove(MouseMoveHandler handler) {
-	    this.link.onMouseMove(handler);
-	    return this;
-	}
+	public static class ListItem
+	    extends Bootstrap<ListItem>
+	    implements HasText<ListItem>, HasFocusHandlers<ListItem>, HasClickHandlers<ListItem>, HasKeyHandlers<ListItem>,
+	    HasMouseHandlers<ListItem> {
 
-	@Override
-	public ListItem onMouseOut(MouseOutHandler handler) {
-	    this.link.onMouseOut(handler);
-	    return this;
-	}
+		private HTML<AnchorElement> link = HTML.asAnchor("#");
 
-	@Override
-	public ListItem onMouseOver(MouseOverHandler handler) {
-	    this.link.onMouseOver(handler);
-	    return this;
-	}
+		public ListItem() {
+			super(ElementResolver.li());
+			this.add(this.link);
+			this.link.element().setHref("#");
+		}
 
-	@Override
-	public ListItem onMouseUp(MouseUpHandler handler) {
-	    this.link.onMouseUp(handler);
-	    return this;
-	}
+		@Override
+		public ListItem onMouseDown(MouseDownHandler handler) {
+			this.link.onMouseDown(handler);
+			return this;
+		}
 
-	@Override
-	public ListItem onMouseWheel(MouseWheelHandler handler) {
-	    this.link.onMouseWheel(handler);
-	    return this;
-	}
+		@Override
+		public ListItem onMouseMove(MouseMoveHandler handler) {
+			this.link.onMouseMove(handler);
+			return this;
+		}
 
-	@Override
-	public ListItem onKeyPress(KeyPressHandler handler) {
-	    this.link.onKeyPress(handler);
-	    return this;
-	}
+		@Override
+		public ListItem onMouseOut(MouseOutHandler handler) {
+			this.link.onMouseOut(handler);
+			return this;
+		}
 
-	@Override
-	public ListItem onKeyDown(KeyDownHandler handler) {
-	    this.link.onKeyDown(handler);
-	    return this;
-	}
+		@Override
+		public ListItem onMouseOver(MouseOverHandler handler) {
+			this.link.onMouseOver(handler);
+			return this;
+		}
 
-	@Override
-	public ListItem onKeyUp(KeyUpHandler handler) {
-	    this.link.onKeyUp(handler);
-	    return this;
-	}
+		@Override
+		public ListItem onMouseUp(MouseUpHandler handler) {
+			this.link.onMouseUp(handler);
+			return this;
+		}
 
-	@Override
-	public ListItem onClick(ClickHandler handler) {
-	    this.link.onClick(handler);
-	    return this;
-	}
+		@Override
+		public ListItem onMouseWheel(MouseWheelHandler handler) {
+			this.link.onMouseWheel(handler);
+			return this;
+		}
 
-	@Override
-	public ListItem onDoubleClick(DoubleClickHandler handler) {
-	    this.link.onDoubleClick(handler);
-	    return this;
-	}
+		@Override
+		public ListItem onKeyPress(KeyPressHandler handler) {
+			this.link.onKeyPress(handler);
+			return this;
+		}
 
-	@Override
-	public ListItem onFocus(FocusHandler handler) {
-	    this.link.onFocus(handler);
-	    return this;
-	}
+		@Override
+		public ListItem onKeyDown(KeyDownHandler handler) {
+			this.link.onKeyDown(handler);
+			return this;
+		}
 
-	@Override
-	public ListItem onBlur(BlurHandler handler) {
-	    this.link.onBlur(handler);
-	    return this;
-	}
+		@Override
+		public ListItem onKeyUp(KeyUpHandler handler) {
+			this.link.onKeyUp(handler);
+			return this;
+		}
 
-	@Override
-	public ListItem text(String text) {
-	    this.link.text(text);
-	    return this;
-	}
+		@Override
+		public ListItem onClick(ClickHandler handler) {
+			this.link.onClick(handler);
+			return this;
+		}
 
-	@Override
-	public String getText() {
-	    return this.link.getText();
-	}
+		@Override
+		public ListItem onDoubleClick(DoubleClickHandler handler) {
+			this.link.onDoubleClick(handler);
+			return this;
+		}
 
-	public HTML<AnchorElement> link() {
-	    return this.link;
+		@Override
+		public ListItem onFocus(FocusHandler handler) {
+			this.link.onFocus(handler);
+			return this;
+		}
+
+		@Override
+		public ListItem onBlur(BlurHandler handler) {
+			this.link.onBlur(handler);
+			return this;
+		}
+
+		@Override
+		public ListItem text(String text) {
+			this.link.text(text);
+			return this;
+		}
+
+		@Override
+		public String getText() {
+			return this.link.getText();
+		}
+
+		public HTML<AnchorElement> link() {
+			return this.link;
+		}
 	}
-    }
 }

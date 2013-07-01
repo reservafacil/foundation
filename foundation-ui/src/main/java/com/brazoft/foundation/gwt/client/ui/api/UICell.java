@@ -9,21 +9,21 @@ import com.google.gwt.user.client.ui.Widget;
 public interface UICell<W extends Widget>
     extends HasText<W>, HasClickHandlers<W>, HasMouseHandlers<W> {
 
-    W add(Widget add);
+	W add(Widget add);
 
-    W colspan(int colspan);
+	W colspan(int colspan);
 
-    W rowspan(int rowspan);
+	W rowspan(int rowspan);
 
-    W icon(Icon icon);
+	W icon(Icon icon);
 
-    W align(Alignment align);
+	W align(Alignment align);
 
-    W verticalAlign(VerticalAlignment vAlign);
+	W verticalAlign(VerticalAlignment vAlign);
 
-    W visible();
+	W visible();
 
-    W hidden();
+	W hidden();
 
-    Style<W> style();
+	Style<W> style();
 }
