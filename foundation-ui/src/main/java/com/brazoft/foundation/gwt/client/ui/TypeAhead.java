@@ -51,11 +51,12 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 				String value = TypeAhead.this.input().getValue();
 				if (value.length() >= TypeAhead.this.minLength) {
 					TypeAhead.this.load(value);
-					return;
 				}
 
-				TypeAhead.this.menu.close();
-				TypeAhead.this.entries = null;
+				if (value.length() < TypeAhead.this.minLength  ||  TypeAhead.this.entries == null  ||  TypeAhead.this.entries.length() == 0) {
+					TypeAhead.this.menu.close();
+					TypeAhead.this.entries = null;
+				}
 			}
 		});
 
