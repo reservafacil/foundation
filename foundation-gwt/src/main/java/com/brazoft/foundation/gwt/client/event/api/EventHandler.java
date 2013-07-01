@@ -19,23 +19,23 @@ import com.brazoft.foundation.gwt.client.event.Event;
 
 public abstract class EventHandler<T> {
 
-    private boolean canceled;
+	private boolean canceled;
 
-    public final void fire(Event<T> e) {
-	if (this.canceled) {
-	    return;
+	public final void fire(Event<T> e) {
+		if (this.canceled) {
+			return;
+		}
+
+		this.onEvent(e);
 	}
 
-	this.onEvent(e);
-    }
+	public void canceled() {
+		this.canceled = true;
+	}
 
-    public void canceled() {
-	this.canceled = true;
-    }
+	public void activate() {
+		this.canceled = false;
+	}
 
-    public void activate() {
-	this.canceled = false;
-    }
-
-    public abstract void onEvent(Event<T> e);
+	public abstract void onEvent(Event<T> e);
 }

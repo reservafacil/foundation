@@ -22,58 +22,58 @@ public abstract class Composite<C extends Composite<C>>
     extends Selector<C>
     implements HasVisibility<C> {
 
-    public Composite() {
-	super();
-    }
+	public Composite() {
+		super();
+	}
 
-    public C detach() {
-	this.removeFromParent();
-	return (C)this;
-    }
+	public C detach() {
+		this.removeFromParent();
+		return (C)this;
+	}
 
-    public C onAttach(AttachHandler handler) {
-	this.addAttachHandler(handler);
-	return (C)this;
-    }
+	public C onAttach(AttachHandler handler) {
+		this.addAttachHandler(handler);
+		return (C)this;
+	}
 
-    public C onDetach(DetachHandler handler) {
-	this.addAttachHandler(handler);
-	return (C)this;
-    }
+	public C onDetach(DetachHandler handler) {
+		this.addAttachHandler(handler);
+		return (C)this;
+	}
 
-    public C onHidden(EventHandler<Void> handler) {
-	this.addHandler(HasVisibility.TriggerEvent.HIDDEN, handler);
-	return (C)this;
-    }
+	public C onHidden(EventHandler<Void> handler) {
+		this.addHandler(HasVisibility.TriggerEvent.HIDDEN, handler);
+		return (C)this;
+	}
 
-    public C onVisible(EventHandler<Void> handler) {
-	this.addHandler(HasVisibility.TriggerEvent.VISIBLE, handler);
-	return (C)this;
-    }
+	public C onVisible(EventHandler<Void> handler) {
+		this.addHandler(HasVisibility.TriggerEvent.VISIBLE, handler);
+		return (C)this;
+	}
 
-    public C title(String title) {
-	this.getElement().setTitle(title);
-	return (C)this;
-    }
+	public C title(String title) {
+		this.getElement().setTitle(title);
+		return (C)this;
+	}
 
-    public C visible() {
-	this.fireEvent(HasVisibility.TriggerEvent.VISIBLE);
-	this.setVisible(true);
-	return (C)this;
-    }
+	public C visible() {
+		this.fireEvent(HasVisibility.TriggerEvent.VISIBLE);
+		this.setVisible(true);
+		return (C)this;
+	}
 
-    public C hidden() {
-	this.fireEvent(HasVisibility.TriggerEvent.HIDDEN);
-	this.setVisible(false);
-	return (C)this;
-    }
+	public C hidden() {
+		this.fireEvent(HasVisibility.TriggerEvent.HIDDEN);
+		this.setVisible(false);
+		return (C)this;
+	}
 
-    public String getId() {
-	return this.getElement().getId();
-    }
+	public String getId() {
+		return this.getElement().getId();
+	}
 
-    public C id(String id) {
-	this.getElement().setId(id);
-	return (C)this;
-    }
+	public C id(String id) {
+		this.getElement().setId(id);
+		return (C)this;
+	}
 }

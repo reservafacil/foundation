@@ -175,8 +175,8 @@ public final class Modal
 	}
 
 	protected native void doFunction(String method, String id) /*-{
-	                                                           $wnd.$("#" + id).modal(method);
-	                                                           }-*/;
+		$wnd.$("#" + id).modal(method);
+	}-*/;
 
 	enum Type
 	    implements EventType {

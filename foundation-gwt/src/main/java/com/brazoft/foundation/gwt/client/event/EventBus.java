@@ -22,53 +22,53 @@ import com.brazoft.foundation.gwt.client.event.api.*;
 @SuppressWarnings("unchecked")
 public class EventBus {
 
-    private final Map<EventType, List<EventHandler<?>>> events;
+	private final Map<EventType, List<EventHandler<?>>> events;
 
-    public EventBus() {
-	this.events = new HashMap<EventType, List<EventHandler<?>>>();
-    }
-
-    public <T> EventBus add(EventType type, EventHandler<T> handler) {
-	if (!this.events.containsKey(type)) {
-	    this.events.put(type, new ArrayList<EventHandler<?>>());
+	public EventBus() {
+		this.events = new HashMap<EventType, List<EventHandler<?>>>();
 	}
 
-	this.events.get(type).add(handler);
+	public <T> EventBus add(EventType type, EventHandler<T> handler) {
+		if (!this.events.containsKey(type)) {
+			this.events.put(type, new ArrayList<EventHandler<?>>());
+		}
 
-	return this;
-    }
+		this.events.get(type).add(handler);
 
-    public <T> EventBus fire(Event<T> e) {
-	if (!this.events.containsKey(e.type())) {
-	    return this;
+		return this;
 	}
 
-	List<EventHandler<?>> handlers = this.events.get(e.type());
+	public <T> EventBus fire(Event<T> e) {
+		if (!this.events.containsKey(e.type())) {
+			return this;
+		}
 
-	for (EventHandler<?> handler : handlers) {
-	    ((EventHandler<T>)handler).fire(e);
+		List<EventHandler<?>> handlers = this.events.get(e.type());
+
+		for (EventHandler<?> handler : handlers) {
+			((EventHandler<T>)handler).fire(e);
+		}
+
+		return this;
 	}
 
-	return this;
-    }
-
-    public <T> EventBus remove(EventHandler<T> handler) {
-	handler.canceled();
-	return this;
-    }
-
-    public EventBus remove(EventType type) {
-
-	List<EventHandler<?>> handlers = this.events.get(type);
-
-	for (EventHandler<?> handler : handlers) {
-	    handler.canceled();
+	public <T> EventBus remove(EventHandler<T> handler) {
+		handler.canceled();
+		return this;
 	}
 
-	return this;
-    }
+	public EventBus remove(EventType type) {
 
-    public Iterable<EventType> types() {
-	return this.events.keySet();
-    }
+		List<EventHandler<?>> handlers = this.events.get(type);
+
+		for (EventHandler<?> handler : handlers) {
+			handler.canceled();
+		}
+
+		return this;
+	}
+
+	public Iterable<EventType> types() {
+		return this.events.keySet();
+	}
 }

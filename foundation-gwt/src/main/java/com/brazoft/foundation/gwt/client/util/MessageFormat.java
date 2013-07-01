@@ -20,22 +20,21 @@ import com.google.gwt.core.client.JsArrayString;
 
 public class MessageFormat {
 
-    public static <T> String format(final String pattern, final T... args) {
-	if (null == args || 0 == args.length)
-	    return pattern;
+	public static <T> String format(final String pattern, final T... args) {
+		if (null == args || 0 == args.length)
+			return pattern;
 
-	JsArrayString array = JavaScriptObject.createArray().cast();
-	for (Object arg : args) {
-	    array.push(String.valueOf(arg));
+		JsArrayString array = JavaScriptObject.createArray().cast();
+		for (Object arg : args) {
+			array.push(String.valueOf(arg));
+		}
+
+		return nativeFormat(pattern, array);
 	}
 
-	return nativeFormat(pattern, array);
-    }
-
-    private static native String nativeFormat(final String format, final JsArrayString args)/*-{
-	                                                                                    return format.replace(/{(\d+)}/g, function(match, number) 
-	                                                                                    {
-	                                                                                    return typeof args[number] != 'undefined' ? args[number] : match;
-	                                                                                    });
-	                                                                                    }-*/;
+	private static native String nativeFormat(final String format, final JsArrayString args)/*-{
+		return format.replace(/{(\d+)}/g, function(match, number) {
+			return typeof args[number] != 'undefined' ? args[number] : match;
+		});
+	}-*/;
 }

@@ -23,143 +23,143 @@ import com.google.gwt.http.client.URL;
 
 public class Rest {
 
-    private Resource resource;
+	private Resource resource;
 
-    public Rest(String uri, Map<String, String> headers) {
-	this.resource = new RestResource(uri, headers);
-    }
-
-    public Rest(String uri, String query, Map<String, String> headers) {
-	this.resource = new RestResource(uri, query, headers);
-    }
-
-    public Rest(String uri, String query) {
-	this.resource = new RestResource(uri, query);
-    }
-
-    public Rest(String uri) {
-	this.resource = new RestResource(uri);
-    }
-
-    public Rest(String uri, PathBuilder builder) {
-	this.resource = new RestResource(uri + builder.toString());
-    }
-
-    public RestMethod delete() {
-	return new RestMethod(this.resource.delete());
-    }
-
-    public RestMethod get() {
-	return new RestMethod(this.resource.get());
-    }
-
-    public RestMethod head() {
-	return new RestMethod(this.resource.head());
-    }
-
-    public RestMethod options() {
-	return new RestMethod(this.resource.options());
-    }
-
-    public RestMethod post() {
-	return new RestMethod(this.resource.post());
-    }
-
-    public RestMethod put() {
-	return new RestMethod(this.resource.put());
-    }
-
-    public Rest addHeaderParam(String key, String value) {
-	this.resource.getHeaders().put(key, value);
-	return this;
-    }
-
-    class RestResource
-	extends Resource {
-
-	RestResource(String uri, Map<String, String> headers) {
-	    super(uri, headers);
-	    // TODO Auto-generated constructor stub
+	public Rest(String uri, Map<String, String> headers) {
+		this.resource = new RestResource(uri, headers);
 	}
 
-	RestResource(String uri, String query, Map<String, String> headers) {
-	    super(uri, query, headers);
-	    // TODO Auto-generated constructor stub
+	public Rest(String uri, String query, Map<String, String> headers) {
+		this.resource = new RestResource(uri, query, headers);
 	}
 
-	RestResource(String uri, String query) {
-	    super(uri, query);
-	    // TODO Auto-generated constructor stub
+	public Rest(String uri, String query) {
+		this.resource = new RestResource(uri, query);
 	}
 
-	RestResource(String uri) {
-	    super(uri);
-	    // TODO Auto-generated constructor stub
+	public Rest(String uri) {
+		this.resource = new RestResource(uri);
 	}
 
-	@Override
-	protected Map<String, String> defaultHeaders() {
-	    return new HashMap<String, String>();
-	}
-    }
-
-    public static class PathBuilder {
-
-	private StringBuffer target;
-
-	private StringBuffer query = new StringBuffer();
-
-	private PathBuilder(String uri) {
-	    this.target = new StringBuffer(this.parse(uri));
+	public Rest(String uri, PathBuilder builder) {
+		this.resource = new RestResource(uri + builder.toString());
 	}
 
-	public static PathBuilder get(String uri) {
-	    return new PathBuilder(uri);
+	public RestMethod delete() {
+		return new RestMethod(this.resource.delete());
 	}
 
-	public PathBuilder append(Boolean value) {
-	    return this.add(value);
+	public RestMethod get() {
+		return new RestMethod(this.resource.get());
 	}
 
-	public PathBuilder append(Number value) {
-	    return this.add(value);
+	public RestMethod head() {
+		return new RestMethod(this.resource.head());
 	}
 
-	public PathBuilder append(String value) {
-	    return this.add(value);
+	public RestMethod options() {
+		return new RestMethod(this.resource.options());
 	}
 
-	public PathBuilder append(Object value) {
-	    return this.add(value);
+	public RestMethod post() {
+		return new RestMethod(this.resource.post());
 	}
 
-	public PathBuilder addQueryParam(String key, String value) {
-	    if (this.query.length() == 0) {
-		this.query.append("?");
-	    } else {
-		this.query.append("&");
-	    }
-
-	    key = URL.encodeQueryString(key);
-	    value = URL.encodeQueryString(value);
-
-	    this.query.append(key).append("=").append(value);
-
-	    return this;
+	public RestMethod put() {
+		return new RestMethod(this.resource.put());
 	}
 
-	PathBuilder add(Object value) {
-	    this.target.append("/").append(value);
-	    return this;
+	public Rest addHeaderParam(String key, String value) {
+		this.resource.getHeaders().put(key, value);
+		return this;
 	}
 
-	@Override
-	public String toString() {
-	    return this.target.append(this.query).toString();
+	class RestResource
+	    extends Resource {
+
+		RestResource(String uri, Map<String, String> headers) {
+			super(uri, headers);
+			// TODO Auto-generated constructor stub
+		}
+
+		RestResource(String uri, String query, Map<String, String> headers) {
+			super(uri, query, headers);
+			// TODO Auto-generated constructor stub
+		}
+
+		RestResource(String uri, String query) {
+			super(uri, query);
+			// TODO Auto-generated constructor stub
+		}
+
+		RestResource(String uri) {
+			super(uri);
+			// TODO Auto-generated constructor stub
+		}
+
+		@Override
+		protected Map<String, String> defaultHeaders() {
+			return new HashMap<String, String>();
+		}
 	}
 
-	String parse(String uri) {
-	    return uri.endsWith("/") ? uri.substring(0, uri.length() - 1) : uri;
+	public static class PathBuilder {
+
+		private StringBuffer target;
+
+		private StringBuffer query = new StringBuffer();
+
+		private PathBuilder(String uri) {
+			this.target = new StringBuffer(this.parse(uri));
+		}
+
+		public static PathBuilder get(String uri) {
+			return new PathBuilder(uri);
+		}
+
+		public PathBuilder append(Boolean value) {
+			return this.add(value);
+		}
+
+		public PathBuilder append(Number value) {
+			return this.add(value);
+		}
+
+		public PathBuilder append(String value) {
+			return this.add(value);
+		}
+
+		public PathBuilder append(Object value) {
+			return this.add(value);
+		}
+
+		public PathBuilder addQueryParam(String key, String value) {
+			if (this.query.length() == 0) {
+				this.query.append("?");
+			} else {
+				this.query.append("&");
+			}
+
+			key = URL.encodeQueryString(key);
+			value = URL.encodeQueryString(value);
+
+			this.query.append(key).append("=").append(value);
+
+			return this;
+		}
+
+		PathBuilder add(Object value) {
+			this.target.append("/").append(value);
+			return this;
+		}
+
+		@Override
+		public String toString() {
+			return this.target.append(this.query).toString();
+		}
+
+		String parse(String uri) {
+			return uri.endsWith("/") ? uri.substring(0, uri.length() - 1) : uri;
+		}
 	}
-    }
 }

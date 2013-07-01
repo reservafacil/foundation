@@ -22,7 +22,7 @@ import com.google.gwt.core.client.*;
 public class MapJSO<J extends JavaScriptObject>
     extends JavaScriptObject {
 
-	protected MapJSO() { }
+	protected MapJSO() {}
 
 	public static native <J extends JavaScriptObject> MapJSO<J> create()/*-{
 		return new Object();

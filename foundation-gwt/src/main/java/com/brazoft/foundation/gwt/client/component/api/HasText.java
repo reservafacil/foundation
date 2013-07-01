@@ -19,7 +19,7 @@ import com.google.gwt.user.client.ui.Widget;
 
 public interface HasText<W extends Widget> {
 
-    W text(String text);
+	W text(String text);
 
-    String getText();
+	String getText();
 }

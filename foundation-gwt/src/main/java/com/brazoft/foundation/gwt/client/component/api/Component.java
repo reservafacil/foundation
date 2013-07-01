@@ -22,60 +22,60 @@ import com.google.gwt.user.client.ui.Widget;
 public abstract class Component<C extends Component<C>>
     extends Node<C> {
 
-    public Component(Element element) {
-	super(element);
-    }
-
-    public static class Util {
-
-	public static <W extends Widget> W setId(W widget, String id) {
-	    Element element = widget.getElement();
-	    String holderId = htmlHolderId(element.getId());
-	    element.setId(id);
-
-	    Element span = ElementResolver.getChildById(element, holderId);
-	    if (span != null) {
-		holderId = htmlHolderId(element.getId());
-		span.setId(holderId);
-	    }
-
-	    return widget;
+	public Component(Element element) {
+		super(element);
 	}
 
-	public static <W extends Widget> String getId(W widget) {
-	    return widget.getElement().getId();
+	public static class Util {
+
+		public static <W extends Widget> W setId(W widget, String id) {
+			Element element = widget.getElement();
+			String holderId = htmlHolderId(element.getId());
+			element.setId(id);
+
+			Element span = ElementResolver.getChildById(element, holderId);
+			if (span != null) {
+				holderId = htmlHolderId(element.getId());
+				span.setId(holderId);
+			}
+
+			return widget;
+		}
+
+		public static <W extends Widget> String getId(W widget) {
+			return widget.getElement().getId();
+		}
+
+		public static String getHTML(Widget widget) {
+			return resolveHTMLHolder(widget).getInnerHTML();
+		}
+
+		public static <W extends Widget> W setHTML(W widget, String html) {
+			resolveHTMLHolder(widget).setInnerHTML(html);
+			return widget;
+		}
+
+		private static <W extends Widget> Element resolveHTMLHolder(W widget) {
+			Element element = widget.getElement();
+			String id = htmlHolderId(element.getId());
+
+			if (element.getTagName().equals("span")) {
+				element.setId(id);
+				return element;
+			}
+
+			Element span = ElementResolver.getChildById(element, id);
+			if (span == null) {
+				span = ElementResolver.span();
+				element.appendChild(span);
+			}
+			span.setId(id);
+
+			return span;
+		}
+
+		private static String htmlHolderId(String id) {
+			return id + "-text";
+		}
 	}
-
-	public static String getHTML(Widget widget) {
-	    return resolveHTMLHolder(widget).getInnerHTML();
-	}
-
-	public static <W extends Widget> W setHTML(W widget, String html) {
-	    resolveHTMLHolder(widget).setInnerHTML(html);
-	    return widget;
-	}
-
-	private static <W extends Widget> Element resolveHTMLHolder(W widget) {
-	    Element element = widget.getElement();
-	    String id = htmlHolderId(element.getId());
-
-	    if (element.getTagName().equals("span")) {
-		element.setId(id);
-		return element;
-	    }
-
-	    Element span = ElementResolver.getChildById(element, id);
-	    if (span == null) {
-		span = ElementResolver.span();
-		element.appendChild(span);
-	    }
-	    span.setId(id);
-
-	    return span;
-	}
-
-	private static String htmlHolderId(String id) {
-	    return id + "-text";
-	}
-    }
 }

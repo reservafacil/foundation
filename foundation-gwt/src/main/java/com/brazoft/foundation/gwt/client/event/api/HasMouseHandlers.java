@@ -19,15 +19,15 @@ import com.google.gwt.event.dom.client.*;
 
 public interface HasMouseHandlers<T> {
 
-    T onMouseDown(MouseDownHandler handler);
+	T onMouseDown(MouseDownHandler handler);
 
-    T onMouseMove(MouseMoveHandler handler);
+	T onMouseMove(MouseMoveHandler handler);
 
-    T onMouseOut(MouseOutHandler handler);
+	T onMouseOut(MouseOutHandler handler);
 
-    T onMouseOver(MouseOverHandler handler);
+	T onMouseOver(MouseOverHandler handler);
 
-    T onMouseUp(MouseUpHandler handler);
+	T onMouseUp(MouseUpHandler handler);
 
-    T onMouseWheel(MouseWheelHandler handler);
+	T onMouseWheel(MouseWheelHandler handler);
 }

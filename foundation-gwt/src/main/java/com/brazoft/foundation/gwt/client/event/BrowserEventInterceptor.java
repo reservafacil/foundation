@@ -16,119 +16,119 @@ public class BrowserEventInterceptor
     HasKeyHandlers<BrowserEventInterceptor>, HasMouseHandlers<BrowserEventInterceptor>, HasTouchHandlers<BrowserEventInterceptor>,
     HasHandlers {
 
-    private static final BrowserEventInterceptor instance = new BrowserEventInterceptor();
+	private static final BrowserEventInterceptor instance = new BrowserEventInterceptor();
 
-    private HandlerManager                       manager  = new HandlerManager(this);
+	private HandlerManager                       manager  = new HandlerManager(this);
 
-    public static BrowserEventInterceptor get() {
-	return instance;
-    }
-
-    private BrowserEventInterceptor() {
-	Event.addNativePreviewHandler(this);
-    }
-
-    @Override
-    public final void onPreviewNativeEvent(NativePreviewEvent event) {
-	try {
-	    DomEvent.fireNativeEvent(event.getNativeEvent(), this);
-	} finally {
-	    event.consume();
+	public static BrowserEventInterceptor get() {
+		return instance;
 	}
-    }
 
-    @Override
-    public void fireEvent(GwtEvent<?> event) {
-	this.manager.fireEvent(event);
-    }
+	private BrowserEventInterceptor() {
+		Event.addNativePreviewHandler(this);
+	}
 
-    @Override
-    public BrowserEventInterceptor onClick(ClickHandler handler) {
-	return this.put(ClickEvent.getType(), handler);
-    }
+	@Override
+	public final void onPreviewNativeEvent(NativePreviewEvent event) {
+		try {
+			DomEvent.fireNativeEvent(event.getNativeEvent(), this);
+		} finally {
+			event.consume();
+		}
+	}
 
-    @Override
-    public BrowserEventInterceptor onDoubleClick(DoubleClickHandler handler) {
-	return this.put(DoubleClickEvent.getType(), handler);
-    }
+	@Override
+	public void fireEvent(GwtEvent<?> event) {
+		this.manager.fireEvent(event);
+	}
 
-    @Override
-    public BrowserEventInterceptor onBlur(BlurHandler handler) {
-	return this.put(BlurEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onClick(ClickHandler handler) {
+		return this.put(ClickEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onFocus(FocusHandler handler) {
-	return this.put(FocusEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onDoubleClick(DoubleClickHandler handler) {
+		return this.put(DoubleClickEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onKeyPress(KeyPressHandler handler) {
-	return this.put(KeyPressEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onBlur(BlurHandler handler) {
+		return this.put(BlurEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onKeyDown(KeyDownHandler handler) {
-	return this.put(KeyDownEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onFocus(FocusHandler handler) {
+		return this.put(FocusEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onKeyUp(KeyUpHandler handler) {
-	return this.put(KeyUpEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onKeyPress(KeyPressHandler handler) {
+		return this.put(KeyPressEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onMouseDown(MouseDownHandler handler) {
-	return this.put(MouseDownEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onKeyDown(KeyDownHandler handler) {
+		return this.put(KeyDownEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onMouseMove(MouseMoveHandler handler) {
-	return this.put(MouseMoveEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onKeyUp(KeyUpHandler handler) {
+		return this.put(KeyUpEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onMouseOut(MouseOutHandler handler) {
-	return this.put(MouseOutEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onMouseDown(MouseDownHandler handler) {
+		return this.put(MouseDownEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onMouseOver(MouseOverHandler handler) {
-	return this.put(MouseOverEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onMouseMove(MouseMoveHandler handler) {
+		return this.put(MouseMoveEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onMouseUp(MouseUpHandler handler) {
-	return this.put(MouseUpEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onMouseOut(MouseOutHandler handler) {
+		return this.put(MouseOutEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onMouseWheel(MouseWheelHandler handler) {
-	return this.put(MouseWheelEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onMouseOver(MouseOverHandler handler) {
+		return this.put(MouseOverEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onTouchCancel(TouchCancelHandler handler) {
-	return this.put(TouchCancelEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onMouseUp(MouseUpHandler handler) {
+		return this.put(MouseUpEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onTouchEnd(TouchEndHandler handler) {
-	return this.put(TouchEndEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onMouseWheel(MouseWheelHandler handler) {
+		return this.put(MouseWheelEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onTouchMove(TouchMoveHandler handler) {
-	return this.put(TouchMoveEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onTouchCancel(TouchCancelHandler handler) {
+		return this.put(TouchCancelEvent.getType(), handler);
+	}
 
-    @Override
-    public BrowserEventInterceptor onTouchStart(TouchStartHandler handler) {
-	return this.put(TouchStartEvent.getType(), handler);
-    }
+	@Override
+	public BrowserEventInterceptor onTouchEnd(TouchEndHandler handler) {
+		return this.put(TouchEndEvent.getType(), handler);
+	}
 
-    private <H extends EventHandler> BrowserEventInterceptor put(Type<H> type, H handler) {
-	this.manager.addHandler(type, handler);
-	return this;
-    }
+	@Override
+	public BrowserEventInterceptor onTouchMove(TouchMoveHandler handler) {
+		return this.put(TouchMoveEvent.getType(), handler);
+	}
+
+	@Override
+	public BrowserEventInterceptor onTouchStart(TouchStartHandler handler) {
+		return this.put(TouchStartEvent.getType(), handler);
+	}
+
+	private <H extends EventHandler> BrowserEventInterceptor put(Type<H> type, H handler) {
+		this.manager.addHandler(type, handler);
+		return this;
+	}
 }

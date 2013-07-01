@@ -6,12 +6,12 @@ import com.google.gwt.event.logical.shared.AttachEvent.Handler;
 public abstract class DetachHandler
     implements Handler {
 
-    @Override
-    public final void onAttachOrDetach(AttachEvent event) {
-	if (!event.isAttached()) {
-	    this.onDetach(event);
+	@Override
+	public final void onAttachOrDetach(AttachEvent event) {
+		if (!event.isAttached()) {
+			this.onDetach(event);
+		}
 	}
-    }
 
-    protected abstract void onDetach(AttachEvent event);
+	protected abstract void onDetach(AttachEvent event);
 }

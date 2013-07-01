@@ -19,9 +19,9 @@ import com.google.gwt.event.dom.client.*;
 
 public interface HasKeyHandlers<T> {
 
-    T onKeyPress(KeyPressHandler handler);
+	T onKeyPress(KeyPressHandler handler);
 
-    T onKeyDown(KeyDownHandler handler);
+	T onKeyDown(KeyDownHandler handler);
 
-    T onKeyUp(KeyUpHandler handler);
+	T onKeyUp(KeyUpHandler handler);
 }

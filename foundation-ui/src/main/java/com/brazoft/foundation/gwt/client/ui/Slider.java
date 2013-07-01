@@ -314,62 +314,62 @@ public final class Slider
 	 * JSNI methods
 	 */
 	private native void setOptionJS(String id, String option, double value) /*-{
-	                                                                        $wnd.$("#" + id).slider("option", option, value);
-	                                                                        }-*/;
+		$wnd.$("#" + id).slider("option", option, value);
+	}-*/;
 
 	private native double getOptionJS(String id, String option) /*-{
-	                                                            return $wnd.$("#" + id).slider("option", option);
-	                                                            }-*/;
+		return $wnd.$("#" + id).slider("option", option);
+	}-*/;
 
 	private native void setOptionJS(String id, String option, boolean value) /*-{
-	                                                                         $wnd.$("#" + id).slider("option", option, value);
-	                                                                         }-*/;
+		$wnd.$("#" + id).slider("option", option, value);
+	}-*/;
 
 	private native boolean getBooleanOptionJS(String id, String option) /*-{
-	                                                                    return $wnd.$("#" + id).slider("option", option);
-	                                                                    }-*/;
+		return $wnd.$("#" + id).slider("option", option);
+	}-*/;
 
 	private native void setOptionJS(String id, String option, String value) /*-{
-	                                                                        $wnd.$("#" + id).slider("option", option, value);
-	                                                                        }-*/;
+		$wnd.$("#" + id).slider("option", option, value);
+	}-*/;
 
 	private native String getStringOptionJS(String id, String option) /*-{
-	                                                                  return $wnd.$("#" + id).slider("option", option);
-	                                                                  }-*/;
+		return $wnd.$("#" + id).slider("option", option);
+	}-*/;
 
 	private native void setValuesJS(String id, JavaScriptObject values) /*-{
-	                                                                    $wnd.$("#" + id).slider("option", "values", values);
-	                                                                    }-*/;
+		$wnd.$("#" + id).slider("option", "values", values);
+	}-*/;
 
 	private native JsArrayNumber getValuesJS(String id) /*-{
-	                                                    return $wnd.$("#" + id).slider("values");
-	                                                    }-*/;
+		return $wnd.$("#" + id).slider("values");
+	}-*/;
 
 	private native double getValueJS(String id, int index) /*-{
-	                                                       return Number($wnd.$("#" + id).slider("values", index));
-	                                                       }-*/;
+		return Number($wnd.$("#" + id).slider("values", index));
+	}-*/;
 
 	private native void createSliderJS(Slider widget, String id, JavaScriptObject options) /*-{
-	                                                                                       options.start = function(event, ui) {
-	                                                                                       widget.@com.brazoft.foundation.gwt.client.ui.Slider::fireOnStartEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;)(event, ui.values);
-	                                                                                       };
-	                                                                                       options.slide = function(event, ui) {
-	                                                                                       return widget.@com.brazoft.foundation.gwt.client.ui.Slider::fireOnSlideEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;)(event, ui.values);
-	                                                                                       };
-	                                                                                       options.change = function(event, ui) {
-	                                                                                       var has = event.originalEvent ? true : false;
-	                                                                                       widget.@com.brazoft.foundation.gwt.client.ui.Slider::fireOnChangeEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;Z)(event, ui.values, has);
-	                                                                                       };
-	                                                                                       options.stop = function(event, ui) {
-	                                                                                       widget.@com.brazoft.foundation.gwt.client.ui.Slider::fireOnStopEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;)(event, ui.values);
-	                                                                                       };
+		options.start = function(event, ui) {
+			widget.@com.brazoft.foundation.gwt.client.ui.Slider::fireOnStartEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;)(event, ui.values);
+		};
+		options.slide = function(event, ui) {
+			return widget.@com.brazoft.foundation.gwt.client.ui.Slider::fireOnSlideEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;)(event, ui.values);
+		};
+		options.change = function(event, ui) {
+			var has = event.originalEvent ? true : false;
+			widget.@com.brazoft.foundation.gwt.client.ui.Slider::fireOnChangeEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;Z)(event, ui.values, has);
+		};
+		options.stop = function(event, ui) {
+			widget.@com.brazoft.foundation.gwt.client.ui.Slider::fireOnStopEvent(Lcom/google/gwt/user/client/Event;Lcom/google/gwt/core/client/JsArrayNumber;)(event, ui.values);
+		};
 
-	                                                                                       $wnd.$("#" + id).slider(options);
-	                                                                                       }-*/;
+		$wnd.$("#" + id).slider(options);
+	}-*/;
 
 	private native void destroySliderJS(Slider widget, String id) /*-{
-	                                                              $wnd.$("#" + id).slider("destroy");
-	                                                              }-*/;
+		$wnd.$("#" + id).slider("destroy");
+	}-*/;
 
 	enum SliderEvent
 	    implements EventType {

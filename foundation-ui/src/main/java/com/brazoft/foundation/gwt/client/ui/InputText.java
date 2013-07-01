@@ -91,10 +91,10 @@ public final class InputText
 	}
 
 	private native void nativeMask(String id, JavaScriptObject options)/*-{
-	                                                                   $wnd.$("#" + id).inputmask(options);
-	                                                                   }-*/;
+		$wnd.$("#" + id).inputmask(options);
+	}-*/;
 
 	private native void nativeUnmask(String id)/*-{
-	                                           $wnd.$("#" + id).inputmask().unmask();
-	                                           }-*/;
+		$wnd.$("#" + id).inputmask().unmask();
+	}-*/;
 }

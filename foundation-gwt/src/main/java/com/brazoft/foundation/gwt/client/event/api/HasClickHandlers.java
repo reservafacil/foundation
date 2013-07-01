@@ -19,7 +19,7 @@ import com.google.gwt.event.dom.client.*;
 
 public interface HasClickHandlers<T> {
 
-    T onClick(ClickHandler handler);
+	T onClick(ClickHandler handler);
 
-    T onDoubleClick(DoubleClickHandler handler);
+	T onDoubleClick(DoubleClickHandler handler);
 }

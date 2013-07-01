@@ -25,96 +25,96 @@ import com.google.gwt.json.client.JSONValue;
 
 public class JSON {
 
-    public static JSONCollection<String> asExpressionCollection() {
-	return new JSONCollection<String>() {
+	public static JSONCollection<String> asExpressionCollection() {
+		return new JSONCollection<String>() {
 
-	    @Override
-	    JSONValue toJSONValue(String value) {
-		return new JSONExpression(value);
-	    }
+			@Override
+			JSONValue toJSONValue(String value) {
+				return new JSONExpression(value);
+			}
 
-	    @Override
-	    String toValue(JSONValue value) {
-		return value.isString().stringValue();
-	    }
-	};
-    }
+			@Override
+			String toValue(JSONValue value) {
+				return value.isString().stringValue();
+			}
+		};
+	}
 
-    public static JSONCollection<String> asStringCollection(String json) {
-	JSONCollection<String> collection = asStringCollection();
-	collection.setArray(JSONParser.parseLenient(json).isArray());
+	public static JSONCollection<String> asStringCollection(String json) {
+		JSONCollection<String> collection = asStringCollection();
+		collection.setArray(JSONParser.parseLenient(json).isArray());
 
-	return collection;
-    }
+		return collection;
+	}
 
-    public static JSONCollection<String> asStringCollection() {
-	return new JSONCollection<String>() {
+	public static JSONCollection<String> asStringCollection() {
+		return new JSONCollection<String>() {
 
-	    @Override
-	    JSONValue toJSONValue(String value) {
-		return new JSONString(value);
-	    }
+			@Override
+			JSONValue toJSONValue(String value) {
+				return new JSONString(value);
+			}
 
-	    @Override
-	    String toValue(JSONValue value) {
-		return value.isString().stringValue();
-	    }
-	};
-    }
+			@Override
+			String toValue(JSONValue value) {
+				return value.isString().stringValue();
+			}
+		};
+	}
 
-    public static JSONCollection<Boolean> asBooleanCollection(String json) {
-	JSONCollection<Boolean> collection = asBooleanCollection();
-	collection.setArray(JSONParser.parseLenient(json).isArray());
+	public static JSONCollection<Boolean> asBooleanCollection(String json) {
+		JSONCollection<Boolean> collection = asBooleanCollection();
+		collection.setArray(JSONParser.parseLenient(json).isArray());
 
-	return collection;
-    }
+		return collection;
+	}
 
-    public static JSONCollection<Boolean> asBooleanCollection() {
-	return new JSONCollection<Boolean>() {
+	public static JSONCollection<Boolean> asBooleanCollection() {
+		return new JSONCollection<Boolean>() {
 
-	    @Override
-	    JSONValue toJSONValue(Boolean value) {
-		return JSONBoolean.getInstance(value);
-	    }
+			@Override
+			JSONValue toJSONValue(Boolean value) {
+				return JSONBoolean.getInstance(value);
+			}
 
-	    @Override
-	    Boolean toValue(JSONValue value) {
-		return value.isBoolean().booleanValue();
-	    }
-	};
-    }
+			@Override
+			Boolean toValue(JSONValue value) {
+				return value.isBoolean().booleanValue();
+			}
+		};
+	}
 
-    public static JSONCollection<Number> asNumberCollection(String json) {
-	JSONCollection<Number> collection = asNumberCollection();
-	collection.setArray(JSONParser.parseLenient(json).isArray());
+	public static JSONCollection<Number> asNumberCollection(String json) {
+		JSONCollection<Number> collection = asNumberCollection();
+		collection.setArray(JSONParser.parseLenient(json).isArray());
 
-	return collection;
-    }
+		return collection;
+	}
 
-    public static JSONCollection<Number> asNumberCollection() {
-	return new JSONCollection<Number>() {
+	public static JSONCollection<Number> asNumberCollection() {
+		return new JSONCollection<Number>() {
 
-	    @Override
-	    JSONValue toJSONValue(Number value) {
-		return new JSONNumber(value.doubleValue());
-	    }
+			@Override
+			JSONValue toJSONValue(Number value) {
+				return new JSONNumber(value.doubleValue());
+			}
 
-	    @Override
-	    Number toValue(JSONValue value) {
-		return value.isNumber().doubleValue();
-	    }
-	};
-    }
+			@Override
+			Number toValue(JSONValue value) {
+				return value.isNumber().doubleValue();
+			}
+		};
+	}
 
-    public static JSONObject asObject(JavaScriptObject object) {
-	return new JSONObject(object);
-    }
+	public static JSONObject asObject(JavaScriptObject object) {
+		return new JSONObject(object);
+	}
 
-    public static JSONObject asObject() {
-	return new JSONObject();
-    }
+	public static JSONObject asObject() {
+		return new JSONObject();
+	}
 
-    public static JSONObject asObject(String json) {
-	return new JSONObject(JSONParser.parseLenient(json).isObject());
-    }
+	public static JSONObject asObject(String json) {
+		return new JSONObject(JSONParser.parseLenient(json).isObject());
+	}
 }

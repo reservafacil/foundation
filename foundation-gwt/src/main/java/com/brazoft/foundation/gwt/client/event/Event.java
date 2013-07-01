@@ -20,36 +20,36 @@ import com.google.gwt.user.client.ui.Widget;
 
 public class Event<T> {
 
-    private Widget    widget;
+	private Widget    widget;
 
-    private T         data;
+	private T         data;
 
-    private EventType type;
+	private EventType type;
 
-    public Event(EventType type, Widget widget) {
-	this(type, widget, null);
-    }
+	public Event(EventType type, Widget widget) {
+		this(type, widget, null);
+	}
 
-    public Event(EventType type, T data) {
-	this(type, null, data);
-    }
+	public Event(EventType type, T data) {
+		this(type, null, data);
+	}
 
-    public Event(EventType type, Widget widget, T data) {
-	super();
-	this.type = type;
-	this.widget = widget;
-	this.data = data;
-    }
+	public Event(EventType type, Widget widget, T data) {
+		super();
+		this.type = type;
+		this.widget = widget;
+		this.data = data;
+	}
 
-    public Widget widget() {
-	return this.widget;
-    }
+	public Widget widget() {
+		return this.widget;
+	}
 
-    public T data() {
-	return this.data;
-    }
+	public T data() {
+		return this.data;
+	}
 
-    public EventType type() {
-	return this.type;
-    }
+	public EventType type() {
+		return this.type;
+	}
 }

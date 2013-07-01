@@ -57,7 +57,7 @@ public class LightMap
 	public final native void put(String key, String value) /*-{
 		this[key] = value;
 	}-*/;
-	
+
 	public final native String get(String property) /*-{
 		return this[property];
 	}-*/;

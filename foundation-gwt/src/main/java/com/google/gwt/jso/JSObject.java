@@ -29,203 +29,203 @@ import com.google.gwt.json.client.JSONObject;
 public abstract class JSObject
     extends JavaScriptObject {
 
-    protected JSObject() {
-	super();
-    }
+	protected JSObject() {
+		super();
+	}
 
-    public final native boolean hasKey(String key) /*-{
+	public final native boolean hasKey(String key) /*-{
 		return this[key] != undefined;
-    }-*/;
+	}-*/;
 
-    public final native JsArrayString keys() /*-{
+	public final native JsArrayString keys() /*-{
 		var a = new Array();
 		for ( var e in this) {
 			a.push(e);
 		}
 		return a;
-    }-*/;
+	}-*/;
 
-    public final JSONObject json() {
-	return new JSONObject(this);
-    }
+	public final JSONObject json() {
+		return new JSONObject(this);
+	}
 
-    public final native String get(String property) /*-{
+	public final native String get(String property) /*-{
 		return this[property];
-    }-*/;
+	}-*/;
 
-    public final native int getInt(String property) /*-{
+	public final native int getInt(String property) /*-{
 		return this[property];
-    }-*/;
+	}-*/;
 
-    public final native float getFloat(String property) /*-{
+	public final native float getFloat(String property) /*-{
 		return this[property];
-    }-*/;
+	}-*/;
 
-    public final native double getDouble(String property) /*-{
+	public final native double getDouble(String property) /*-{
 		return this[property];
-    }-*/;
+	}-*/;
 
-    public final native boolean getBoolean(String property) /*-{
+	public final native boolean getBoolean(String property) /*-{
 		return this[property];
-    }-*/;
+	}-*/;
 
-    public final native <T extends JavaScriptObject> JsArray<T> getArray(String property) /*-{
+	public final native <T extends JavaScriptObject> JsArray<T> getArray(String property) /*-{
 		return this[property];
-    }-*/;
+	}-*/;
 
-    public final native <T extends JavaScriptObject> MapJSO<T> getMap(String property) /*-{
+	public final native <T extends JavaScriptObject> MapJSO<T> getMap(String property) /*-{
 		return this[property];
-    }-*/;
+	}-*/;
 
-    public final Date getDate(String property) {
-	return this.get(property, new Date(), DateFormat.ISO_8601);
-    }
-
-    public final String get(String property, String defaultValue) {
-	if (!this.hasKey(property)) {
-	    return defaultValue;
+	public final Date getDate(String property) {
+		return this.get(property, new Date(), DateFormat.ISO_8601);
 	}
 
-	return this.get(property);
-    };
+	public final String get(String property, String defaultValue) {
+		if (!this.hasKey(property)) {
+			return defaultValue;
+		}
 
-    public final Integer get(String property, Integer defaultValue) {
-	if (!this.hasKey(property)) {
-	    return defaultValue;
+		return this.get(property);
+	};
+
+	public final Integer get(String property, Integer defaultValue) {
+		if (!this.hasKey(property)) {
+			return defaultValue;
+		}
+
+		return this.getInt(property);
 	}
 
-	return this.getInt(property);
-    }
+	public final int get(String property, int defaultValue) {
+		if (!this.hasKey(property)) {
+			return defaultValue;
+		}
 
-    public final int get(String property, int defaultValue) {
-	if (!this.hasKey(property)) {
-	    return defaultValue;
+		return this.getInt(property);
+	};
+
+	public final Float get(String property, Float defaultValue) {
+		if (!this.hasKey(property)) {
+			return defaultValue;
+		}
+
+		return this.getFloat(property);
 	}
 
-	return this.getInt(property);
-    };
+	public final float get(String property, float defaultValue) {
+		if (!this.hasKey(property)) {
+			return defaultValue;
+		}
 
-    public final Float get(String property, Float defaultValue) {
-	if (!this.hasKey(property)) {
-	    return defaultValue;
+		return this.getFloat(property);
+	};
+
+	public final Double get(String property, Double defaultValue) {
+		if (!this.hasKey(property)) {
+			return defaultValue;
+		}
+
+		return this.getDouble(property);
 	}
 
-	return this.getFloat(property);
-    }
+	public final double get(String property, double defaultValue) {
+		if (!this.hasKey(property)) {
+			return defaultValue;
+		}
 
-    public final float get(String property, float defaultValue) {
-	if (!this.hasKey(property)) {
-	    return defaultValue;
+		return this.getDouble(property);
+	};
+
+	public final Boolean get(String property, Boolean defaultValue) {
+		if (!this.hasKey(property)) {
+			return defaultValue;
+		}
+
+		return this.getBoolean(property);
 	}
 
-	return this.getFloat(property);
-    };
+	public final boolean get(String property, boolean defaultValue) {
+		if (!this.hasKey(property)) {
+			return defaultValue;
+		}
 
-    public final Double get(String property, Double defaultValue) {
-	if (!this.hasKey(property)) {
-	    return defaultValue;
+		return this.getBoolean(property);
+	};
+
+	public final <T extends JavaScriptObject> JsArray<T> get(String property, JsArray<T> defaultValue) {
+		if (!this.hasKey(property)) {
+			return defaultValue;
+		}
+
+		return this.getArray(property);
+	};
+
+	public final <T extends JavaScriptObject> MapJSO<T> get(String property, MapJSO<T> defaultValue) {
+		if (!this.hasKey(property)) {
+			return defaultValue;
+		}
+
+		return this.getMap(property);
+	};
+
+	public final <T extends JavaScriptObject> T get(String property, T defaultValue) {
+		if (!this.hasKey(property)) {
+			return defaultValue;
+		}
+
+		return this.getObject(property);
 	}
 
-	return this.getDouble(property);
-    }
+	public final native <T extends JavaScriptObject> T getObject(String property) /*-{
+		return this[property];
+	}-*/;
 
-    public final double get(String property, double defaultValue) {
-	if (!this.hasKey(property)) {
-	    return defaultValue;
+	public final Date get(String property, Date defaultValue) {
+		return this.get(property, defaultValue, DateFormat.ISO_8601);
 	}
 
-	return this.getDouble(property);
-    };
-
-    public final Boolean get(String property, Boolean defaultValue) {
-	if (!this.hasKey(property)) {
-	    return defaultValue;
+	public final Date get(String property, Date defaultValue, DateFormat format) {
+		return format.unformat(this.get(property, format.format(defaultValue)));
 	}
 
-	return this.getBoolean(property);
-    }
-
-    public final boolean get(String property, boolean defaultValue) {
-	if (!this.hasKey(property)) {
-	    return defaultValue;
-	}
-
-	return this.getBoolean(property);
-    };
-
-    public final <T extends JavaScriptObject> JsArray<T> get(String property, JsArray<T> defaultValue) {
-	if (!this.hasKey(property)) {
-	    return defaultValue;
-	}
-	
-	return this.getArray(property);
-    };
-
-    public final <T extends JavaScriptObject> MapJSO<T> get(String property, MapJSO<T> defaultValue){
-	if (!this.hasKey(property)) {
-	    return defaultValue;
-	}
-	
-	return this.getMap(property);
-    };
-
-    public final <T extends JavaScriptObject> T get(String property, T defaultValue) {
-	if (!this.hasKey(property)) {
-	    return defaultValue;
-	}
-	
-	return this.getObject(property);
-    }
-
-    public final native <T extends JavaScriptObject> T getObject(String property) /*-{
-	return this[property];
-    }-*/;
-    
-    public final Date get(String property, Date defaultValue) {
-	return this.get(property, defaultValue, DateFormat.ISO_8601);
-    }
-
-    public final Date get(String property, Date defaultValue, DateFormat format) {
-	return format.unformat(this.get(property, format.format(defaultValue)));
-    }
-
-    public final native void set(String property, String value) /*-{
+	public final native void set(String property, String value) /*-{
 		this[property] = value;
-    }-*/;
+	}-*/;
 
-    public final native void set(String property, int value) /*-{
+	public final native void set(String property, int value) /*-{
 		this[property] = value;
-    }-*/;
+	}-*/;
 
-    public final native void set(String property, float value) /*-{
+	public final native void set(String property, float value) /*-{
 		this[property] = value;
-    }-*/;
+	}-*/;
 
-    public final native void set(String property, double value) /*-{
+	public final native void set(String property, double value) /*-{
 		this[property] = value;
-    }-*/;
+	}-*/;
 
-    public final native void set(String property, boolean value) /*-{
+	public final native void set(String property, boolean value) /*-{
 		this[property] = value;
-    }-*/;
+	}-*/;
 
-    public final native <T extends JavaScriptObject> void set(String property, JsArray<T> value) /*-{
+	public final native <T extends JavaScriptObject> void set(String property, JsArray<T> value) /*-{
 		this[property] = value;
-    }-*/;
+	}-*/;
 
-    public final native <T extends JavaScriptObject> void set(String property, MapJSO<T> value) /*-{
+	public final native <T extends JavaScriptObject> void set(String property, MapJSO<T> value) /*-{
 		this[property] = value;
-    }-*/;
+	}-*/;
 
-    public final native <T extends JavaScriptObject> void set(String property, T value) /*-{
+	public final native <T extends JavaScriptObject> void set(String property, T value) /*-{
 		this[property] = value;
-    }-*/;
+	}-*/;
 
-    public final void set(String property, Date value) {
-	this.set(property, value, DateFormat.ISO_8601);
-    }
+	public final void set(String property, Date value) {
+		this.set(property, value, DateFormat.ISO_8601);
+	}
 
-    public final void set(String property, Date defaultValue, DateFormat format) {
-	this.set(property, format.format(defaultValue));
-    }
+	public final void set(String property, Date defaultValue, DateFormat format) {
+		this.set(property, format.format(defaultValue));
+	}
 }
