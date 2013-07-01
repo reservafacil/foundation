@@ -81,7 +81,7 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 		}
 
 		this.menu.open();
-		this.selectionCommand.schedule(100);
+		this.selectionCommand.schedule(10);
 	}
 
 	public T onShow(EventHandler<Void> handler) {
