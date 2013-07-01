@@ -44,20 +44,18 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 		this.style().position(Position.RELATIVE);
 		this.add(this.menu.hidden());
 
-		this.input().onKeyUp(new Handler() {
+		@Override
+		void onKeyUp(int keyCode, char charCode) {
+			String value = TypeAhead.this.input().getValue();
+			if (value.length() >= TypeAhead.this.minLength) {
+				TypeAhead.this.load(value);
+			}
 
-			@Override
-			void onKeyUp(int keyCode, char charCode) {
-				String value = TypeAhead.this.input().getValue();
-				if (value.length() >= TypeAhead.this.minLength) {
-					TypeAhead.this.load(value);
-					return;
-				}
-
+			if (value.length() < TypeAhead.this.minLength  ||  TypeAhead.this.entries == null  ||  TypeAhead.this.entries.length() == 0) {
 				TypeAhead.this.menu.close();
 				TypeAhead.this.entries = null;
 			}
-		});
+		}
 
 		this.input().onBlur(new BlurHandler() {
 
