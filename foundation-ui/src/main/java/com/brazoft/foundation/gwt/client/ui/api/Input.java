@@ -136,6 +136,10 @@ public abstract class Input<I extends Input<I, V>, V>
 		return (I)this;
 	}
 
+	public int cursorPosition() {
+		return Input.impl.getCursorPos((com.google.gwt.user.client.Element)this.element.cast());
+	}
+
 	public I span(int span) {
 		return this.className("span" + span);
 	}

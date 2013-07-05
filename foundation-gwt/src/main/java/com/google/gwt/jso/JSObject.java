@@ -73,7 +73,7 @@ public abstract class JSObject
 		return this[property];
 	}-*/;
 
-	public final native <T extends JavaScriptObject> MapJSO<T> getMap(String property) /*-{
+	public final native <T extends JSObject> MapJSO<T> getMap(String property) /*-{
 		return this[property];
 	}-*/;
 
@@ -161,7 +161,7 @@ public abstract class JSObject
 		return this.getArray(property);
 	};
 
-	public final <T extends JavaScriptObject> MapJSO<T> get(String property, MapJSO<T> defaultValue) {
+	public final <T extends JSObject> MapJSO<T> get(String property, MapJSO<T> defaultValue) {
 		if (!this.hasKey(property)) {
 			return defaultValue;
 		}
@@ -174,10 +174,10 @@ public abstract class JSObject
 			return defaultValue;
 		}
 
-		return this.getObject(property);
+		return this.getJavaScriptObject(property);
 	}
 
-	public final native <T extends JavaScriptObject> T getObject(String property) /*-{
+	public final native <T extends JavaScriptObject> T getJavaScriptObject(String property) /*-{
 		return this[property];
 	}-*/;
 
@@ -213,7 +213,7 @@ public abstract class JSObject
 		this[property] = value;
 	}-*/;
 
-	public final native <T extends JavaScriptObject> void set(String property, MapJSO<T> value) /*-{
+	public final native <T extends JSObject> void set(String property, MapJSO<T> value) /*-{
 		this[property] = value;
 	}-*/;
 

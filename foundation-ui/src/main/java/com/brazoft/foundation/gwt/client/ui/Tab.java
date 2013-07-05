@@ -51,7 +51,7 @@ public final class Tab
 		TabItem item = this.item().link(id).text(label);
 
 		if (active) {
-			item.active();
+			item.activate();
 		}
 
 		return item;
@@ -194,7 +194,7 @@ public final class Tab
 			return this;
 		}
 
-		TabItem active() {
+		public TabItem activate() {
 			return Widgets.activateClass(this);
 		}
 

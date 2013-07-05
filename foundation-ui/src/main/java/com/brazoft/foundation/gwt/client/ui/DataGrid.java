@@ -57,6 +57,8 @@ public final class DataGrid<J extends JSObject>
 
 	private int                              totalRows;
 
+	private static final String              SKIP          = "_#*skip*#_";
+
 	public DataGrid() {
 		this.className("table table-bordered datagrid");
 		this.footer.pager.whenPaginate(new EventHandler<Integer>() {
@@ -136,29 +138,38 @@ public final class DataGrid<J extends JSObject>
 
 	public DataGrid<J> filter() {
 		boolean apply;
+		boolean inactive = true;
 		int totalRowsFiltered = 0;
 
 		this.footer.pager.reset();
 
 		for (int i = 0; i < this.rows.length(); i++) {
 			J row = this.rows.get(i);
-
+			row.set(DataGrid.SKIP, false);
+			apply = true;
+			
 			for (GridFilter<J> filter : this.filters) {
 				if (!filter.isActive()) {
 					continue;
 				}
 
-				apply = filter.filter(row);
-				row.set("_skip_", !apply);
-
-				if (apply) {
-					totalRowsFiltered++;
-					break;
+				inactive = false;
+				apply = filter.filter(row) && apply;
+				row.set(DataGrid.SKIP, !apply);
+				if(!apply) {
+					break;	
 				}
+			}
+			
+			if (apply) {
+				totalRowsFiltered++;
 			}
 		}
 
 		this.totalRows = totalRowsFiltered;
+		if(inactive) {
+			this.totalRows = this.rows.length();
+		}
 		this.drawPage(1);
 
 		return this;
@@ -219,7 +230,7 @@ public final class DataGrid<J extends JSObject>
 
 			final J object = this.rows.get(index++);
 
-			if (object.hasKey("_skip_") && object.getBoolean("_skip_")) {
+			if (object.hasKey(DataGrid.SKIP) && object.getBoolean(DataGrid.SKIP)) {
 				continue;
 			}
 

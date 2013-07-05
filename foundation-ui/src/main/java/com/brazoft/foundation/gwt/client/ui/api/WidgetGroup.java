@@ -2,9 +2,10 @@ package com.brazoft.foundation.gwt.client.ui.api;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
+import com.brazoft.foundation.gwt.client.event.Events;
 import com.brazoft.foundation.gwt.client.event.api.HasChangeHandlers;
 import com.brazoft.foundation.gwt.client.ui.*;
-import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.Widget;
 
 @SuppressWarnings("unchecked")
@@ -24,15 +25,24 @@ public abstract class WidgetGroup<G extends WidgetGroup<G, V>, V>
 	}
 
 	public G onChange(ChangeHandler handler) {
-		for (Widget child : getChildren()) {
-			Label label = (Label)child;
-			UIInput<?, ?> input = label.getInput();
-			if (input instanceof HasChangeHandlers) {
-				((HasChangeHandlers<?>)input).onChange(handler);
-			}
+//		for (Widget child : getChildren()) {
+//			Label label = (Label)child;
+//			UIInput<?, ?> input = label.getInput();
+//			if (input instanceof HasChangeHandlers) {
+//				((HasChangeHandlers<?>)input).onChange(handler);
+//			}
+//		}
+		
+		return Events.on((G) this, handler);
+	}
+	
+	@Override
+	public G add(Widget add) {
+		if (add instanceof HasChangeHandlers) {
+			((HasChangeHandlers<?>)add).onChange(new ChangeHandlerAdapter());
 		}
-
-		return (G)this;
+		
+		return super.add(add);
 	}
 
 	public G item(String text) {
@@ -105,5 +115,13 @@ public abstract class WidgetGroup<G extends WidgetGroup<G, V>, V>
 		}
 
 		return (G)this;
+	}
+	
+	class ChangeHandlerAdapter implements ChangeHandler {
+
+		@Override
+        public void onChange(ChangeEvent event) {
+	        WidgetGroup.this.fireEvent(event);
+        }
 	}
 }

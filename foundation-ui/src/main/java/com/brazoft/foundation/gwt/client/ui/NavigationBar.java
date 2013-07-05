@@ -201,15 +201,19 @@ public final class NavigationBar
 			return item;
 		}
 
-		public class Item
+		public final class Item
 		    extends Bootstrap<Item>
 		    implements HasText<Item>, HasFocusHandlers<Item>, HasClickHandlers<Item>, HasMouseHandlers<Item>, HasKeyHandlers<Item> {
 
-			private HTML<AnchorElement> link = HTML.asAnchor("#");
+			private final HTML<AnchorElement> link = HTML.asAnchor("#");
 
 			public Item() {
 				super(ElementResolver.li());
 			}
+			
+            public HTML<AnchorElement> link() {
+	            return link;
+            }
 
 			@Override
 			public Item onKeyPress(KeyPressHandler handler) {

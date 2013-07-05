@@ -19,12 +19,12 @@ import java.util.*;
 
 import com.google.gwt.core.client.*;
 
-public class MapJSO<J extends JavaScriptObject>
-    extends JavaScriptObject {
+public class MapJSO<J extends JSObject>
+    extends JSObject {
 
 	protected MapJSO() {}
 
-	public static native <J extends JavaScriptObject> MapJSO<J> create()/*-{
+	public static native  <J extends JSObject> MapJSO<J> create()/*-{
 		return new Object();
 	}-*/;
 
@@ -34,18 +34,6 @@ public class MapJSO<J extends JavaScriptObject>
 
 	public final native void put(String key, J value) /*-{
 		this[key] = value;
-	}-*/;
-
-	protected final native JsArrayString keys() /*-{
-		var a = new Array();
-		for ( var e in this) {
-			a.push(e);
-		}
-		return a;
-	}-*/;
-
-	public final native J get(String key) /*-{
-		return this[key];
 	}-*/;
 
 	public final Set<String> keySet() {
@@ -66,20 +54,16 @@ public class MapJSO<J extends JavaScriptObject>
 		return this.size() == 0;
 	}
 
-	public final J remove(String key) {
-		J value = this.get(key);
-
-		this.put(key, null);
-
-		return value;
-	}
+	public final native void remove(String key) /*-{
+		delete this[key];
+	}-*/;
 
 	public final void putAll(MapJSO<J> map) {
 		JsArrayString keys = this.keys();
 
 		for (int idx = 0; idx < keys.length(); idx++) {
 			String key = keys.get(idx);
-			this.put(key, map.get(key));
+			this.put(key, map.<J> getJavaScriptObject(key));
 		}
 	}
 
@@ -93,9 +77,13 @@ public class MapJSO<J extends JavaScriptObject>
 		JsArray<J> values = JsArray.createArray().cast();
 
 		for (String key : this.keySet()) {
-			values.push(this.get(key));
+			values.push(this.<J> getJavaScriptObject(key));
 		}
 
 		return values;
+	}
+	
+	public final J getObject(String key){
+		return this.getJavaScriptObject(key);
 	}
 }

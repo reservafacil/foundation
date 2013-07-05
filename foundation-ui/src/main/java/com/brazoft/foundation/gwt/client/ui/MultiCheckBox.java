@@ -14,10 +14,7 @@ public final class MultiCheckBox
 
 	@Override
 	public MultiCheckBox clear() {
-		for (Widget child : getChildren()) {
-			this.checkbox(child).clear();
-		}
-		return this;
+		return this.uncheckAll();
 	}
 
 	@Override
@@ -51,6 +48,43 @@ public final class MultiCheckBox
 		CheckBox input = new CheckBox().value(value);
 
 		return this.input(input, text);
+	}
+	
+	public MultiCheckBox checkAll() {
+		return this.check(true);
+	}
+	
+	public MultiCheckBox uncheckAll() {
+		return this.check(false);
+	}
+	
+	public MultiCheckBox uncheck(String value) {
+		return this.check(value, false);
+	}
+	
+	public MultiCheckBox check(String value){
+		return this.check(value, true);
+	}
+	
+	public MultiCheckBox check(String value, boolean check){
+		for (Widget child : getChildren()) {
+			CheckBox checkbox = this.checkbox(child);
+			if(checkbox.getValue().equals(value)) {
+				checkbox.checked(check);
+				break;
+			}
+		}
+		
+		return this;
+	}
+	
+	private MultiCheckBox check(boolean check){
+		for (Widget child : getChildren()) {
+			CheckBox checkbox = this.checkbox(child);
+			checkbox.checked(check);
+		}
+		
+		return this;
 	}
 
 	private CheckBox checkbox(Widget child) {
