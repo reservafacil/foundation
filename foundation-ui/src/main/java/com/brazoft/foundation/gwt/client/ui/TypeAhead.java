@@ -338,7 +338,11 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 		}
 
 		public Menu reset() {
-			this.item(this.activeItem()).deactivate();
+			int index = this.activeItem();
+			if(index > -1) {
+				this.item(index).deactivate();
+			}
+			
 			return this;
 		}
 

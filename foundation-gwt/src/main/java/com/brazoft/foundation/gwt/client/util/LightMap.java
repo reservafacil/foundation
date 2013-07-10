@@ -12,13 +12,13 @@ public class LightMap
 		return new Object();
 	}-*/;
 
-	public final native int size() /*-{
-		return this.length;
-	}-*/;
+	public final int size() {
+		return this.arrayOfKeys().length();
+	}
 
-	public final native boolean isEmpty() /*-{
-		return this.length == 0;
-	}-*/;
+	public final boolean isEmpty() {
+		return this.size() == 0;
+	}
 
 	public final native boolean containsKey(String key) /*-{
 		return this[key] != undefined;

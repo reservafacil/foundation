@@ -111,6 +111,16 @@ public final class Datepicker
 
 		return this;
 	}
+	
+	public Datepicker append(Button button){
+		this.input.append(button);
+		return this;
+	}
+	
+	public Datepicker prepend(Button button){
+		this.input.prepend(button);
+		return this;
+	}
 
 	public InputText input() {
 		return input.input();

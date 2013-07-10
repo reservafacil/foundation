@@ -45,8 +45,6 @@ public final class DataGrid<J extends JSObject>
 
 	private GridCaption                      caption       = new GridCaption(this.header.row());
 
-	private ProgressIndicator                progress      = new ProgressIndicator(this.header.row());
-
 	private Row                              headerColumns = this.header.row();
 
 	private DataGridOptions                  options;
@@ -78,8 +76,6 @@ public final class DataGrid<J extends JSObject>
 				DataGrid.this.drawPage(1);
 			}
 		});
-
-		this.add(this.progress);
 	}
 
 	public DataGrid<J> onDraw(EventHandler<Object> handler) {
@@ -105,7 +101,6 @@ public final class DataGrid<J extends JSObject>
 		int colspan = this.columns.size();
 		this.caption.colspan(colspan);
 		this.footer.colspan(colspan);
-		this.progress.colspan(colspan);
 
 		return this;
 	}
@@ -203,8 +198,6 @@ public final class DataGrid<J extends JSObject>
 	}
 
 	void drawPage(int page) {
-		this.progress.working();
-
 		int rowsPerPage = this.footer.rowsPerPage.getValue();
 
 		int pages = this.totalRows / rowsPerPage;
@@ -254,8 +247,6 @@ public final class DataGrid<J extends JSObject>
 				column.render((index - 1), row.cell(), object);
 			}
 		}
-
-		this.progress.done();
 	}
 
 	public class DataGridOptions {

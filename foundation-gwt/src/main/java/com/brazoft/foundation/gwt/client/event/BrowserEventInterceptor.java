@@ -126,6 +126,11 @@ public class BrowserEventInterceptor
 	public BrowserEventInterceptor onTouchStart(TouchStartHandler handler) {
 		return this.put(TouchStartEvent.getType(), handler);
 	}
+	
+	public <H extends EventHandler> BrowserEventInterceptor remove(Type<H> type, H handler) {
+		this.manager.removeHandler(type, handler);
+		return this;
+	}
 
 	private <H extends EventHandler> BrowserEventInterceptor put(Type<H> type, H handler) {
 		this.manager.addHandler(type, handler);
