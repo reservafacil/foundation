@@ -64,7 +64,7 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 
 			@Override
 			public void onBlur(BlurEvent event) {
-				if (!TypeAhead.this.menu.isOpened()) {
+				if (TypeAhead.this.menu.isOpened()) {
 					TypeAhead.this.menu.close();
 				}
 			}
