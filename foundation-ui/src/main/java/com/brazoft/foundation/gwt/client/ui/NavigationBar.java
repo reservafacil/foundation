@@ -33,7 +33,7 @@ public final class NavigationBar
     extends Bootstrap<NavigationBar>
     implements HasText<NavigationBar> {
 
-	private HTML<AnchorElement> brand = HTML.asAnchor("#").className("brand");
+	private HTML<AnchorElement> brand = HTML.asAnchor("#").className("brand").hidden();
 
 	private HTML<DivElement>    content;
 
@@ -140,12 +140,12 @@ public final class NavigationBar
 	}
 
 	public NavigationBar brand(Image image) {
-		this.brand.add(image);
+		this.brand.visible().add(image);
 		return this;
 	}
 
 	public NavigationBar brand(Icon icon) {
-		this.brand.add(new Iconic().icon(icon));
+		this.brand.visible().add(new Iconic().icon(icon));
 		return this;
 	}
 

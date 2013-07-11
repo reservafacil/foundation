@@ -39,10 +39,14 @@ public final class Portlet
 		Header() {
 			super(ElementResolver.div());
 			this.className("portlet-header");
-			this.add(this.icon).add(this.title).icon(Icon.NONE);
+			this.add(this.title);
 		}
 
 		public Header icon(Icon icon) {
+			if(!this.icon.isAttached()) {
+				this.insert(this.icon, this.title);
+			}
+			
 			Widgets.setIcon(this.icon, icon);
 			return this;
 		}

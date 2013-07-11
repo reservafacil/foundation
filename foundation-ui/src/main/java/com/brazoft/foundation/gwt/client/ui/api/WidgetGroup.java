@@ -4,7 +4,9 @@ import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.Events;
 import com.brazoft.foundation.gwt.client.event.api.HasChangeHandlers;
+import com.brazoft.foundation.gwt.client.event.api.HasClickHandlers;
 import com.brazoft.foundation.gwt.client.ui.*;
+import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -13,11 +15,13 @@ public abstract class WidgetGroup<G extends WidgetGroup<G, V>, V>
     extends Bootstrap<G>
     implements UIInput<G, V>, HasChangeHandlers<G> {
 
-	private Orientation orientation;
+	private Orientation          orientation;
 
-	private InputState  contentState = InputState.NONE;
+	private InputState           contentState = InputState.NONE;
 
-	private boolean     required;
+	private ChangeHandlerAdapter adapter      = new ChangeHandlerAdapter();
+
+	private boolean              required;
 
 	public WidgetGroup(Orientation orientation) {
 		super(ElementResolver.div());
@@ -25,23 +29,11 @@ public abstract class WidgetGroup<G extends WidgetGroup<G, V>, V>
 	}
 
 	public G onChange(ChangeHandler handler) {
-//		for (Widget child : getChildren()) {
-//			Label label = (Label)child;
-//			UIInput<?, ?> input = label.getInput();
-//			if (input instanceof HasChangeHandlers) {
-//				((HasChangeHandlers<?>)input).onChange(handler);
-//			}
-//		}
-		
-		return Events.on((G) this, handler);
+		return Events.on((G)this, handler);
 	}
-	
+
 	@Override
 	public G add(Widget add) {
-		if (add instanceof HasChangeHandlers) {
-			((HasChangeHandlers<?>)add).onChange(new ChangeHandlerAdapter());
-		}
-		
 		return super.add(add);
 	}
 
@@ -104,6 +96,7 @@ public abstract class WidgetGroup<G extends WidgetGroup<G, V>, V>
 		this.contentState.visit(input);
 
 		Label label = new Label(this.orientation).forInput(input).text(labelText);
+		this.adapter.visit(input);
 
 		return this.add(label);
 	}
@@ -116,12 +109,30 @@ public abstract class WidgetGroup<G extends WidgetGroup<G, V>, V>
 
 		return (G)this;
 	}
-	
-	class ChangeHandlerAdapter implements ChangeHandler {
+
+	class ChangeHandlerAdapter
+	    implements ChangeHandler, ClickHandler {
+
+		void visit(UIInput<?, ?> input) {
+			if (input instanceof HasClickHandlers) {
+				((HasClickHandlers<?>)input).onClick(this);
+				return;
+			}
+			
+			if (input instanceof HasChangeHandlers) {
+				((HasChangeHandlers<?>)input).onChange(this);
+				return;
+			}
+		}
 
 		@Override
-        public void onChange(ChangeEvent event) {
-	        WidgetGroup.this.fireEvent(event);
-        }
+		public void onChange(ChangeEvent event) {
+			WidgetGroup.this.fireEvent(event);
+		}
+
+		@Override
+		public void onClick(ClickEvent event) {
+			DomEvent.fireNativeEvent(Document.get().createChangeEvent(), WidgetGroup.this);
+		}
 	}
 }
