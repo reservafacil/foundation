@@ -64,7 +64,7 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 
 			@Override
 			public void onBlur(BlurEvent event) {
-				if (TypeAhead.this.menu.isOpened()) {
+				if (TypeAhead.this.menu.isOpened() && !TypeAhead.this.menu.isHover()) {
 					TypeAhead.this.menu.close();
 				}
 			}
@@ -196,6 +196,20 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 
 		private void init() {
 			this.className("typeahead dropdown-menu");
+			
+			this.onMouseOver(new MouseOverHandler() {
+				
+				@Override
+				public void onMouseOver(MouseOverEvent event) {
+					Menu.this.hover = true;
+				}
+			}).onMouseOut(new MouseOutHandler() {
+				
+				@Override
+				public void onMouseOut(MouseOutEvent event) {
+					Menu.this.hover = false;
+				}
+			});
 		}
 
 		void up() {
@@ -225,14 +239,14 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 				if (item.isActive()) {
 					item.blur();
 					if (bound) {
-						this.item(idx).focus();
+						this.item(idx).activate();
 						return;
 					}
 					break;
 				}
 			} while (bound);
 
-			target.focus();
+			target.activate();
 		}
 
 		MenuItem item(int index) {
