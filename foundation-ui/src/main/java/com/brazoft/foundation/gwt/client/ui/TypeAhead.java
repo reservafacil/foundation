@@ -139,21 +139,32 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 	public int getActiveIndex() {
 		return this.menu.activeItem();
 	}
-
+	
 	public T select(int index) {
-		this.input().blur();
-		return this.select(this.entries.get(index));
+		return this.select(index, true);
 	}
 
+	public T select(int index, boolean fireEvent) {
+		this.input().blur();
+		return this.select(this.entries.get(index), fireEvent);
+	}
+	
 	public T select(Entry entry) {
+		return this.select(entry, true);
+	}
+
+	public T select(Entry entry, boolean fireEvent) {
 		this.selection = entry;
 		this.input().value(entry.getValue());
-		this.fireEvent(new Event<Entry>(Events.SELECTION, entry));
+		
+		if(fireEvent) {
+			this.fireEvent(new Event<Entry>(Events.SELECTION, entry));
+		}
 		this.menu.close();
 
 		return (T)this;
 	}
-
+	
 	public boolean hasSuggestions() {
 		return this.menu.isOpened();
 	}

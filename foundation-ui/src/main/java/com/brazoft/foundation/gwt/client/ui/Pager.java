@@ -45,6 +45,7 @@ public final class Pager
 
 	@Override
 	public Pager pages(int pages) {
+		this.next.activate();
 		if (pages == 1) {
 			this.next.disabled();
 		}
