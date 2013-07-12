@@ -21,6 +21,7 @@ import com.brazoft.foundation.gwt.client.event.api.*;
 import com.brazoft.foundation.gwt.client.event.api.HasClickHandlers;
 import com.brazoft.foundation.gwt.client.event.api.HasFocusHandlers;
 import com.google.gwt.dom.client.*;
+import com.google.gwt.dom.client.Style.Cursor;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -200,7 +201,9 @@ public final class HTML<E extends Element>
 	}
 
 	public static HTML<AnchorElement> asAnchor() {
-		return HTML.asAnchor("#");
+		HTML<AnchorElement> anchor = HTML.as(ElementResolver.a());
+		anchor.style().cursor(Cursor.POINTER);
+		return anchor;
 	}
 
 	public static HTML<AnchorElement> asAnchor(String href) {

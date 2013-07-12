@@ -205,7 +205,7 @@ public final class NavigationBar
 		    extends Bootstrap<Item>
 		    implements HasText<Item>, HasFocusHandlers<Item>, HasClickHandlers<Item>, HasMouseHandlers<Item>, HasKeyHandlers<Item> {
 
-			private final HTML<AnchorElement> link = HTML.asAnchor("#");
+			private final HTML<AnchorElement> link = HTML.asAnchor();
 
 			public Item() {
 				super(ElementResolver.li());
@@ -304,7 +304,6 @@ public final class NavigationBar
 
 			@Override
 			public Item text(String text) {
-				this.link.element().setHref("#");
 				this.add(this.link);
 				Component.Util.setHTML(this.link, text);
 
