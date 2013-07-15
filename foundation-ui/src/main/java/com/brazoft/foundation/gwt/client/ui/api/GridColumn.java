@@ -110,6 +110,10 @@ public abstract class GridColumn<G extends GridColumn<G, J>, J extends JSObject>
 		this.label.text(label);
 		return (G)this;
 	}
+	
+	protected String getLabel() {
+		return this.label.getText();
+	}
 
 	public String toString(J object) {
 		return object.toString();

@@ -193,10 +193,28 @@ public class AbstractTable<T extends AbstractTable<T>>
 	    implements HasClickHandlers<Row>, HasMouseHandlers<Row> {
 
 		private boolean head;
+		
+		private StyleChooser<Row> chooser = new StyleChooser<Row>("warning", "error", "info", "success");
 
 		public Row(boolean head) {
 			super(ElementResolver.tr());
 			this.head = head;
+		}
+		
+		public Row warning() {
+			return this.chooser.className(this, "alert-warning");
+		}
+
+		public Row error() {
+			return this.chooser.className(this, "alert-error");
+		}
+
+		public Row info() {
+			return this.chooser.className(this, "alert-info");
+		}
+
+		public Row success() {
+			return this.chooser.className(this, "alert-success");
 		}
 
 		@Override
