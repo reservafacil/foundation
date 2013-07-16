@@ -232,6 +232,14 @@ public final class HTML<E extends Element>
 	public static HTML<LIElement> asListItem() {
 		return HTML.as(ElementResolver.li());
 	}
+	
+	public static HTML<OListElement> asOrderedList(){
+		return HTML.as(ElementResolver.ol());
+	}
+	
+	public static HTML<UListElement> asUnorderedList(){
+		return HTML.as(ElementResolver.ul());
+	}
 
 	public static HTML<SpanElement> asSpan() {
 		return HTML.as(ElementResolver.span());
