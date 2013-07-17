@@ -1,0 +1,26 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<module rename-to='showcase'>
+  <inherits name='com.brazoft.foundation.gwt.Foundation' />
+  <inherits name='com.brazoft.foundation.gwt.UI' />
+  <inherits name='com.brazoft.foundation.gwt.Skin' />
+  <inherits name='com.brazoft.foundation.Commons' />
+
+  <public path="assets" />
+  <source path="client" />
+  <source path="shared" />
+
+  <stylesheet src="css/b2c.css" />
+  <stylesheet src="css/b2c-ie.css" />
+
+  <extend-property name="locale" values="pt" />
+
+  <!-- Dev Settings 
+  <collapse-all-properties />
+  -->
+
+  <!-- Enable GZip Compression for client performance 
+  <inherits name="com.google.gwt.precompress.Precompress"/> 
+  -->
+  
+  <entry-point class='com.brazoft.foundation.showcase.client.Showcase' />
+</module>
