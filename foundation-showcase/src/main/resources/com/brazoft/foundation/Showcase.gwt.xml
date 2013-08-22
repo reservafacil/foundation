@@ -5,12 +5,7 @@
   <inherits name='com.brazoft.foundation.gwt.Skin' />
   <inherits name='com.brazoft.foundation.Commons' />
 
-  <public path="assets" />
-  <source path="client" />
-  <source path="shared" />
-
-  <stylesheet src="css/b2c.css" />
-  <stylesheet src="css/b2c-ie.css" />
+  <source path="showcase/client" />
 
   <extend-property name="locale" values="pt" />
 

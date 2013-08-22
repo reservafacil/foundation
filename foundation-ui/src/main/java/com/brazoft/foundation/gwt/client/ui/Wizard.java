@@ -97,16 +97,11 @@ public final class Wizard
 	}
 
 	public Wizard onNext(EventHandler<Void> handler) {
-		return this.addHandler(Events.NEXT, handler);
+		return this.addHandler(FireableEvent.NEXT, handler);
 	}
 
 	public Wizard onPrevious(EventHandler<Void> handler) {
-		return this.addHandler(Events.PREVIOUS, handler);
-	}
-
-	enum Events
-	    implements EventType {
-		NEXT, PREVIOUS;
+		return this.addHandler(FireableEvent.PREVIOUS, handler);
 	}
 
 	class Pager {
@@ -154,11 +149,11 @@ public final class Wizard
 
 			if (direction > 0) {
 				Wizard.this.left.bar.worked(this.index);
-				Wizard.this.fireEvent(Events.NEXT);
+				Wizard.this.fireEvent(FireableEvent.NEXT);
 				return;
 			}
 
-			Wizard.this.fireEvent(Events.PREVIOUS);
+			Wizard.this.fireEvent(FireableEvent.PREVIOUS);
 		}
 
 		private void assertControls() {
@@ -278,5 +273,10 @@ public final class Wizard
 
 			return this;
 		}
+	}
+
+	enum FireableEvent
+	    implements EventType {
+		NEXT, PREVIOUS;
 	}
 }

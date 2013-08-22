@@ -15,7 +15,7 @@
   <properties>
     <webappDirectory>${project.build.directory}/${project.build.finalName}</webappDirectory>
     <project.build.sourceEncoding>UTF-8</project.build.sourceEncoding>
-    
+
     <!-- GWT Properties -->
     <gwt.style>PRETTY</gwt.style> <!-- OBF[USCATED], PRETTY, DETAILED default: OBF -->
     <messages.bundle>com.brazoft.foundation.showcase.client.i18n.Messages</messages.bundle>
@@ -37,6 +37,12 @@
       <groupId>com.google.gwt</groupId>
       <artifactId>gwt-servlet</artifactId>
       <version>${gwt.version}</version>
+    </dependency>
+
+    <dependency>
+      <groupId>com.googlecode.gwtquery</groupId>
+      <artifactId>gwtquery</artifactId>
+      <scope>provided</scope>
     </dependency>
 
     <dependency>
@@ -86,7 +92,7 @@
       <artifactId>jackson-core-asl</artifactId>
       <version>1.9.9</version>
     </dependency>
-    
+
     <!-- Foundation Dependencies -->
     <dependency>
       <groupId>com.brazoft.foundation</groupId>
@@ -109,7 +115,55 @@
     </dependency>
   </dependencies>
 
+  <profiles>
+    <profile>
+      <id>gwt</id>
+      <build>
+        <plugins>
+          <plugin>
+            <groupId>org.codehaus.mojo</groupId>
+            <artifactId>gwt-maven-plugin</artifactId>
+            <version>${gwt.version}</version>
+            <executions>
+              <execution>
+                <goals>
+                  <goal>compile</goal>
+                  <goal>test</goal>
+                  <goal>i18n</goal>
+                  <goal>generateAsync</goal>
+                </goals>
+              </execution>
+            </executions>
+            <!-- Plugin configuration. There are many available options, 
+              see gwt-maven-plugin documentation at codehaus.org -->
+            <configuration>
+              <module>com.brazoft.foundation.Showcase</module>
+              <runTarget>showcase.html</runTarget>
+
+              <hostedWebapp>${webappDirectory}</hostedWebapp>
+              <warSourceDirectory>${webappDirectory}/showcase/target/showcase</warSourceDirectory>
+              <style>${gwt.style}</style>
+              <!-- 
+              <i18nMessagesBundle>${messages.bundle}</i18nMessagesBundle>
+              -->
+              <i18nConstantsWithLookupBundle>${constants.bundle}</i18nConstantsWithLookupBundle>
+              <localWorkers>2</localWorkers>
+              <logLevel>${log.level}</logLevel>
+              <optimizationLevel>${optimization.level}</optimizationLevel>
+              <extraJvmArgs>-XX:MaxPermSize=512m</extraJvmArgs>
+            </configuration>
+          </plugin>
+        </plugins>
+      </build>
+    </profile>
+  </profiles>
+
   <build>
+    <finalName>showcase</finalName>
+
+    <!-- Generate compiled stuff in the folder used for developing mode -->
+    <outputDirectory>${webappDirectory}/WEB-INF/classes</outputDirectory>
+
     <!--Add sources to jar files -->
     <resources>
       <resource>
@@ -130,6 +184,47 @@
         </configuration>
       </plugin>
 
+      <!-- Jetty plugin -->
+      <plugin>
+        <groupId>org.mortbay.jetty</groupId>
+        <artifactId>maven-jetty-plugin</artifactId>
+        <version>6.1.15</version>
+        <configuration>
+          <!-- By default the artifactId is taken, override it with something 
+            simple -->
+          <contextPath>/</contextPath>
+          <scanIntervalSeconds>2</scanIntervalSeconds>
+          <webAppSourceDirectory>${webappDirectory}</webAppSourceDirectory>
+          <stopKey>foo</stopKey>
+          <stopPort>9999</stopPort>
+          <connectors>
+            <connector implementation="org.mortbay.jetty.nio.SelectChannelConnector">
+              <port>8080</port>
+              <maxIdleTime>60000</maxIdleTime>
+            </connector>
+          </connectors>
+        </configuration>
+        <executions>
+          <execution>
+            <id>start-jetty</id>
+            <phase>pre-integration-test</phase>
+            <goals>
+              <goal>run</goal>
+            </goals>
+            <configuration>
+              <scanIntervalSeconds>0</scanIntervalSeconds>
+              <daemon>true</daemon>
+            </configuration>
+          </execution>
+          <execution>
+            <id>stop-jetty</id>
+            <phase>post-integration-test</phase>
+            <goals>
+              <goal>stop</goal>
+            </goals>
+          </execution>
+        </executions>
+      </plugin>
     </plugins>
   </build>
 </project>

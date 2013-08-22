@@ -63,7 +63,7 @@
                 <include>${project.build.directory}/classes/web/css/ui-plan.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-portlet.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-quick-button.css</include>
-                <include>${project.build.directory}/classes/web/css/ui-select2.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-select.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-slider.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-spinner.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-wizard.css</include>

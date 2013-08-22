@@ -42,6 +42,10 @@ public final class MultiCheckBox
 
 		return values.toArray(new String[values.size()]);
 	}
+	
+	public MultiCheckBox item(Image image, String value) {
+		return this.item(image.toString(), value);
+	}
 
 	@Override
 	public MultiCheckBox item(String text, String value) {

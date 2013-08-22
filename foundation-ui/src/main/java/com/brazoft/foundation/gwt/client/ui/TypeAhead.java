@@ -2,17 +2,15 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.*;
 import com.brazoft.foundation.gwt.client.component.api.*;
-import com.brazoft.foundation.gwt.client.event.Event;
+import com.brazoft.foundation.gwt.client.event.*;
 import com.brazoft.foundation.gwt.client.event.api.*;
 import com.brazoft.foundation.gwt.client.event.api.HasClickHandlers;
 import com.brazoft.foundation.gwt.client.event.api.HasFocusHandlers;
-import com.brazoft.foundation.gwt.client.ui.api.DecoratedInput;
+import com.brazoft.foundation.gwt.client.ui.api.*;
 import com.brazoft.foundation.gwt.client.util.Entry;
 import com.google.gwt.core.client.JsArray;
 import com.google.gwt.dom.client.*;
-import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Position;
-import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.Timer;
 import com.google.gwt.user.client.ui.Widget;
@@ -85,19 +83,19 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 	}
 
 	public T onShow(EventHandler<Void> handler) {
-		return this.addHandler(Events.SHOW, handler);
+		return this.addHandler(FireableEvent.SHOW, handler);
 	}
 
 	public T onMoveUp(EventHandler<Void> handler) {
-		return this.addHandler(Events.UP, handler);
+		return this.addHandler(FireableEvent.UP, handler);
 	}
 
 	public T onMoveDown(EventHandler<Void> handler) {
-		return this.addHandler(Events.DOWN, handler);
+		return this.addHandler(FireableEvent.DOWN, handler);
 	}
 
 	public T onSelect(EventHandler<Entry> handler) {
-		this.addHandler(Events.SELECTION, handler);
+		this.addHandler(FireableEvent.SELECTION, handler);
 		return (T)this;
 	}
 
@@ -158,7 +156,7 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 		this.input().value(entry.getValue());
 		
 		if(fireEvent) {
-			this.fireEvent(new Event<Entry>(Events.SELECTION, entry));
+			this.fireEvent(new Event<Entry>(FireableEvent.SELECTION, entry));
 		}
 		this.menu.close();
 
@@ -187,18 +185,14 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 		JsArray<Entry> provideContent(String value, int numberOfItems);
 	}
 
-	enum Events
+	enum FireableEvent
 	    implements EventType {
 		COMPLETION, DOWN, SELECTION, SHOW, UP;
 	}
 
 	class Menu
-	    extends Component<Menu>
+	    extends FloatPanel<Menu>
 	    implements HasMouseHandlers<Menu>, HasKeyHandlers<Menu> {
-
-		private boolean hover;
-
-		private boolean opened;
 
 		public Menu() {
 			super(ElementResolver.ul());
@@ -206,35 +200,21 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 		}
 
 		private void init() {
-			this.className("typeahead dropdown-menu");
-			
-			this.onMouseOver(new MouseOverHandler() {
-				
-				@Override
-				public void onMouseOver(MouseOverEvent event) {
-					Menu.this.hover = true;
-				}
-			}).onMouseOut(new MouseOutHandler() {
-				
-				@Override
-				public void onMouseOut(MouseOutEvent event) {
-					Menu.this.hover = false;
-				}
-			});
+			this.className("typeahead dropdown-menu").target(TypeAhead.this.input());
 		}
 
 		void up() {
 			this.moveTo(-1);
-			TypeAhead.this.fireEvent(Events.UP);
+			TypeAhead.this.fireEvent(FireableEvent.UP);
 		}
 
 		void down() {
 			this.moveTo(1);
-			TypeAhead.this.fireEvent(Events.DOWN);
+			TypeAhead.this.fireEvent(FireableEvent.DOWN);
 		}
 
 		void moveTo(int direction) {
-			if (!this.hasChildren() || this.hover) {
+			if (!this.hasChildren() || this.isHover()) {
 				return;
 			}
 
@@ -277,89 +257,19 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 			return -1;
 		}
 
-		public boolean isHover() {
-			return hover;
-		}
-
-		public boolean isOpened() {
-			return opened;
-		}
-
 		@Override
 		public Menu onKeyPress(KeyPressHandler handler) {
-			return com.brazoft.foundation.gwt.client.event.Events.on(this, handler);
+			return Events.on(this, handler);
 		}
 
 		@Override
 		public Menu onKeyDown(KeyDownHandler handler) {
-			return com.brazoft.foundation.gwt.client.event.Events.on(this, handler);
+			return Events.on(this, handler);
 		}
 
 		@Override
 		public Menu onKeyUp(KeyUpHandler handler) {
-			return com.brazoft.foundation.gwt.client.event.Events.on(this, handler);
-		}
-
-		@Override
-		public Menu onMouseDown(MouseDownHandler handler) {
-			return com.brazoft.foundation.gwt.client.event.Events.on(this, handler);
-		}
-
-		@Override
-		public Menu onMouseMove(MouseMoveHandler handler) {
-			return com.brazoft.foundation.gwt.client.event.Events.on(this, handler);
-		}
-
-		@Override
-		public Menu onMouseOut(MouseOutHandler handler) {
-			return com.brazoft.foundation.gwt.client.event.Events.on(this, handler);
-		}
-
-		@Override
-		public Menu onMouseOver(MouseOverHandler handler) {
-			return com.brazoft.foundation.gwt.client.event.Events.on(this, handler);
-		}
-
-		@Override
-		public Menu onMouseUp(MouseUpHandler handler) {
-			return com.brazoft.foundation.gwt.client.event.Events.on(this, handler);
-		}
-
-		@Override
-		public Menu onMouseWheel(MouseWheelHandler handler) {
-			return com.brazoft.foundation.gwt.client.event.Events.on(this, handler);
-		}
-
-		public Menu open() {
-			if (!this.hasChildren()) {
-				return this.close();
-			}
-
-			this.opened = true;
-			InputText input = TypeAhead.this.input();
-
-			double left = 0;
-			double top = input.top() + input.position().top() + input.scrollTop() + input.outerHeight(true);
-			this.style().zIndex(10000).position(Position.ABSOLUTE).display(Display.BLOCK).top(top, Unit.PX).left(left, Unit.PX);
-
-			return this;
-		}
-
-		public Menu close() {
-			this.opened = false;
-			return this.hidden();
-		}
-
-		@Override
-		public Menu hidden() {
-			this.style().display(Display.NONE);
-			return super.hidden();
-		}
-
-		@Override
-		public Menu visible() {
-			this.style().display(Display.BLOCK);
-			return super.visible();
+			return Events.on(this, handler);
 		}
 
 		public Menu reset() {
@@ -380,17 +290,13 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 				public void onClick(ClickEvent event) {
 					TypeAhead.this.select(entry);
 				}
-			});
-
-			item.onBlur(new BlurHandler() {
+			}).onBlur(new BlurHandler() {
 
 				@Override
 				public void onBlur(BlurEvent event) {
 					item.link.removeAttribute("focused");
 				}
-			});
-
-			item.onKeyUp(new Handler());
+			}).onKeyUp(new Handler());
 
 			this.add(item);
 			return item;
@@ -585,7 +491,7 @@ public abstract class TypeAhead<T extends TypeAhead<T, V>, V>
 
 		@Override
 		public void run() {
-			TypeAhead.this.fireEvent(Events.SHOW);
+			TypeAhead.this.fireEvent(FireableEvent.SHOW);
 		}
 	}
 

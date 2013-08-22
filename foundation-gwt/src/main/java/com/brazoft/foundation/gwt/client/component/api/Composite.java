@@ -67,6 +67,14 @@ public abstract class Composite<C extends Composite<C>>
 		this.setVisible(false);
 		return (C)this;
 	}
+	
+	public C toggleVisibility() {
+		if(this.isVisible()){
+			return this.hidden();
+		}
+		
+		return this.visible();
+	}
 
 	public String getId() {
 		return this.getElement().getId();

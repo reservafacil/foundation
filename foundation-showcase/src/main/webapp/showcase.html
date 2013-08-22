@@ -13,6 +13,29 @@
 		<!--[if lt IE 9]>
 			<script src="http://html5shim.googlecode.com/svn/trunk/html5.js"></script>
 		<![endif]-->
+		<style type="text/css">
+			/* Wrapper for page content to push down footer */
+			#wrap {
+				min-height: 100%;
+				height: auto !important;
+				height: 100%;
+				/* Negative indent footer by it's height */
+				margin: 0 auto -30px;
+			}
+			
+			/* Set the fixed height of the footer here */
+			#push,#footer {
+				height: 30px;
+			}
+			
+			#footer {
+				font-size: 10pt;
+			}
+			
+			#footer div {
+				padding: 4px;
+			}
+		</style>
 	</head>
 
 	<body>
@@ -33,7 +56,9 @@
 		</div>
 	
 		<div id="footer">
+			<!-- 
 			<div class="pull-left">Todos os direitos reservados &copy; Brazoft</div>
+			-->
 		</div>
 		<script type="text/javascript" src="showcase/showcase.nocache.js"></script>
 	</body>

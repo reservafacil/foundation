@@ -88,11 +88,11 @@ public final class DataGrid<J extends JSObject>
 	}
 
 	public DataGrid<J> onDraw(EventHandler<Object> handler) {
-		return this.addHandler(Type.DRAW, handler);
+		return this.addHandler(FireableEvent.DRAW, handler);
 	}
 
 	public DataGrid<J> onSelection(EventHandler<J> handler) {
-		return this.addHandler(Type.SELECTION, handler);
+		return this.addHandler(FireableEvent.SELECTION, handler);
 	}
 
 	public DataGrid<J> add(final GridColumn<?, J> column) {
@@ -196,7 +196,7 @@ public final class DataGrid<J extends JSObject>
 	}
 
 	public DataGrid<J> draw(JsArray<J> rows) {
-		this.fireEvent(Type.DRAW);
+		this.fireEvent(FireableEvent.DRAW);
 
 		this.rows = rows;
 		this.totalRows = rows.length();
@@ -249,7 +249,7 @@ public final class DataGrid<J extends JSObject>
 
 				@Override
 				public void onClick(ClickEvent event) {
-					fireEvent(new Event<J>(Type.SELECTION, object));
+					fireEvent(new Event<J>(FireableEvent.SELECTION, object));
 				}
 			});
 
@@ -565,7 +565,7 @@ public final class DataGrid<J extends JSObject>
 		}
 	}
 
-	enum Type
+	enum FireableEvent
 	    implements EventType {
 
 		DRAW, SELECTION;

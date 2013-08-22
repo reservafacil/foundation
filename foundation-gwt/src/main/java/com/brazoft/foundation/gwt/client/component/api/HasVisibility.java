@@ -6,6 +6,8 @@ import com.google.gwt.user.client.ui.IsWidget;
 public interface HasVisibility<T>
     extends IsWidget {
 
+	T toggleVisibility();
+	
 	T visible();
 
 	T hidden();

@@ -6,6 +6,10 @@ import com.google.gwt.core.client.*;
 
 public class JSIterable {
 
+	public static <J extends JavaScriptObject> Iterable<J> from(JsArray<J> values) {
+		return new JSObjectIterable<J>(values);
+	}
+
 	public static Iterable<Boolean> from(JsArrayBoolean values) {
 		return new BooleanIterable(values);
 	}
@@ -82,6 +86,22 @@ public class JSIterable {
 
 		@Override
 		public String next() {
+			return this.values.get(this.doNext());
+		}
+	}
+
+	static class JSObjectIterable<J extends JavaScriptObject>
+	    extends AbstractIterable<J> {
+
+		private JsArray<J> values;
+
+		JSObjectIterable(JsArray<J> values) {
+			super(values.length());
+			this.values = values;
+		}
+
+		@Override
+		public J next() {
 			return this.values.get(this.doNext());
 		}
 	}

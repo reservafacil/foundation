@@ -38,15 +38,6 @@ public abstract class Select2<S extends Select2<S, V>, V>
 
 	private boolean      required;
 	
-	/*
-	<div class="select2-container select2-dropdown-open select2-container-active" id="s2id_gwt-uid-2" style="width: 100%;">
-		<a tabindex="-1" class="select2-choice" onclick="return false;" href="javascript:void(0)">
-		<span>PlaceHolder</span>
-		<abbr style="display:none;" class="select2-search-choice-close"></abbr>
-	</a>
-	<input type="text" class="select2-focusser select2-offscreen" disabled="disabled"></div>
-	*/
-
 	public Select2(boolean multiple) {
 		super(ElementResolver.div());
 		this.input = new Select(multiple).placeholder("");
@@ -115,10 +106,6 @@ public abstract class Select2<S extends Select2<S, V>, V>
 	public S maximumInputLength(int length) {
 		this.options.put("maximumInputLength", length);
 		return (S)this;
-	}
-
-	protected JSONObject getOptions() {
-		return this.options;
 	}
 
 	public S select(int index) {
@@ -218,6 +205,10 @@ public abstract class Select2<S extends Select2<S, V>, V>
 		this.input.hidden();
 		return super.detach();
 	}
+	
+	protected JSONObject getOptions() {
+		return this.options;
+	}
 
 	protected native String getSelection(String id) /*-{
 		var value = $wnd.$("#" + id).select2("val");
@@ -239,23 +230,4 @@ public abstract class Select2<S extends Select2<S, V>, V>
 	native void initJS(String id, JavaScriptObject options)/*-{
 		$wnd.$("#" + id).select2(options);
 	}-*/;
-	
-	/*Options HTML 
-		<div style="top: 30px; left: 0px; width: 1920px; display: block;" class="select2-drop select2-drop-active" id="select2-drop">
-		<div class="select2-search select2-search-hidden">
-			<input type="text" class="select2-input" autocomplete="off">
-		</div>
-		<ul class="select2-results">
-			<li class="select2-results-dept-0 select2-result select2-result-selectable">
-				<div class="select2-result-label"><span class="select2-match"></span>Value 1</div>
-			</li>
-			<li class="select2-results-dept-0 select2-result select2-result-selectable">
-				<div class="select2-result-label"><span class="select2-match"></span>Value 2</div>
-			</li>
-			<li class="select2-results-dept-0 select2-result select2-result-selectable select2-highlighted">
-				<div class="select2-result-label"><span class="select2-match"></span>Value 3</div>
-			</li>
-		</ul>
-	</div> 
-	*/
 }

@@ -145,32 +145,32 @@ public final class Modal
 	}
 
 	public Modal onShow(EventHandler<Void> handler) {
-		return this.addHandler(Type.SHOW, handler);
+		return this.addHandler(FireableEvent.SHOW, handler);
 	}
 
 	public Modal whenShown(EventHandler<Void> handler) {
-		return this.addHandler(Type.SHOWN, handler);
+		return this.addHandler(FireableEvent.SHOWN, handler);
 	}
 
 	public Modal onHide(EventHandler<Void> handler) {
-		return this.addHandler(Type.HIDE, handler);
+		return this.addHandler(FireableEvent.HIDE, handler);
 	}
 
 	public Modal whenHidden(EventHandler<Void> handler) {
-		return this.addHandler(Type.HIDDEN, handler);
+		return this.addHandler(FireableEvent.HIDDEN, handler);
 	}
 
 	public Modal show() {
 		if (!this.isAttached()) {
 			RootPanel.get().add(this);
 		}
-		this.doFunction(Type.SHOW.method(), this.getId());
+		this.doFunction(FireableEvent.SHOW.method(), this.getId());
 		this.getElement().focus();
 		return this;
 	}
 
 	public Modal hide() {
-		this.doFunction(Type.HIDE.method(), this.getId());
+		this.doFunction(FireableEvent.HIDE.method(), this.getId());
 		return this;
 	}
 
@@ -178,7 +178,7 @@ public final class Modal
 		$wnd.$("#" + id).modal(method);
 	}-*/;
 
-	enum Type
+	enum FireableEvent
 	    implements EventType {
 		HIDE, HIDDEN, SHOW, SHOWN;
 

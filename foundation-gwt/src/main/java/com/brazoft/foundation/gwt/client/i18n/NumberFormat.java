@@ -17,37 +17,56 @@ package com.brazoft.foundation.gwt.client.i18n;
 
 import com.brazoft.foundation.commons.Validator;
 import com.brazoft.foundation.commons.format.api.Format;
+import com.google.gwt.i18n.client.CurrencyList;
 
 public enum NumberFormat
     implements Format<Number> {
-	INTEGER(getInteger()), CURRENCY(com.google.gwt.i18n.client.NumberFormat.getCurrencyFormat()), DECIMAL(com.google.gwt.i18n.client.NumberFormat.getDecimalFormat()), GLOBAL_CURRENCY(com.google.gwt.i18n.client.NumberFormat.getGlobalCurrencyFormat()), PERCENT(com.google.gwt.i18n.client.NumberFormat.getPercentFormat()), SCIENTIFIC(com.google.gwt.i18n.client.NumberFormat.getScientificFormat()), SIMPLE_CURRENCY(com.google.gwt.i18n.client.NumberFormat.getSimpleCurrencyFormat()), CUSTOM(null);
+	INTEGER(getInteger()), 
+	CURRENCY(com.google.gwt.i18n.client.NumberFormat.getCurrencyFormat()), 
+	DECIMAL(com.google.gwt.i18n.client.NumberFormat.getDecimalFormat()), 
+	GLOBAL_CURRENCY(com.google.gwt.i18n.client.NumberFormat.getGlobalCurrencyFormat()), 
+	PERCENT(com.google.gwt.i18n.client.NumberFormat.getPercentFormat()),
+	SIMPLE_PERCENT(new PercentFormat()),
+	SCIENTIFIC(com.google.gwt.i18n.client.NumberFormat.getScientificFormat()), 
+	SIMPLE_CURRENCY(com.google.gwt.i18n.client.NumberFormat.getSimpleCurrencyFormat());
 
-	private com.google.gwt.i18n.client.NumberFormat wrapped;
+	private WrappedFormat wrapped;
 
-	private NumberFormat(com.google.gwt.i18n.client.NumberFormat wrapped) {
-		this.wrapped = wrapped;
+	private NumberFormat(com.google.gwt.i18n.client.NumberFormat format) {
+		this.wrapped = new WrappedFormat(format);
 	}
 
 	@Override
 	public String format(Number value) {
-		return value == null ? null : this.wrapped.format(value);
+		return this.wrapped.format(value);
 	}
 
 	@Override
 	public Number unformat(String value) {
-		return Validator.isEmptyOrNull(value) ? null : this.wrapped.parse(value);
+		return this.wrapped.unformat(value);
 	}
 
 	@Override
 	public String pattern() {
-		return this.wrapped.getPattern();
+		return this.wrapped.pattern();
 	}
-
-	public static NumberFormat CUSTOM(String pattern) {
-		NumberFormat instance = NumberFormat.CUSTOM;
-		instance.wrapped = com.google.gwt.i18n.client.NumberFormat.getFormat(pattern);
-
-		return instance;
+	
+	public static Format<Number> custom(String pattern){
+		return new WrappedFormat(com.google.gwt.i18n.client.NumberFormat.getFormat(pattern));
+	}
+	
+	public static Format<Number> custom(String pattern, int fractionDigits){
+		com.google.gwt.i18n.client.NumberFormat format = com.google.gwt.i18n.client.NumberFormat.getFormat(pattern);
+		format.overrideFractionDigits(fractionDigits);
+		
+		return new WrappedFormat(format);
+	}
+	
+	public static Format<Number> custom(String pattern, int minFractionDigits, int maxFractionDigits){
+		com.google.gwt.i18n.client.NumberFormat format = com.google.gwt.i18n.client.NumberFormat.getFormat(pattern);
+		format.overrideFractionDigits(minFractionDigits, maxFractionDigits);
+		
+		return new WrappedFormat(format);
 	}
 
 	static com.google.gwt.i18n.client.NumberFormat getInteger() {
@@ -55,5 +74,53 @@ public enum NumberFormat
 		pattern = pattern.substring(0, pattern.lastIndexOf("."));
 
 		return com.google.gwt.i18n.client.NumberFormat.getFormat(pattern);
+	}
+	
+	static class WrappedFormat implements Format<Number> {
+		private com.google.gwt.i18n.client.NumberFormat wrapped;
+
+		public WrappedFormat(com.google.gwt.i18n.client.NumberFormat wrapped) {
+	        super();
+	        this.wrapped = wrapped;
+        }
+
+		@Override
+		public String format(Number value) {
+			return value == null ? null : this.wrapped.format(value);
+		}
+
+		@Override
+		public Number unformat(String value) {
+			return Validator.isEmptyOrNull(value) ? null : this.wrapped.parse(value);
+		}
+
+		@Override
+		public String pattern() {
+			return this.wrapped.getPattern();
+		}
+	}
+	
+	static class PercentFormat extends com.google.gwt.i18n.client.NumberFormat {
+
+        public PercentFormat() {
+	        super(defaultNumberConstants.percentPattern(), CurrencyList.get().getDefault(), false);
+        }
+		
+        @Override
+        public String format(double number) {
+            return super.format(number / 100d);
+        }
+        
+        @Override
+        public String format(Number number) {
+            return this.format(number.doubleValue() / 100d);
+        }
+        
+        @Override
+        public double parse(String text)
+            throws NumberFormatException {
+            
+        	return super.parse(text) * 100;
+        }
 	}
 }

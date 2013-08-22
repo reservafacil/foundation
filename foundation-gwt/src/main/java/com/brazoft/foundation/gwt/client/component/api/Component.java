@@ -58,8 +58,9 @@ public abstract class Component<C extends Component<C>>
 		private static <W extends Widget> Element resolveHTMLHolder(W widget) {
 			Element element = widget.getElement();
 			String id = htmlHolderId(element.getId());
-
-			if (element.getTagName().equals("span")) {
+			String tagName = element.getTagName().toUpperCase();
+			
+			if (tagName.equals("SPAN")) {
 				element.setId(id);
 				return element;
 			}

@@ -102,7 +102,7 @@ public final class Accordion
 
 				@Override
 				public void onClick(ClickEvent e) {
-					handler.onEvent(new Event<Void>(Type.REMOVE, RemovableItem.this));
+					handler.onEvent(new Event<Void>(FireableEvent.REMOVE, RemovableItem.this));
 				}
 			};
 
@@ -232,22 +232,22 @@ public final class Accordion
 	}
 
 	public Accordion onShow(EventHandler<Void> event) {
-		return this.addHandler(Type.SHOW, event);
+		return this.addHandler(FireableEvent.SHOW, event);
 	}
 
 	public Accordion whenShown(EventHandler<Void> event) {
-		return this.addHandler(Type.SHOWN, event);
+		return this.addHandler(FireableEvent.SHOWN, event);
 	}
 
 	public Accordion onHide(EventHandler<Void> event) {
-		return this.addHandler(Type.HIDE, event);
+		return this.addHandler(FireableEvent.HIDE, event);
 	}
 
 	public Accordion whenHidden(EventHandler<Void> event) {
-		return this.addHandler(Type.HIDDEN, event);
+		return this.addHandler(FireableEvent.HIDDEN, event);
 	}
 
-	enum Type
+	enum FireableEvent
 	    implements EventType {
 		HIDE, HIDDEN, REMOVE, SHOW, SHOWN, TOGGLE;
 	}
