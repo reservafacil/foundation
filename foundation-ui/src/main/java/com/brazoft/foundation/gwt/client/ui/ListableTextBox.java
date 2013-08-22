@@ -77,6 +77,10 @@ public class ListableTextBox
 		}
 	}
 	
+	public TextBox input() {
+		return this.input;
+	}
+	
 	public ListableTextBox removeText(String text){
 		this.removeBtn.text(text);
 		return this;

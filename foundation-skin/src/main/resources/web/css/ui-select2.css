@@ -1,7 +1,7 @@
 /*
 Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
 */
-.select-container {
+.select2-container {
     position: relative;
     display: inline-block;
     /* inline-block for ie7 */
@@ -10,10 +10,10 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     vertical-align: top;
 }
 
-.select-container,
-.select-drop,
-.select-search,
-.select-search input{
+.select2-container,
+.select2-drop,
+.select2-search,
+.select2-search input{
   /*
     Force border-box so that % widths fit the parent
     container without overlap because of margin/padding.
@@ -27,7 +27,7 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
           box-sizing: border-box; /* css3 */
 }
 
-.select-container .select-choice {
+.select2-container .select2-choice {
     display: block;
     height: 28px;
     padding: 0 0 0 8px;
@@ -65,7 +65,7 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     background-image: linear-gradient(top, #ffffff 0%, #eeeeee 50%);
 }
 
-.select-container.select-drop-above .select-choice {
+.select2-container.select2-drop-above .select2-choice {
     border-bottom-color: #aaa;
 
     -webkit-border-radius:0 0 4px 4px;
@@ -81,7 +81,7 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     background-image: linear-gradient(top, #eeeeee 0%,#ffffff 90%);
 }
 
-.select-container .select-choice span {
+.select2-container .select2-choice span {
     margin-right: 26px;
     display: block;
     overflow: hidden;
@@ -93,7 +93,7 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
         text-overflow: ellipsis;
 }
 
-.select-container .select-choice abbr {
+.select2-container .select2-choice abbr {
     display: block;
     width: 12px;
     height: 12px;
@@ -109,12 +109,12 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     cursor: pointer;
     outline: 0;
 }
-.select-container .select-choice abbr:hover {
+.select2-container .select2-choice abbr:hover {
     background-position: right -11px;
     cursor: pointer;
 }
 
-.select-drop-mask {
+.select2-drop-mask {
     position: absolute;
     left: 0;
     top: 0;
@@ -122,7 +122,7 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     opacity: 0;
 }
 
-.select-drop {
+.select2-drop {
     width: 100%;
     margin-top:-1px;
     position: absolute;
@@ -143,7 +143,7 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
             box-shadow: 0 4px 5px rgba(0, 0, 0, .15);
 }
 
-.select-drop.select-drop-above {
+.select2-drop.select2-drop-above {
     margin-top: 1px;
     border-top: 1px solid #aaa;
     border-bottom: 0;
@@ -157,7 +157,7 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
             box-shadow: 0 -4px 5px rgba(0, 0, 0, .15);
 }
 
-.select-container .select-choice div {
+.select2-container .select2-choice div {
     display: block;
     width: 18px;
     height: 100%;
@@ -184,14 +184,14 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     background-image: linear-gradient(top, #cccccc 0%, #eeeeee 60%);
 }
 
-.select-container .select-choice div b {
+.select2-container .select2-choice div b {
     display: block;
     width: 100%;
     height: 100%;
     background: url('img/select.png') no-repeat 0 1px;
 }
 
-.select-search {
+.select2-search {
     display: inline-block;
     width: 100%;
     min-height: 26px;
@@ -205,13 +205,13 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     white-space: nowrap;
 }
 
-.select-search-hidden {
+.select2-search-hidden {
     display: block;
     position: absolute;
     left: -10000px;
 }
 
-.select-search input {
+.select2-search input {
     width: 100%;
     height: auto !important;
     min-height: 26px;
@@ -240,11 +240,11 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     background: url('img/select.png') no-repeat 100% -22px, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
 }
 
-.select-drop.select-drop-above .select-search input {
+.select2-drop.select2-drop-above .select2-search input {
     margin-top: 4px;
 }
 
-.select-search input.select-active {
+.select2-search input.select2-active {
     background: #fff url('img/select-spinner.gif') no-repeat 100%;
     background: url('img/select-spinner.gif') no-repeat 100%, -webkit-gradient(linear, left bottom, left top, color-stop(0.85, white), color-stop(0.99, #eeeeee));
     background: url('img/select-spinner.gif') no-repeat 100%, -webkit-linear-gradient(center bottom, white 85%, #eeeeee 99%);
@@ -254,8 +254,8 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     background: url('img/select-spinner.gif') no-repeat 100%, linear-gradient(top, #ffffff 85%, #eeeeee 99%);
 }
 
-.select-container-active .select-choice,
-.select-container-active .select-choices {
+.select2-container-active .select2-choice,
+.select2-container-active .select2-choices {
     border: 1px solid #5897fb;
     outline: none;
 
@@ -264,7 +264,7 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
             box-shadow: 0 0 5px rgba(0,0,0,.3);
 }
 
-.control-group.error .select-container {
+.control-group.error .select2-container {
     border: 1px solid #b94a48;
     outline: none;
 	-webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
@@ -272,7 +272,7 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
 	box-shadow: inset 0 1px 1px rgba(0,0,0,0.075);
 }
 
-.select-dropdown-open .select-choice {
+.select2-dropdown-open .select2-choice {
     border-bottom-color: transparent;
     -webkit-box-shadow: 0 1px 0 #fff inset;
        -moz-box-shadow: 0 1px 0 #fff inset;
@@ -296,17 +296,17 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     background-image: linear-gradient(top, #ffffff 0%,#eeeeee 50%);
 }
 
-.select-dropdown-open .select-choice div {
+.select2-dropdown-open .select2-choice div {
     background: transparent;
     border-left: none;
     filter: none;
 }
-.select-dropdown-open .select-choice div b {
+.select2-dropdown-open .select2-choice div b {
     background-position: -18px 1px;
 }
 
 /* results */
-.select-results {
+.select2-results {
     max-height: 200px;
     padding: 0 0 0 4px;
     margin: 4px 4px 4px 0;
@@ -316,29 +316,29 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
     -webkit-tap-highlight-color: rgba(0,0,0,0);
 }
 
-.select-results ul.select-result-sub {
+.select2-results ul.select2-result-sub {
     margin: 0;
 }
 
-.select-results ul.select-result-sub > li .select-result-label { padding-left: 20px }
-.select-results ul.select-result-sub ul.select-result-sub > li .select-result-label { padding-left: 40px }
-.select-results ul.select-result-sub ul.select-result-sub ul.select-result-sub > li .select-result-label { padding-left: 60px }
-.select-results ul.select-result-sub ul.select-result-sub ul.select-result-sub ul.select-result-sub > li .select-result-label { padding-left: 80px }
-.select-results ul.select-result-sub ul.select-result-sub ul.select-result-sub ul.select-result-sub ul.select-result-sub > li .select-result-label { padding-left: 100px }
-.select-results ul.select-result-sub ul.select-result-sub ul.select-result-sub ul.select-result-sub ul.select-result-sub ul.select-result-sub > li .select-result-label { padding-left: 110px }
-.select-results ul.select-result-sub ul.select-result-sub ul.select-result-sub ul.select-result-sub ul.select-result-sub ul.select-result-sub ul.select-result-sub > li .select-result-label { padding-left: 120px }
+.select2-results ul.select2-result-sub > li .select2-result-label { padding-left: 20px }
+.select2-results ul.select2-result-sub ul.select2-result-sub > li .select2-result-label { padding-left: 40px }
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label { padding-left: 60px }
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label { padding-left: 80px }
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label { padding-left: 100px }
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label { padding-left: 110px }
+.select2-results ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub ul.select2-result-sub > li .select2-result-label { padding-left: 120px }
 
-.select-results li {
+.select2-results li {
     list-style: none;
     display: list-item;
     background-image: none;
 }
 
-.select-results li.select-result-with-children > .select-result-label {
+.select2-results li.select2-result-with-children > .select2-result-label {
     font-weight: bold;
 }
 
-.select-results .select-result-label {
+.select2-results .select2-result-label {
     padding: 3px 7px 4px;
     margin: 0;
     cursor: pointer;
@@ -351,29 +351,29 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
               user-select: none;
 }
 
-.select-results .select-highlighted {
+.select2-results .select2-highlighted {
     background: #3875d7;
     color: #fff;
 }
 
-.select-results li em {
+.select2-results li em {
     background: #feffde;
     font-style: normal;
 }
 
-.select-results .select-highlighted em {
+.select2-results .select2-highlighted em {
     background: transparent;
 }
 
-.select-results .select-highlighted ul {
+.select2-results .select2-highlighted ul {
     background: white;
     color: #000;
 }
 
 
-.select-results .select-no-results,
-.select-results .select-searching,
-.select-results .select-selection-limit {
+.select2-results .select2-no-results,
+.select2-results .select2-searching,
+.select2-results .select2-selection-limit {
     background: #f4f4f4;
     display: list-item;
 }
@@ -381,54 +381,54 @@ Version: 3.3.1 Timestamp: Wed Feb 20 09:57:22 PST 2013
 /*
 disabled look for disabled choices in the results dropdown
 */
-.select-results .select-disabled.select-highlighted {
+.select2-results .select2-disabled.select2-highlighted {
     color: #666;
     background: #f4f4f4;
     display: list-item;
     cursor: default;
 }
-.select-results .select-disabled {
+.select2-results .select2-disabled {
   background: #f4f4f4;
   display: list-item;
   cursor: default;
 }
 
-.select-results .select-selected {
+.select2-results .select2-selected {
     display: none;
 }
 
-.select-more-results.select-active {
+.select2-more-results.select2-active {
     background: #f4f4f4 url('img/select-spinner.gif') no-repeat 100%;
 }
 
-.select-more-results {
+.select2-more-results {
     background: #f4f4f4;
     display: list-item;
 }
 
 /* disabled styles */
 
-.select-container.select-container-disabled .select-choice {
+.select2-container.select2-container-disabled .select2-choice {
     background-color: #f4f4f4;
     background-image: none;
     border: 1px solid #ddd;
     cursor: default;
 }
 
-.select-container.select-container-disabled .select-choice div {
+.select2-container.select2-container-disabled .select2-choice div {
     background-color: #f4f4f4;
     background-image: none;
     border-left: 0;
 }
 
-.select-container.select-container-disabled .select-choice abbr {
+.select2-container.select2-container-disabled .select2-choice abbr {
     display: none
 }
 
 
 /* multiselect */
 
-.select-container-multi .select-choices {
+.select2-container-multi .select2-choices {
     height: auto !important;
     height: 1%;
     margin: 0;
@@ -448,15 +448,15 @@ disabled look for disabled choices in the results dropdown
     background-image: linear-gradient(top, #eeeeee 1%, #ffffff 15%);
 }
 
-.select-locked {
+.select2-locked {
   padding: 3px 5px 3px 5px !important;
 }
 
-.select-container-multi .select-choices {
+.select2-container-multi .select2-choices {
     min-height: 26px;
 }
 
-.select-container-multi.select-container-active .select-choices {
+.select2-container-multi.select2-container-active .select2-choices {
     border: 1px solid #5897fb;
     outline: none;
 
@@ -464,17 +464,17 @@ disabled look for disabled choices in the results dropdown
        -moz-box-shadow: 0 0 5px rgba(0,0,0,.3);
             box-shadow: 0 0 5px rgba(0,0,0,.3);
 }
-.select-container-multi .select-choices li {
+.select2-container-multi .select2-choices li {
     float: left;
     list-style: none;
 }
-.select-container-multi .select-choices .select-search-field {
+.select2-container-multi .select2-choices .select2-search-field {
     margin: 0;
     padding: 0;
     white-space: nowrap;
 }
 
-.select-container-multi .select-choices .select-search-field input {
+.select2-container-multi .select2-choices .select2-search-field input {
     padding: 5px;
     margin: 1px 0;
 
@@ -489,15 +489,15 @@ disabled look for disabled choices in the results dropdown
     background: transparent !important;
 }
 
-.select-container-multi .select-choices .select-search-field input.select-active {
+.select2-container-multi .select2-choices .select2-search-field input.select2-active {
     background: #fff url('img/select-spinner.gif') no-repeat 100% !important;
 }
 
-.select-default {
+.select2-default {
     color: #999 !important;
 }
 
-.select-container-multi .select-choices .select-search-choice {
+.select2-container-multi .select2-choices .select2-search-choice {
     padding: 3px 5px 3px 18px;
     margin: 3px 0 3px 5px;
     position: relative;
@@ -535,14 +535,14 @@ disabled look for disabled choices in the results dropdown
     background-image: -ms-linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
     background-image: linear-gradient(top, #f4f4f4 20%, #f0f0f0 50%, #e8e8e8 52%, #eeeeee 100%);
 }
-.select-container-multi .select-choices .select-search-choice span {
+.select2-container-multi .select2-choices .select2-search-choice span {
     cursor: default;
 }
-.select-container-multi .select-choices .select-search-choice-focus {
+.select2-container-multi .select2-choices .select2-search-choice-focus {
     background: #d4d4d4;
 }
 
-.select-search-choice-close {
+.select2-search-choice-close {
     display: block;
     width: 12px;
     height: 13px;
@@ -555,44 +555,44 @@ disabled look for disabled choices in the results dropdown
     background: url('img/select.png') right top no-repeat;
 }
 
-.select-container-multi .select-search-choice-close {
+.select2-container-multi .select2-search-choice-close {
     left: 3px;
 }
 
-.select-container-multi .select-choices .select-search-choice .select-search-choice-close:hover {
+.select2-container-multi .select2-choices .select2-search-choice .select2-search-choice-close:hover {
   background-position: right -11px;
 }
-.select-container-multi .select-choices .select-search-choice-focus .select-search-choice-close {
+.select2-container-multi .select2-choices .select2-search-choice-focus .select2-search-choice-close {
     background-position: right -11px;
 }
 
 /* disabled styles */
-.select-container-multi.select-container-disabled .select-choices{
+.select2-container-multi.select2-container-disabled .select2-choices{
     background-color: #f4f4f4;
     background-image: none;
     border: 1px solid #ddd;
     cursor: default;
 }
 
-.select-container-multi.select-container-disabled .select-choices .select-search-choice {
+.select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice {
     padding: 3px 5px 3px 5px;
     border: 1px solid #ddd;
     background-image: none;
     background-color: #f4f4f4;
 }
 
-.select-container-multi.select-container-disabled .select-choices .select-search-choice .select-search-choice-close {
+.select2-container-multi.select2-container-disabled .select2-choices .select2-search-choice .select2-search-choice-close {
     display: none;
 }
 /* end multiselect */
 
 
-.select-result-selectable .select-match,
-.select-result-unselectable .select-match {
+.select2-result-selectable .select2-match,
+.select2-result-unselectable .select2-match {
     text-decoration: underline;
 }
 
-.select-offscreen {
+.select2-offscreen {
     position: absolute;
     left: -10000px;
 }
@@ -600,12 +600,12 @@ disabled look for disabled choices in the results dropdown
 /* Retina-ize icons */
 
 @media only screen and (-webkit-min-device-pixel-ratio: 1.5), only screen and (min-resolution: 144dpi)  {
-  .select-search input, .select-search-choice-close, .select-container .select-choice abbr, .select-container .select-choice div b {
+  .select2-search input, .select2-search-choice-close, .select2-container .select2-choice abbr, .select2-container .select2-choice div b {
       background-image: url('img/select2x2.png') !important;
       background-repeat: no-repeat !important;
       background-size: 60px 40px !important;
   }
-  .select-search input {
+  .select2-search input {
       background-position: 100% -21px !important;
   }
 }
