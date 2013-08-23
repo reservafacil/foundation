@@ -6,12 +6,13 @@ import java.util.List;
 import com.brazoft.foundation.commons.Validator;
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.api.*;
+import com.brazoft.foundation.gwt.client.ui.Orientation;
+import com.brazoft.foundation.gwt.client.ui.api.WidgetGroup;
 import com.brazoft.foundation.gwt.client.util.Entry;
 import com.google.gwt.event.dom.client.*;
 
 public class ListableTextBox
-    extends Component<ListableTextBox>
-    implements HasValues<ListableTextBox, Entry> {
+	extends WidgetGroup<ListableTextBox, Entry[]> {
 
 	private TextBox       input     = new TextBox().block();
 
@@ -22,7 +23,7 @@ public class ListableTextBox
 	private MultiCheckBox items     = new MultiCheckBox(Orientation.VERTICAL);
 
 	public ListableTextBox() {
-		super(ElementResolver.div());
+		super(Orientation.VERTICAL);
 		this.init();
 	}
 
@@ -113,5 +114,20 @@ public class ListableTextBox
 		}
 
 		return values.toArray(new Entry[values.size()]);
+	}
+
+	@Override
+	public ListableTextBox clear() {
+		this.input.clear();
+		this.items.clear();
+		return this;
+	}
+
+	@Override
+	public ListableTextBox item(String text, String value) {
+		Entry entry = Entry.create();
+		entry.key(value).value(text);
+		add(entry);
+		return this;
 	}
 }
