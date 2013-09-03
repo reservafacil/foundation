@@ -2,7 +2,7 @@ package com.google.gwt.jso;
 
 
 public class SingleResponseJSO<J extends JSObject>
-    extends StatusResponseJSO<J> {
+    extends StatusResponseJSO {
 
 	protected SingleResponseJSO() {}
 

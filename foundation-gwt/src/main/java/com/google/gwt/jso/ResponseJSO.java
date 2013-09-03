@@ -3,7 +3,7 @@ package com.google.gwt.jso;
 import com.google.gwt.core.client.JsArray;
 
 public class ResponseJSO<J extends JSObject>
-    extends StatusResponseJSO<J> {
+    extends StatusResponseJSO {
 
 	protected ResponseJSO() {}
 
