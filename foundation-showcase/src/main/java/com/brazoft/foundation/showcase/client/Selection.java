@@ -199,11 +199,11 @@ public abstract class Selection<S extends Selection<S, V>, V>
 	    extends Component<Container>
 	    implements HasFocusHandlers<Container>, HasText<Container> {
 
-		private HTML<AnchorElement> choice      = HTML.asAnchor("javascript:void(0)").className("select-choice");
+		private HTML<AnchorElement> choice      = HTML.asAnchor("javascript:void(0)").className("select2-choice");
 
-		private HTML<SpanElement>   placeholder = HTML.asSpan().className("select-chosen");
+		private HTML<SpanElement>   placeholder = HTML.asSpan().className("select2-chosen");
 
-		private HTML<Element>       clear       = HTML.as(ElementResolver.abbr()).className("select-search-choice-close").hidden();
+		private HTML<Element>       clear       = HTML.as(ElementResolver.abbr()).className("select2-search-choice-close").hidden();
 
 		private HTML<DivElement>    arrow       = HTML.asDiv().add(HTML.as(ElementResolver.create("b")));
 
@@ -213,7 +213,7 @@ public abstract class Selection<S extends Selection<S, V>, V>
 		}
 
 		private void setup() {
-			this.className("select-container").style().width(100, Unit.PCT);
+			this.className("select2-container").style().width(100, Unit.PCT);
 			this.choice.onFocus(new FocusHandler() {
 
 				@Override
@@ -285,11 +285,11 @@ public abstract class Selection<S extends Selection<S, V>, V>
 		}
 
 		private void activate() {
-			this.className("select-container-active");
+			this.className("select2-container-active");
 		}
 
 		private void deactivate() {
-			this.removeClassName("select-container-active");
+			this.removeClassName("select2-container-active");
 		}
 	}
 
@@ -306,7 +306,7 @@ public abstract class Selection<S extends Selection<S, V>, V>
 		}
 
 		private void init() {
-			this.className("select-drop").add(this.search).add(this.results).hidden();
+			this.className("select2-drop").add(this.search).add(this.results).hidden();
 		}
 
 		public DropDown onSelection(EventHandler<Entry> handler) {
@@ -314,22 +314,22 @@ public abstract class Selection<S extends Selection<S, V>, V>
 		}
 
 		public DropDown activate() {
-			return this.className("select-drop-active");
+			return this.className("select2-drop-active");
 		}
 
 		public DropDown deactivate() {
-			return this.removeClassName("select-drop-active");
+			return this.removeClassName("select2-drop-active");
 		}
 		
 		public DropDown open() {
 			this.style().width(Selection.this.container.outerWidth(), Unit.PX);
-			Selection.this.container.className("select-dropdown-open").deactivate();
+			Selection.this.container.className("select2-dropdown-open").deactivate();
 			
 			return super.open();
 		}
 
 		public DropDown close() {
-			Selection.this.container.removeClassName("select-dropdown-open");
+			Selection.this.container.removeClassName("select2-dropdown-open");
 			
 			return super.close();
 		}
@@ -343,11 +343,11 @@ public abstract class Selection<S extends Selection<S, V>, V>
 		class Search
 		    extends Component<Search> {
 
-			private InputText input = new InputText().className("select-input");
+			private InputText input = new InputText().className("select2-input");
 
 			public Search() {
 				super(ElementResolver.div());
-				this.className("select-search").add(this.input);
+				this.className("select2-search").add(this.input);
 			}
 		}
 
@@ -360,7 +360,7 @@ public abstract class Selection<S extends Selection<S, V>, V>
 			}
 
 			private void init() {
-				this.className("select-results");
+				this.className("select2-results");
 			}
 
 			public Items item(String value, String text) {
@@ -390,7 +390,7 @@ public abstract class Selection<S extends Selection<S, V>, V>
 			    extends Component<Item>
 			    implements HasClickHandlers<Item>, HasMouseHandlers<Item>, HasValue<Item, Entry> {
 
-				private HTML<DivElement> label = HTML.asDiv().className("select-result-label");
+				private HTML<DivElement> label = HTML.asDiv().className("select2-result-label");
 
 				private Entry            value;
 
@@ -400,7 +400,7 @@ public abstract class Selection<S extends Selection<S, V>, V>
 				}
 
 				private void init() {
-					this.className("select-results-dept-0 select-result select-result-selectable");
+					this.className("select2-results-dept-0 select2-result select2-result-selectable");
 					this.add(this.label);
 
 					this.onClick(new ClickHandler() {
@@ -413,13 +413,13 @@ public abstract class Selection<S extends Selection<S, V>, V>
 
 						@Override
 						public void onMouseOver(MouseOverEvent event) {
-							Item.this.className("select-highlighted");
+							Item.this.className("select2-highlighted");
 						}
 					}).onMouseOut(new MouseOutHandler() {
 
 						@Override
 						public void onMouseOut(MouseOutEvent event) {
-							Item.this.removeClassName("select-highlighted");
+							Item.this.removeClassName("select2-highlighted");
 						}
 					});
 				}

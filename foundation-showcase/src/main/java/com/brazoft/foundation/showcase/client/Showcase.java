@@ -25,7 +25,7 @@ public class Showcase implements EntryPoint {
 	class Select extends Selection<Select, Entry> {
 		
         public Select() {
-	        this.item("A").item("B");
+	        this.item("A").item("B").resetable();
         }
 
 		@Override
