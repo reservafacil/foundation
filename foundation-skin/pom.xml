@@ -59,6 +59,7 @@
                 <include>${project.build.directory}/classes/web/css/ui-datagrid.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-datapanel.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-datepicker.css</include>
+                <include>${project.build.directory}/classes/web/css/ui-page.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-panel.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-plan.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-portlet.css</include>

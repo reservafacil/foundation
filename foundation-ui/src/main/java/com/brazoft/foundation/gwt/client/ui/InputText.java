@@ -18,7 +18,8 @@ package com.brazoft.foundation.gwt.client.ui;
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.json.*;
 import com.brazoft.foundation.gwt.client.ui.api.Input;
-import com.google.gwt.core.client.JavaScriptObject;
+import com.brazoft.foundation.gwt.client.ui.binding.Placeholder;
+import com.google.gwt.core.client.*;
 import com.google.gwt.dom.client.Document;
 import com.google.gwt.event.dom.client.DomEvent;
 
@@ -26,6 +27,8 @@ public final class InputText
     extends Input<InputText, String> {
 
 	private JSONObject options = JSON.asObject();
+	
+	private static Placeholder placeholderImpl = GWT.create(Placeholder.class);
 
 	public InputText() {
 		super(ElementResolver.text());
@@ -82,7 +85,13 @@ public final class InputText
 
 	@Override
 	public String getValue() {
-		return this.element().getValue();
+		return InputText.placeholderImpl.getValue(this);
+	}
+	
+	@Override
+	public InputText placeholder(String placeholder) {
+		InputText.placeholderImpl.apply(this, placeholder);
+		return this;
 	}
 
 	public InputText maxLength(int maxLength) {

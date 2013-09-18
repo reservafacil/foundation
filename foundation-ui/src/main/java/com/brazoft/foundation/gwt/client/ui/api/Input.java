@@ -36,8 +36,8 @@ public abstract class Input<I extends Input<I, V>, V>
 
 	private boolean            required;
 
-	private static TextBoxImpl impl = GWT.create(TextBoxImpl.class);
-
+	private static TextBoxImpl textBoxCursor = GWT.create(TextBoxImpl.class);
+	
 	public Input(InputElement element) {
 		super(element);
 		this.element = element;
@@ -137,7 +137,7 @@ public abstract class Input<I extends Input<I, V>, V>
 	}
 
 	public int cursorPosition() {
-		return Input.impl.getCursorPos((com.google.gwt.user.client.Element)this.element.cast());
+		return Input.textBoxCursor.getCursorPos((com.google.gwt.user.client.Element)this.element.cast());
 	}
 
 	public I span(int span) {
@@ -195,7 +195,7 @@ public abstract class Input<I extends Input<I, V>, V>
 	}
 
 	public I placeholder(String placeholder) {
-		return this.attribute("placeholder", placeholder);
+		return (I) this;
 	}
 
 	public I selectAll() {
@@ -207,6 +207,6 @@ public abstract class Input<I extends Input<I, V>, V>
 	}
 
 	private void selectRange(int index, int length) {
-		Input.impl.setSelectionRange((com.google.gwt.user.client.Element)this.element.cast(), index, length);
+		Input.textBoxCursor.setSelectionRange((com.google.gwt.user.client.Element)this.element.cast(), index, length);
 	}
 }

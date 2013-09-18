@@ -71,12 +71,12 @@ public final class Wizard
 	}
 
 	public Wizard open() {
-		this.wizard.show();
+		this.wizard.open();
 		return this;
 	}
 
 	public Wizard close() {
-		this.wizard.hide();
+		this.wizard.close();
 		return this;
 	}
 

@@ -40,6 +40,11 @@ public abstract class Composite<C extends Composite<C>>
 		this.addAttachHandler(handler);
 		return (C)this;
 	}
+	
+	public C onToggleVisibility(EventHandler<Void> handler){
+		this.onVisible(handler);
+		return this.onHidden(handler);
+	}
 
 	public C onHidden(EventHandler<Void> handler) {
 		this.addHandler(HasVisibility.TriggerEvent.HIDDEN, handler);

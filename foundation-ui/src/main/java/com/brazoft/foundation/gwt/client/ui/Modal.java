@@ -80,6 +80,40 @@ public final class Modal
 		return this.footer;
 	}
 
+	public Modal onOpen(EventHandler<Void> handler) {
+		return this.addHandler(FireableEvent.SHOW, handler);
+	}
+	
+	public Modal whenOpened(EventHandler<Void> handler) {
+		return this.addHandler(FireableEvent.SHOWN, handler);
+	}
+
+	public Modal onClose(EventHandler<Void> handler) {
+		return this.addHandler(FireableEvent.HIDE, handler);
+	}
+
+	public Modal whenClosed(EventHandler<Void> handler) {
+		return this.addHandler(FireableEvent.HIDDEN, handler);
+	}
+	
+	public Modal open() {
+		if (!this.isAttached()) {
+			RootPanel.get().add(this);
+		}
+		this.doFunction(FireableEvent.SHOW.method(), this.getId());
+		this.getElement().focus();
+		return this;
+	}
+	
+	public Modal close() {
+		this.doFunction(FireableEvent.HIDE.method(), this.getId());
+		return this;
+	}
+
+	protected native void doFunction(String method, String id) /*-{
+		$wnd.$("#" + id).modal(method);
+	}-*/;
+
 	public static class ModalBody
 	    extends Bootstrap<ModalBody> {
 
@@ -143,40 +177,6 @@ public final class Modal
 			return this;
 		}
 	}
-
-	public Modal onShow(EventHandler<Void> handler) {
-		return this.addHandler(FireableEvent.SHOW, handler);
-	}
-
-	public Modal whenShown(EventHandler<Void> handler) {
-		return this.addHandler(FireableEvent.SHOWN, handler);
-	}
-
-	public Modal onHide(EventHandler<Void> handler) {
-		return this.addHandler(FireableEvent.HIDE, handler);
-	}
-
-	public Modal whenHidden(EventHandler<Void> handler) {
-		return this.addHandler(FireableEvent.HIDDEN, handler);
-	}
-
-	public Modal show() {
-		if (!this.isAttached()) {
-			RootPanel.get().add(this);
-		}
-		this.doFunction(FireableEvent.SHOW.method(), this.getId());
-		this.getElement().focus();
-		return this;
-	}
-
-	public Modal hide() {
-		this.doFunction(FireableEvent.HIDE.method(), this.getId());
-		return this;
-	}
-
-	protected native void doFunction(String method, String id) /*-{
-		$wnd.$("#" + id).modal(method);
-	}-*/;
 
 	enum FireableEvent
 	    implements EventType {
