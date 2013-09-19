@@ -1,0 +1,63 @@
+.page-header {
+  padding: 9px 15px;
+  border-bottom: 1px solid #eee;
+}
+
+.page-header .close {
+  margin-top: 2px;
+}
+
+.page-header h3 {
+  margin: 0;
+  line-height: 30px;
+}
+
+.page-body {
+  position: relative;
+  max-height: 400px;
+  padding: 15px;
+  overflow-y: auto;
+}
+
+.page-form {
+  margin-bottom: 0;
+}
+
+.page-footer {
+  padding: 14px 15px 15px;
+  margin-bottom: 0;
+  text-align: right;
+  background-color: #f5f5f5;
+  border-top: 1px solid #ddd;
+  -webkit-border-radius: 0 0 6px 6px;
+     -moz-border-radius: 0 0 6px 6px;
+          border-radius: 0 0 6px 6px;
+  *zoom: 1;
+  -webkit-box-shadow: inset 0 1px 0 #ffffff;
+     -moz-box-shadow: inset 0 1px 0 #ffffff;
+          box-shadow: inset 0 1px 0 #ffffff;
+}
+
+.page-footer:before,
+.page-footer:after {
+  display: table;
+  line-height: 0;
+  content: "";
+}
+
+.page-footer:after {
+  clear: both;
+}
+
+.page-footer .btn + .btn {
+  margin-bottom: 0;
+  margin-left: 5px;
+}
+
+.page-footer .btn-group .btn + .btn {
+  margin-left: -1px;
+}
+
+.page-footer .btn-block + .btn-block {
+  margin-left: 0;
+}
