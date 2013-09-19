@@ -28,7 +28,7 @@ public final class InputText
 
 	private JSONObject options = JSON.asObject();
 	
-	private static Placeholder placeholderImpl = GWT.create(Placeholder.class);
+	private final Placeholder placeholderImpl = GWT.create(Placeholder.class);
 
 	public InputText() {
 		super(ElementResolver.text());
@@ -85,12 +85,12 @@ public final class InputText
 
 	@Override
 	public String getValue() {
-		return InputText.placeholderImpl.getValue(this);
+		return this.placeholderImpl.getValue(this);
 	}
 	
 	@Override
 	public InputText placeholder(String placeholder) {
-		InputText.placeholderImpl.apply(this, placeholder);
+		this.placeholderImpl.apply(this, placeholder);
 		return this;
 	}
 
