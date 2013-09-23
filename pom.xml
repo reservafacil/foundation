@@ -90,7 +90,7 @@
       <dependency>
         <groupId>com.ibm.icu</groupId>
         <artifactId>icu4j</artifactId>
-        <version>4.2.1</version>
+        <version>51.1</version>
       </dependency>
 
       <dependency>
@@ -330,22 +330,17 @@
       <name>Fusesource Snapshots</name>
       <url>http://repo.fusesource.com/nexus/content/repositories/public</url>
     </repository>
-    <repository>
-      <id>brazoft-releases</id>
-      <name>Brazoft releases</name>
-      <url>http://nexus-brazoft.rhcloud.com/nexus/content/groups/public/</url>
-    </repository>
   </repositories>
 
   <distributionManagement>
     <repository>
-      <id>brazoft-releases</id>
-      <url>https://nexus-brazoft.rhcloud.com/nexus/content/repositories/releases</url>
+      <id>reservafacil.releases</id>
+      <url>${reservafacil.releases.url}</url>
     </repository>
 
     <snapshotRepository>
-      <id>brazoft-snapshots</id>
-      <url>https://nexus-brazoft.rhcloud.com/nexus/content/repositories/snapshots/</url>
+      <id>reservafacil.snapshots</id>
+      <url>${reservafacil.snapshots.url}</url>
     </snapshotRepository>
   </distributionManagement>
 
