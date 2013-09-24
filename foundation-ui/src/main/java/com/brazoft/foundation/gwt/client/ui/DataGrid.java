@@ -170,6 +170,10 @@ public final class DataGrid<J extends JSObject>
 		return this;
 	}
 
+	public int indexOf(J object) {
+	    return JSArrays.indexOf(object, this.rows);
+	}
+
 	public DataGrid<J> remove(int rowIndex) {
 		JSArrays.remove(this.rows, rowIndex);
 

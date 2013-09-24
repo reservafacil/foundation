@@ -16,6 +16,22 @@ public class JSArrays {
 	private JSArrays() {}
 
 	/**
+	 * Returns index of an item for an Array
+	 * 
+	 * @param o
+	 *            the item to search for in the array
+	 * @param a2
+	 *            the array sopused to containing the element
+	 * @return -1 if object not found in array or int number for object indext in array starting from zero (0).
+	 */
+	public static final native <T extends JavaScriptObject> int indexOf(JavaScriptObject o, JsArray<T> a) /*-{
+		for (var i = 0, j = a.length; i < j; i++) {
+			if (a[i] === o) { return i; }
+		}
+		return -1;
+	}-*/;
+
+	/**
 	 * Return the last object from the given array and remove it from the array. The resulting array
 	 * lenght is <code>a.length-1</code>.
 	 * 
