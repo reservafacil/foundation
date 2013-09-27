@@ -56,6 +56,7 @@
               <includes>
                 <include>${project.build.directory}/classes/web/css/bootstrap.css</include>
                 <include>${project.build.directory}/classes/web/css/bootstrap-responsive.css</include>
+                <include>${project.build.directory}/classes/web/css/bootstrap-scroll-modal.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-datagrid.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-datapanel.css</include>
                 <include>${project.build.directory}/classes/web/css/ui-datepicker.css</include>

@@ -38,6 +38,7 @@ public final class Modal
 		this.id(id).className("modal hide fade in").attribute("role", "dialog");
 		this.attribute("aria-labelledby", id + "_label").attribute("aria-hidden", "true");
 		this.attribute("data-keyboard", "true");
+		this.attribute("data-dynamic", "true");
 
 		this.add(this.header.hidden()).add(this.body.hidden()).add(this.footer.hidden());
 	}
@@ -59,8 +60,11 @@ public final class Modal
 	}
 
 	public Button trigger() {
-		return new Button(ButtonOptions.ANCHOR).attribute("href", "#" + this.getId()).attribute("role", "button").attribute("data-toggle",
-		                                                                                                                    "modal");
+		return new Button(ButtonOptions.ANCHOR)
+					.attribute("href", "#" + this.getId())
+					.attribute("role", "button")
+					.attribute("data-toggle", "modal")
+					.attribute("data-dynamic", "true");
 	}
 
 	public Modal heading(String text) {
