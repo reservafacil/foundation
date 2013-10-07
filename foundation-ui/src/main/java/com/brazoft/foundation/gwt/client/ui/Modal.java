@@ -38,7 +38,9 @@ public final class Modal
 		this.id(id).className("modal hide fade in").attribute("role", "dialog");
 		this.attribute("aria-labelledby", id + "_label").attribute("aria-hidden", "true");
 		this.attribute("data-keyboard", "true");
-		this.attribute("data-dynamic", "true");
+
+		// Default behavior: vertical scroll as needed
+		this.scrollable(Boolean.TRUE);
 
 		this.add(this.header.hidden()).add(this.body.hidden()).add(this.footer.hidden());
 	}
@@ -59,12 +61,19 @@ public final class Modal
 		return this.attribute("data-backdrop", "static");
 	}
 
+	public Modal scrollable(Boolean scrollable) {
+		if (scrollable == null) {
+			scrollable = Boolean.TRUE;
+		}
+		this.attribute("data-dynamic", scrollable.toString());
+		return this;
+	}
+
 	public Button trigger() {
 		return new Button(ButtonOptions.ANCHOR)
 					.attribute("href", "#" + this.getId())
 					.attribute("role", "button")
-					.attribute("data-toggle", "modal")
-					.attribute("data-dynamic", "true");
+					.attribute("data-toggle", "modal");
 	}
 
 	public Modal heading(String text) {
