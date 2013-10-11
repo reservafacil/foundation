@@ -177,7 +177,7 @@
         if (this.isShown && this.options.backdrop) {
           var doAnimate = $.support.transition && animate
 
-          this.$backdrop = $('<div class="modal-backdrop ' + animate + '" />')
+          this.$backdrop = $('<div style="overflow: auto; position: absolute;" class="modal-backdrop ' + animate + '" />')
             .appendTo(document.body)
 
           // Below are Bootstrap Scroll Modal additions to the backdrop function.
