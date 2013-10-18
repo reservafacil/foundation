@@ -2,6 +2,7 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.HTML;
 import com.brazoft.foundation.gwt.client.component.api.HasText;
+import com.brazoft.foundation.gwt.client.component.api.Selector;
 import com.brazoft.foundation.gwt.client.ui.api.Tip;
 import com.google.gwt.dom.client.DivElement;
 
@@ -25,4 +26,10 @@ public class Tooltip
 		this.inner.text(text);
 		return this;
 	}
+
+	@Override
+    public Tooltip show(Selector<?> holder) {
+		this.text(holder.getTooltipText());
+	    return super.show(holder);
+    }
 }

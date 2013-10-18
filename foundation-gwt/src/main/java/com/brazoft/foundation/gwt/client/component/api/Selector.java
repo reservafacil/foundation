@@ -14,6 +14,17 @@ public class Selector<S extends Selector<S>>
 
 	private Style<S> style;
 
+	private String tooltipText;
+
+	public String getTooltipText() {
+		return this.tooltipText;
+	}
+
+	public S tooltipText(String tooltipText) {
+		this.tooltipText = tooltipText;
+		return (S)this;
+	}
+
 	public S attribute(String name, String value) {
 		this.getElement().setAttribute(name, value);
 		return (S)this;

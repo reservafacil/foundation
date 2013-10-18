@@ -76,6 +76,17 @@ public abstract class Tip<T extends Tip<T>>
 		return (T)this;
 	}
 
+	public T show(Selector<?> holder) {
+		if (!this.isAttached()) {
+			RootPanel.get().add(this);
+		}
+		this.holder = holder;
+		this.positioning();
+		this.display.show((T)this);
+
+		return (T)this;
+	}
+
 	public T hide() {
 		this.display.hide((T)this);
 		return (T)this;
@@ -192,12 +203,12 @@ public abstract class Tip<T extends Tip<T>>
 		HOVER {
 
 			@Override
-			<T extends Tip<T>> void register(Widget holder, final T tip) {
+			<T extends Tip<T>> void register(final Widget holder, final T tip) {
 				Events.on(holder, new MouseOverHandler() {
 
 					@Override
 					public void onMouseOver(MouseOverEvent event) {
-						tip.show();
+						tip.show((Selector<?>)holder);
 					}
 				});
 
@@ -221,12 +232,12 @@ public abstract class Tip<T extends Tip<T>>
 		FOCUS {
 
 			@Override
-			<T extends Tip<T>> void register(Widget holder, final T tip) {
+			<T extends Tip<T>> void register(final Widget holder, final T tip) {
 				Events.on(holder, new FocusHandler() {
 
 					@Override
 					public void onFocus(FocusEvent event) {
-						tip.show();
+						tip.show((Selector<?>)holder);
 					}
 				});
 
