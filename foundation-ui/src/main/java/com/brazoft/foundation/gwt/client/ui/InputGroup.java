@@ -81,6 +81,7 @@ public class InputGroup<V>
 
 	@Override
 	public InputGroup<V> placeholder(String placeholder) {
+		this.noLabel();
 		this.input.placeholder(placeholder);
 		return this;
 	}

@@ -41,8 +41,11 @@
 .required {
 	color: #B94A48;
 	display: inline;
-	padding-left: 5px;
 	font-weight: bold;
+}
+
+.required-visible {
+	padding-left: 5px;
 }
 
 .simple-container {

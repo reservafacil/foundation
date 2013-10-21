@@ -1,5 +1,6 @@
 package com.brazoft.foundation.gwt.client.ui.api;
 
+import com.brazoft.foundation.commons.Validator;
 import com.brazoft.foundation.gwt.client.component.*;
 import com.brazoft.foundation.gwt.client.component.api.*;
 import com.brazoft.foundation.gwt.client.ui.*;
@@ -26,6 +27,11 @@ public abstract class Group<G extends Group<G>>
 		return (G)this;
 	}
 
+	protected G noLabel() {
+		this.label.text("");
+		return (G)this;
+	}
+
 	public LabelGroup getLabel() {
 		return this.label;
 	}
@@ -45,7 +51,7 @@ public abstract class Group<G extends Group<G>>
 
 		private LabeledText       label = new LabeledText().align(Alignment.LEFT);
 
-		private HTML<SpanElement> mark  = HTML.asSpan().className("required");
+		private HTML<SpanElement> mark  = HTML.asSpan().text("&nbsp;").className("required");
 
 		private HTML<SpanElement> hint  = HTML.asSpan().className("hint");
 
@@ -62,17 +68,29 @@ public abstract class Group<G extends Group<G>>
 		}
 
 		public LabelGroup mark() {
-			this.mark.text("*");
+			if (!Validator.isEmptyOrNull(this.label.getText())) {
+				this.mark.removeClassName("required-visible");
+				this.mark.addStyleName("required-visible");
+				this.mark.text("*");
+			}
 			return this.visible();
 		}
 
 		public LabelGroup unmark() {
+			this.mark.removeClassName("required-visible");
 			this.mark.text("");
 			return this.visible();
 		}
 
 		@Override
 		public LabelGroup text(String text) {
+			if (Validator.isEmptyOrNull(text)) {
+				this.label.removeClassName("label");
+				this.unmark();
+			} else {
+				this.label.removeClassName("label");
+				this.label.addStyleName("label");
+			}
 			this.label.text(text);
 			return this.visible();
 		}
