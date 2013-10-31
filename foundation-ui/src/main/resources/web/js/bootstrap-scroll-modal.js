@@ -83,6 +83,8 @@
 
           that.enforceFocus()
 
+          $('body').css({ 'overflow' : 'hidden' })
+
           transition ?
             that.$element.one($.support.transition.end, function () { that.$element.trigger('shown') }) :
             that.$element.focus().trigger('shown')
@@ -159,7 +161,6 @@
           this.$elementWrapper.remove()
           this.$elementWrapper = null
         }
-
         this.backdrop()
       }
 
