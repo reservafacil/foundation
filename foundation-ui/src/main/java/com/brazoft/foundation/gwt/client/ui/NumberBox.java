@@ -19,7 +19,8 @@ public final class NumberBox
 			}
 
 			if (Widgets.controlKeys().contains(keyCode)) {
-				return;
+				if (!bugedKeyCode(keyCode, event.getCharCode()))
+					return;
 			}
 
 			if (!accepted.contains(String.valueOf(event.getCharCode()))) {
@@ -32,6 +33,13 @@ public final class NumberBox
 			}
 		}
 	};
+
+	private boolean bugedKeyCode(int keyCode, char charCode) {
+		if (KeyCodes.KEY_DELETE == keyCode  &&  charCode == '.') { // "delete" não pode ser "ponto" (bug do chrome).
+			return true;
+		}
+		return false;
+	}
 
 	public NumberBox() {
 		this.decimalSimbol = null;
