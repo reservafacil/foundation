@@ -50,15 +50,17 @@ public abstract class DataPanel<D extends DataPanel<D>>
 		return (D)this;
 	}
 
-	public D item(Widget widget) {
-		this.strategy.cell().add(widget);
-		return (D)this;
+	public UICell<?> item(Widget widget) {
+		UICell<?> cell = this.strategy.cell();
+		cell.add(widget);
+		return cell;
 	}
 
-	public D item(Widget widget, int colspan) {
-		this.cell(colspan).add(widget);
+	public UICell<?> item(Widget widget, int colspan) {
+		UICell<?> cell = this.cell(colspan);
+		cell.add(widget);
 
-		return (D)this;
+		return cell;
 	}
 
 	public D adopt(Composite<?> composite) {

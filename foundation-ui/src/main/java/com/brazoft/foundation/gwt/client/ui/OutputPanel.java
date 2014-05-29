@@ -3,7 +3,6 @@ package com.brazoft.foundation.gwt.client.ui;
 import com.brazoft.foundation.gwt.client.ui.api.*;
 import com.google.gwt.user.client.ui.Widget;
 
-@SuppressWarnings("unchecked")
 public abstract class OutputPanel<O extends OutputPanel<O>>
     extends DataPanel<O> {
 
@@ -11,11 +10,11 @@ public abstract class OutputPanel<O extends OutputPanel<O>>
 		super(options, columns);
 	}
 
-	public O item(String label, String value) {
+	public UICell<?> item(String label, String value) {
 		return this.item(label, value, 1);
 	}
 
-	public O item(String label, String value, int colspan) {
+	public UICell<?> item(String label, String value, int colspan) {
 		if (value == null) {
 			value = "&nbsp;";
 		}
@@ -24,17 +23,17 @@ public abstract class OutputPanel<O extends OutputPanel<O>>
 		return this.item(label, p, colspan);
 	}
 
-	public O item(String label, Widget value) {
+	public UICell<?> item(String label, Widget value) {
 		return this.item(label, value, 1);
 	}
 
-	public O item(String label, Widget value, int colspan) {
+	public UICell<?> item(String label, Widget value, int colspan) {
 		OutputGroup group = new OutputGroup(value).label(label).colspan(colspan);
 
 		UICell<?> cell = this.cell(group.getColspan());
 		cell.add(group.getLabel());
 		cell.add(group);
 
-		return (O)this;
+		return cell;
 	}
 }
