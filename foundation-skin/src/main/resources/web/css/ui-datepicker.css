@@ -85,7 +85,7 @@
 }
 
 .datepicker .ranges li.active, .datepicker .ranges li:hover {
-  background: #08c;
+  background: #3BC2D1;
   border: 1px solid #08c;
   color: #fff;
 }
@@ -178,7 +178,7 @@
 }
 
 .calendar td.available:hover, .calendar th.available:hover {
-  background: #eee;
+  background: #3BC2D1;
 }
 
 .calendar td.in-range {
@@ -189,15 +189,15 @@
 }
 
 .calendar td.active, .calendar td.active:hover {
-  background-color: #006dcc;
-  background-image: -moz-linear-gradient(top, #0088cc, #0044cc);
-  background-image: -ms-linear-gradient(top, #0088cc, #0044cc);
-  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#0088cc), to(#0044cc));
-  background-image: -webkit-linear-gradient(top, #0088cc, #0044cc);
-  background-image: -o-linear-gradient(top, #0088cc, #0044cc);
-  background-image: linear-gradient(top, #0088cc, #0044cc);
+  background-color: #3BC2D1;
+  background-image: -moz-linear-gradient(top, #3BC2D1, #08c);
+  background-image: -ms-linear-gradient(top, #3BC2D1, #08c);
+  background-image: -webkit-gradient(linear, 0 0, 0 100%, from(#3BC2D1), to(#08c));
+  background-image: -webkit-linear-gradient(top, #3BC2D1, #08c);
+  background-image: -o-linear-gradient(top, #3BC2D1, #08c);
+  background-image: linear-gradient(top, #3BC2D1, #08c);
   background-repeat: repeat-x;
-  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#0088cc', endColorstr='#0044cc', GradientType=0);
+  filter: progid:DXImageTransform.Microsoft.gradient(startColorstr='#3BC2D1', endColorstr='#08c', GradientType=0);
   border-color: #0044cc #0044cc #002a80;
   border-color: rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.1) rgba(0, 0, 0, 0.25);
   filter: progid:DXImageTransform.Microsoft.gradient(enabled = false);
