@@ -19,12 +19,12 @@ import java.util.*;
 
 import com.google.gwt.core.client.*;
 
-public class MapJSO<J extends JSObject>
+public class MapJSO<J extends JavaScriptObject>
     extends JSObject {
 
 	protected MapJSO() {}
 
-	public static native  <J extends JSObject> MapJSO<J> create()/*-{
+	public static native  <J extends JavaScriptObject> MapJSO<J> create()/*-{
 		return new Object();
 	}-*/;
 

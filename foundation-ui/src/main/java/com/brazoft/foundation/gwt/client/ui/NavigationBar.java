@@ -25,6 +25,7 @@ import com.brazoft.foundation.gwt.client.event.api.HasFocusHandlers;
 import com.brazoft.foundation.gwt.client.ui.SearchForm.SearchOptions;
 import com.brazoft.foundation.gwt.client.ui.api.*;
 import com.google.gwt.dom.client.*;
+import com.google.gwt.dom.client.Style.Unit;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.*;
 import com.google.gwt.user.client.ui.Image;
@@ -42,6 +43,8 @@ public final class NavigationBar
 	private NavigationForm      form;
 
 	private SearchForm          search;
+
+	private HTML<DivElement>	itemConteiner;
 
 	public NavigationBar() {
 		this(NavigationBarOptions.DEFAULT);
@@ -87,6 +90,7 @@ public final class NavigationBar
 		}
 
 		this.content = HTML.asDiv().className("navbar-inner");
+		this.content.style().paddingRight(0, Unit.PX);
 		this.add(this.content);
 
 		this.content.add(this.brand);
@@ -127,6 +131,23 @@ public final class NavigationBar
 		return this.items;
 	}
 
+	public void clearContainer() {
+		if (this.content != null && this.itemConteiner != null) {
+			this.content.remove(this.itemConteiner);
+		}
+	}
+
+	public HTML<DivElement> container() {
+		this.clearContainer();
+
+		this.itemConteiner = HTML.asDiv().className("tab-content");
+		this.itemConteiner.addStyleName("navbar-background-ativo");
+
+		this.content.add(this.itemConteiner);
+
+		return this.itemConteiner;
+	}
+	
 	@Override
 	public String getText() {
 		return Component.Util.getHTML(this.brand);
@@ -170,9 +191,24 @@ public final class NavigationBar
 		}
 
 		public ItemsBar activate(int index) {
+			deactivateAll(this.getWidget().getWidget(index));
 			Widgets.activateClass(this.getWidget().getWidget(index));
-
+			this.getWidget().getWidget(index).addStyleName("navbar-background-ativo");
 			return this;
+		}
+
+		public ItemsBar activate(Widget widget) {
+			deactivateAll(widget);
+			Widgets.activateClass(widget);
+			widget.addStyleName("navbar-background-ativo");
+			return this;
+		}
+
+		public void deactivateAll(Widget widgetSelection) {
+			for (Widget child : this.getChildren()) {
+				Widgets.deactivateClass(child);
+				child.removeStyleName("navbar-background-ativo");
+			}
 		}
 
 		public ItemsBar divider() {
@@ -182,6 +218,14 @@ public final class NavigationBar
 
 		public Item item(String label) {
 			return this.item().text(label);
+		}
+
+		public Item item(com.brazoft.foundation.gwt.client.ui.Image image) {
+			return this.item().image(image);
+		}
+
+		public Item item(com.brazoft.foundation.gwt.client.ui.Image image, String text) {
+			return this.item().image(image, text);
 		}
 
 		public Item item(UIButton<? extends Widget> button) {
@@ -300,6 +344,16 @@ public final class NavigationBar
 			@Override
 			public String getText() {
 				return Component.Util.getHTML(this.link);
+			}
+
+			public Item image(com.brazoft.foundation.gwt.client.ui.Image image) {
+				this.link.add(image);
+				return this.add(this.link);
+			}
+
+			public Item image(com.brazoft.foundation.gwt.client.ui.Image image, String text) {
+				this.link.add(image).add(new Label().text(text));
+				return this.add(this.link);
 			}
 
 			@Override
