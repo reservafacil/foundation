@@ -70,12 +70,16 @@ public class InputGroup<V>
 		return this;
 	}
 
+	public boolean notShowMessageRequired() {
+		return false;
+	}
+	
 	public InputGroup<V> action(ValidationAction action) {
 		this.constraint.action(action);
 		return this;
 	}
 
-	boolean validate() {
+	public boolean validate() {
 		return this.constraint.validate();
 	}
 
