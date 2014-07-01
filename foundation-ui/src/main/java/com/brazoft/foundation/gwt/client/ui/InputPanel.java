@@ -5,6 +5,7 @@ import com.brazoft.foundation.gwt.client.event.api.HasFocusHandlers;
 import com.brazoft.foundation.gwt.client.ui.api.*;
 import com.brazoft.foundation.gwt.client.util.*;
 import com.brazoft.foundation.gwt.client.util.ValidationProcess.ValidationAction;
+import com.brazoft.foundation.gwt.client.util.ValidationProcess.ValidationConstraint;
 import com.brazoft.foundation.gwt.client.util.ValidationProcess.ValidationResult;
 import com.google.gwt.event.dom.client.*;
 
@@ -12,7 +13,7 @@ import com.google.gwt.event.dom.client.*;
 public abstract class InputPanel<I extends InputPanel<I>>
     extends OutputPanel<I> {
 
-	private ValidationProcess process = new ValidationProcess();
+	protected ValidationProcess process = new ValidationProcess();
 
 	public InputPanel(PanelOptions option, int columns) {
 		super(option, columns);
@@ -74,9 +75,55 @@ public abstract class InputPanel<I extends InputPanel<I>>
 	}
 
 	public boolean validate() {
-		return this.process.validate();
+		boolean isValid = this.process.validate();
+		if (!isValid) {
+			if (this.process.getConstraint().getInput() instanceof Bootstrap) {
+				((Bootstrap<?>)this.process.getConstraint().getInput()).focus();
+			}
+		}
+		return isValid;
 	}
 
+	public InputPanel<?> addConstraint(final InputGroup<?> group) {
+		this.process.add(group.getConstraint());
+		return this;
+	}
+
+	public InputPanel<?> mergeConstraint(final InputPanel<?> panel) {
+		for (ValidationConstraint<?> validationConstraint : panel.process.getConstraints()) {
+			this.process.add(validationConstraint);
+		}
+		return this;
+	}
+
+	public InputControl addItemControl(final InputGroup<?> group) {
+		final InputControl control = new InputControl().input(group);
+
+		if (group.getInput() instanceof HasFocusHandlers) {
+			((HasFocusHandlers<?>)group.getInput()).onBlur(new BlurHandler() {
+				@Override
+				public void onBlur(BlurEvent event) {
+					group.validate();
+				}
+			});
+		}
+
+		ValidationAction action = new ValidationAction() {
+			@Override
+			public void whenValid() {
+				control.reset();
+			}
+			@Override
+			public void whenInvalid(String message) {
+				control.error().message(message);
+			}
+		};
+
+		group.action(action);
+		this.process.add(group.getConstraint());
+		return control;
+	}
+	
 	public static class InputItem {
 
 		private UICell<?>    cell;

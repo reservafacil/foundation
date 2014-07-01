@@ -16,6 +16,8 @@ public class ValidationProcess {
 
 	private EventHandler<ValidationResult> handler;
 
+	private ValidationConstraint<?> validationConstraint;
+
 	public ValidationProcess onComplete(EventHandler<ValidationResult> handler) {
 		this.handler = handler;
 		return this;
@@ -33,6 +35,10 @@ public class ValidationProcess {
 		return this;
 	}
 
+	public List<ValidationConstraint<?>> getConstraints() {
+		return this.constraints;
+	}
+
 	public boolean validate() {
 		return this.validate(Propagation.ALL);
 	}
@@ -40,7 +46,7 @@ public class ValidationProcess {
 	public boolean validate(Propagation propagation) {
 		boolean valid = true;
 		ValidationResult result = new ValidationResult();
-
+		validationConstraint = null;
 		for (ValidationConstraint<?> constraint : this.constraints) {
 			FieldState field = new FieldState(constraint.validate(), constraint.name);
 			result.add(field);
@@ -48,6 +54,10 @@ public class ValidationProcess {
 			valid = field.isValid() && valid;
 			if (!valid && propagation == Propagation.STOP_AT_ONCE) {
 				return false;
+			}
+			
+			if (!valid && validationConstraint == null) {
+				validationConstraint = constraint;
 			}
 		}
 
@@ -104,6 +114,10 @@ public class ValidationProcess {
 			return this;
 		}
 
+		public UIInput<?, V> getInput() {
+			return this.input;
+		}
+
 		public boolean validate() {
 			try {
 				V value = this.input.getValue();
@@ -112,7 +126,7 @@ public class ValidationProcess {
 					boolean valid = validator.validate(value);
 					if (!valid) {
 						this.action.whenInvalid(validator.getMessage());
-						return false;
+					    return false;
 					}
 				}
 
@@ -158,6 +172,10 @@ public class ValidationProcess {
 				return valid;
 			}
 		}
+	}
+
+	public ValidationConstraint<?> getConstraint() {
+		return this.validationConstraint;
 	}
 
 	public enum Propagation {
