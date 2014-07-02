@@ -46,6 +46,29 @@ public class ElementResolver {
 		return null;
 	}
 
+	public static Element getChildByIdRec(Element parent, String id) {
+		NodeIterable<Node> elements = new NodeIterable<Node>(parent.getChildNodes());
+
+		for (Node node : elements) {
+			Element child = (Element)node;
+			if (child != null && child.getId() != null) {
+				if (child.getId().equals(id)) {
+					return child;
+				}
+				NodeList<Node> childNodes = child.getChildNodes();
+				for (int cii=0; cii < childNodes.getLength(); cii++) {
+					Element child2 = (Element)childNodes.getItem(cii);
+					Element childByIdRec = getChildByIdRec(child2, id);
+					if (childByIdRec != null) {
+						return childByIdRec;
+					}
+				}
+			}
+		}
+
+		return null;
+	}
+	
 	public static Element create(String tagName) {
 		return document().createElement(tagName);
 	}

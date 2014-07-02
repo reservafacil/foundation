@@ -59,6 +59,7 @@ public final class DataGrid<J extends JSObject>
 
 	public DataGrid() {
 		this.className("table table-bordered datagrid");
+		this.header.id("headerFixa");
 		this.footer.pager.whenPaginate(new EventHandler<Integer>() {
 
 			@Override
