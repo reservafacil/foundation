@@ -29,6 +29,12 @@ public final class PasswordBox
 		return (InputPassword)super.input();
 	}
 
+	@Override
+	public PasswordBox id(String id) {
+		this.input().id(id);
+		return this;
+	}
+
 	public PasswordBox block() {
 		this.input().block();
 		return this;

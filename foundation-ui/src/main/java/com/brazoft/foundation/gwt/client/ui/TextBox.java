@@ -25,6 +25,12 @@ public final class TextBox
 		return (InputText)super.input();
 	}
 
+	@Override
+	public TextBox id(String id) {
+		this.input().id(id);
+		return this;
+	}
+
 	public TextBox mask(String pattern) {
 		this.input().mask(pattern);
 

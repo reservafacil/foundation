@@ -73,6 +73,11 @@ public abstract class Select2<S extends Select2<S, V>, V>
 		return (S)this;
 	}
 
+	public S id(String id) {
+		this.input.id(id);
+		return (S)this;
+	}
+
 	public S block() {
 		this.input.block();
 		return (S)this;
