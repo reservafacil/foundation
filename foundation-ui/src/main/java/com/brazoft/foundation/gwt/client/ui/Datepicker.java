@@ -49,6 +49,8 @@ public final class Datepicker
 
 	private boolean          readOnly;
 
+	private POSITION		 position = POSITION.RIGHT;
+
 	public Datepicker() {
 		this(DateFormat.DATE_SHORT);
 	}
@@ -294,6 +296,22 @@ public final class Datepicker
 		return super.removeHandlers(type);
 	}
 
+	public Datepicker setPosition(POSITION position) {
+		this.position = position;
+		return this;
+	}
+
+	public enum POSITION {
+		LEFT(-138), RIGHT(0);
+		private int valor;
+		private POSITION(int valor) {
+			this.valor = valor;
+		}
+		public int getPosition() {
+			return this.valor;
+		}
+	}
+
 	private ClickHandler doFocus = new ClickHandler() {
 
 		                             @Override
@@ -305,9 +323,8 @@ public final class Datepicker
 	Datepicker toPosition() {
 		InputText input = this.input.input();
 
-		double left = 0;
 		double top = input.top() + input.position().top() + input.scrollTop() + input.outerHeight(true);
-		this.picker.style().zIndex(10000).position(Position.ABSOLUTE).display(Display.BLOCK).top(top, Unit.PX).left(left, Unit.PX);
+		this.picker.style().zIndex(10000).position(Position.ABSOLUTE).display(Display.BLOCK).top(top, Unit.PX).left(this.position.getPosition(), Unit.PX);
 
 		return this;
 	}
