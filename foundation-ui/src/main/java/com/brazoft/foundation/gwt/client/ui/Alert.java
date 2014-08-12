@@ -16,6 +16,7 @@
 package com.brazoft.foundation.gwt.client.ui;
 
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
+import com.brazoft.foundation.gwt.client.component.api.HasVisibility;
 import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.Widget;
@@ -29,17 +30,22 @@ public final class Alert
 
 	public Alert() {
 		super(ElementResolver.div());
-		this.init();
+		this.init(0);
 	}
 
-	private void init() {
+	public Alert(final int delayOnClose) {
+		super(ElementResolver.div());
+		this.init(delayOnClose);
+	}
+
+	private void init(final int delayOnClose) {
 		this.className("alert fade in");
 
 		this.dismiss.onClick(new ClickHandler() {
 
 			@Override
 			public void onClick(ClickEvent event) {
-				Alert.this.hidden();
+				Alert.this.fadeOut(delayOnClose);
 			}
 		});
 	}
@@ -64,6 +70,18 @@ public final class Alert
 		this.removeClassName("in").className("out");
 		return super.hidden();
 	}
+
+	@Override
+    public Alert fadeOut(int millisecs) {
+		this.fireEvent(HasVisibility.TriggerEvent.HIDDEN);
+	    return super.fadeOut(millisecs);
+    }
+
+	@Override
+    public Alert fadeIn(int millisecs) {
+		this.fireEvent(HasVisibility.TriggerEvent.VISIBLE);
+	    return super.fadeIn(millisecs);
+    }
 
 	@Override
 	public Alert visible() {
