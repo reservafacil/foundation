@@ -17,21 +17,30 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import java.util.Date;
 
-import com.brazoft.foundation.gwt.client.component.*;
+import com.brazoft.foundation.gwt.client.component.ElementResolver;
+import com.brazoft.foundation.gwt.client.component.HTML;
 import com.brazoft.foundation.gwt.client.component.api.UIInput;
 import com.brazoft.foundation.gwt.client.event.Event;
-import com.brazoft.foundation.gwt.client.event.api.*;
+import com.brazoft.foundation.gwt.client.event.api.EventHandler;
 import com.brazoft.foundation.gwt.client.event.api.HasChangeHandlers;
 import com.brazoft.foundation.gwt.client.event.api.HasFocusHandlers;
 import com.brazoft.foundation.gwt.client.i18n.DateFormat;
 import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
 import com.brazoft.foundation.gwt.client.util.Calendar;
-import com.google.gwt.dom.client.*;
+import com.brazoft.foundation.gwt.client.util.MobileUtil;
+import com.google.gwt.dom.client.DivElement;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.dom.client.BlurEvent;
+import com.google.gwt.event.dom.client.BlurHandler;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
+import com.google.gwt.event.dom.client.FocusEvent;
+import com.google.gwt.event.dom.client.FocusHandler;
 import com.google.gwt.event.shared.GwtEvent.Type;
+import com.google.gwt.i18n.client.DateTimeFormat;
 
 public final class Datepicker
     extends Bootstrap<Datepicker>
@@ -44,6 +53,7 @@ public final class Datepicker
 	private HTML<DivElement> picker = HTML.asDiv().className("datepicker");
 
 	private DateFormat       format;
+	private DateTimeFormat formatMobile;
 
 	private boolean          shown;
 
@@ -63,9 +73,16 @@ public final class Datepicker
 	private void init(DateFormat format) {
 		this.style().position(Position.RELATIVE);
 		this.format = format;
+		this.formatMobile = DateTimeFormat.getFormat("yyyy-MM-dd");
 
 		this.input = new TextBox();
+		this.add(this.input);
 		this.editable();
+
+		if (MobileUtil.isMobileSafari()) {
+			this.input.input().getElement().setAttribute("type", "date");
+			return;
+		}
 
 		this.input.onFocus(new FocusHandler() {
 
@@ -85,7 +102,6 @@ public final class Datepicker
 				Datepicker.this.hide();
 			}
 		});
-		this.add(this.input);
 
 		this.panel = new MonthPanel();
 		this.panel.onSelection(new EventHandler<Date>() {
@@ -125,29 +141,33 @@ public final class Datepicker
 	}
 
 	public InputText input() {
-		return input.input();
+		if (MobileUtil.isMobileSafari()) {
+			return new InputText();
+		} else {
+			return input.input();
+		}
 	}
 
 	@Override
 	public Datepicker onChange(ChangeHandler handler) {
-		this.input.onChange(handler);
+		if (!MobileUtil.isMobileSafari()) { this.input.onChange(handler); }
 		return this;
 	}
 
 	@Override
 	public Datepicker onFocus(FocusHandler handler) {
-		this.input.onFocus(handler);
+		if (!MobileUtil.isMobileSafari()) { this.input.onFocus(handler); }
 		return this;
 	}
 
 	@Override
 	public Datepicker onBlur(BlurHandler handler) {
-		this.input.onBlur(handler);
+		if (!MobileUtil.isMobileSafari()) { this.input.onBlur(handler); }
 		return this;
 	}
 
 	public Datepicker onSelection(EventHandler<Date> handler) {
-		this.panel.onSelection(handler);
+		if (!MobileUtil.isMobileSafari()) { this.panel.onSelection(handler); }
 		return this;
 	}
 
@@ -167,6 +187,7 @@ public final class Datepicker
 	}
 
 	public Datepicker range(Date start, Date end) {
+		if (MobileUtil.isMobileSafari()) { return this; } 
 		this.panel.range(start, end);
 
 		if (Calendar.as(start).after(this.panel.current())) {
@@ -202,7 +223,7 @@ public final class Datepicker
 	public Datepicker hide() {
 		this.shown = false;
 		this.picker.hidden();
-		this.panel.selected(false);
+		if (!MobileUtil.isMobileSafari()) { this.panel.selected(false); }
 
 		return this;
 	}
@@ -220,7 +241,9 @@ public final class Datepicker
 			return this;
 		}
 
-		this.panel.set(value);
+		if (!MobileUtil.isMobileSafari()) {
+			this.panel.set(value);
+		}
 		this.input.value(this.format.format(value));
 
 		return this;
@@ -228,7 +251,10 @@ public final class Datepicker
 
 	@Override
 	public Date getValue() {
-		return this.format.unformat(this.input.getValue());
+		if (this.input.getValue().isEmpty()) {
+			return null;
+		}
+		return MobileUtil.isMobileSafari() ? this.formatMobile.parse(this.input.getValue()) : this.format.unformat(this.input.getValue());
 	}
 
 	@Override
@@ -286,12 +312,14 @@ public final class Datepicker
 
 	@Override
 	public Datepicker removeHandlers(Event<?> event) {
+		if (MobileUtil.isMobileSafari()) { return this; }
 		this.panel.removeHandlers(event);
 		return super.removeHandlers(event);
 	}
 
 	@Override
 	public <H extends com.google.gwt.event.shared.EventHandler> Datepicker removeHandlers(Type<H> type) {
+		if (MobileUtil.isMobileSafari()) { return this; }
 		this.panel.removeHandlers(type);
 		return super.removeHandlers(type);
 	}
