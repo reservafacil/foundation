@@ -133,13 +133,15 @@ public final class DataGrid<J extends JSObject>
 	}
 
 	public DataGrid<J> filter() {
+
 		boolean apply;
 		boolean inactive = true;
 		int totalRowsFiltered = 0;
+		int totalRows = (null == this.rows) ? 0 : this.rows.length();
 
 		this.footer.pager.reset();
 
-		for (int i = 0; i < this.rows.length(); i++) {
+		for (int i = 0; i < totalRows; i++) {
 			J row = this.rows.get(i);
 			row.set(DataGrid.SKIP, false);
 			apply = true;
@@ -164,7 +166,7 @@ public final class DataGrid<J extends JSObject>
 
 		this.totalRows = totalRowsFiltered;
 		if(inactive) {
-			this.totalRows = this.rows.length();
+			this.totalRows = totalRows;
 		}
 		this.drawPage(1);
 

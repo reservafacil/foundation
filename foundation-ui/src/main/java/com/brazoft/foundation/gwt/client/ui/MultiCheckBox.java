@@ -42,7 +42,20 @@ public final class MultiCheckBox
 
 		return values.toArray(new String[values.size()]);
 	}
-	
+
+	public String[] getUncheckedValue() {
+		java.util.List<String> values = new ArrayList<String>();
+
+		for (Widget child : getChildren()) {
+			CheckBox radio = this.checkbox(child);
+			if (!radio.isChecked()) {
+				values.add(radio.getValue());
+			}
+		}
+
+		return values.toArray(new String[values.size()]);
+	}
+
 	public MultiCheckBox item(Image image, String value) {
 		return this.item(image.toString(), value);
 	}
@@ -81,7 +94,15 @@ public final class MultiCheckBox
 		
 		return this;
 	}
-	
+
+	public int itemsLenght() {
+		int count = 0;
+		for (@SuppressWarnings("unused") Widget child : getChildren()) {
+			count++;
+		}
+		return count;
+	}
+
 	private MultiCheckBox check(boolean check){
 		for (Widget child : getChildren()) {
 			CheckBox checkbox = this.checkbox(child);
