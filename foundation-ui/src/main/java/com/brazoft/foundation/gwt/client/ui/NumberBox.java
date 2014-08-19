@@ -50,4 +50,10 @@ public final class NumberBox
 		this.decimalSimbol = decimalSimbol;
 		this.onKeyPress(handler);
 	}
+
+	@Override
+	public NumberBox id(String id) {
+		this.input().id(id);
+		return this;
+	}
 }
