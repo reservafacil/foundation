@@ -1,6 +1,7 @@
 package com.brazoft.foundation.gwt.client.component.api;
 
 import com.brazoft.foundation.gwt.client.component.Style;
+import com.brazoft.foundation.gwt.client.util.MobileUtil;
 import com.google.gwt.dom.client.*;
 import com.google.gwt.dom.client.Style.Position;
 import com.google.gwt.query.client.GQuery;
@@ -77,22 +78,38 @@ public class Selector<S extends Selector<S>>
 	}
 
 	public S fadeIn() {
-		this.selector().fadeIn();
+		if (!MobileUtil.onIE8()) {
+			this.selector().fadeIn();
+		} else {
+			this.selector().show();
+		}
 		return (S)this;
 	}
 
 	public S fadeIn(int millisecs) {
-		this.selector().fadeIn(millisecs);
+		if (!MobileUtil.onIE8()) {
+			this.selector().fadeIn(millisecs);
+		} else {
+			this.selector().show();
+		}
 		return (S)this;
 	}
 
 	public S fadeOut() {
-		this.selector().fadeOut();
+		if (!MobileUtil.onIE8()) {
+			this.selector().fadeOut();
+		} else {
+			this.selector().hide();
+		}
 		return (S)this;
 	}
 
 	public S fadeOut(int millisecs) {
-		this.selector().fadeOut(millisecs);
+		if (!MobileUtil.onIE8()) {
+			this.selector().fadeOut(millisecs);
+		} else {
+			this.selector().hide();
+		}
 		return (S)this;
 	}
 

@@ -11,6 +11,11 @@ public class MobileUtil {
 		return navigator.userAgent.toLowerCase();
     }-*/;
 
+
+	public static native boolean onIE8() /*-{
+		return navigator.userAgent.indexOf("MSIE 8.0") != -1;
+	}-*/;
+	
 	public static boolean isIPhone() {
 		if (getUserAgent().contains("iphone"))
 			return true;
