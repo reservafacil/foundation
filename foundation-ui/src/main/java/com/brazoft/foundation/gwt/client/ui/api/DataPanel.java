@@ -56,6 +56,12 @@ public abstract class DataPanel<D extends DataPanel<D>>
 		return cell;
 	}
 
+	public UICell<?> item(Widget widget, VerticalAlignment valign, int colspan) {
+		UICell<?> cell = this.strategy.cell(valign, colspan);
+		cell.add(widget);
+		return cell;
+	}
+
 	public UICell<?> item(Widget widget, int colspan) {
 		UICell<?> cell = this.cell(colspan);
 		cell.add(widget);
@@ -147,6 +153,13 @@ public abstract class DataPanel<D extends DataPanel<D>>
 		}
 
 		@Override
+		public UICell<?> cell(VerticalAlignment valign, int colspan) {
+			UICell<?> cell = this.cell(colspan);
+			cell.verticalAlign(valign);
+			return cell;
+		}
+
+		@Override
 		public void width(double width, Unit unit) {
 			GWT.log("FluidStrategy in DataPanel does not support width()");
 		}
@@ -195,6 +208,13 @@ public abstract class DataPanel<D extends DataPanel<D>>
 		}
 
 		@Override
+		public UICell<?> cell(VerticalAlignment valign, int colspan) {
+			UICell<?> cell = this.cell(colspan);
+			cell.verticalAlign(valign);
+			return cell;
+		}
+
+		@Override
 		public UICell<?> cell(int colspan) {
 			if (this.columnCounter == 0) {
 				this.row = this.table.body().row();
@@ -226,6 +246,8 @@ public abstract class DataPanel<D extends DataPanel<D>>
 		UICell<?> cell();
 
 		UICell<?> cell(int colspan);
+
+		UICell<?> cell(VerticalAlignment valign, int colspan);
 
 		void width(double width, Unit unit);
 
