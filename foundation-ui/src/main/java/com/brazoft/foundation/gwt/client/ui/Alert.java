@@ -18,6 +18,7 @@ package com.brazoft.foundation.gwt.client.ui;
 import com.brazoft.foundation.gwt.client.component.ElementResolver;
 import com.brazoft.foundation.gwt.client.component.api.HasVisibility;
 import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
+import com.brazoft.foundation.gwt.client.util.MobileUtil;
 import com.google.gwt.event.dom.client.*;
 import com.google.gwt.user.client.ui.Widget;
 
@@ -45,7 +46,11 @@ public final class Alert
 
 			@Override
 			public void onClick(ClickEvent event) {
-				Alert.this.fadeOut(delayOnClose);
+				if (MobileUtil.onIE8()) {
+					Alert.this.hidden();
+				} else {
+					Alert.this.fadeOut(delayOnClose);
+				}
 			}
 		});
 	}
