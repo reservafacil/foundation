@@ -17,18 +17,27 @@ package com.brazoft.foundation.gwt.client.ui;
 
 import java.util.ArrayList;
 
-import com.brazoft.foundation.gwt.client.component.*;
+import com.brazoft.foundation.gwt.client.component.ElementResolver;
+import com.brazoft.foundation.gwt.client.component.HTML;
 import com.brazoft.foundation.gwt.client.event.Event;
-import com.brazoft.foundation.gwt.client.event.api.*;
+import com.brazoft.foundation.gwt.client.event.api.EventHandler;
+import com.brazoft.foundation.gwt.client.event.api.EventType;
 import com.brazoft.foundation.gwt.client.ui.ProgressBar.ProgressBarOptions;
-import com.brazoft.foundation.gwt.client.ui.api.*;
+import com.brazoft.foundation.gwt.client.ui.api.AbstractTable;
 import com.brazoft.foundation.gwt.client.ui.api.AbstractTable.Row.Cell;
+import com.brazoft.foundation.gwt.client.ui.api.Bootstrap;
+import com.brazoft.foundation.gwt.client.ui.api.GridColumn;
+import com.brazoft.foundation.gwt.client.ui.api.GridFilter;
 import com.brazoft.foundation.gwt.client.util.JSArrays;
 import com.google.gwt.core.client.JsArray;
-import com.google.gwt.dom.client.*;
+import com.google.gwt.dom.client.DivElement;
+import com.google.gwt.dom.client.SpanElement;
 import com.google.gwt.dom.client.Style.Display;
 import com.google.gwt.dom.client.Style.Unit;
-import com.google.gwt.event.dom.client.*;
+import com.google.gwt.event.dom.client.ChangeEvent;
+import com.google.gwt.event.dom.client.ChangeHandler;
+import com.google.gwt.event.dom.client.ClickEvent;
+import com.google.gwt.event.dom.client.ClickHandler;
 import com.google.gwt.jso.JSObject;
 
 @SuppressWarnings("unchecked")
@@ -251,11 +260,15 @@ public final class DataGrid<J extends JSObject>
 				}
 			});
 
-			for (GridColumn<?, J> column : this.columns) {
-				column.render((index - 1), row.cell(), object);
+			try {
+				for (GridColumn<?, J> column : this.columns) {
+					column.render((index - 1), row.cell(), object);
+				}
+			} catch (Throwable exc) {
 			}
+
 		}
-		
+
 		String emptyMessage = this.options.emptyMessage;
 		if (this.totalRows == 0 && emptyMessage != null){
 			Row row = this.body.row().warning();

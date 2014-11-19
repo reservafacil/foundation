@@ -34,7 +34,11 @@ public abstract class JSObject
 	}
 
 	public final native boolean hasKey(String key) /*-{
-		return this[key] != undefined;
+		try {
+			return this[key] != undefined;
+		} catch (error) {
+			return false;
+		}
 	}-*/;
 
 	public final native JsArrayString keys() /*-{
