@@ -40,7 +40,7 @@ public enum DateFormat
 
 	YEAR(DateTimeFormat.getFormat(PredefinedFormat.YEAR)), YEAR_MONTH(DateTimeFormat.getFormat(PredefinedFormat.YEAR_MONTH)), YEAR_MONTH_ABBR(DateTimeFormat.getFormat(PredefinedFormat.YEAR_MONTH_ABBR)), YEAR_MONTH_ABBR_DAY(DateTimeFormat.getFormat(PredefinedFormat.YEAR_MONTH_ABBR_DAY)), YEAR_MONTH_DAY(DateTimeFormat.getFormat(PredefinedFormat.YEAR_MONTH_DAY)), YEAR_MONTH_NUM(DateTimeFormat.getFormat(PredefinedFormat.YEAR_MONTH_NUM)), YEAR_MONTH_NUM_DAY(DateTimeFormat.getFormat(PredefinedFormat.YEAR_MONTH_NUM_DAY)), YEAR_MONTH_WEEKDAY_DAY(DateTimeFormat.getFormat(PredefinedFormat.YEAR_MONTH_WEEKDAY_DAY)), YEAR_QUARTER(DateTimeFormat.getFormat(PredefinedFormat.YEAR_QUARTER)), YEAR_QUARTER_ABBR(DateTimeFormat.getFormat(PredefinedFormat.YEAR_QUARTER_ABBR)),
 
-	ISO_8601(DateTimeFormat.getFormat(PredefinedFormat.ISO_8601));
+	ISO_8601(DateTimeFormat.getFormat(PredefinedFormat.ISO_8601)), ISO_8601_WITHOUT_TIMEZONE(DateTimeFormat.getFormat("yyyy-MM-dd'T'HH:mm:ss"));
 
 	private final DateTimeFormat wrapped;
 
@@ -49,7 +49,13 @@ public enum DateFormat
 	}
 
 	public Date unformat(String value) {
-		return Validator.isEmptyOrNull(value) ? null : this.wrapped.parseStrict(value);
+		Date retorno;
+		try {
+			retorno = Validator.isEmptyOrNull(value) ? null : this.wrapped.parseStrict(value);
+		} catch (IllegalArgumentException exc) {
+			retorno = Validator.isEmptyOrNull(value) ? null : DateFormat.ISO_8601.wrapped.parseStrict(value);
+		}
+		return retorno;
 	}
 
 	public String format(Date value) {

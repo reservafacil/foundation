@@ -78,7 +78,7 @@ public abstract class JSObject
 	}-*/;
 
 	public final Date getDate(String property) {
-		return this.get(property, new Date(), DateFormat.ISO_8601);
+		return this.get(property, new Date(), DateFormat.ISO_8601_WITHOUT_TIMEZONE);
 	}
 
 	public final String get(String property, String defaultValue) {
@@ -182,7 +182,7 @@ public abstract class JSObject
 	}-*/;
 
 	public final Date get(String property, Date defaultValue) {
-		return this.get(property, defaultValue, DateFormat.ISO_8601);
+		return this.get(property, defaultValue, DateFormat.ISO_8601_WITHOUT_TIMEZONE);
 	}
 
 	public final Date get(String property, Date defaultValue, DateFormat format) {
@@ -222,7 +222,7 @@ public abstract class JSObject
 	}-*/;
 
 	public final void set(String property, Date value) {
-		this.set(property, value, DateFormat.ISO_8601);
+		this.set(property, value, DateFormat.ISO_8601_WITHOUT_TIMEZONE);
 	}
 
 	public final void set(String property, Date defaultValue, DateFormat format) {
