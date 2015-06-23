@@ -1,8 +1,6 @@
 <module>
   <inherits name="com.brazoft.foundation.gwt.Foundation" />
 
-  <script src="bootstrap.js" />
-
   <replace-with class="com.brazoft.foundation.gwt.client.ui.binding.PlaceholderHTML5">
     <when-type-is class="com.brazoft.foundation.gwt.client.ui.binding.Placeholder" />
   </replace-with>
